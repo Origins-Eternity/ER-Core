@@ -1,0 +1,5 @@
+{
+  "variants": {
+    "normal": { "model": "ercore:tungsten_ore" }
+  }
+}

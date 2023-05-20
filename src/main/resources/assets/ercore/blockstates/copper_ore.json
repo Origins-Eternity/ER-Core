@@ -1,0 +1,5 @@
+{
+  "variants": {
+    "normal": { "model": "ercore:copper_ore" }
+  }
+}
