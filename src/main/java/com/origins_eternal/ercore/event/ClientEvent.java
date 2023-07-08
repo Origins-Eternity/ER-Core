@@ -25,13 +25,11 @@ public class ClientEvent {
     @SubscribeEvent
     public static void GuiOpen(GuiOpenEvent event) {
         Minecraft mc = Minecraft.getMinecraft();
-        if (mc.inGameHasFocus) {
-            EntityPlayer player = mc.player;
+        EntityPlayer player = mc.player;
+        if ((event.getGui() instanceof GuiSleepMP) || (event.getGui() instanceof GuiChat) || (event.getGui() instanceof GuiIngameMenu)) {
             Set<String> tags = player.getTags();
-            if ((event.getGui() instanceof GuiSleepMP) || (event.getGui() instanceof GuiChat) || (event.getGui() instanceof GuiIngameMenu)) {
-                if (tags.contains("rest")) {
-                    event.setCanceled(true);
-                }
+            if (tags.contains("rest")) {
+                event.setCanceled(true);
             }
         }
     }
