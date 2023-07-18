@@ -12,6 +12,8 @@ import net.minecraft.item.ItemBlock;
 
 import java.util.Random;
 
+import static com.origins_eternity.ercore.content.tab.CreativeTab.ERCORE;
+
 public class BlockCreator extends Block {
     public BlockCreator(String name, int hardness, int harvestlevel, String toolclass) {
         super(Material.ROCK);
@@ -20,7 +22,7 @@ public class BlockCreator extends Block {
         setHardness(hardness);
         setHarvestLevel(toolclass, harvestlevel);
         setSoundType(SoundType.STONE);
-        setCreativeTab(ERCore.ERCORE);
+        setCreativeTab(ERCORE);
 
         if (name.contains("Ore")) {
             Ores.ORES.add(this);

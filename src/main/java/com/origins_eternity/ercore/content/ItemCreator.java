@@ -5,6 +5,8 @@ import com.origins_eternity.ercore.content.item.Blueprints;
 import com.origins_eternity.ercore.content.item.Items;
 import net.minecraft.item.Item;
 
+import static com.origins_eternity.ercore.content.tab.CreativeTab.ERCORE;
+
 public class ItemCreator extends Item
 {
     public ItemCreator(String name, int maxdamage)
@@ -13,7 +15,7 @@ public class ItemCreator extends Item
         setRegistryName(name.toLowerCase());
         setMaxDamage(maxdamage);
         setNoRepair();
-        setCreativeTab(ERCore.ERCORE);
+        setCreativeTab(ERCORE);
 
         if (name.contains("Blueprint")) {
             Blueprints.PRINTS.add(this);

@@ -1,8 +1,6 @@
 package com.origins_eternity.ercore;
 
-import com.origins_eternity.ercore.content.tab.CreativeTab;
 import com.origins_eternity.ercore.utils.proxy.CommonProxy;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
@@ -22,8 +20,6 @@ public class ERCore {
 	
 	@SidedProxy(clientSide = "com.origins_eternity.ercore.utils.proxy.ClientProxy", serverSide = "com.origins_eternity.ercore.utils.proxy.CommonProxy")
 	public static CommonProxy proxy;
-
-	public static final CreativeTabs ERCORE = new CreativeTab();
 
 	static { FluidRegistry.enableUniversalBucket(); }
 

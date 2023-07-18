@@ -133,11 +133,15 @@ public class Endurance implements IEndurance {
     public void consumeEndurance(int value) {
         endurance -= value;
         if (endurance <= 5) {
-            setTired(true);
-            setSprite(false);
+            if (!tired) {
+                setTired(true);
+                setSprite(false);
+            }
             if (endurance <= 0) {
                 endurance = 0;
-                setExhausted(true);
+                if (!exhausted) {
+                    setExhausted(true);
+                }
             }
         }
     }
@@ -146,11 +150,15 @@ public class Endurance implements IEndurance {
     public void recoverEndurance(int value) {
         endurance += value;
         if (endurance >= 5) {
-            setTired(false);
+            if (tired) {
+                setTired(false);
+            }
             if (endurance >= 20) {
                 endurance = 20;
-                setSprite(true);
-                setExhausted(false);
+                if (exhausted) {
+                    setSprite(true);
+                    setExhausted(false);
+                }
             }
         }
     }
