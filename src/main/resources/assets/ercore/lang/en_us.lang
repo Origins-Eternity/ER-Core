@@ -108,6 +108,8 @@ config.ercore.tungsten.max=Generate Tungsten Max Height
 
 config.ercore.overlay=Show Overlay Bar
 config.ercore.overlay.tooltip=Whether to show endurance bar or not.
+config.ercore.rest=Rest
+config.ercore.rest.tooltip=Whether to force player to sleep when exhausted. Even if this is disabled, your debuff will not disappear until the endurance is full!
 config.ercore.offset=The Bar Offset
 config.ercore.offset.tooltip=Positive values represent upward movement, it's usually a multiple of 10.
 config.ercore.tools=Tools

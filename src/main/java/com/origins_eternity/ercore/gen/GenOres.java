@@ -1,7 +1,7 @@
 package com.origins_eternity.ercore.gen;
 
-import net.minecraft.block.state.pattern.BlockMatcher;
 import com.origins_eternity.ercore.config.Configuration;
+import net.minecraft.block.state.pattern.BlockMatcher;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;

@@ -5,8 +5,11 @@ import com.origins_eternity.ercore.content.capability.Capabilities;
 import com.origins_eternity.ercore.content.capability.endurance.Endurance;
 import com.origins_eternity.ercore.content.capability.endurance.IEndurance;
 import com.origins_eternity.ercore.message.CheckMove;
+import com.origins_eternity.ercore.utils.Utils;
+import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -35,10 +38,21 @@ public class CommonEvent {
     }
 
     @SubscribeEvent
+    public static void onFluidPlaceBlock(BlockEvent.FluidPlaceBlockEvent event) {
+        Block block = event.getState().getBlock();
+        if (block.equals(Blocks.STONE)) {
+            event.setNewState(Utils.getBlockstate("taiga:basalt_block", Blocks.STONE));
+        } else if (block.equals(Blocks.COBBLESTONE)) {
+            event.setNewState(Utils.getBlockstate("chisel:basalt", Blocks.COBBLESTONE));
+        } else if (block.equals(Blocks.OBSIDIAN)) {
+            event.setNewState(Utils.getBlockstate("advancedrocketry:basalt", Blocks.OBSIDIAN));
+        }
+    }
+
+    @SubscribeEvent
     public static void onCreateSpawnPosition(WorldEvent.CreateSpawnPosition event) {
         World world = event.getWorld();
-        int sea = world.getSeaLevel();
-        BlockPos blockPos = new BlockPos(0, sea, 0);
+        BlockPos blockPos = new BlockPos(0, 0, 0);
         event.setCanceled(true);
         world.setSpawnPoint(blockPos);
     }
@@ -145,23 +159,7 @@ public class CommonEvent {
     public static void onPlayerTick(TickEvent.PlayerTickEvent event) {
         EntityPlayer player = event.player;
         if ((!player.isSpectator()) && (!player.isCreative())) {
-            IEndurance endurance = player.getCapability(Capabilities.ENDURANCE, null);
-            if (endurance.isSprite()) {
-                if (player.isPlayerSleeping()) {
-                    player.wakeUpPlayer(false, false, false);
-                    endurance.setExhausted(false);
-                }
-            }
-            if (endurance.isTired()) {
-                player.setSprinting(false);
-                addDebuff(player);
-                if (endurance.isExhausted()) {
-                    if (!player.isPlayerSleeping()) {
-                        player.trySleep(new BlockPos(player));
-                    }
-                }
-                endurance.setSprite(false);
-            }
+            checkStatus(player);
             World world = player.world;
             if (world.isRemote) {
                 boolean move = (player.moveForward != 0) || (player.moveStrafing != 0);

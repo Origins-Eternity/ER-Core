@@ -1,6 +1,5 @@
 package com.origins_eternity.ercore.utils.registry;
 
-import com.origins_eternity.ercore.content.block.Blocks;
 import com.origins_eternity.ercore.content.fluid.Fluids;
 import com.origins_eternity.ercore.content.item.Items;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;

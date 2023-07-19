@@ -51,6 +51,11 @@ public class Configuration {
         @Config.Comment("Whether to show endurance bar or not.")
         public static boolean showOverlay = true;
 
+        @Config.Name("Rest")
+        @Config.LangKey("config.ercore.rest")
+        @Config.Comment("Whether to force player to sleep when exhausted. Even if this is disabled, your debuff will not disappear until the endurance is full!")
+        public static boolean forceRest = true;
+
         @Config.RangeInt()
         @Config.Name("The Bar Offset")
         @Config.LangKey("config.ercore.offset")

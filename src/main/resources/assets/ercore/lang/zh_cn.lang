@@ -108,6 +108,8 @@ config.ercore.tungsten.max=生成钨矿脉最大高度
 
 config.ercore.overlay=自定义状态栏显示
 config.ercore.overlay.tooltip=是否显示耐力值条
+config.ercore.rest=自定义休息
+config.ercore.rest.tooltip=是否在玩家精疲力竭时强行进入休息状态。即使禁用此项，你的负面效果在耐力值恢复满之后才会消除。
 config.ercore.offset=自定义状态栏偏移量
 config.ercore.offset.tooltip=正数代表向上移动，一般是10的倍数。
 config.ercore.tools=自定义工具

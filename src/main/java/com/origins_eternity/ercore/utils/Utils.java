@@ -1,5 +1,6 @@
 package com.origins_eternity.ercore.utils;
 
+import com.origins_eternity.ercore.config.Configuration;
 import com.origins_eternity.ercore.content.capability.Capabilities;
 import com.origins_eternity.ercore.content.capability.endurance.IEndurance;
 import com.origins_eternity.ercore.message.SyncEndurance;
@@ -12,6 +13,7 @@ import net.minecraft.init.Blocks;
 import net.minecraft.init.MobEffects;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.common.capabilities.Capability;
 
 import static com.origins_eternity.ercore.ERCore.packetHandler;
@@ -37,9 +39,17 @@ public class Utils {
 
     public static void addDebuff(EntityPlayer player) {
         if (!player.world.isRemote) {
-            player.addPotionEffect(new PotionEffect(MobEffects.WEAKNESS, 0, 1, false, false));
-            player.addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, 0, 1, false, false));
-            player.addPotionEffect(new PotionEffect(MobEffects.MINING_FATIGUE, 0, 1, false, false));
+            IEndurance endurance = player.getCapability(ENDURANCE, null);
+            if (endurance.isTired()) {
+                player.addPotionEffect(new PotionEffect(MobEffects.WEAKNESS, 1, 1, false, false));
+                player.addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, 1, 1, false, false));
+                player.addPotionEffect(new PotionEffect(MobEffects.MINING_FATIGUE, 1, 1, false, false));
+            }
+            if (endurance.isExhausted()) {
+                player.addPotionEffect(new PotionEffect(MobEffects.BLINDNESS, 1, 1, false, false));
+                player.addPotionEffect(new PotionEffect(MobEffects.HUNGER, 1, 1, false, false));
+                player.addPotionEffect(new PotionEffect(MobEffects.NAUSEA, 1, 1, false, false));
+            }
         }
     }
 
@@ -68,7 +78,7 @@ public class Utils {
                     }
                 }
             }
-        }else {
+        } else {
             if (endurance.getCoolDown() > 0) {
                 endurance.removeCoolDown(1);
             } else {
@@ -80,6 +90,29 @@ public class Utils {
                     endurance.addSaturation(0.03f);
                 }
             }
+        }
+    }
+
+    public static void checkStatus(EntityPlayer player) {
+        IEndurance endurance = player.getCapability(Capabilities.ENDURANCE, null);
+        if (endurance.isTired()) {
+            player.setSprinting(false);
+            addDebuff(player);
+        }
+        if (endurance.isExhausted()) {
+            addDebuff(player);
+            if (Configuration.forceRest) {
+                player.addTag("rest");
+                if (!player.isPlayerSleeping()) {
+                    player.trySleep(new BlockPos(player));
+                }
+            }
+        }
+        if ((!endurance.isExhausted()) && (player.getTags().contains("rest")) && (Configuration.forceRest)) {
+            if (player.isPlayerSleeping()) {
+                player.wakeUpPlayer(false, false, false);
+            }
+            player.removeTag("rest");
         }
     }
 }

@@ -1,11 +1,10 @@
 package com.origins_eternity.ercore.content.capability;
 
+import com.origins_eternity.ercore.content.capability.endurance.Endurance;
 import com.origins_eternity.ercore.content.capability.endurance.IEndurance;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.CapabilityInject;
 import net.minecraftforge.common.capabilities.CapabilityManager;
-
-import com.origins_eternity.ercore.content.capability.endurance.*;
 
 public class Capabilities {
     @CapabilityInject(IEndurance.class)

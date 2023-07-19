@@ -15,8 +15,6 @@ public class Endurance implements IEndurance {
 
     private float saturation = 0;
 
-    private boolean sprite = false;
-
     private boolean exhausted = false;
 
     private boolean tired = false;
@@ -90,16 +88,6 @@ public class Endurance implements IEndurance {
     }
 
     @Override
-    public boolean isSprite() {
-        return sprite;
-    }
-
-    @Override
-    public void setSprite(boolean sprite) {
-        this.sprite = sprite;
-    }
-
-    @Override
     public boolean isExhausted() {
         return exhausted;
     }
@@ -154,8 +142,8 @@ public class Endurance implements IEndurance {
             }
             if (endurance >= 20) {
                 endurance = 20;
-                if (!sprite) {
-                    setSprite(true);
+                if (exhausted) {
+                    setExhausted(false);
                 }
             }
         }
@@ -217,7 +205,6 @@ public class Endurance implements IEndurance {
             compound.setInteger("CoolDown", instance.getCoolDown());
             compound.setFloat("Exhaustion", instance.getExhaustion());
             compound.setFloat("Saturation", instance.getSaturation());
-            compound.setBoolean("Sprite", instance.isSprite());
             compound.setBoolean("Exhausted", instance.isExhausted());
             compound.setBoolean("Tired", instance.isTired());
             compound.setBoolean("Move", instance.isMove());
@@ -232,7 +219,6 @@ public class Endurance implements IEndurance {
                 instance.setCoolDown(compound.getInteger("CoolDown"));
                 instance.setExhaustion(compound.getFloat("Exhaustion"));
                 instance.setSaturation(compound.getFloat("Saturation"));
-                instance.setSprite(compound.getBoolean("Sprite"));
                 instance.setExhausted(compound.getBoolean("Exhausted"));
                 instance.setTired(compound.getBoolean("Tired"));
                 instance.setMove(compound.getBoolean("Move"));

@@ -1,7 +1,7 @@
 package com.origins_eternity.ercore.content.gui;
 
-import com.origins_eternity.ercore.content.capability.endurance.IEndurance;
 import com.origins_eternity.ercore.config.Configuration;
+import com.origins_eternity.ercore.content.capability.endurance.IEndurance;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.client.gui.Gui;

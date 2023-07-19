@@ -21,10 +21,6 @@ public interface IEndurance {
 
     void addSaturation(float value);
 
-    boolean isSprite();
-
-    void setSprite(boolean sprite);
-
     boolean isExhausted();
 
     void setExhausted(boolean exhausted);
