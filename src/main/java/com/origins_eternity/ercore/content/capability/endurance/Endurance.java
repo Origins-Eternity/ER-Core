@@ -135,7 +135,6 @@ public class Endurance implements IEndurance {
         if (endurance <= 5) {
             if (!tired) {
                 setTired(true);
-                setSprite(false);
             }
             if (endurance <= 0) {
                 endurance = 0;
@@ -155,9 +154,8 @@ public class Endurance implements IEndurance {
             }
             if (endurance >= 20) {
                 endurance = 20;
-                if (exhausted) {
+                if (!sprite) {
                     setSprite(true);
-                    setExhausted(false);
                 }
             }
         }

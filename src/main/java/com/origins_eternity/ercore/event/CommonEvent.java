@@ -10,6 +10,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.event.entity.player.AttackEntityEvent;
@@ -129,6 +130,18 @@ public class CommonEvent {
     }
 
     @SubscribeEvent
+    public static void onClone(PlayerEvent.Clone event) {
+        if (!event.isWasDeath()) {
+            EntityPlayer player = event.getOriginal();
+            EntityPlayer clone = event.getEntityPlayer();
+            Capability<IEndurance> capability = Capabilities.ENDURANCE;
+            IEndurance origin = player.getCapability(capability, null);
+            IEndurance present = clone.getCapability(capability, null);
+            capability.getStorage().readNBT(capability, present, null, capability.getStorage().writeNBT(capability, origin, null));
+        }
+    }
+
+    @SubscribeEvent
     public static void onPlayerTick(TickEvent.PlayerTickEvent event) {
         EntityPlayer player = event.player;
         if ((!player.isSpectator()) && (!player.isCreative())) {
@@ -136,8 +149,10 @@ public class CommonEvent {
             if (endurance.isSprite()) {
                 if (player.isPlayerSleeping()) {
                     player.wakeUpPlayer(false, false, false);
+                    endurance.setExhausted(false);
                 }
-            } else if (endurance.isTired()) {
+            }
+            if (endurance.isTired()) {
                 player.setSprinting(false);
                 addDebuff(player);
                 if (endurance.isExhausted()) {
@@ -145,6 +160,7 @@ public class CommonEvent {
                         player.trySleep(new BlockPos(player));
                     }
                 }
+                endurance.setSprite(false);
             }
             World world = player.world;
             if (world.isRemote) {
