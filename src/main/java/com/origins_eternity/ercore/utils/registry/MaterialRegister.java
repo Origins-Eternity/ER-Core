@@ -1,5 +1,6 @@
 package com.origins_eternity.ercore.utils.registry;
 
+import com.origins_eternity.ercore.content.block.Ores;
 import com.origins_eternity.ercore.content.fluid.Fluids;
 import com.origins_eternity.ercore.content.item.Items;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
@@ -66,6 +67,7 @@ public class MaterialRegister {
         registerMelting(Items.Obsidian_Magic_Shard, Fluids.Obsidian_Magic, 72);
         registerMelting(Items.Tungsten_Nugget, Fluids.Tungsten, 72);
         registerMelting(Items.Tungsten_Ingot, Fluids.Tungsten, 144);
+        registerMelting(Ores.Tungsten_ore, Fluids.Tungsten, 144);
         registerMelting(Items.Tungsten_Carbide_Nugget, Fluids.Tungsten_Carbide, 72);
         registerMelting(Items.Tungsten_Carbide_Ingot, Fluids.Tungsten_Carbide, 144);
         registerMelting(Items.Tungsten_Steel_Nugget, Fluids.Tungsten_Steel, 72);
