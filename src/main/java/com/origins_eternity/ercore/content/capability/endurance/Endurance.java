@@ -63,27 +63,19 @@ public class Endurance implements IEndurance {
 
     @Override
     public void addExhaustion(float value) {
-        if (saturation > 0) {
-            saturation -= value;
-        } else {
-            exhaustion += value;
-            while (exhaustion > 1) {
-                consumeEndurance(1);
-                exhaustion -= 1;
-            }
+        exhaustion += value;
+        while (exhaustion > 1) {
+            consumeEndurance(1);
+            exhaustion -= 1;
         }
     }
 
     @Override
     public void addSaturation(float value) {
-        if (exhaustion > 0) {
-            exhaustion -= value;
-        } else {
-            saturation += value;
-            while (saturation > 1) {
-                recoverEndurance(1);
-                saturation -= 1;
-            }
+        saturation += value;
+        while (saturation > 1) {
+            recoverEndurance(1);
+            saturation -= 1;
         }
     }
 

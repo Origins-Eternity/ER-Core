@@ -65,7 +65,12 @@ public class Configuration {
         @Config.Name("Tools")
         @Config.LangKey("config.ercore.tools")
         @Config.Comment("A list of tools which should consume endurance to use.")
-        public static String[] tools = new String[]{"hoe", "shovel"};
+        public static String[] tools = new String[]{"toolHoe", "toolHoe", "toolHoe", "toolShovel", "item.flintAndSteel"};
+
+        @Config.Name("Work Blocks")
+        @Config.LangKey("config.ercore.workblocks")
+        @Config.Comment("A list of blocks which should consume endurance to interact.")
+        public static String[] blocks = new String[]{"grass", "dirt", "tile.grassPath", "grass", "*"};
 
         @Config.Name("Resourcepacks")
         @Config.RequiresMcRestart()

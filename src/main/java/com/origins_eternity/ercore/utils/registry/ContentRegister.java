@@ -33,9 +33,8 @@ import static com.origins_eternity.ercore.content.block.Blocks.BLOCKITEMS;
 import static com.origins_eternity.ercore.content.block.FluidBlocks.FLUIDBLOCKS;
 import static com.origins_eternity.ercore.content.block.Ores.OREITEMS;
 
-@Mod.EventBusSubscriber
+@Mod.EventBusSubscriber(modid = MOD_ID)
 public class ContentRegister {
-
     @SubscribeEvent
     public static void registerBlocks(RegistryEvent.Register<Block> event) {
         if (Configuration.enableBlocks) {

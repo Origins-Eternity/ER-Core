@@ -10,6 +10,8 @@ import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
+import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -73,7 +75,7 @@ public class CommonEvent {
             float hardness = event.getState().getBlockHardness(world, event.getPos());
             IEndurance endurance = player.getCapability(Capabilities.ENDURANCE, null);
             if (!world.isRemote) {
-                endurance.addCoolDown(20);
+                endurance.addCoolDown(30);
                 endurance.addExhaustion(hardness / 10);
             }
         }
@@ -102,26 +104,58 @@ public class CommonEvent {
         if (!player.isCreative()) {
             IEndurance endurance = player.getCapability(Capabilities.ENDURANCE, null);
             if (endurance.isExhausted()) {
-                 event.setCanceled(true);
+                event.setCanceled(true);
             }
             if (!player.world.isRemote) {
-                endurance.addCoolDown(10);
+                endurance.addCoolDown(20);
                 endurance.addExhaustion(0.005f);
             }
         }
     }
 
     @SubscribeEvent
-    public static void onRightClickBlock(PlayerInteractEvent event) {
-        String toolClass = event.getItemStack().getTranslationKey();
-        for (String tool : Configuration.tools) {
-            if (toolClass.contains(tool)) {
-                EntityPlayer player = event.getEntityPlayer();
-                if (!player.isCreative()) {
-                    IEndurance endurance = player.getCapability(Capabilities.ENDURANCE, null);
-                    if (!player.world.isRemote) {
+    public static void onRightClickBlock(PlayerInteractEvent.RightClickBlock event) {
+        Item item = event.getItemStack().getItem();
+        Block block = event.getWorld().getBlockState(event.getPos()).getBlock();
+        EntityPlayer player = event.getEntityPlayer();
+        if (!player.isCreative()) {
+            int counter = 0;
+            for (String tool : Configuration.tools) {
+                if (isItemMatched(tool, item)) {
+                    String target = Configuration.blocks[counter];
+                    if (isBlockMatched(target, block)) {
+                        IEndurance endurance = player.getCapability(Capabilities.ENDURANCE, null);
+                        if (!player.world.isRemote) {
+                            if (!event.isCanceled()) {
+                                endurance.addCoolDown(30);
+                                endurance.addExhaustion(0.1f);
+                                if (endurance.isExhausted()) {
+                                    event.setCanceled(true);
+                                }
+                            }
+                        }
+                        break;
+                    }
+                }
+                counter++;
+            }
+        }
+    }
+
+    @SubscribeEvent
+    public static void onRightClickItem(PlayerInteractEvent.RightClickItem event) {
+        String item = event.getItemStack().getItem().getTranslationKey();
+        EntityPlayer player = event.getEntityPlayer();
+        if (!player.isCreative()) {
+            if ((isItemMatched(item, Items.BOW)) || (isItemMatched(item, Items.SHIELD))) {
+                IEndurance endurance = player.getCapability(Capabilities.ENDURANCE, null);
+                if (!player.world.isRemote) {
+                    if (!event.isCanceled()) {
                         endurance.addCoolDown(20);
                         endurance.addExhaustion(0.1f);
+                        if (endurance.isExhausted()) {
+                            event.setCanceled(true);
+                        }
                     }
                 }
             }
@@ -165,8 +199,8 @@ public class CommonEvent {
                 boolean move = (player.moveForward != 0) || (player.moveStrafing != 0);
                 packetHandler.sendToServer(new CheckMove(move));
             } else {
-                syncEndurance(player);
                 tickUpdate(player);
+                syncEndurance(player);
             }
         }
     }
