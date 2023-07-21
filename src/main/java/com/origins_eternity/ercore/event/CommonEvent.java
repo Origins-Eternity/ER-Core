@@ -149,13 +149,13 @@ public class CommonEvent {
         if (!player.isCreative()) {
             if ((isItemMatched(item, Items.BOW)) || (isItemMatched(item, Items.SHIELD))) {
                 IEndurance endurance = player.getCapability(Capabilities.ENDURANCE, null);
+                if (endurance.isExhausted()) {
+                    event.setCanceled(true);
+                }
                 if (!player.world.isRemote) {
                     if (!event.isCanceled()) {
                         endurance.addCoolDown(20);
                         endurance.addExhaustion(0.1f);
-                        if (endurance.isExhausted()) {
-                            event.setCanceled(true);
-                        }
                     }
                 }
             }
