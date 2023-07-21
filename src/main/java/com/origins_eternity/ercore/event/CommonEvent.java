@@ -88,7 +88,7 @@ public class CommonEvent {
             EntityPlayer player = (EntityPlayer) entity;
             if (!player.isCreative()) {
                 IEndurance endurance = player.getCapability(Capabilities.ENDURANCE, null);
-                if (endurance.isTired()) {
+                if ((endurance.isTired()) || (endurance.isExhausted())) {
                     event.getEntityLiving().motionY -= 1F;
                 } else if (!player.world.isRemote) {
                     endurance.addCoolDown(60);

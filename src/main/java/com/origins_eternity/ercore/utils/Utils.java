@@ -75,7 +75,7 @@ public class Utils {
                 } else if (player.isSprinting()) {
                     endurance.addExhaustion(0.03f);
                 } else if (player.onGround) {
-                    if (endurance.isTired()) {
+                    if ((endurance.isTired()) || (endurance.isExhausted())) {
                         endurance.addExhaustion(0.01f);
                     }
                 }
