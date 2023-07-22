@@ -1,4 +1,4 @@
-![This is an image](https://s1.ax1x.com/2023/07/22/pCq3ulT.png)
+![This is an image](https://s1.ax1x.com/2023/07/22/pCq30ne.png)
 ![This is an image](https://cf.way2muchnoise.eu/versions/702132.svg)
 ![This is an image](https://cf.way2muchnoise.eu/full_702132_downloads.svg)
 ## Introduction
