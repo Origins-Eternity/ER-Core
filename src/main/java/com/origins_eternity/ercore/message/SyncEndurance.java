@@ -44,9 +44,9 @@ public class SyncEndurance implements IMessage {
     public static class Handler implements IMessageHandler<SyncEndurance, IMessage> {
         @Override
         public IMessage onMessage(SyncEndurance message, MessageContext ctx) {
-            if(ctx.side == Side.CLIENT) {
+            if (ctx.side == Side.CLIENT) {
                 EntityPlayerSP player = Minecraft.getMinecraft().player;
-                if(player != null) {
+                if (player != null) {
                     mc().addScheduledTask(() -> {
                         Capability<IEndurance> capability = Capabilities.ENDURANCE;
                         capability.getStorage().readNBT(capability, player.getCapability(capability, null), null, message.getNBT());

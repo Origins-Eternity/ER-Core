@@ -154,7 +154,6 @@ public class CommonEvent {
                 }
                 if (!player.world.isRemote) {
                     if (!event.isCanceled()) {
-                        endurance.addCoolDown(20);
                         endurance.addExhaustion(0.1f);
                     }
                 }
@@ -193,11 +192,11 @@ public class CommonEvent {
     public static void onPlayerTick(TickEvent.PlayerTickEvent event) {
         EntityPlayer player = event.player;
         if ((!player.isSpectator()) && (!player.isCreative())) {
-            checkStatus(player);
             World world = player.world;
+            checkStatus(player);
             if (world.isRemote) {
                 boolean move = (player.moveForward != 0) || (player.moveStrafing != 0);
-                packetHandler.sendToServer(new CheckMove(move));
+                packetHandler.sendToServer(new CheckMove(move, player.getCachedUniqueIdString()));
             } else {
                 tickUpdate(player);
                 syncEndurance(player);

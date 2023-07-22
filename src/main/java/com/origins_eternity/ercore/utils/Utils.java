@@ -1,6 +1,5 @@
 package com.origins_eternity.ercore.utils;
 
-import com.origins_eternity.ercore.config.Configuration;
 import com.origins_eternity.ercore.content.capability.Capabilities;
 import com.origins_eternity.ercore.content.capability.endurance.IEndurance;
 import com.origins_eternity.ercore.message.SyncEndurance;
@@ -59,10 +58,12 @@ public class Utils {
         IEndurance endurance = player.getCapability(Capabilities.ENDURANCE, null);
         if (endurance.isMove()) {
             if ((player.isRiding()) && (!(player.getRidingEntity() instanceof EntityBoat))) {
-                if (endurance.getCoolDown() > 0) {
-                    endurance.removeCoolDown(1);
-                } else {
-                    endurance.addSaturation(0.03f);
+                if (!player.isHandActive()) {
+                    if (endurance.getCoolDown() > 0) {
+                        endurance.removeCoolDown(1);
+                    } else {
+                        endurance.addSaturation(0.03f);
+                    }
                 }
             } else {
                 endurance.addCoolDown(10);
@@ -81,15 +82,17 @@ public class Utils {
                 }
             }
         } else {
-            if (endurance.getCoolDown() > 0) {
-                endurance.removeCoolDown(1);
-            } else {
-                if (player.isInWater()) {
-                    endurance.addSaturation(0.02f);
-                } else if (player.onGround) {
-                    endurance.addSaturation(0.01f);
-                } else if (player.isRiding()) {
-                    endurance.addSaturation(0.03f);
+            if (!player.isHandActive()) {
+                if (endurance.getCoolDown() > 0) {
+                    endurance.removeCoolDown(1);
+                } else {
+                    if (player.isInWater()) {
+                        endurance.addSaturation(0.02f);
+                    } else if (player.onGround) {
+                        endurance.addSaturation(0.01f);
+                    } else if (player.isRiding()) {
+                        endurance.addSaturation(0.03f);
+                    }
                 }
             }
         }
@@ -113,14 +116,12 @@ public class Utils {
         if (endurance.isExhausted()) {
             player.setSprinting(false);
             addDebuff(player);
-            if (Configuration.forceRest) {
-                player.addTag("rest");
-                if (!player.isPlayerSleeping()) {
-                    player.trySleep(new BlockPos(player));
-                }
+            player.addTag("rest");
+            if (!player.isPlayerSleeping()) {
+                player.trySleep(new BlockPos(player));
             }
         }
-        if ((!endurance.isExhausted()) && (player.getTags().contains("rest")) && (Configuration.forceRest)) {
+        if ((player.getTags().contains("rest")) && (!endurance.isExhausted())) {
             if (player.isPlayerSleeping()) {
                 player.wakeUpPlayer(false, false, false);
             }

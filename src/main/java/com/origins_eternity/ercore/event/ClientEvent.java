@@ -1,7 +1,6 @@
 package com.origins_eternity.ercore.event;
 
 import net.minecraft.client.gui.GuiChat;
-import net.minecraft.client.gui.GuiIngameMenu;
 import net.minecraft.client.gui.GuiSleepMP;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.client.event.GuiOpenEvent;
@@ -19,7 +18,7 @@ public class ClientEvent {
     @SubscribeEvent
     public static void GuiOpen(GuiOpenEvent event) {
         EntityPlayer player = mc().player;
-        if ((event.getGui() instanceof GuiSleepMP) || (event.getGui() instanceof GuiChat) || (event.getGui()instanceof GuiIngameMenu)) {
+        if ((event.getGui() instanceof GuiSleepMP) || (event.getGui() instanceof GuiChat)) {
             if (player.getTags().contains("rest")) {
                 event.setCanceled(true);
             }
