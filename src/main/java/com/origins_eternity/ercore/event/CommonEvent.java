@@ -42,12 +42,8 @@ public class CommonEvent {
     @SubscribeEvent
     public static void onFluidPlaceBlock(BlockEvent.FluidPlaceBlockEvent event) {
         Block block = event.getState().getBlock();
-        if (block.equals(Blocks.STONE)) {
-            event.setNewState(Utils.getBlockstate("taiga:basalt_block", Blocks.STONE));
-        } else if (block.equals(Blocks.COBBLESTONE)) {
-            event.setNewState(Utils.getBlockstate("chisel:basalt", Blocks.COBBLESTONE));
-        } else if (block.equals(Blocks.OBSIDIAN)) {
-            event.setNewState(Utils.getBlockstate("advancedrocketry:basalt", Blocks.OBSIDIAN));
+        if (block.equals(Blocks.OBSIDIAN)) {
+            event.setNewState(Utils.getBlockstate("chisel:basalt", Blocks.OBSIDIAN));
         }
     }
 

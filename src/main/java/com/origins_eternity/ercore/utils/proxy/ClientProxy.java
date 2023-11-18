@@ -40,7 +40,7 @@ public class ClientProxy extends CommonProxy {
     @Override
     public void init(FMLInitializationEvent event) {
         super.init(event);
-        if (Loader.isModLoaded("rtg")) {
+        if (Loader.isModLoaded("biomesoplenty")) {
             defaultWorldtype();
         };
     }
@@ -58,10 +58,9 @@ public class ClientProxy extends CommonProxy {
         return mc().gameDir.getPath();
     }
 
-    @Optional.Method(modid = "rtg")
     private static void defaultWorldtype() {
         for (int i = 0; i < WorldType.WORLD_TYPES.length; i++) {
-            if (WorldType.WORLD_TYPES[i] == WorldType.byName("RTG")) {
+            if (WorldType.WORLD_TYPES[i] == WorldType.byName(Configuration.worldtype)) {
                 WorldType defaultype = WorldType.WORLD_TYPES[0];
                 WorldType.WORLD_TYPES[0] = WorldType.WORLD_TYPES[i];
                 WorldType.WORLD_TYPES[i] = defaultype;

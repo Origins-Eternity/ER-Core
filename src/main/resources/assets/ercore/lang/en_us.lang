@@ -118,6 +118,8 @@ config.ercore.resourcepacks=Resourcepacks
 config.ercore.resourcepacks.tooltip=A list of resourcepacks which will be backed up.
 config.ercore.languages=Languages
 config.ercore.languages.tooltip=A list of languages which can be detected to switch automatically.
+config.ercore.worldtype=World Type
+config.ercore.worldtype.tooltip=Default world type when creating a new world.
 config.ercore.backup=Resourcespacks Backup
 config.ercore.backup.tooltip=Whether to backup resourcepacks or not.
 

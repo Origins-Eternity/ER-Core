@@ -118,6 +118,8 @@ config.ercore.resourcepacks=资源包
 config.ercore.resourcepacks.tooltip=将被备份的资源包列表。
 config.ercore.languages=语言
 config.ercore.languages.tooltip=将被自动切换的语言列表。
+config.ercore.worldtype=世界类型
+config.ercore.worldtype.tooltip=在创建新世界时的默认世界类型。
 config.ercore.backup=自定义备份资源包
 config.ercore.backup.tooltip=是否备份资源包。
 
