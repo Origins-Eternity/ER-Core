@@ -57,11 +57,6 @@ public class Configuration {
         @Config.Comment("Positive values represent upward movement, it's usually a multiple of 10.")
         public static int barOffset = 0;
 
-        @Config.Name("Work Blocks")
-        @Config.LangKey("config.ercore.workblocks")
-        @Config.Comment("A list of blocks which should consume endurance to interact.")
-        public static String[] blocks = new String[]{"grass", "dirt", "tile.grassPath", "grass", "*"};
-
         @Config.Name("Resourcepacks")
         @Config.RequiresMcRestart()
         @Config.LangKey("config.ercore.resourcepacks")
