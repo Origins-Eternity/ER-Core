@@ -17,15 +17,15 @@ public class CreativeTab {
         public ItemStack createIcon() {
             ItemStack icon = new ItemStack(net.minecraft.init.Items.RABBIT_FOOT, 1);
             if (Configuration.enableItems) {
-                icon = new ItemStack(Items.Sulphur, 1);
+                icon = new ItemStack(Items.Tungsten_Ingot, 1);
             } else if (Configuration.enableOres) {
                 icon = new ItemStack(Ores.Copper_Ore, 1);
             } else if (Configuration.enableBlocks) {
-                icon = new ItemStack(Blocks.Obsidian_Magic, 1);
+                icon = new ItemStack(Blocks.Basalt, 1);
             } else if (Configuration.enableBlueprints) {
                 icon = new ItemStack(Blueprints.Anther_Table, 1);
             } else if (Configuration.enableFluids) {
-                icon = new ItemStack(Fluids.Obsidian_Magic.getBlock());
+                icon = new ItemStack(Fluids.Tungsten.getBlock());
             }
             return icon;
         }

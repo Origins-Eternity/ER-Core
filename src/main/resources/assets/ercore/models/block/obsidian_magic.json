@@ -1,6 +1,0 @@
-{
-  "parent": "block/cube_all",
-  "textures": {
-    "all": "ercore:blocks/obsidian_magic"
-  }
-}

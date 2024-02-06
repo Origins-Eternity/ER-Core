@@ -1,11 +1,9 @@
 package com.origins_eternity.ercore.event;
 
-import com.origins_eternity.ercore.config.Configuration;
 import com.origins_eternity.ercore.content.capability.Capabilities;
 import com.origins_eternity.ercore.content.capability.endurance.Endurance;
 import com.origins_eternity.ercore.content.capability.endurance.IEndurance;
 import com.origins_eternity.ercore.message.CheckMove;
-import com.origins_eternity.ercore.utils.Utils;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
@@ -43,7 +41,7 @@ public class CommonEvent {
     public static void onFluidPlaceBlock(BlockEvent.FluidPlaceBlockEvent event) {
         Block block = event.getState().getBlock();
         if (block.equals(Blocks.OBSIDIAN)) {
-            event.setNewState(Utils.getBlockstate("chisel:basalt", Blocks.OBSIDIAN));
+            event.setNewState(com.origins_eternity.ercore.content.block.Blocks.Basalt.getDefaultState());
         }
     }
 
@@ -99,8 +97,12 @@ public class CommonEvent {
         EntityPlayer player = event.getEntityPlayer();
         if (!player.isCreative()) {
             IEndurance endurance = player.getCapability(Capabilities.ENDURANCE, null);
-            if (endurance.isExhausted()) {
-                event.setCanceled(true);
+            if (endurance.isTired()) {
+                float origin = event.getOriginalSpeed();
+                event.setNewSpeed((float) (origin * 0.32));
+                if (endurance.isExhausted()) {
+                    event.setCanceled(true);
+                }
             }
             if (!player.world.isRemote) {
                 endurance.addCoolDown(20);
@@ -110,40 +112,11 @@ public class CommonEvent {
     }
 
     @SubscribeEvent
-    public static void onRightClickBlock(PlayerInteractEvent.RightClickBlock event) {
-        Item item = event.getItemStack().getItem();
-        Block block = event.getWorld().getBlockState(event.getPos()).getBlock();
-        EntityPlayer player = event.getEntityPlayer();
-        if (!player.isCreative()) {
-            int counter = 0;
-            for (String tool : Configuration.tools) {
-                if (isItemMatched(tool, item)) {
-                    String target = Configuration.blocks[counter];
-                    if (isBlockMatched(target, block)) {
-                        IEndurance endurance = player.getCapability(Capabilities.ENDURANCE, null);
-                        if (!player.world.isRemote) {
-                            if (!event.isCanceled()) {
-                                endurance.addCoolDown(30);
-                                endurance.addExhaustion(0.1f);
-                                if (endurance.isExhausted()) {
-                                    event.setCanceled(true);
-                                }
-                            }
-                        }
-                        break;
-                    }
-                }
-                counter++;
-            }
-        }
-    }
-
-    @SubscribeEvent
     public static void onRightClickItem(PlayerInteractEvent.RightClickItem event) {
-        String item = event.getItemStack().getItem().getTranslationKey();
+        Item item = event.getItemStack().getItem();
         EntityPlayer player = event.getEntityPlayer();
         if (!player.isCreative()) {
-            if ((isItemMatched(item, Items.BOW)) || (isItemMatched(item, Items.SHIELD))) {
+            if ((item.equals(Items.BOW)) || (item.equals(Items.SHIELD))) {
                 IEndurance endurance = player.getCapability(Capabilities.ENDURANCE, null);
                 if (endurance.isExhausted()) {
                     event.setCanceled(true);

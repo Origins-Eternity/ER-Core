@@ -48,7 +48,6 @@ public class MaterialRegister {
 
     @Optional.Method(modid = "tconstruct")
     public static void preTinker() {
-        preInitMaterials(false, true, 72, Items.Obsidian_Magic_Shard, Obsidian_Magic(), Fluids.Obsidian_Magic, 200, 7.07f, 4.2f, 0.9f, -100, 90, 5, 5f, 0.4f, -1f);
         preInitMaterials(false, true, 144, Items.Tungsten_Steel_Ingot, Tungsten_Steel(), Fluids.Tungsten_Steel, 2000, 8f, 10f, 3f, 100, 100, 9, 3f, 4f, 7f);
     }
 
@@ -64,7 +63,6 @@ public class MaterialRegister {
 
     @Optional.Method(modid = "tconstruct")
     public static void addTinkerMelting() {
-        registerMelting(Items.Obsidian_Magic_Shard, Fluids.Obsidian_Magic, 72);
         registerMelting(Items.Tungsten_Nugget, Fluids.Tungsten, 72);
         registerMelting(Items.Tungsten_Ingot, Fluids.Tungsten, 144);
         registerMelting(Ores.Tungsten_ore, Fluids.Tungsten, 144);

@@ -13,7 +13,7 @@ public class Blueprints {
     public static final Item Basic_Workshop = new ItemCreator("Basic_Workshop_Blueprint", 10);
     public static final Item Bucket = new ItemCreator("Bucket_Blueprint", 10);
     public static final Item Blacksmith_Workshop = new ItemCreator("Blacksmith_Workshop_Blueprint", 10);
-    public static final Item Crafting_Table = new ItemCreator("Crafting_Table_Blueprint", 10);
+    public static final Item CraftingTable_core = new ItemCreator("CraftingTable_CoreBlueprint", 10);
     public static final Item Engineer_Workstation = new ItemCreator("Engineer_Workstation_Blueprint", 10);
     public static final Item Chef_Workstation = new ItemCreator("Chef_Workstation_Blueprint", 10);
     public static final Item Dough = new ItemCreator("Dough_Blueprint", 10);
@@ -22,9 +22,6 @@ public class Blueprints {
     public static final Item Engineer_Workshop = new ItemCreator("Engineer_Workshop_Blueprint", 10);
     public static final Item Wither_Forge = new ItemCreator("Wither_Forge_Blueprint", 10);
     public static final Item Tweaker_Workshop = new ItemCreator("Tweaker_Workshop_Blueprint", 10);
-    public static final Item Mage_Workstation = new ItemCreator("Mage_Workstation_Blueprint", 10);
-    public static final Item Mage_Workshop = new ItemCreator("Mage_Workshop_Blueprint", 10);
-    public static final Item Magic_Pool = new ItemCreator("Magic_Pool_Blueprint", 10);
     public static final Item Anther_Table = new ItemCreator("Anther_Table_Blueprint", 10);
     public static final Item Tailor_Workstation = new ItemCreator("Tailor_Workstation_Blueprint", 10);
     public static final Item Tailor_Workshop = new ItemCreator("Tailor_Workshop_Blueprint", 10);
@@ -33,7 +30,6 @@ public class Blueprints {
     public static final Item Apothecary_Workstation = new ItemCreator("Apothecary_Workstation_Blueprint", 10);
     public static final Item Brewing_Stand = new ItemCreator("Brewing_Stand_Blueprint", 10);
     public static final Item Apothecary_Workshop = new ItemCreator("Apothecary_Workshop_Blueprint", 10);
-    public static final Item Plant_Brewing_Stand = new ItemCreator("Plant_Brewing_Stand_Blueprint", 10);
     public static final Item Small_Backpack = new ItemCreator("Small_Backpack_Blueprint", 10);
     public static final Item Medium_Backpack = new ItemCreator("Medium_Backpack_Blueprint", 10);
     public static final Item Large_Backpack = new ItemCreator("Large_Backpack_Blueprint", 10);

@@ -12,8 +12,6 @@ public class FluidBlocks {
     public static final List<Block> FLUIDBLOCKS = new ArrayList<>();
     public static final List<Item> FLUIDITEMS = new ArrayList<>();
 
-    public static final Block Molten_Obsidian_Magic = new ClassicCreator(Fluids.Obsidian_Magic);
-    public static final Block Molten_Iridium = new ClassicCreator(Fluids.Iridium);
     public static final Block Molten_Sugarcane = new ClassicCreator(Fluids.Sugarcane);
     public static final Block Molten_Tungsten = new ClassicCreator(Fluids.Tungsten);
     public static final Block Molten_Slaked_Lime = new ClassicCreator(Fluids.Slaked_Lime);

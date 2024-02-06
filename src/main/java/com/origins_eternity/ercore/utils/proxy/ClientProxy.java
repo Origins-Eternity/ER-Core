@@ -8,7 +8,6 @@ import net.minecraft.client.resources.ResourcePackRepository;
 import net.minecraft.world.WorldType;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Loader;
-import net.minecraftforge.fml.common.Optional;
 import net.minecraftforge.fml.common.event.FMLConstructionEvent;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
