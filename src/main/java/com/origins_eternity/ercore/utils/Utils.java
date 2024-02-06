@@ -43,10 +43,6 @@ public class Utils {
                     endurance.addExhaustion(0.01f);
                 } else if (player.isSprinting()) {
                     endurance.addExhaustion(0.03f);
-                } else if (player.onGround) {
-                    if ((endurance.isTired()) || (endurance.isExhausted())) {
-                        endurance.addExhaustion(0.01f);
-                    }
                 }
             }
         } else {
@@ -55,9 +51,9 @@ public class Utils {
                     endurance.removeCoolDown(1);
                 } else {
                     if (player.isInWater()) {
-                        endurance.addSaturation(0.02f);
-                    } else if (player.onGround) {
                         endurance.addSaturation(0.01f);
+                    } else if (player.onGround) {
+                        endurance.addSaturation(0.02f);
                     } else if (player.isRiding()) {
                         endurance.addSaturation(0.03f);
                     }
