@@ -46,14 +46,6 @@ public class CommonEvent {
     }
 
     @SubscribeEvent
-    public static void onCreateSpawnPosition(WorldEvent.CreateSpawnPosition event) {
-        World world = event.getWorld();
-        BlockPos blockPos = new BlockPos(0, 0, 0);
-        event.setCanceled(true);
-        world.setSpawnPoint(blockPos);
-    }
-
-    @SubscribeEvent
     public static void onAttachCapability(AttachCapabilitiesEvent<Entity> event) {
         Entity entity = event.getObject();
         if (entity instanceof EntityPlayer) {
@@ -82,7 +74,7 @@ public class CommonEvent {
             EntityPlayer player = (EntityPlayer) entity;
             if (!player.isCreative()) {
                 IEndurance endurance = player.getCapability(Capabilities.ENDURANCE, null);
-                if ((endurance.isTired()) || (endurance.isExhausted())) {
+                if (endurance.isExhausted()) {
                     event.getEntityLiving().motionY -= 1F;
                 } else if (!player.world.isRemote) {
                     endurance.addCoolDown(60);

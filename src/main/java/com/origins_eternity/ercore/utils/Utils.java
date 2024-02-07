@@ -8,7 +8,6 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
-import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.common.capabilities.Capability;
 
 import static com.origins_eternity.ercore.ERCore.packetHandler;
@@ -62,17 +61,7 @@ public class Utils {
             player.setSprinting(false);
             if (endurance.isExhausted()) {
                 player.setSprinting(false);
-                player.addTag("rest");
-                if (!player.isPlayerSleeping()) {
-                    player.trySleep(new BlockPos(player));
-                }
             }
-        }
-        if ((player.getTags().contains("rest")) && (!endurance.isExhausted())) {
-            if (player.isPlayerSleeping()) {
-                player.wakeUpPlayer(false, false, false);
-            }
-            player.removeTag("rest");
         }
     }
 }
