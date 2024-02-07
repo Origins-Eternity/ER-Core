@@ -72,10 +72,12 @@ public class Endurance implements IEndurance {
 
     @Override
     public void addSaturation(float value) {
-        saturation += value;
-        while (saturation > 1) {
-            recoverEndurance(1);
-            saturation -= 1;
+        if (coolDown == 0) {
+            saturation += value;
+            while (saturation > 1) {
+                recoverEndurance(1);
+                saturation -= 1;
+            }
         }
     }
 

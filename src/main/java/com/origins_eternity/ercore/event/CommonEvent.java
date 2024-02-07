@@ -156,19 +156,24 @@ public class CommonEvent {
             capability.getStorage().readNBT(capability, present, null, capability.getStorage().writeNBT(capability, origin, null));
         }
     }
+    static int counter;
 
     @SubscribeEvent
     public static void onPlayerTick(TickEvent.PlayerTickEvent event) {
         EntityPlayer player = event.player;
         if ((!player.isSpectator()) && (!player.isCreative())) {
-            World world = player.world;
-            checkStatus(player);
-            if (world.isRemote) {
-                boolean move = (player.moveForward != 0) || (player.moveStrafing != 0);
-                packetHandler.sendToServer(new CheckMove(move, player.getCachedUniqueIdString()));
-            } else {
-                tickUpdate(player);
-                syncEndurance(player);
+            counter++;
+            if (counter > 10) {
+                World world = player.world;
+                checkStatus(player);
+                if (world.isRemote) {
+                    boolean move = (player.motionX != 0) || (player.motionY != 0) || (player.motionZ != 0);
+                    packetHandler.sendToServer(new CheckMove(move, player.getCachedUniqueIdString()));
+                } else {
+                    tickUpdate(player);
+                    syncEndurance(player);
+                }
+                counter = 0;
             }
         }
     }

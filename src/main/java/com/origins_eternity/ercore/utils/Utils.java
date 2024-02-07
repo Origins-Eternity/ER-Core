@@ -25,49 +25,34 @@ public class Utils {
     public static void tickUpdate(EntityPlayer player) {
         IEndurance endurance = player.getCapability(Capabilities.ENDURANCE, null);
         if (endurance.isMove()) {
-            if ((player.isRiding()) && (!(player.getRidingEntity() instanceof EntityBoat))) {
+            if (player.isRiding()) {
                 if (!player.isHandActive()) {
-                    if (endurance.getCoolDown() > 0) {
-                        endurance.removeCoolDown(1);
-                    } else {
-                        endurance.addSaturation(0.03f);
-                    }
+                    endurance.removeCoolDown(10);
+                    endurance.addSaturation(0.3f);
                 }
-            } else {
-                endurance.addCoolDown(10);
                 if (player.getRidingEntity() instanceof EntityBoat) {
-                    endurance.addExhaustion(0.01f);
-                } else if (player.isInWater()) {
-                    endurance.addExhaustion(0.02f);
-                } else if ((player.isElytraFlying()) || (player.isOnLadder())) {
-                    endurance.addExhaustion(0.01f);
-                } else if (player.isSprinting()) {
-                    endurance.addExhaustion(0.03f);
+                    endurance.addCoolDown(1);
+                    endurance.addExhaustion(0.1f);
                 }
+            } else if (player.isSprinting()) {
+                endurance.addCoolDown(100);
+                endurance.addExhaustion(0.3f);
             }
-        } else {
-            if (!player.isHandActive()) {
-                if (endurance.getCoolDown() > 0) {
-                    endurance.removeCoolDown(1);
-                } else {
-                    if (player.isInWater()) {
-                        endurance.addSaturation(0.01f);
-                    } else if (player.onGround) {
-                        endurance.addSaturation(0.02f);
-                    } else if (player.isRiding()) {
-                        endurance.addSaturation(0.03f);
-                    }
+            if (player.isHandActive()) {
+                Item item = player.getHeldItem(player.getActiveHand()).getItem();
+                if (item.equals(Items.SHIELD)) {
+                    endurance.addExhaustion(0.1f);
+                } else if (item.equals(Items.BOW)) {
+                    endurance.addExhaustion(0.2f);
                 }
+                endurance.addCoolDown(40);
+            } else {
+                endurance.removeCoolDown(10);
+                endurance.addSaturation(0.1f);
             }
-        }
-        if (player.isHandActive()) {
-            Item item = player.getHeldItem(player.getActiveHand()).getItem();
-            if (item.equals(Items.SHIELD)) {
-                endurance.addExhaustion(0.01f);
-            } else if (item.equals(Items.BOW)) {
-                endurance.addExhaustion(0.02f);
-            }
-            endurance.addCoolDown(10);
+        } else if (!player.isHandActive()) {
+            endurance.removeCoolDown(10);
+            endurance.addSaturation(0.2f);
         }
     }
 
