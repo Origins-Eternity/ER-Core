@@ -4,9 +4,6 @@
     "model": "forge:fluid"
   },
   "variants": {
-    "molten_iridium": [{"custom": {"fluid": "iridium"}}],
-    "molten_sugarcane": [{"custom": {"fluid": "sugarcane"}}],
-    "molten_obsidian_magic": [{"custom": {"fluid": "obsidian_magic"}}],
     "molten_tungsten": [{"custom": {"fluid": "tungsten"}}],
     "molten_slaked_lime": [{"custom": {"fluid": "slaked_lime"}}],
     "molten_tungsten_carbide": [{"custom": {"fluid": "tungsten_carbide"}}],

@@ -5,9 +5,7 @@ import com.origins_eternity.ercore.content.gui.Overlay;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.Language;
 import net.minecraft.client.resources.ResourcePackRepository;
-import net.minecraft.world.WorldType;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.event.FMLConstructionEvent;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
@@ -39,9 +37,6 @@ public class ClientProxy extends CommonProxy {
     @Override
     public void init(FMLInitializationEvent event) {
         super.init(event);
-        if (Loader.isModLoaded("biomesoplenty")) {
-            defaultWorldtype();
-        };
     }
 
     @Override
@@ -57,16 +52,7 @@ public class ClientProxy extends CommonProxy {
         return mc().gameDir.getPath();
     }
 
-    private static void defaultWorldtype() {
-        for (int i = 0; i < WorldType.WORLD_TYPES.length; i++) {
-            if (WorldType.WORLD_TYPES[i] == WorldType.byName(Configuration.worldtype)) {
-                WorldType defaultype = WorldType.WORLD_TYPES[0];
-                WorldType.WORLD_TYPES[0] = WorldType.WORLD_TYPES[i];
-                WorldType.WORLD_TYPES[i] = defaultype;
-                break;
-            }
-        }
-    }
+
 
     private static void moveResources() {
         for (String resourcepack : Configuration.resourcepacks) {

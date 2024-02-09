@@ -11,7 +11,6 @@ import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
@@ -20,10 +19,10 @@ import net.minecraftforge.event.entity.player.AttackEntityEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.world.BlockEvent;
-import net.minecraftforge.event.world.WorldEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.Event;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.gameevent.PlayerEvent.ItemCraftedEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 
 import static com.origins_eternity.ercore.ERCore.MOD_ID;
@@ -63,6 +62,18 @@ public class CommonEvent {
             if (!world.isRemote) {
                 endurance.addCoolDown(30);
                 endurance.addExhaustion(hardness / 10);
+            }
+        }
+    }
+
+    @SubscribeEvent
+    public static void onItemCraftedEvent(ItemCraftedEvent event) {
+        EntityPlayer player = event.player;
+        if (!player.isCreative()) {
+            IEndurance endurance = player.getCapability(Capabilities.ENDURANCE, null);
+            if (!player.world.isRemote) {
+                endurance.addCoolDown(30);
+                endurance.addExhaustion(0.5f);
             }
         }
     }

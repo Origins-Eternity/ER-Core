@@ -69,12 +69,6 @@ public class Configuration {
         @Config.Comment("A list of languages which can be detected to switch automatically.")
         public static String[] languages = new String[]{"zh_cn"};
 
-        @Config.Name("World Type")
-        @Config.RequiresMcRestart()
-        @Config.LangKey("config.ercore.worldtype")
-        @Config.Comment("Default world type when creating a new world.")
-        public static String worldtype = "default";
-
         @Config.Name("Resourcespacks Backup")
         @Config.RequiresMcRestart()
         @Config.LangKey("config.ercore.backup")

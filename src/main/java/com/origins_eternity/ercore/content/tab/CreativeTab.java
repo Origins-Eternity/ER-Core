@@ -23,7 +23,7 @@ public class CreativeTab {
             } else if (Configuration.enableBlocks) {
                 icon = new ItemStack(Blocks.Basalt, 1);
             } else if (Configuration.enableBlueprints) {
-                icon = new ItemStack(Blueprints.Anther_Table, 1);
+                icon = new ItemStack(Blueprints.Basic_Workshop, 1);
             } else if (Configuration.enableFluids) {
                 icon = new ItemStack(Fluids.Tungsten.getBlock());
             }

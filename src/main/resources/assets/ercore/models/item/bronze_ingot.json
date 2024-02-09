@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "ercore:items/flour"
+    "layer0": "ercore:items/bronze_ingot"
   }
 }
