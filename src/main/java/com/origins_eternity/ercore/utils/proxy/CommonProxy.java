@@ -16,9 +16,8 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 
 import static com.origins_eternity.ercore.ERCore.packetHandler;
+import static com.origins_eternity.ercore.campat.TConstruct.*;
 import static com.origins_eternity.ercore.utils.registry.ContentRegister.registerFluids;
-import static com.origins_eternity.ercore.utils.registry.MaterialRegister.addTinkerMelting;
-import static com.origins_eternity.ercore.utils.registry.MaterialRegister.preTinker;
 
 public class CommonProxy {
     public void construction(FMLConstructionEvent event) {
@@ -32,6 +31,8 @@ public class CommonProxy {
                 if ((Configuration.enableOres) && (Configuration.enableItems) && (Configuration.enableMaterial) && (Configuration.enableFluids)) {
                     preTinker();
                     addTinkerMelting();
+                    addTinkerAlloying();
+                    addTinkerCasting();
                 }
             }
         }

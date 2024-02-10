@@ -13,5 +13,5 @@ public class Ores {
 
     public static final Block Copper_Ore = new BlockCreator("Copper_Ore", 5, 2, "pickaxe");
     public static final Block Tin_Ore = new BlockCreator("Tin_Ore", 5, 2, "pickaxe");
-    public static final Block Tungsten_ore = new BlockCreator("Tungsten_Ore", 5, 8, "pickaxe");
+    public static final Block Tungsten_ore = new BlockCreator("Tungsten_Ore", 5, 4, "pickaxe");
 }
