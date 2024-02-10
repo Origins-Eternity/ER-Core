@@ -59,7 +59,10 @@ public class ClientProxy extends CommonProxy {
             File pack = new File(gameDir() + "\\resourcepacks\\" + resourcepack);
             File backup = new File(gameDir() + "\\backup\\" + resourcepack);
             File origin = new File(gameDir() + "\\mods\\" + resourcepack + ".disabled");
-            if ((origin.exists()) && (!pack.exists())) {
+            File resource = new File(gameDir() +"\\resourcepacks\\" + resourcepack + ".disabled");
+            if ((resource.exists()) && (!pack.exists())) {
+                resource.renameTo(pack);
+            } else if ((origin.exists()) && (!pack.exists())) {
                 origin.renameTo(pack);
             } else if ((backup.exists()) && (!pack.exists())) {
                 backup.renameTo(pack);
