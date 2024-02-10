@@ -180,4 +180,15 @@ public class CommonEvent {
             }
         }
     }
+
+    @SubscribeEvent
+    public static void onRightClickBlock(PlayerInteractEvent.RightClickBlock event) {
+        EntityPlayer player = event.getEntityPlayer();
+        if (!player.isCreative()) {
+            IEndurance endurance = player.getCapability(Capabilities.ENDURANCE, null);
+            if (endurance.isExhausted()) {
+                event.setCanceled(true);
+            }
+        }
+    }
 }
