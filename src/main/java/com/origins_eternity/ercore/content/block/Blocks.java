@@ -12,5 +12,5 @@ public class Blocks {
     public static final List<Item> BLOCKITEMS = new ArrayList<>();
     public static final Block Basalt = new BlockCreator("Basalt", 4, 2, "pickaxe");
     public static final Block Slakedlime_Block = new BlockCreator("Slakedlime_Block", 3, 3, "shovel");
-
+    public static final Block Tungsten_Steel_Block = new BlockCreator("Tungsten_Steel_Block", 5, 5, "pickaxe");
 }

@@ -5,6 +5,7 @@ tile.ercore.basalt.name=玄武岩
 tile.ercore.copper_ore.name=孔雀石
 tile.ercore.tin_ore.name=锡矿石
 tile.ercore.tungsten_ore.name=钨矿石
+tile.ercore.tungsten_steel_block.name=钨钢块
 tile.ercore.molten_tungsten.name=熔融钨
 tile.ercore.molten_slaked_lime.name=熔融熟石灰
 tile.ercore.molten_tungsten_carbide.name=熔融碳化钨

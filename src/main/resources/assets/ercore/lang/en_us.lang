@@ -5,6 +5,7 @@ tile.ercore.basalt.name=Basalt
 tile.ercore.copper_ore.name=Copper Ore
 tile.ercore.tin_ore.name=Tin Ore
 tile.ercore.tungsten_ore.name=Tungsten Ore
+tile.ercore.tungsten_steel_block.name=Tungsten Steel Block
 tile.ercore.molten_tungsten.name=Molten Tungsten
 tile.ercore.molten_slaked_lime.name=Molten Slaked Lime
 tile.ercore.molten_tungsten_carbide.name=Molten Tungsten Carbide
