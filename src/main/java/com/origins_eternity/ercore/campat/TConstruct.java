@@ -69,12 +69,12 @@ public class TConstruct {
         registerMelting(Items.Tungsten_Steel_Ingot, Fluids.Tungsten_Steel, 144);
     }
 
-    @Optional.Method(modid = "tconstrust")
+    @Optional.Method(modid = "tconstruct")
     public static void addTinkerAlloying() {
         registerAlloy(new FluidStack(Fluids.Tungsten_Steel, 1), new FluidStack(Fluids.Tungsten, 1), new FluidStack(Fluids.Tungsten_Carbide, 3));
     }
 
-    @Optional.Method(modid = "tconstrust")
+    @Optional.Method(modid = "tconstruct")
     public static void addTinkerCasting() {
         registerBasinCasting(new ItemStack(Items.Tungsten_Ingot), ItemStack.EMPTY, Fluids.Tungsten, 144);
         registerBasinCasting(new ItemStack(Items.Tungsten_Carbide_Ingot), ItemStack.EMPTY, Fluids.Tungsten_Carbide, 144);
