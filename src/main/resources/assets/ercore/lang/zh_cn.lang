@@ -59,8 +59,6 @@ material.tungsten_steel.name=钨钢
 
 config.ercore.overlay=自定义状态栏显示
 config.ercore.overlay.tooltip=是否显示耐力值条
-config.ercore.offset=自定义状态栏偏移量
-config.ercore.offset.tooltip=正数代表向上移动，一般是10的倍数。
 config.ercore.resourcepacks=资源包
 config.ercore.resourcepacks.tooltip=将被备份的资源包列表。
 config.ercore.languages=语言

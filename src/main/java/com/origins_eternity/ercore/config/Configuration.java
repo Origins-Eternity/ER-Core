@@ -51,12 +51,6 @@ public class Configuration {
         @Config.Comment("Whether to show endurance bar or not.")
         public static boolean showOverlay = true;
 
-        @Config.RangeInt()
-        @Config.Name("The Bar Offset")
-        @Config.LangKey("config.ercore.offset")
-        @Config.Comment("Positive values represent upward movement, it's usually a multiple of 10.")
-        public static int barOffset = 0;
-
         @Config.Name("Resourcepacks")
         @Config.RequiresMcRestart()
         @Config.LangKey("config.ercore.resourcepacks")
