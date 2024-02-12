@@ -7,6 +7,7 @@ import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
+import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 import static com.origins_eternity.ercore.ERCore.MOD_ID;
@@ -31,6 +32,9 @@ public class Overlay extends Gui {
                 int posY = event.getResolution().getScaledHeight() - 49;
                 posY -= Configuration.barOffset;
                 if (player.getAir() < 300) {
+                    posY -= 10;
+                }
+                if ((player.getTotalArmorValue() > 0) && Loader.isModLoaded("toughnessbar")) {
                     posY -= 10;
                 }
                 drawTexturedModalRect(posX, posY, 0, 0, 80, 9);
