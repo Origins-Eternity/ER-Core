@@ -60,7 +60,11 @@ public class ClientProxy extends CommonProxy {
             File backup = new File(gameDir() + "\\backup\\" + resourcepack);
             File origin = new File(gameDir() + "\\mods\\" + resourcepack);
             if ((origin.exists()) && (!pack.exists())) {
-                origin.renameTo(pack);
+                try {
+                    Files.copy(origin.toPath(), pack.toPath());
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
             } else if ((backup.exists()) && (!pack.exists())) {
                 backup.renameTo(pack);
             }
