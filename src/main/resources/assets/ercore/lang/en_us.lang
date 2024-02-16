@@ -6,6 +6,7 @@ tile.ercore.copper_ore.name=Copper Ore
 tile.ercore.tin_ore.name=Tin Ore
 tile.ercore.tungsten_ore.name=Tungsten Ore
 tile.ercore.tungsten_steel_block.name=Tungsten Steel Block
+tile.ercore.molten_sugarcane.name=Molten Sugarcane
 tile.ercore.molten_tungsten.name=Molten Tungsten
 tile.ercore.molten_slaked_lime.name=Molten Slaked Lime
 tile.ercore.molten_tungsten_carbide.name=Molten Tungsten Carbide
@@ -50,6 +51,7 @@ item.ercore.vacuum_bag_blueprint.name=Vacuum Bag Design Blueprint
 item.ercore.toxic_mask_blueprint.name=Toxic Mask Design Blueprint
 item.ercore.chest_blueprint.name=Chest Design Blueprint
 
+fluid.ercore.sugarcane=Molten Sugarcane
 fluid.ercore.tungsten=Molten Tungsten
 fluid.ercore.slaked_lime=Molten Slaked Lime
 fluid.ercore.tungsten_carbide=Molten Tungsten Carbide
