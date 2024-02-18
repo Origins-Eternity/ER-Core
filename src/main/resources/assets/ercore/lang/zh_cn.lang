@@ -60,11 +60,9 @@ material.tungsten_steel.name=钨钢
 config.ercore.overlay=自定义状态栏显示
 config.ercore.overlay.tooltip=是否显示耐力值条
 config.ercore.resourcepacks=资源包
-config.ercore.resourcepacks.tooltip=将被备份的资源包列表。
+config.ercore.resourcepacks.tooltip=将被自动安装的资源包列表。
 config.ercore.languages=语言
 config.ercore.languages.tooltip=将被自动切换的语言列表。
-config.ercore.backup=自定义备份资源包
-config.ercore.backup.tooltip=是否备份资源包。
 
 config.ercore.ores=添加矿石
 config.ercore.ores.tooltip=是否添加矿石。

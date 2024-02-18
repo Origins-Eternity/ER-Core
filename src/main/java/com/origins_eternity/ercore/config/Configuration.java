@@ -54,7 +54,7 @@ public class Configuration {
         @Config.Name("Resourcepacks")
         @Config.RequiresMcRestart()
         @Config.LangKey("config.ercore.resourcepacks")
-        @Config.Comment("A list of resourcepacks which will be backed up.")
+        @Config.Comment("A list of resourcepacks which will be automatically installed.")
         public static String[] resourcepacks = new String[]{"Evolution-Reset-Resource-Pack-1.2.0.zip"};
 
         @Config.Name("Languages")
@@ -62,12 +62,6 @@ public class Configuration {
         @Config.LangKey("config.ercore.languages")
         @Config.Comment("A list of languages which can be detected to switch automatically.")
         public static String[] languages = new String[]{"zh_cn"};
-
-        @Config.Name("Resourcespacks Backup")
-        @Config.RequiresMcRestart()
-        @Config.LangKey("config.ercore.backup")
-        @Config.Comment("Whether to backup resourcepacks or not.")
-        public static boolean enableBackup = true;
 
     @Mod.EventBusSubscriber(modid = MOD_ID)
     public static class ConfigSyncHandler {

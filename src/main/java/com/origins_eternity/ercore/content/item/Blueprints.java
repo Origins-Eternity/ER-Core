@@ -30,7 +30,7 @@ public class Blueprints {
     public static final Item Quarry_Bag = new ItemCreator("Quarry_Bag_Blueprint", 10);
     public static final Item Tanner_Workshop = new ItemCreator("Tanner_Workshop_Blueprint", 10);
     public static final Item Durable_Quarry_Bag = new ItemCreator("Durable_Quarry_Bag_Blueprint", 10);
-    public static final Item Explosive = new ItemCreator("Explosive_Blueprint", 10);
+    public static final Item Gunpowder = new ItemCreator("Gunpowder_Blueprint", 10);
     public static final Item Tool = new ItemCreator("Tool_Blueprint", 10);
     public static final Item Ladder = new ItemCreator("Ladder_Blueprint", 10);
     public static final Item Vacuum_Bag = new ItemCreator("Vacuum_Bag_Blueprint", 10);
