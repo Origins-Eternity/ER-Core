@@ -3,10 +3,8 @@ package com.origins_eternity.ercore.campat;
 import com.origins_eternity.ercore.content.block.Ores;
 import com.origins_eternity.ercore.content.fluid.Fluids;
 import com.origins_eternity.ercore.content.item.Items;
-import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
@@ -15,11 +13,9 @@ import net.minecraftforge.fml.common.Optional;
 import net.minecraftforge.fml.relauncher.Side;
 import slimeknights.tconstruct.library.MaterialIntegration;
 import slimeknights.tconstruct.library.TinkerRegistry;
-import slimeknights.tconstruct.library.client.MaterialRenderInfo;
-import slimeknights.tconstruct.library.client.texture.MetalTextureTexture;
 import slimeknights.tconstruct.library.materials.*;
 
-import static com.origins_eternity.ercore.ERCore.MOD_ID;
+import static com.origins_eternity.ercore.utils.Utils.setRenderInfo;
 import static slimeknights.tconstruct.library.TinkerRegistry.*;
 import static slimeknights.tconstruct.tools.TinkerTraits.*;
 
@@ -46,16 +42,6 @@ public class TConstruct {
     @Optional.Method(modid = "tconstruct")
     public static void preTinker() {
         preInitMaterials(false, true, 144, Items.Tungsten_Steel_Ingot, Tungsten_Steel(), Fluids.Tungsten_Steel, 2000, 8f, 10f, 3f, 100, 100, 5, 3f, 4f, 7f);
-    }
-
-    @Optional.Method(modid = "tconstruct")
-    private static void setRenderInfo(Material material, Fluid fluid) {
-        material.setRenderInfo(new MaterialRenderInfo.AbstractMaterialRenderInfo() {
-            @Override
-            public TextureAtlasSprite getTexture(ResourceLocation resourceLocation, String location) {
-                return new MetalTextureTexture(new ResourceLocation(MOD_ID + ":materials/" + material.getIdentifier()), resourceLocation, location, fluid.getColor(), 2f, 3f, 0f);
-            }
-        });
     }
 
     @Optional.Method(modid = "tconstruct")
