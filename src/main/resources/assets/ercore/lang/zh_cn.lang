@@ -59,8 +59,6 @@ material.tungsten_steel.name=钨钢
 
 config.ercore.overlay=自定义状态栏显示
 config.ercore.overlay.tooltip=是否显示耐力值条
-config.ercore.resourcepacks=资源包
-config.ercore.resourcepacks.tooltip=将被自动安装的资源包列表。
 config.ercore.languages=语言
 config.ercore.languages.tooltip=将被自动切换的语言列表。
 

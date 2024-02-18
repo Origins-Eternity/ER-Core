@@ -51,12 +51,6 @@ public class Configuration {
         @Config.Comment("Whether to show endurance bar or not.")
         public static boolean showOverlay = true;
 
-        @Config.Name("Resourcepacks")
-        @Config.RequiresMcRestart()
-        @Config.LangKey("config.ercore.resourcepacks")
-        @Config.Comment("A list of resourcepacks which will be automatically installed.")
-        public static String[] resourcepacks = new String[]{"Evolution-Reset-Resource-Pack-1.2.0.zip"};
-
         @Config.Name("Languages")
         @Config.RequiresMcRestart()
         @Config.LangKey("config.ercore.languages")

@@ -59,8 +59,6 @@ material.tungsten_steel.name=Tungsten Steel
 
 config.ercore.overlay=Show Overlay Bar
 config.ercore.overlay.tooltip=Whether to show endurance bar or not.
-config.ercore.resourcepacks=Resourcepacks
-config.ercore.resourcepacks.tooltip=A list of resourcepacks which will be backed up.
 config.ercore.languages=Languages
 config.ercore.languages.tooltip=A list of resourcepacks which will be automatically installed.
 
