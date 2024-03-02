@@ -10,10 +10,12 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
+import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
+import net.minecraftforge.event.entity.living.LivingDamageEvent;
 import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.event.entity.player.AttackEntityEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
@@ -39,7 +41,7 @@ public class CommonEvent {
     @SubscribeEvent
     public static void onFluidPlaceBlock(BlockEvent.FluidPlaceBlockEvent event) {
         Block block = event.getState().getBlock();
-        if (block.equals(Blocks.OBSIDIAN)) {
+        if (block.equals(Blocks.COBBLESTONE)) {
             event.setNewState(com.origins_eternity.ercore.content.block.Blocks.Basalt.getDefaultState());
         }
     }
@@ -188,6 +190,22 @@ public class CommonEvent {
             IEndurance endurance = player.getCapability(Capabilities.ENDURANCE, null);
             if (endurance.isExhausted()) {
                 event.setCanceled(true);
+            }
+        }
+    }
+
+    @SubscribeEvent
+    public static void onLivingDamage(LivingDamageEvent event) {
+        if (event.getEntity() instanceof EntityPlayer) {
+            EntityPlayer player = (EntityPlayer) event.getEntity();
+            if (!player.world.isRemote) {
+                if (event.getSource() == DamageSource.DROWN) {
+                    event.setAmount(player.getHealth());
+                } else if (event.getSource() == DamageSource.LAVA) {
+                    event.setAmount(player.getHealth());
+                } else if (event.getSource() == DamageSource.LIGHTNING_BOLT) {
+                    event.setAmount(player.getHealth());
+                }
             }
         }
     }

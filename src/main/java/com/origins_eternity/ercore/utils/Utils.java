@@ -4,11 +4,12 @@ import com.origins_eternity.ercore.content.capability.Capabilities;
 import com.origins_eternity.ercore.content.capability.endurance.IEndurance;
 import com.origins_eternity.ercore.message.SyncEndurance;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
-import net.minecraft.entity.item.EntityBoat;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Items;
+import net.minecraft.init.MobEffects;
 import net.minecraft.item.Item;
+import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.fluids.Fluid;
@@ -37,13 +38,12 @@ public class Utils {
                     endurance.removeCoolDown(10);
                     endurance.addSaturation(0.3f);
                 }
-                if (player.getRidingEntity() instanceof EntityBoat) {
-                    endurance.addCoolDown(1);
-                    endurance.addExhaustion(0.1f);
-                }
             } else if (player.isSprinting()) {
                 endurance.addCoolDown(100);
                 endurance.addExhaustion(0.3f);
+            } else if (endurance.isTired()) {
+                endurance.addCoolDown(50);
+                endurance.addExhaustion(0.1f);
             }
             if (player.isHandActive()) {
                 Item item = player.getHeldItem(player.getActiveHand()).getItem();
@@ -63,12 +63,23 @@ public class Utils {
         }
     }
 
+    public static void addDebuff(EntityPlayer player) {
+        if (!player.world.isRemote) {
+            IEndurance endurance = player.getCapability(ENDURANCE, null);
+            if (endurance.isExhausted()) {
+                player.addPotionEffect(new PotionEffect(MobEffects.HUNGER, 100, 1, false, false));
+                player.addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, 100, 1, false, false));
+                player.addPotionEffect(new PotionEffect(MobEffects.WEAKNESS, 100, 1, false, false));
+            }
+        }
+    }
+
     public static void checkStatus(EntityPlayer player) {
         IEndurance endurance = player.getCapability(Capabilities.ENDURANCE, null);
         if (endurance.isTired()) {
             player.setSprinting(false);
             if (endurance.isExhausted()) {
-                player.setSprinting(false);
+                addDebuff(player);
             }
         }
     }

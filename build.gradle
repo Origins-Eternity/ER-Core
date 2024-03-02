@@ -3,7 +3,7 @@ plugins {
 }
 
 
-group = 'com.origins_eternal'
+group = 'com.origins_eternity'
 version = '1.2.0'
 
 java {
