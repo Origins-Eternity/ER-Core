@@ -65,10 +65,13 @@ public class Utils {
 
     public static void addDebuff(EntityPlayer player) {
         if (!player.world.isRemote) {
-            IEndurance endurance = player.getCapability(ENDURANCE, null);
-            if (endurance.isExhausted()) {
+            if (!player.isPotionActive(MobEffects.HUNGER)) {
                 player.addPotionEffect(new PotionEffect(MobEffects.HUNGER, 100, 1, false, false));
+            }
+            if (!player.isPotionActive(MobEffects.SLOWNESS)) {
                 player.addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, 100, 1, false, false));
+            }
+            if (!player.isPotionActive(MobEffects.WEAKNESS)) {
                 player.addPotionEffect(new PotionEffect(MobEffects.WEAKNESS, 100, 1, false, false));
             }
         }

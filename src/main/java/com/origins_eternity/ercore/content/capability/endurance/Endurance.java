@@ -63,6 +63,7 @@ public class Endurance implements IEndurance {
 
     @Override
     public void addExhaustion(float value) {
+        if (endurance == 0) return;
         exhaustion += value;
         while (exhaustion > 1) {
             consumeEndurance(1);
@@ -72,6 +73,7 @@ public class Endurance implements IEndurance {
 
     @Override
     public void addSaturation(float value) {
+        if (endurance == 20) return;
         if (coolDown == 0) {
             saturation += value;
             while (saturation > 1) {
