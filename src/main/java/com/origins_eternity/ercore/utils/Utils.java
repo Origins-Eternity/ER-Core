@@ -41,9 +41,6 @@ public class Utils {
             } else if (player.isSprinting()) {
                 endurance.addCoolDown(100);
                 endurance.addExhaustion(0.3f);
-            } else if (endurance.isTired()) {
-                endurance.addCoolDown(50);
-                endurance.addExhaustion(0.1f);
             }
             if (player.isHandActive()) {
                 Item item = player.getHeldItem(player.getActiveHand()).getItem();
@@ -63,17 +60,16 @@ public class Utils {
         }
     }
 
-    public static void addDebuff(EntityPlayer player) {
+    public static void addTiredDebuff(EntityPlayer player) {
         if (!player.world.isRemote) {
-            if (!player.isPotionActive(MobEffects.HUNGER)) {
-                player.addPotionEffect(new PotionEffect(MobEffects.HUNGER, 100, 1, false, false));
-            }
-            if (!player.isPotionActive(MobEffects.SLOWNESS)) {
-                player.addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, 100, 1, false, false));
-            }
-            if (!player.isPotionActive(MobEffects.WEAKNESS)) {
-                player.addPotionEffect(new PotionEffect(MobEffects.WEAKNESS, 100, 1, false, false));
-            }
+            player.addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, 10, 1, false, false));
+        }
+    }
+
+    public static void addExhaustedDebuff(EntityPlayer player) {
+        if (!player.world.isRemote) {
+            player.addPotionEffect(new PotionEffect(MobEffects.BLINDNESS, 10, 1, false, false));
+            player.addPotionEffect(new PotionEffect(MobEffects.HUNGER, 10, 1, false, false));
         }
     }
 
@@ -81,8 +77,9 @@ public class Utils {
         IEndurance endurance = player.getCapability(Capabilities.ENDURANCE, null);
         if (endurance.isTired()) {
             player.setSprinting(false);
+            addTiredDebuff(player);
             if (endurance.isExhausted()) {
-                addDebuff(player);
+                addExhaustedDebuff(player);
             }
         }
     }

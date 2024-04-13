@@ -172,7 +172,7 @@ public class CommonEvent {
                 World world = player.world;
                 checkStatus(player);
                 if (world.isRemote) {
-                    boolean move = (player.motionX != 0) || (player.motionY != 0) || (player.motionZ != 0);
+                    boolean move = (player.motionX != 0) || (player.motionY != 0);
                     packetHandler.sendToServer(new CheckMove(move, player.getCachedUniqueIdString()));
                 } else {
                     tickUpdate(player);
@@ -205,6 +205,14 @@ public class CommonEvent {
                     event.setAmount(player.getHealth());
                 } else if (event.getSource() == DamageSource.LIGHTNING_BOLT) {
                     event.setAmount(player.getHealth());
+                }
+            }
+        } else if (event.getSource().getTrueSource() instanceof EntityPlayer) {
+            EntityPlayer player = (EntityPlayer) event.getSource().getTrueSource();
+            if (!player.isCreative()) {
+                IEndurance endurance = player.getCapability(Capabilities.ENDURANCE, null);
+                if (endurance.isTired()) {
+                    event.setAmount((float) (event.getAmount() * 0.32));
                 }
             }
         }

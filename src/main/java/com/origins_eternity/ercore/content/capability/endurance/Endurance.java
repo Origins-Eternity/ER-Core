@@ -147,6 +147,7 @@ public class Endurance implements IEndurance {
 
     @Override
     public void addCoolDown(int value) {
+        if (endurance == 0) return;
         if (value > coolDown) {
             coolDown = value;
         }
