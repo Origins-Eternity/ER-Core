@@ -2,9 +2,11 @@ package com.origins_eternity.ercore.utils.proxy;
 
 import com.origins_eternity.ercore.config.Configuration;
 import com.origins_eternity.ercore.content.gui.Overlay;
+import com.origins_eternity.ercore.utils.Utils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.Language;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.event.FMLConstructionEvent;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
@@ -25,6 +27,9 @@ public class ClientProxy extends CommonProxy {
     @Override
     public void init(FMLInitializationEvent event) {
         super.init(event);
+        if (Loader.isModLoaded("rtg")) {
+            Utils.defaultWorldtype();
+        }
     }
 
     @Override

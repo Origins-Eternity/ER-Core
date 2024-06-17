@@ -4,6 +4,7 @@ import com.origins_eternity.ercore.content.capability.Capabilities;
 import com.origins_eternity.ercore.content.capability.endurance.Endurance;
 import com.origins_eternity.ercore.content.capability.endurance.IEndurance;
 import com.origins_eternity.ercore.message.CheckMove;
+import com.origins_eternity.ercore.utils.Utils;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
@@ -42,7 +43,7 @@ public class CommonEvent {
     public static void onFluidPlaceBlock(BlockEvent.FluidPlaceBlockEvent event) {
         Block block = event.getState().getBlock();
         if (block.equals(Blocks.COBBLESTONE)) {
-            event.setNewState(com.origins_eternity.ercore.content.block.Blocks.Basalt.getDefaultState());
+            event.setNewState(Utils.getBlockstate("chisel:basalt", Blocks.COBBLESTONE));
         }
     }
 
@@ -161,6 +162,7 @@ public class CommonEvent {
             capability.getStorage().readNBT(capability, present, null, capability.getStorage().writeNBT(capability, origin, null));
         }
     }
+
     static int counter;
 
     @SubscribeEvent

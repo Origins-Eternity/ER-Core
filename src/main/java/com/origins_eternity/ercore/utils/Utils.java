@@ -3,14 +3,18 @@ package com.origins_eternity.ercore.utils;
 import com.origins_eternity.ercore.content.capability.Capabilities;
 import com.origins_eternity.ercore.content.capability.endurance.IEndurance;
 import com.origins_eternity.ercore.message.SyncEndurance;
+import net.minecraft.block.Block;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.init.MobEffects;
 import net.minecraft.item.Item;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.world.WorldType;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fml.common.Optional;
@@ -84,6 +88,16 @@ public class Utils {
         }
     }
 
+    public static IBlockState getBlockstate(String id, Block origin) {
+        ResourceLocation location = new ResourceLocation(id);
+        Block block = Block.REGISTRY.getObject(location);
+        if (block.equals(Blocks.AIR)) {
+            block = origin;
+        }
+
+        return block.getDefaultState();
+    }
+
     @Optional.Method(modid = "tconstruct")
     public static void setRenderInfo(Material material, Fluid fluid) {
         material.setRenderInfo(new MaterialRenderInfo.AbstractMaterialRenderInfo() {
@@ -92,5 +106,17 @@ public class Utils {
                 return new MetalTextureTexture(new ResourceLocation(MOD_ID + ":materials/" + material.getIdentifier()), resourceLocation, location, fluid.getColor(), 2f, 3f, 0f);
             }
         });
+    }
+
+    @Optional.Method(modid = "rtg")
+    public static void defaultWorldtype() {
+        for(int i = 0; i < WorldType.WORLD_TYPES.length; ++i) {
+            if (WorldType.WORLD_TYPES[i] == WorldType.byName("RTG")) {
+                WorldType defaultype = WorldType.WORLD_TYPES[0];
+                WorldType.WORLD_TYPES[0] = WorldType.WORLD_TYPES[i];
+                WorldType.WORLD_TYPES[i] = defaultype;
+                break;
+            }
+        }
     }
 }

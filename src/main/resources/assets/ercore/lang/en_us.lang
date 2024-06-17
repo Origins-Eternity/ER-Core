@@ -1,7 +1,6 @@
 itemGroup.ercore=ER Core
 
 tile.ercore.slakedlime_block.name=Slaked Lime Block
-tile.ercore.basalt.name=Basalt
 tile.ercore.copper_ore.name=Copper Ore
 tile.ercore.tin_ore.name=Tin Ore
 tile.ercore.tungsten_ore.name=Tungsten Ore
@@ -35,7 +34,7 @@ item.ercore.potter_workshop_blueprint.name=Potter Workshop Design Blueprint
 item.ercore.tailor_workstation_blueprint.name=Tailor Workstation Design Blueprint
 item.ercore.tailor_workshop_blueprint.name=Tailor Workshop Design Blueprint
 item.ercore.tanner_workstation_blueprint.name=Tanner Workstation Design Blueprint
-item.ercore.bed_blueprint.name=Bed Design Blueprint
+item.ercore.sleeping_bag_blueprint.name=Sleeping Bag Design Blueprint
 item.ercore.brewing_stand_blueprint.name=Brewing Stand Design Blueprint
 item.ercore.small_backpack_blueprint.name=Small Backpack Design Blueprint
 item.ercore.medium_backpack_blueprint.name=Medium Backpack Design Blueprint
@@ -48,7 +47,6 @@ item.ercore.tool_blueprint.name=Tool Design Blueprint
 item.ercore.ladder_blueprint.name=Ladder Design Blueprint
 item.ercore.vacuum_bag_blueprint.name=Vacuum Bag Design Blueprint
 item.ercore.toxic_mask_blueprint.name=Toxic Mask Design Blueprint
-item.ercore.chest_blueprint.name=Chest Design Blueprint
 
 fluid.ercore.tungsten=Molten Tungsten
 fluid.ercore.slaked_lime=Molten Slaked Lime
