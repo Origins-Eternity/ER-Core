@@ -15,7 +15,7 @@ import slimeknights.tconstruct.library.MaterialIntegration;
 import slimeknights.tconstruct.library.TinkerRegistry;
 import slimeknights.tconstruct.library.materials.*;
 
-import static com.origins_eternity.ercore.utils.Utils.setRenderInfo;
+import static com.origins_eternity.ercore.utils.proxy.ClientProxy.setRenderInfo;
 import static slimeknights.tconstruct.library.TinkerRegistry.*;
 import static slimeknights.tconstruct.tools.TinkerTraits.*;
 
