@@ -61,7 +61,7 @@ public class Utils {
 
     private static void addPotions(EntityPlayer player, Potion potion) {
         if (!player.isPotionActive(potion)) {
-            player.addPotionEffect(new PotionEffect(potion, 60, 1, false, false));
+            player.addPotionEffect(new PotionEffect(potion, 100, 1, false, false));
         }
     }
 

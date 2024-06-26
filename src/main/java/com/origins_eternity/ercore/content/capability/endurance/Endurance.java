@@ -132,14 +132,16 @@ public class Endurance implements IEndurance {
     @Override
     public void recoverEndurance(int value) {
         endurance += value;
-        if (endurance >= 5) {
-            if (tired) {
-                setTired(false);
+        if(endurance > 0) {
+            if (exhausted) {
+                exhausted = false;
             }
-            if (endurance >= 20) {
-                endurance = 20;
-                if (exhausted) {
-                    setExhausted(false);
+            if (endurance >= 5) {
+                if (tired) {
+                    setTired(false);
+                }
+                if (endurance >= 20) {
+                    endurance = 20;
                 }
             }
         }
