@@ -11,6 +11,7 @@ import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.init.MobEffects;
 import net.minecraft.item.Item;
+import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.WorldType;
@@ -58,16 +59,22 @@ public class Utils {
         }
     }
 
+    private static void addPotions(EntityPlayer player, Potion potion) {
+        if (!player.isPotionActive(potion)) {
+            player.addPotionEffect(new PotionEffect(potion, 60, 1, false, false));
+        }
+    }
+
     public static void addTiredDebuff(EntityPlayer player) {
         if (!player.world.isRemote) {
-            player.addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, 10, 1, false, false));
+            addPotions(player, MobEffects.SLOWNESS);
         }
     }
 
     public static void addExhaustedDebuff(EntityPlayer player) {
         if (!player.world.isRemote) {
-            player.addPotionEffect(new PotionEffect(MobEffects.BLINDNESS, 10, 1, false, false));
-            player.addPotionEffect(new PotionEffect(MobEffects.HUNGER, 10, 1, false, false));
+            addPotions(player, MobEffects.BLINDNESS);
+            addPotions(player, MobEffects.HUNGER);
         }
     }
 
