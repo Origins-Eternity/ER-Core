@@ -7,14 +7,14 @@
 **Inspired by the StaminaPlus mod, each survival/adventure player has their own endurance level, you can choose whether to display the HUD in the configuration file.**  
 ![This is an image](https://s1.ax1x.com/2023/07/22/pCbvoF0.png)
 ### Language Automatically Set  
-**Mod will attempt to set the game language to the corresponding language based on the detected system language. Only Chinese are supported by default, you can add the desired language in the configuration file. After testing, the feature will not work when installed RandomPatches at the same time.**  
+**Mod will attempt to set the game language to the corresponding language based on the detected system language. Only Chinese are supported by default, you can add the desired language in the configuration file. Notice, the feature will not work when installed RandomPatches at the same time.**  
 ### No Infinite Fluids  
 **All fluids in the game cannot create new fluid resources, but players can still bottle water with water.**  
 ![This is an image](https://s1.ax1x.com/2022/12/28/pSSP7Sx.png)
 ### Replace The Products of Lava and Water  
 **When lava and water meets, the original obsidian will be replaced with basalt blocks.**  
 ### Default World Type
-**It's not really a change, but rather swapping the RTG world type with the default world type. Valid only when Realistic Terrain Generation is installed.**
+**It's not really a change, but rather swapping the RTG world type with the default world type. Valid only when Realistic Terrain Generation and other fork version which has the same modid is installed.**
 ## Content  
 **All content is also designed for the above modpack, you can customize what should be added in the configuration file, and all content will not be added by default.**  
 ### Ores  
