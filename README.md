@@ -13,6 +13,8 @@
 ![This is an image](https://s1.ax1x.com/2022/12/28/pSSP7Sx.png)
 ### Replace The Products of Lava and Water  
 **When lava and water meets, the original obsidian will be replaced with basalt blocks.**  
+### Default World Type
+**It's not really a change, but rather swapping the RTG world type with the default world type. Valid only when Realistic Terrain Generation is installed.**
 ## Content  
 **All content is also designed for the above modpack, you can customize what should be added in the configuration file, and all content will not be added by default.**  
 ### Ores  
