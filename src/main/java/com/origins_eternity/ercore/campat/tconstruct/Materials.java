@@ -1,4 +1,4 @@
-package com.origins_eternity.ercore.campat;
+package com.origins_eternity.ercore.campat.tconstruct;
 
 import com.origins_eternity.ercore.content.block.Ores;
 import com.origins_eternity.ercore.content.fluid.Fluids;
@@ -9,7 +9,6 @@ import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fml.common.FMLCommonHandler;
-import net.minecraftforge.fml.common.Optional;
 import net.minecraftforge.fml.relauncher.Side;
 import slimeknights.tconstruct.library.MaterialIntegration;
 import slimeknights.tconstruct.library.TinkerRegistry;
@@ -19,13 +18,9 @@ import static com.origins_eternity.ercore.utils.proxy.ClientProxy.setRenderInfo;
 import static slimeknights.tconstruct.library.TinkerRegistry.*;
 import static slimeknights.tconstruct.tools.TinkerTraits.*;
 
-public class TConstruct {
-    @Optional.Method(modid = "tconstruct")
-    private static Material Tungsten_Steel() {
-        return new Material("tungsten_steel", TextFormatting.DARK_GRAY).addTrait(heavy).addTrait(sharp, "head").addTrait(sharp, "bowstring").addTrait(dense, "handle").addTrait(stiff, "extra").addTrait(dense, "extra");
-    }
+public class Materials {
+    private static Material Tungsten_Steel = new Material("tungsten_steel", TextFormatting.DARK_GRAY).addTrait(heavy).addTrait(sharp, "head").addTrait(sharp, "bowstring").addTrait(dense, "handle").addTrait(stiff, "extra").addTrait(dense, "extra");
 
-    @Optional.Method(modid = "tconstruct")
     private static void preInitMaterials(boolean craft, boolean cast, int volume, Item item, Material material, Fluid fluid, int headDura, float headSpeed, float headAttack, float handleMod, int handleDura, int extra, int headLevel, float drawSpeed, float range, float bonusDamage) {
         TinkerRegistry.addMaterialStats(material, new HeadMaterialStats(headDura, headSpeed, headAttack, headLevel));
         TinkerRegistry.addMaterialStats(material, new HandleMaterialStats(handleMod, handleDura));
@@ -39,12 +34,10 @@ public class TConstruct {
         TinkerRegistry.integrate(new MaterialIntegration(material, fluid)).toolforge().preInit();
     }
 
-    @Optional.Method(modid = "tconstruct")
     public static void preTinker() {
-        preInitMaterials(false, true, 144, Items.Tungsten_Steel_Ingot, Tungsten_Steel(), Fluids.Tungsten_Steel, 2000, 8f, 10f, 3f, 100, 100, 5, 3f, 4f, 7f);
+        preInitMaterials(false, true, 144, Items.Tungsten_Steel_Ingot, Tungsten_Steel, Fluids.Tungsten_Steel, 2000, 8f, 10f, 3f, 100, 100, 5, 3f, 4f, 7f);
     }
 
-    @Optional.Method(modid = "tconstruct")
     public static void addTinkerMelting() {
         registerMelting(Items.Tungsten_Nugget, Fluids.Tungsten, 72);
         registerMelting(Items.Tungsten_Ingot, Fluids.Tungsten, 144);
@@ -55,12 +48,10 @@ public class TConstruct {
         registerMelting(Items.Tungsten_Steel_Ingot, Fluids.Tungsten_Steel, 144);
     }
 
-    @Optional.Method(modid = "tconstruct")
     public static void addTinkerAlloying() {
         registerAlloy(new FluidStack(Fluids.Tungsten_Steel, 1), new FluidStack(Fluids.Tungsten, 1), new FluidStack(Fluids.Tungsten_Carbide, 3));
     }
 
-    @Optional.Method(modid = "tconstruct")
     public static void addTinkerCasting() {
         registerBasinCasting(new ItemStack(Items.Tungsten_Ingot), ItemStack.EMPTY, Fluids.Tungsten, 144);
         registerBasinCasting(new ItemStack(Items.Tungsten_Carbide_Ingot), ItemStack.EMPTY, Fluids.Tungsten_Carbide, 144);

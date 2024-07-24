@@ -14,11 +14,13 @@ import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.renderer.block.statemap.StateMapperBase;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
+import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
@@ -32,6 +34,7 @@ import static com.origins_eternity.ercore.ERCore.MOD_ID;
 import static com.origins_eternity.ercore.content.block.Blocks.BLOCKITEMS;
 import static com.origins_eternity.ercore.content.block.FluidBlocks.FLUIDBLOCKS;
 import static com.origins_eternity.ercore.content.block.Ores.OREITEMS;
+import static slimeknights.tconstruct.tools.TinkerTraits.autosmelt;
 
 @Mod.EventBusSubscriber(modid = MOD_ID)
 public class ContentRegister {
@@ -102,6 +105,9 @@ public class ContentRegister {
             for (Item fluiditem : FluidBlocks.FLUIDITEMS) {
                 event.getRegistry().register(fluiditem);
             }
+        }
+        if (Loader.isModLoaded("tconstruct") && Loader.isModLoaded("pyrotech")) {
+            autosmelt.addItem(Item.REGISTRY.getObject(new ResourceLocation("pyrotech:furnace_core")));
         }
     }
 

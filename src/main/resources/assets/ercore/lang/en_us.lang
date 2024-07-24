@@ -7,6 +7,7 @@ tile.ercore.tungsten_ore.name=Tungsten Ore
 tile.ercore.tungsten_steel_block.name=Tungsten Steel Block
 tile.ercore.molten_tungsten.name=Molten Tungsten
 tile.ercore.molten_slaked_lime.name=Molten Slaked Lime
+tile.ercore.molten_sugarcane.name=Molten Sugarcane
 tile.ercore.molten_tungsten_carbide.name=Molten Tungsten Carbide
 tile.ercore.molten_tungsten_steel.name=Molten Tungsten Steel
 
@@ -50,6 +51,7 @@ item.ercore.toxic_mask_blueprint.name=Toxic Mask Design Blueprint
 
 fluid.ercore.tungsten=Molten Tungsten
 fluid.ercore.slaked_lime=Molten Slaked Lime
+fluid.ercore.sugarcane=Molten Sugarcane
 fluid.ercore.tungsten_carbide=Molten Tungsten Carbide
 fluid.ercore.tungsten_steel=Molten Tungsten Steel
 

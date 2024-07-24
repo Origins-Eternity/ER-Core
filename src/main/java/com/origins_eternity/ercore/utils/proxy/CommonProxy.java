@@ -16,7 +16,7 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 
 import static com.origins_eternity.ercore.ERCore.packetHandler;
-import static com.origins_eternity.ercore.campat.TConstruct.*;
+import static com.origins_eternity.ercore.campat.tconstruct.Materials.*;
 import static com.origins_eternity.ercore.utils.registry.ContentRegister.registerFluids;
 
 public class CommonProxy {

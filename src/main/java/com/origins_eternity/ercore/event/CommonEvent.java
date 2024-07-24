@@ -23,10 +23,12 @@ import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.common.Optional;
 import net.minecraftforge.fml.common.eventhandler.Event;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent.ItemCraftedEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
+import squeek.applecore.api.food.FoodEvent;
 
 import static com.origins_eternity.ercore.ERCore.MOD_ID;
 import static com.origins_eternity.ercore.ERCore.packetHandler;
@@ -165,6 +167,14 @@ public class CommonEvent {
 
     static int counter;
 
+    static float maxHealth;
+
+    @Optional.Method(modid = "solcarrot")
+    @SubscribeEvent
+    public static void onFoodEaten(FoodEvent.FoodEaten event) {
+        maxHealth = event.player.getMaxHealth();
+    }
+
     @SubscribeEvent
     public static void onPlayerTick(TickEvent.PlayerTickEvent event) {
         EntityPlayer player = event.player;
@@ -181,6 +191,11 @@ public class CommonEvent {
                     syncEndurance(player);
                 }
                 counter = 0;
+            }
+            if (player.getMaxHealth() > maxHealth) {
+                float extra = player.getMaxHealth() - maxHealth;
+                maxHealth = player.getMaxHealth();
+                player.setHealth(player.getHealth() + extra);
             }
         }
     }

@@ -7,6 +7,7 @@ tile.ercore.tungsten_ore.name=钨矿石
 tile.ercore.tungsten_steel_block.name=钨钢块
 tile.ercore.molten_tungsten.name=熔融钨
 tile.ercore.molten_slaked_lime.name=熔融熟石灰
+tile.ercore.molten_sugarcane.name=熔融甘蔗
 tile.ercore.molten_tungsten_carbide.name=熔融碳化钨
 tile.ercore.molten_tungsten_steel.name=熔融钨钢
 
@@ -50,6 +51,7 @@ item.ercore.toxic_mask_blueprint.name=防毒面具设计蓝图
 
 fluid.ercore.tungsten=熔融钨
 fluid.ercore.slaked_lime=熔融熟石灰
+fluid.ercore.sugarcane=熔融甘蔗
 fluid.ercore.tungsten_carbide=熔融碳化钨
 fluid.ercore.tungsten_steel=熔融钨钢
 
@@ -70,5 +72,5 @@ config.ercore.material=添加材料
 config.ercore.material.tooltip=是否添加匠魂材料。（需要添加物品，流体和矿石！）
 config.ercore.blueprints=添加蓝图
 config.ercore.blueprints.tooltip=是否添加蓝图。
-config.ercore.fluids=添加流体
-config.ercore.fluids.tooltip=是否添加流体。
+config.ercore.fluids=添加流体。
+config.ercore.fluids.tooltip=Whether to add fluids or not.config.ercore.fluids=是否添加流体。

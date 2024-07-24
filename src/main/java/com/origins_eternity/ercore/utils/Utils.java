@@ -61,7 +61,7 @@ public class Utils {
 
     private static void addPotions(EntityPlayer player, Potion potion) {
         if (!player.isPotionActive(potion)) {
-            player.addPotionEffect(new PotionEffect(potion, 100, 1, false, false));
+            player.addPotionEffect(new PotionEffect(potion, 312, 2, false, false));
         }
     }
 
@@ -84,6 +84,7 @@ public class Utils {
             player.setSprinting(false);
             addTiredDebuff(player);
             if (endurance.isExhausted()) {
+                endurance.addCoolDown(312);
                 addExhaustedDebuff(player);
             }
         }
