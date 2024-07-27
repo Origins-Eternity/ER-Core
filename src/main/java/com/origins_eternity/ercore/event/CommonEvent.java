@@ -4,7 +4,8 @@ import com.origins_eternity.ercore.content.capability.Capabilities;
 import com.origins_eternity.ercore.content.capability.endurance.Endurance;
 import com.origins_eternity.ercore.content.capability.endurance.IEndurance;
 import com.origins_eternity.ercore.message.CheckMove;
-import com.origins_eternity.ercore.utils.Utils;
+import ichttt.mods.firstaid.api.CapabilityExtendedHealthSystem;
+import ichttt.mods.firstaid.common.damagesystem.PlayerDamageModel;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
@@ -22,13 +23,18 @@ import net.minecraftforge.event.entity.player.AttackEntityEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.world.BlockEvent;
+import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Optional;
 import net.minecraftforge.fml.common.eventhandler.Event;
+import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent.ItemCraftedEvent;
+import net.minecraftforge.fml.common.gameevent.PlayerEvent.PlayerLoggedInEvent;
+import net.minecraftforge.fml.common.gameevent.PlayerEvent.PlayerRespawnEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
-import squeek.applecore.api.food.FoodEvent;
+
+import java.util.ArrayList;
 
 import static com.origins_eternity.ercore.ERCore.MOD_ID;
 import static com.origins_eternity.ercore.ERCore.packetHandler;
@@ -45,7 +51,7 @@ public class CommonEvent {
     public static void onFluidPlaceBlock(BlockEvent.FluidPlaceBlockEvent event) {
         Block block = event.getState().getBlock();
         if (block.equals(Blocks.COBBLESTONE)) {
-            event.setNewState(Utils.getBlockstate("chisel:basalt", Blocks.COBBLESTONE));
+            event.setNewState(getBlockstate("chisel:basalt", Blocks.COBBLESTONE));
         }
     }
 
@@ -124,12 +130,14 @@ public class CommonEvent {
         Item item = event.getItemStack().getItem();
         EntityPlayer player = event.getEntityPlayer();
         if (!player.isCreative()) {
-            if ((item.equals(Items.BOW)) || (item.equals(Items.SHIELD))) {
+            if (!player.world.isRemote) {
+                PlayerDamageModel model = (PlayerDamageModel) player.getCapability(CapabilityExtendedHealthSystem.INSTANCE, null);
                 IEndurance endurance = player.getCapability(Capabilities.ENDURANCE, null);
-                if (endurance.isExhausted()) {
-                    event.setCanceled(true);
-                }
-                if (!player.world.isRemote) {
+                endurance.setMaxHealth(player.getMaxHealth());
+                if ((item.equals(Items.BOW)) || (item.equals(Items.SHIELD))) {
+                    if (endurance.isExhausted()) {
+                        player.dropItem(true);
+                    }
                     if (!event.isCanceled()) {
                         endurance.addExhaustion(0.1f);
                     }
@@ -153,27 +161,47 @@ public class CommonEvent {
         }
     }
 
-    @SubscribeEvent
+    @SubscribeEvent(priority = EventPriority.HIGHEST)
     public static void onClone(PlayerEvent.Clone event) {
-        if (!event.isWasDeath()) {
-            EntityPlayer player = event.getOriginal();
-            EntityPlayer clone = event.getEntityPlayer();
+        EntityPlayer old = event.getOriginal();
+        EntityPlayer clone = event.getEntityPlayer();
+        if (!clone.world.isRemote) {
             Capability<IEndurance> capability = Capabilities.ENDURANCE;
-            IEndurance origin = player.getCapability(capability, null);
+            IEndurance origin = old.getCapability(capability, null);
             IEndurance present = clone.getCapability(capability, null);
-            capability.getStorage().readNBT(capability, present, null, capability.getStorage().writeNBT(capability, origin, null));
+            if (!event.isWasDeath()) {
+                capability.getStorage().readNBT(capability, present, null, capability.getStorage().writeNBT(capability, origin, null));
+                if (Loader.isModLoaded("firstaid")) {
+                    syncHealth(old, clone);
+                }
+            } else {
+                present.setMaxHealth(origin.getMaxHealth());
+            }
+        }
+    }
+
+    @SubscribeEvent(priority = EventPriority.LOWEST)
+    public static void onPlayerRespawn(PlayerRespawnEvent event) {
+        EntityPlayer player = event.player;
+        if (!event.player.world.isRemote) {
+            IEndurance endurance = player.getCapability(Capabilities.ENDURANCE, null);
+            endurance.setEndurance(player.getMaxHealth());
+        }
+    }
+
+    @Optional.Method(modid = "firstaid")
+    @SubscribeEvent(priority = EventPriority.HIGHEST)
+    public static void onPlayerLoggedIn(PlayerLoggedInEvent event) {
+        if (!event.player.world.isRemote) {
+            EntityPlayer player = event.player;
+            PlayerDamageModel model = (PlayerDamageModel) player.getCapability(CapabilityExtendedHealthSystem.INSTANCE, null);
+            ArrayList<Float> health = new ArrayList<>();
+            model.forEach(abstractDamageablePart -> health.add(abstractDamageablePart.currentHealth));
+            syncHealth(health, model);
         }
     }
 
     static int counter;
-
-    static float maxHealth;
-
-    @Optional.Method(modid = "solcarrot")
-    @SubscribeEvent
-    public static void onFoodEaten(FoodEvent.FoodEaten event) {
-        maxHealth = event.player.getMaxHealth();
-    }
 
     @SubscribeEvent
     public static void onPlayerTick(TickEvent.PlayerTickEvent event) {
@@ -192,18 +220,13 @@ public class CommonEvent {
                 }
                 counter = 0;
             }
-            if (player.getMaxHealth() > maxHealth) {
-                float extra = player.getMaxHealth() - maxHealth;
-                maxHealth = player.getMaxHealth();
-                player.setHealth(player.getHealth() + extra);
-            }
         }
     }
 
     @SubscribeEvent
     public static void onRightClickBlock(PlayerInteractEvent.RightClickBlock event) {
         EntityPlayer player = event.getEntityPlayer();
-        if (!player.isCreative()) {
+        if ((!player.isCreative()) && (!player.world.isRemote)) {
             IEndurance endurance = player.getCapability(Capabilities.ENDURANCE, null);
             if (endurance.isExhausted()) {
                 event.setCanceled(true);

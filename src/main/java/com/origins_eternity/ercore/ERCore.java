@@ -12,7 +12,7 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 
-@Mod(modid = ERCore.MOD_ID, name = ERCore.MOD_NAME, version = ERCore.VERSION, dependencies = "after:tconstruct@[1.12-2.7.2.15,);after:pyrotech@[1.12.2-1.6.0,);after:applecore@[1.12.2-3.1.1,);")
+@Mod(modid = ERCore.MOD_ID, name = ERCore.MOD_NAME, version = ERCore.VERSION, dependencies = "after:tconstruct@[1.12-2.7.2.15,);after:pyrotech@[1.12.2-1.6.0,);after:firstaid@[1.6.13,);")
 public class ERCore {
 	public static final String MOD_ID = "ercore";
 	public static final String MOD_NAME = "ER Core";

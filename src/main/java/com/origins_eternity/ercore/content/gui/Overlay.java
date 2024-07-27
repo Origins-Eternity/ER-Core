@@ -25,7 +25,7 @@ public class Overlay extends Gui {
             GlStateManager.pushMatrix();
             IEndurance endurance = player.getCapability(ENDURANCE, null);
             float value = endurance.getEndurance();
-            float percent = value / 20f;
+            float percent = value / player.getMaxHealth();
             int rest = (int) (percent * 80);
             int consume = 80 - rest;
             int posX = event.getResolution().getScaledWidth() / 2 + 10;

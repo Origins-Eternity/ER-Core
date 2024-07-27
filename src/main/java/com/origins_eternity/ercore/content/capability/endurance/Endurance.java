@@ -5,9 +5,14 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ICapabilitySerializable;
+import net.minecraftforge.fml.common.Loader;
 
 public class Endurance implements IEndurance {
-    private int endurance = 20;
+    private float maxhealth = 20;
+
+    private float health = 20;
+
+    private float endurance = 20;
 
     private int coolDown = 0;
 
@@ -22,12 +27,32 @@ public class Endurance implements IEndurance {
     private boolean move = false;
 
     @Override
-    public void setEndurance(int endurance) {
+    public void setHealth(float health) {
+        this.health = health;
+    }
+
+    @Override
+    public float getHealth() {
+        return health;
+    }
+
+    @Override
+    public void setMaxHealth(float maxhealth) {
+        this.maxhealth = maxhealth;
+    }
+
+    @Override
+    public float getMaxHealth() {
+        return maxhealth;
+    }
+
+    @Override
+    public void setEndurance(float endurance) {
         this.endurance = endurance;
     }
 
     @Override
-    public int getEndurance() {
+    public float getEndurance() {
         return endurance;
     }
 
@@ -73,7 +98,7 @@ public class Endurance implements IEndurance {
 
     @Override
     public void addSaturation(float value) {
-        if (endurance == 20) return;
+        if (endurance == health) return;
         if (coolDown == 0) {
             saturation += value;
             while (saturation > 1) {
@@ -140,8 +165,8 @@ public class Endurance implements IEndurance {
                 if (tired) {
                     setTired(false);
                 }
-                if (endurance >= 20) {
-                    endurance = 20;
+                if (endurance >= health) {
+                    endurance = health;
                 }
             }
         }
@@ -200,13 +225,17 @@ public class Endurance implements IEndurance {
         @Override
         public NBTBase writeNBT(Capability<IEndurance> capability, IEndurance instance, EnumFacing side) {
             NBTTagCompound compound = new NBTTagCompound();
-            compound.setInteger("Endurance", instance.getEndurance());
+            compound.setFloat("Health", instance.getHealth());
+            compound.setFloat("Endurance", instance.getEndurance());
             compound.setInteger("CoolDown", instance.getCoolDown());
             compound.setFloat("Exhaustion", instance.getExhaustion());
             compound.setFloat("Saturation", instance.getSaturation());
             compound.setBoolean("Exhausted", instance.isExhausted());
             compound.setBoolean("Tired", instance.isTired());
             compound.setBoolean("Move", instance.isMove());
+            if (Loader.isModLoaded("firstaid")) {
+                compound.setFloat("MaxHealth", instance.getMaxHealth());
+            }
             return compound;
         }
 
@@ -214,13 +243,17 @@ public class Endurance implements IEndurance {
         public void readNBT(Capability<IEndurance> capability, IEndurance instance, EnumFacing side, NBTBase nbt) {
             if (nbt instanceof NBTTagCompound) {
                 NBTTagCompound compound = (NBTTagCompound) nbt;
-                instance.setEndurance(compound.getInteger("Endurance"));
+                instance.setHealth(compound.getFloat("Health"));
+                instance.setEndurance(compound.getFloat("Endurance"));
                 instance.setCoolDown(compound.getInteger("CoolDown"));
                 instance.setExhaustion(compound.getFloat("Exhaustion"));
                 instance.setSaturation(compound.getFloat("Saturation"));
                 instance.setExhausted(compound.getBoolean("Exhausted"));
                 instance.setTired(compound.getBoolean("Tired"));
                 instance.setMove(compound.getBoolean("Move"));
+                if (Loader.isModLoaded("firstaid")) {
+                    instance.setMaxHealth(compound.getFloat("MaxHealth"));
+                }
             }
         }
     }

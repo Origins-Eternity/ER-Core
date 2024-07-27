@@ -1,9 +1,17 @@
 package com.origins_eternity.ercore.content.capability.endurance;
 
 public interface IEndurance {
-    void setEndurance(int endurance);
+    void setHealth(float health);
 
-    int getEndurance();
+    float getHealth();
+
+    void setMaxHealth(float maxhealth);
+
+    float getMaxHealth();
+
+    void setEndurance(float endurance);
+
+    float getEndurance();
 
     void setCoolDown(int coolDown);
 
