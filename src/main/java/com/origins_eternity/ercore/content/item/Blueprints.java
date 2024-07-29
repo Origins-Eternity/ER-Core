@@ -22,6 +22,8 @@ public class Blueprints {
     public static final Item Tailor_Workstation = new ItemCreator("Tailor_Workstation_Blueprint", 10);
     public static final Item Tailor_Workshop = new ItemCreator("Tailor_Workshop_Blueprint", 10);
     public static final Item Tanner_Workstation = new ItemCreator("Tanner_Workstation_Blueprint", 10);
+    public static final Item Mage_Workstation = new ItemCreator("Mage_Workstation_Blueprint", 10);
+    public static final Item Mage_Workshop = new ItemCreator("Mage_Workshop_Blueprint", 10);
     public static final Item Sleeping_Bag = new ItemCreator("Sleeping_Bag_Blueprint", 10);
     public static final Item Brewing_Stand = new ItemCreator("Brewing_Stand_Blueprint", 10);
     public static final Item Small_Backpack = new ItemCreator("Small_Backpack_Blueprint", 10);
@@ -35,4 +37,7 @@ public class Blueprints {
     public static final Item Ladder = new ItemCreator("Ladder_Blueprint", 10);
     public static final Item Vacuum_Bag = new ItemCreator("Vacuum_Bag_Blueprint", 10);
     public static final Item Toxic_Mask = new ItemCreator("Toxic_Mask_Blueprint", 10);
+    public static final Item Plant_Brewing_Stand = new ItemCreator("Plant_Brewing_Stand_Blueprint", 10);
+    public static final Item Petal_Apothecary = new ItemCreator("Petal_Apothecary_Blueprint", 10);
+    public static final Item Magic_Pool = new ItemCreator("Magic_Pool_Blueprint", 10);
 }
