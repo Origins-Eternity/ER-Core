@@ -1,11 +1,13 @@
 package com.origins_eternity.ercore.utils.proxy;
 
+import com.origins_eternity.ercore.campat.firstaid.Events;
 import com.origins_eternity.ercore.config.Configuration;
 import com.origins_eternity.ercore.content.capability.Capabilities;
 import com.origins_eternity.ercore.gen.GenOres;
 import com.origins_eternity.ercore.message.CheckMove;
 import com.origins_eternity.ercore.message.SyncEndurance;
 import com.origins_eternity.ercore.utils.registry.RecipeRegister;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.capabilities.CapabilityManager;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.event.FMLConstructionEvent;
@@ -45,6 +47,9 @@ public class CommonProxy {
     public void init(FMLInitializationEvent event) {
         if (Configuration.enableOres) {
             RecipeRegister.registerRecipes();
+        }
+        if (Loader.isModLoaded("firstaid")) {
+            MinecraftForge.EVENT_BUS.register(Events.class);
         }
         Capabilities.registerCapability(CapabilityManager.INSTANCE);
     }

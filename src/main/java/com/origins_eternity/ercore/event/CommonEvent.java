@@ -4,8 +4,6 @@ import com.origins_eternity.ercore.content.capability.Capabilities;
 import com.origins_eternity.ercore.content.capability.endurance.Endurance;
 import com.origins_eternity.ercore.content.capability.endurance.IEndurance;
 import com.origins_eternity.ercore.message.CheckMove;
-import ichttt.mods.firstaid.api.CapabilityExtendedHealthSystem;
-import ichttt.mods.firstaid.common.damagesystem.PlayerDamageModel;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
@@ -25,16 +23,12 @@ import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.common.Optional;
 import net.minecraftforge.fml.common.eventhandler.Event;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent.ItemCraftedEvent;
-import net.minecraftforge.fml.common.gameevent.PlayerEvent.PlayerLoggedInEvent;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent.PlayerRespawnEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
-
-import java.util.ArrayList;
 
 import static com.origins_eternity.ercore.ERCore.MOD_ID;
 import static com.origins_eternity.ercore.ERCore.packetHandler;
@@ -131,7 +125,6 @@ public class CommonEvent {
         EntityPlayer player = event.getEntityPlayer();
         if (!player.isCreative()) {
             if (!player.world.isRemote) {
-                PlayerDamageModel model = (PlayerDamageModel) player.getCapability(CapabilityExtendedHealthSystem.INSTANCE, null);
                 IEndurance endurance = player.getCapability(Capabilities.ENDURANCE, null);
                 endurance.setMaxHealth(player.getMaxHealth());
                 if ((item.equals(Items.BOW)) || (item.equals(Items.SHIELD))) {
@@ -171,10 +164,7 @@ public class CommonEvent {
             IEndurance present = clone.getCapability(capability, null);
             if (!event.isWasDeath()) {
                 capability.getStorage().readNBT(capability, present, null, capability.getStorage().writeNBT(capability, origin, null));
-                if (Loader.isModLoaded("firstaid")) {
-                    syncHealth(old, clone);
-                }
-            } else {
+            } else if (Loader.isModLoaded("firstaid")) {
                 present.setMaxHealth(origin.getMaxHealth());
             }
         }
@@ -186,18 +176,6 @@ public class CommonEvent {
         if (!event.player.world.isRemote) {
             IEndurance endurance = player.getCapability(Capabilities.ENDURANCE, null);
             endurance.setEndurance(player.getMaxHealth());
-        }
-    }
-
-    @Optional.Method(modid = "firstaid")
-    @SubscribeEvent(priority = EventPriority.HIGHEST)
-    public static void onPlayerLoggedIn(PlayerLoggedInEvent event) {
-        if (!event.player.world.isRemote) {
-            EntityPlayer player = event.player;
-            PlayerDamageModel model = (PlayerDamageModel) player.getCapability(CapabilityExtendedHealthSystem.INSTANCE, null);
-            ArrayList<Float> health = new ArrayList<>();
-            model.forEach(abstractDamageablePart -> health.add(abstractDamageablePart.currentHealth));
-            syncHealth(health, model);
         }
     }
 

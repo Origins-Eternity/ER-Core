@@ -6,6 +6,7 @@ import net.minecraft.util.EnumFacing;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ICapabilitySerializable;
 import net.minecraftforge.fml.common.Loader;
+import net.minecraftforge.fml.common.Optional;
 
 public class Endurance implements IEndurance {
     private float maxhealth = 20;
@@ -37,11 +38,13 @@ public class Endurance implements IEndurance {
     }
 
     @Override
+    @Optional.Method(modid = "firstaid")
     public void setMaxHealth(float maxhealth) {
         this.maxhealth = maxhealth;
     }
 
     @Override
+    @Optional.Method(modid = "firstaid")
     public float getMaxHealth() {
         return maxhealth;
     }
