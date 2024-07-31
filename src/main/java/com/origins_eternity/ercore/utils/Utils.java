@@ -1,5 +1,6 @@
 package com.origins_eternity.ercore.utils;
 
+import com.origins_eternity.ercore.config.Configuration;
 import com.origins_eternity.ercore.content.capability.endurance.IEndurance;
 import com.origins_eternity.ercore.message.SyncEndurance;
 import ichttt.mods.firstaid.api.CapabilityExtendedHealthSystem;
@@ -64,9 +65,12 @@ public class Utils {
             endurance.addSaturation(0.2f);
         }
         if (Loader.isModLoaded("firstaid")) {
-            if (player.getMaxHealth() > endurance.getMaxHealth()) {
-                player.addPotionEffect(new PotionEffect(MobEffects.REGENERATION, 200, 2));
-                endurance.setMaxHealth(player.getMaxHealth());
+            double maxHealth = player.getAttributeMap().getAttributeInstanceByName("generic.maxHealth").getAttributeValue();
+            if (maxHealth > endurance.getMaxHealth()) {
+                if (Configuration.enableRegeneration) {
+                    player.addPotionEffect(new PotionEffect(MobEffects.REGENERATION, 200, 2));
+                }
+                endurance.setMaxHealth(maxHealth);
             }
         }
     }

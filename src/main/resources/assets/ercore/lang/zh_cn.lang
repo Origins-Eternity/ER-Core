@@ -54,6 +54,8 @@ item.ercore.plant_brewing_stand_blueprint.name=植物酿造台设计蓝图
 item.ercore.petal_apothecary_blueprint.name=花药台设计蓝图
 item.ercore.magic_pool_blueprint.name=魔力池设计蓝图
 
+item.ercore.herbs.name=草药
+
 fluid.ercore.tungsten=熔融钨
 fluid.ercore.slaked_lime=熔融熟石灰
 fluid.ercore.sugarcane=熔融甘蔗
@@ -77,5 +79,9 @@ config.ercore.material=添加材料
 config.ercore.material.tooltip=是否添加匠魂材料。（需要添加物品，流体和矿石！）
 config.ercore.blueprints=添加蓝图
 config.ercore.blueprints.tooltip=是否添加蓝图。
-config.ercore.fluids=添加流体。
-config.ercore.fluids.tooltip=Whether to add fluids or not.config.ercore.fluids=是否添加流体。
+config.ercore.fluids=添加流体
+config.ercore.fluids.tooltip=是否添加流体。
+config.ercore.herbs=添加草药
+config.ercore.herbs.tooltip=是否添加草药。（仅对急救/医药护理模组有效！）
+config.ercore.regeneration=添加生命恢复
+config.ercore.regeneration.tooltip=当玩家生命上限增大时，是否给予玩家生命恢复效果。

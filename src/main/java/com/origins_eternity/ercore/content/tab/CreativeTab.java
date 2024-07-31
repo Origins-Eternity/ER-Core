@@ -10,6 +10,7 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
 
 import static com.origins_eternity.ercore.ERCore.MOD_ID;
+import static com.origins_eternity.ercore.campat.firstaid.Items.Herbs;
 
 public class CreativeTab {
     public static final CreativeTabs ERCORE = new CreativeTabs(MOD_ID) {
@@ -26,6 +27,8 @@ public class CreativeTab {
                 icon = new ItemStack(Blueprints.Basic_Workshop, 1);
             } else if (Configuration.enableFluids) {
                 icon = new ItemStack(Fluids.Tungsten.getBlock());
+            } else if (Configuration.enableHerbs) {
+                icon = new ItemStack(Herbs, 1);
             }
             return icon;
         }

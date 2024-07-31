@@ -1,5 +1,6 @@
 package com.origins_eternity.ercore.content.gui;
 
+import com.origins_eternity.ercore.config.Configuration;
 import com.origins_eternity.ercore.content.capability.endurance.IEndurance;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityPlayerSP;
@@ -18,25 +19,27 @@ public class Overlay extends Gui {
 
     @SubscribeEvent
     public void onRenderGameOverlay(RenderGameOverlayEvent.Pre event) {
-        Minecraft mc = Minecraft.getMinecraft();
-        EntityPlayerSP player = mc.player;
-        if (event.getType() == RenderGameOverlayEvent.ElementType.AIR) {
-            GlStateManager.enableBlend();
-            GlStateManager.pushMatrix();
-            IEndurance endurance = player.getCapability(ENDURANCE, null);
-            float value = endurance.getEndurance();
-            float percent = value / player.getMaxHealth();
-            int rest = (int) (percent * 80);
-            int consume = 80 - rest;
-            int posX = event.getResolution().getScaledWidth() / 2 + 10;
-            int posY = event.getResolution().getScaledHeight() - GuiIngameForge.right_height;
-            mc.getTextureManager().bindTexture(gui);
-            drawTexturedModalRect(posX, posY, 0, 0, 80, 9);
-            drawTexturedModalRect(posX + consume, posY, consume, 9, rest, 9);
-            GuiIngameForge.right_height += 10;
-            GlStateManager.popMatrix();
-            mc.getTextureManager().bindTexture(Gui.ICONS);
-            GlStateManager.disableBlend();
+        if (Configuration.showOverlay) {
+            Minecraft mc = Minecraft.getMinecraft();
+            EntityPlayerSP player = mc.player;
+            if (event.getType() == RenderGameOverlayEvent.ElementType.AIR) {
+                GlStateManager.enableBlend();
+                GlStateManager.pushMatrix();
+                IEndurance endurance = player.getCapability(ENDURANCE, null);
+                float value = endurance.getEndurance();
+                float percent = value / player.getMaxHealth();
+                int rest = (int) (percent * 80);
+                int consume = 80 - rest;
+                int posX = event.getResolution().getScaledWidth() / 2 + 10;
+                int posY = event.getResolution().getScaledHeight() - GuiIngameForge.right_height;
+                mc.getTextureManager().bindTexture(gui);
+                drawTexturedModalRect(posX, posY, 0, 0, 80, 9);
+                drawTexturedModalRect(posX + consume, posY, consume, 9, rest, 9);
+                GuiIngameForge.right_height += 10;
+                GlStateManager.popMatrix();
+                mc.getTextureManager().bindTexture(Gui.ICONS);
+                GlStateManager.disableBlend();
+            }
         }
     }
 }

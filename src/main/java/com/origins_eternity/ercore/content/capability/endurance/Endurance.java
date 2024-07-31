@@ -9,7 +9,7 @@ import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.Optional;
 
 public class Endurance implements IEndurance {
-    private float maxhealth = 20;
+    private double maxhealth = 20;
 
     private float health = 20;
 
@@ -39,13 +39,13 @@ public class Endurance implements IEndurance {
 
     @Override
     @Optional.Method(modid = "firstaid")
-    public void setMaxHealth(float maxhealth) {
+    public void setMaxHealth(double maxhealth) {
         this.maxhealth = maxhealth;
     }
 
     @Override
     @Optional.Method(modid = "firstaid")
-    public float getMaxHealth() {
+    public double getMaxHealth() {
         return maxhealth;
     }
 
@@ -237,7 +237,7 @@ public class Endurance implements IEndurance {
             compound.setBoolean("Tired", instance.isTired());
             compound.setBoolean("Move", instance.isMove());
             if (Loader.isModLoaded("firstaid")) {
-                compound.setFloat("MaxHealth", instance.getMaxHealth());
+                compound.setDouble("MaxHealth", instance.getMaxHealth());
             }
             return compound;
         }
@@ -255,7 +255,7 @@ public class Endurance implements IEndurance {
                 instance.setTired(compound.getBoolean("Tired"));
                 instance.setMove(compound.getBoolean("Move"));
                 if (Loader.isModLoaded("firstaid")) {
-                    instance.setMaxHealth(compound.getFloat("MaxHealth"));
+                    instance.setMaxHealth(compound.getDouble("MaxHealth"));
                 }
             }
         }

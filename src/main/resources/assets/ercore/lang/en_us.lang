@@ -54,6 +54,8 @@ item.ercore.plant_brewing_stand_blueprint.name=Plant Brewing Stand Design Bluepr
 item.ercore.petal_apothecary_blueprint.name=Petal Apothecary Design Blueprint
 item.ercore.magic_pool_blueprint.name=Magic Pool Design Blueprint
 
+item.ercore.herbs.name=Herbs
+
 fluid.ercore.tungsten=Molten Tungsten
 fluid.ercore.slaked_lime=Molten Slaked Lime
 fluid.ercore.sugarcane=Molten Sugarcane
@@ -79,3 +81,7 @@ config.ercore.blueprints=Enable Blueprints
 config.ercore.blueprints.tooltip=Whether to add blueprints or not.
 config.ercore.fluids=Enable Fluids
 config.ercore.fluids.tooltip=Whether to add fluids or not.
+config.ercore.herbs=Enable Herbs
+config.ercore.herbs.tooltip=Whether to add herbs or not.(Only work for the Fisrt Aid mod!)
+config.ercore.regeneration=Enable Regeneration Buff
+config.ercore.regeneration.tooltip=Whether to add the regeneration buff when player's maxhealth increased.

@@ -8,10 +8,10 @@ public interface IEndurance {
     float getHealth();
 
     @Optional.Method(modid = "firstaid")
-    void setMaxHealth(float maxhealth);
+    void setMaxHealth(double maxhealth);
 
     @Optional.Method(modid = "firstaid")
-    float getMaxHealth();
+    double getMaxHealth();
 
     void setEndurance(float endurance);
 

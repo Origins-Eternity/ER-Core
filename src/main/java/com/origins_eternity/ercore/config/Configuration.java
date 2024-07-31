@@ -46,6 +46,18 @@ public class Configuration {
         @Config.Comment("Whether to add fluids or not.")
         public static boolean enableFluids = false;
 
+        @Config.Name("Enable Herbs")
+        @Config.RequiresMcRestart()
+        @Config.LangKey("config.ercore.herbs")
+        @Config.Comment("Whether to add herbs or not. Only work for Fisrt Aid!")
+        public static boolean enableHerbs = false;
+
+        @Config.Name("Enable Regeneration Buff")
+        @Config.RequiresMcRestart()
+        @Config.LangKey("config.ercore.regeneration")
+        @Config.Comment("Whether to add the regeneration buff when player's maxhealth increased.")
+        public static boolean enableRegeneration = false;
+
         @Config.Name("Show Overlay Bar")
         @Config.LangKey("config.ercore.overlay")
         @Config.Comment("Whether to show endurance bar or not.")

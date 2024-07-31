@@ -31,6 +31,7 @@ import javax.annotation.Nonnull;
 import java.util.Objects;
 
 import static com.origins_eternity.ercore.ERCore.MOD_ID;
+import static com.origins_eternity.ercore.campat.firstaid.Items.Herbs;
 import static com.origins_eternity.ercore.content.block.Blocks.BLOCKITEMS;
 import static com.origins_eternity.ercore.content.block.FluidBlocks.FLUIDBLOCKS;
 import static com.origins_eternity.ercore.content.block.Ores.OREITEMS;
@@ -106,6 +107,9 @@ public class ContentRegister {
                 event.getRegistry().register(fluiditem);
             }
         }
+        if (Configuration.enableHerbs) {
+            event.getRegistry().register(Herbs);
+        }
         if (Loader.isModLoaded("tconstruct") && Loader.isModLoaded("pyrotech")) {
             autosmelt.addItem(Item.REGISTRY.getObject(new ResourceLocation("pyrotech:furnace_core")));
         }
@@ -149,6 +153,9 @@ public class ContentRegister {
             for (Block ore : Ores.ORES) {
                 ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ore), 0, new ModelResourceLocation(Objects.requireNonNull(ore.getRegistryName()), "inventory"));
             }
+        }
+        if (Configuration.enableHerbs) {
+            ModelLoader.setCustomModelResourceLocation(Herbs, 0, new ModelResourceLocation(MOD_ID + ":" + "herbs", "inventory"));
         }
     }
 
