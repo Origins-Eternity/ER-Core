@@ -107,7 +107,7 @@ public class ContentRegister {
                 event.getRegistry().register(fluiditem);
             }
         }
-        if (Configuration.enableHerbs) {
+        if ((Configuration.enableHerbs) && (Loader.isModLoaded("firstaid"))) {
             event.getRegistry().register(Herbs);
         }
         if (Loader.isModLoaded("tconstruct") && Loader.isModLoaded("pyrotech")) {
@@ -154,7 +154,7 @@ public class ContentRegister {
                 ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ore), 0, new ModelResourceLocation(Objects.requireNonNull(ore.getRegistryName()), "inventory"));
             }
         }
-        if (Configuration.enableHerbs) {
+        if ((Configuration.enableHerbs) && (Loader.isModLoaded("firstaid"))) {
             ModelLoader.setCustomModelResourceLocation(Herbs, 0, new ModelResourceLocation(MOD_ID + ":" + "herbs", "inventory"));
         }
     }

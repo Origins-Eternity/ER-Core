@@ -97,7 +97,7 @@ dependencies {
     // implementation fg.deobf("com.tterrag.registrate:Registrate:MC${mc_version}-${registrate_version}") // Adds registrate as a dependency
     // Examples using mod jars from ./libs
     // implementation fg.deobf("blank:coolmod-${mc_version}:${coolmod_version}")
-    compileOnly "curse.maven:firstaid-276837:2871156-api"
+    compileOnly "curse.maven:firstaid-276837:2871156-sources-api"
     compileOnly "curse.maven:mantle-74924:2713386"
     compileOnly "curse.maven:tconstruct-74072:2902483"
 
