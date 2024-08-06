@@ -53,6 +53,7 @@ item.ercore.toxic_mask_blueprint.name=防毒面具设计蓝图
 item.ercore.plant_brewing_stand_blueprint.name=植物酿造台设计蓝图
 item.ercore.petal_apothecary_blueprint.name=花药台设计蓝图
 item.ercore.magic_pool_blueprint.name=魔力池设计蓝图
+item.ercore.filter_blueprint.name=过滤器设计蓝图
 
 item.ercore.herbs.name=草药
 
@@ -68,6 +69,8 @@ config.ercore.overlay=自定义状态栏显示
 config.ercore.overlay.tooltip=是否显示耐力值条
 config.ercore.languages=语言
 config.ercore.languages.tooltip=将被自动切换的语言列表。
+config.ercore.tools=工具
+config.ercore.tools.tooltip=使用这些类型的工具将会消耗耐力值。
 
 config.ercore.ores=添加矿石
 config.ercore.ores.tooltip=是否添加矿石。

@@ -1,5 +1,6 @@
 package com.origins_eternity.ercore.event;
 
+import com.origins_eternity.ercore.config.Configuration;
 import com.origins_eternity.ercore.content.capability.Capabilities;
 import com.origins_eternity.ercore.content.capability.endurance.Endurance;
 import com.origins_eternity.ercore.content.capability.endurance.IEndurance;
@@ -8,10 +9,11 @@ import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
-import net.minecraft.item.Item;
+import net.minecraft.init.MobEffects;
+import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
@@ -20,6 +22,7 @@ import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.event.entity.player.AttackEntityEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
+import net.minecraftforge.event.entity.player.UseHoeEvent;
 import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.Mod;
@@ -29,6 +32,8 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent.ItemCraftedEvent;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent.PlayerRespawnEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
+
+import java.util.Set;
 
 import static com.origins_eternity.ercore.ERCore.MOD_ID;
 import static com.origins_eternity.ercore.ERCore.packetHandler;
@@ -45,7 +50,7 @@ public class CommonEvent {
     public static void onFluidPlaceBlock(BlockEvent.FluidPlaceBlockEvent event) {
         Block block = event.getState().getBlock();
         if (block.equals(Blocks.COBBLESTONE)) {
-            event.setNewState(getBlockstate("chisel:basalt", Blocks.COBBLESTONE));
+            event.setNewState(getBlock("chisel:basalt", Blocks.COBBLESTONE).getDefaultState());
         }
     }
 
@@ -121,19 +126,16 @@ public class CommonEvent {
 
     @SubscribeEvent
     public static void onRightClickItem(PlayerInteractEvent.RightClickItem event) {
-        Item item = event.getItemStack().getItem();
         EntityPlayer player = event.getEntityPlayer();
         if (!player.isCreative()) {
             if (!player.world.isRemote) {
                 IEndurance endurance = player.getCapability(Capabilities.ENDURANCE, null);
-                endurance.setMaxHealth(player.getMaxHealth());
-                if ((item.equals(Items.BOW)) || (item.equals(Items.SHIELD))) {
-                    if (endurance.isExhausted()) {
-                        player.dropItem(true);
-                    }
-                    if (!event.isCanceled()) {
-                        endurance.addExhaustion(0.1f);
-                    }
+                if (endurance.isExhausted()) {
+                    player.dropItem(true);
+                }
+                if (Loader.isModLoaded("firstaid")) {
+                    double maxHealth = player.getAttributeMap().getAttributeInstanceByName("generic.maxHealth").getAttributeValue();
+                    endurance.setMaxHealth(maxHealth);
                 }
             }
         }
@@ -209,6 +211,27 @@ public class CommonEvent {
             if (endurance.isExhausted()) {
                 event.setCanceled(true);
             }
+            Set<String> tools = event.getItemStack().getItem().getToolClasses(event.getItemStack());
+            for (String tool : Configuration.tools) {
+                if (tools.contains(tool)) {
+                    endurance.addExhaustion(0.2f);
+                    endurance.addCoolDown(50);
+                    break;
+                }
+            }
+        }
+    }
+
+    @SubscribeEvent
+    public static void onUseHoe(UseHoeEvent event) {
+        EntityPlayer player = event.getEntityPlayer();
+        if ((!player.isCreative()) && (!player.world.isRemote)) {
+            IEndurance endurance = player.getCapability(Capabilities.ENDURANCE, null);
+            if (endurance.isExhausted()) {
+                event.setCanceled(true);
+            }
+            endurance.addExhaustion(0.2f);
+            endurance.addCoolDown(50);
         }
     }
 

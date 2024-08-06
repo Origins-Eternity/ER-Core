@@ -69,6 +69,11 @@ public class Configuration {
         @Config.Comment("A list of languages which can be detected to switch automatically.")
         public static String[] languages = new String[]{"zh_cn"};
 
+        @Config.Name("Tools")
+        @Config.LangKey("config.ercore.tools")
+        @Config.Comment("Use these types of tools will consume endurance.")
+        public static String[] tools = new String[]{"pickaxe", "axe", "shovel"};
+
     @Mod.EventBusSubscriber(modid = MOD_ID)
     public static class ConfigSyncHandler {
         @SubscribeEvent

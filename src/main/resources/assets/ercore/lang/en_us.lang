@@ -53,6 +53,7 @@ item.ercore.toxic_mask_blueprint.name=Toxic Mask Design Blueprint
 item.ercore.plant_brewing_stand_blueprint.name=Plant Brewing Stand Design Blueprint
 item.ercore.petal_apothecary_blueprint.name=Petal Apothecary Design Blueprint
 item.ercore.magic_pool_blueprint.name=Magic Pool Design Blueprint
+item.ercore.filter_blueprint.name=Filter Design Blueprint
 
 item.ercore.herbs.name=Herbs
 
@@ -67,7 +68,9 @@ material.tungsten_steel.name=Tungsten Steel
 config.ercore.overlay=Show Overlay Bar
 config.ercore.overlay.tooltip=Whether to show endurance bar or not.
 config.ercore.languages=Languages
-config.ercore.languages.tooltip=A list of resourcepacks which will be automatically installed.
+config.ercore.languages.tooltip=A list of languages which will be automatically changed.
+config.ercore.tools=Tools
+config.ercore.tools.tooltip=Use these types of tools will consume endurance.
 
 config.ercore.ores=Enable Ores
 config.ercore.ores.tooltip=Whether to add ores or not.

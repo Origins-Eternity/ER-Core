@@ -14,6 +14,9 @@ import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.init.MobEffects;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemBow;
+import net.minecraft.item.ItemShield;
+import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.ResourceLocation;
@@ -23,6 +26,7 @@ import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.Optional;
 
 import java.util.ArrayList;
+import java.util.Set;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -40,27 +44,29 @@ public class Utils {
     public static void tickUpdate(EntityPlayer player) {
         IEndurance endurance = player.getCapability(ENDURANCE, null);
         endurance.setHealth(player.getHealth());
+        if (player.isHandActive()) {
+            Item item = player.getHeldItem(player.getActiveHand()).getItem();
+            if (item instanceof ItemShield) {
+                endurance.addExhaustion(0.1f);
+            } else if (item instanceof ItemBow) {
+                endurance.addExhaustion(0.2f);
+            }
+            endurance.addCoolDown(40);
+        }
         if (endurance.isMove()) {
             if (player.isSprinting()) {
                 endurance.addCoolDown(100);
                 endurance.addExhaustion(0.3f);
-            }
-            if (player.isHandActive()) {
-                Item item = player.getHeldItem(player.getActiveHand()).getItem();
-                if (item.equals(Items.SHIELD)) {
-                    endurance.addExhaustion(0.1f);
-                } else if (item.equals(Items.BOW)) {
-                    endurance.addExhaustion(0.2f);
+            } else if (!endurance.isExhausted()) {
+                if (player.isRiding()) {
+                    endurance.removeCoolDown(10);
+                    endurance.addSaturation(0.3f);
+                } else {
+                    endurance.removeCoolDown(10);
+                    endurance.addSaturation(0.1f);
                 }
-                endurance.addCoolDown(40);
-            } else if (player.isRiding()) {
-                endurance.removeCoolDown(10);
-                endurance.addSaturation(0.3f);
-            } else {
-                endurance.removeCoolDown(10);
-                endurance.addSaturation(0.1f);
             }
-        } else if (!player.isHandActive()) {
+        } else {
             endurance.removeCoolDown(10);
             endurance.addSaturation(0.2f);
         }
@@ -106,14 +112,14 @@ public class Utils {
         }
     }
 
-    public static IBlockState getBlockstate(String id, Block origin) {
+    public static Block getBlock(String id, Block origin) {
         ResourceLocation location = new ResourceLocation(id);
         Block block = Block.REGISTRY.getObject(location);
         if (block.equals(Blocks.AIR)) {
             block = origin;
         }
 
-        return block.getDefaultState();
+        return block;
     }
 
     @Optional.Method(modid = "rtg")

@@ -40,4 +40,5 @@ public class Blueprints {
     public static final Item Plant_Brewing_Stand = new ItemCreator("Plant_Brewing_Stand_Blueprint", 10);
     public static final Item Petal_Apothecary = new ItemCreator("Petal_Apothecary_Blueprint", 10);
     public static final Item Magic_Pool = new ItemCreator("Magic_Pool_Blueprint", 10);
+    public static final Item Filter = new ItemCreator("Filter_Blueprint", 10);
 }
