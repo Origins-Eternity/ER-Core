@@ -4,16 +4,12 @@ import com.origins_eternity.ercore.config.Configuration;
 import com.origins_eternity.ercore.content.capability.Capabilities;
 import com.origins_eternity.ercore.content.capability.endurance.Endurance;
 import com.origins_eternity.ercore.content.capability.endurance.IEndurance;
-import com.origins_eternity.ercore.message.CheckMove;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
-import net.minecraft.init.MobEffects;
-import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
@@ -36,7 +32,6 @@ import net.minecraftforge.fml.common.gameevent.TickEvent;
 import java.util.Set;
 
 import static com.origins_eternity.ercore.ERCore.MOD_ID;
-import static com.origins_eternity.ercore.ERCore.packetHandler;
 import static com.origins_eternity.ercore.utils.Utils.*;
 
 @Mod.EventBusSubscriber(modid = MOD_ID)
@@ -191,10 +186,7 @@ public class CommonEvent {
             if (counter > 10) {
                 World world = player.world;
                 checkStatus(player);
-                if (world.isRemote) {
-                    boolean move = (player.motionX != 0) || (player.motionY != 0);
-                    packetHandler.sendToServer(new CheckMove(move, player.getCachedUniqueIdString()));
-                } else {
+                if (!world.isRemote) {
                     tickUpdate(player);
                     syncEndurance(player);
                 }
@@ -215,7 +207,7 @@ public class CommonEvent {
             for (String tool : Configuration.tools) {
                 if (tools.contains(tool)) {
                     endurance.addExhaustion(0.2f);
-                    endurance.addCoolDown(50);
+                    endurance.addCoolDown(60);
                     break;
                 }
             }

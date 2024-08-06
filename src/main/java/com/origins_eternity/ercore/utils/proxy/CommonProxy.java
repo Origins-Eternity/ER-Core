@@ -4,7 +4,6 @@ import com.origins_eternity.ercore.campat.firstaid.Events;
 import com.origins_eternity.ercore.config.Configuration;
 import com.origins_eternity.ercore.content.capability.Capabilities;
 import com.origins_eternity.ercore.gen.GenOres;
-import com.origins_eternity.ercore.message.CheckMove;
 import com.origins_eternity.ercore.message.SyncEndurance;
 import com.origins_eternity.ercore.utils.registry.RecipeRegister;
 import net.minecraftforge.common.MinecraftForge;
@@ -60,6 +59,5 @@ public class CommonProxy {
 
     private static void registerMessage() {
         packetHandler.registerMessage(SyncEndurance.Handler.class, SyncEndurance.class, 0, Side.CLIENT);
-        packetHandler.registerMessage(CheckMove.Handler.class, CheckMove.class, 1, Side.SERVER);
     }
 }

@@ -132,16 +132,6 @@ public class Endurance implements IEndurance {
     }
 
     @Override
-    public boolean isMove() {
-        return move;
-    }
-
-    @Override
-    public void setMove(boolean move) {
-        this.move = move;
-    }
-
-    @Override
     public void consumeEndurance(int value) {
         endurance -= value;
         if (endurance <= 5) {
@@ -235,7 +225,6 @@ public class Endurance implements IEndurance {
             compound.setFloat("Saturation", instance.getSaturation());
             compound.setBoolean("Exhausted", instance.isExhausted());
             compound.setBoolean("Tired", instance.isTired());
-            compound.setBoolean("Move", instance.isMove());
             if (Loader.isModLoaded("firstaid")) {
                 compound.setDouble("MaxHealth", instance.getMaxHealth());
             }
@@ -253,7 +242,6 @@ public class Endurance implements IEndurance {
                 instance.setSaturation(compound.getFloat("Saturation"));
                 instance.setExhausted(compound.getBoolean("Exhausted"));
                 instance.setTired(compound.getBoolean("Tired"));
-                instance.setMove(compound.getBoolean("Move"));
                 if (Loader.isModLoaded("firstaid")) {
                     instance.setMaxHealth(compound.getDouble("MaxHealth"));
                 }

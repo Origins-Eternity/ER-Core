@@ -41,10 +41,6 @@ public interface IEndurance {
 
     void setTired(boolean tired);
 
-    boolean isMove();
-
-    void setMove(boolean move);
-
     void consumeEndurance(int value);
 
     void recoverEndurance(int value);

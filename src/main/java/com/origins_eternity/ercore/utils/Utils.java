@@ -7,16 +7,13 @@ import ichttt.mods.firstaid.api.CapabilityExtendedHealthSystem;
 import ichttt.mods.firstaid.api.damagesystem.AbstractDamageablePart;
 import ichttt.mods.firstaid.common.damagesystem.PlayerDamageModel;
 import net.minecraft.block.Block;
-import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
 import net.minecraft.init.MobEffects;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBow;
 import net.minecraft.item.ItemShield;
-import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.ResourceLocation;
@@ -26,7 +23,6 @@ import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.Optional;
 
 import java.util.ArrayList;
-import java.util.Set;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -53,22 +49,15 @@ public class Utils {
             }
             endurance.addCoolDown(40);
         }
-        if (endurance.isMove()) {
-            if (player.isSprinting()) {
-                endurance.addCoolDown(100);
-                endurance.addExhaustion(0.3f);
-            } else if (!endurance.isExhausted()) {
-                if (player.isRiding()) {
-                    endurance.removeCoolDown(10);
-                    endurance.addSaturation(0.3f);
-                } else {
-                    endurance.removeCoolDown(10);
-                    endurance.addSaturation(0.1f);
-                }
-            }
+        if (player.isSprinting()) {
+            endurance.addCoolDown(100);
+            endurance.addExhaustion(0.3f);
+        } else if (player.isRiding()) {
+            endurance.removeCoolDown(10);
+            endurance.addSaturation(0.3f);
         } else {
             endurance.removeCoolDown(10);
-            endurance.addSaturation(0.2f);
+            endurance.addSaturation(0.1f);
         }
         if (Loader.isModLoaded("firstaid")) {
             double maxHealth = player.getAttributeMap().getAttributeInstanceByName("generic.maxHealth").getAttributeValue();
