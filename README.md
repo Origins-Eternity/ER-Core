@@ -13,8 +13,12 @@
 ![This is an image](https://s1.ax1x.com/2022/12/28/pSSP7Sx.png)
 ### Replace The Products of Lava and Water  
 **When lava and water meets, the original obsidian will be replaced with basalt blocks.**  
-### Default World Type
-**It's not really a change, but rather swapping the RTG world type with the default world type. Valid only when Realistic Terrain Generation and other fork version which has the same modid is installed.**
+### Default World Type  
+**It's not really a change, but rather swapping the RTG world type with the default world type. Valid only when Realistic Terrain Generation and other fork version which has the same modid is installed.**  
+### Regeneration  
+**When the player uses an item, if the mod detects an increase in the player's maxhealth, it will give the Regeneration II buff for 10 seconds. Valid only when First Aid is installed at the same time, and can be turned off in the configuration file.**  
+### Maxhealth Fix  
+**This is a fix for First Aid. These issues arise when installing First Aid and other mods that have the ability to increase the player's maxhealth at the same time. This mod currently fixes an issue where players have less health when re-entering a world or returning to the Overworld from the End, and can not gain maxhealth when respawning.**  
 ## Content  
 **All content is also designed for the above modpack, you can customize what should be added in the configuration file, and all content will not be added by default.**  
 ### Ores  
@@ -26,5 +30,7 @@
 ### Tinker's material  
 **A new tinker's material,  Tungsten Steel, has been added, only when Tinkers' Construct 2 is installed. If you enable this, be sure to enable Items, Fluids, and Ores.**  
 ![This is an image](https://s11.ax1x.com/2024/02/13/pF8BzxP.png)
+### Herbs  
+**The herb is a healing item, which is used in the same way as bandage and plaster in First Aid. Recover half a heart every 23 seconds, recover one heart in total. Only added when First Aid is installed at the same time. Note that this mod does not add any recipes to it.**  
 ## About  
 **This mod has been open source under the Apache License 2.0, you can use, modify, port and distribute this mod under the license. And there are currently no plans to make a mod like this for a new Minecraft version.**
