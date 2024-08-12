@@ -25,16 +25,22 @@ public class Endurance implements IEndurance {
 
     private boolean tired = false;
 
-    private boolean move = false;
-
     @Override
     public void setHealth(float health) {
-        this.health = health;
+        if (health > 40) {
+            this.health = 40;
+        } else {
+            this.health = health;
+        }
     }
 
     @Override
     public float getHealth() {
-        return health;
+        if (health > 40) {
+            return 40;
+        } else {
+            return health;
+        }
     }
 
     @Override
@@ -91,7 +97,6 @@ public class Endurance implements IEndurance {
 
     @Override
     public void addExhaustion(float value) {
-        if (endurance == 0) return;
         exhaustion += value;
         while (exhaustion > 1) {
             consumeEndurance(1);
@@ -141,6 +146,7 @@ public class Endurance implements IEndurance {
             if (endurance <= 0) {
                 endurance = 0;
                 if (!exhausted) {
+                    addCoolDown(312);
                     setExhausted(true);
                 }
             }
@@ -149,17 +155,19 @@ public class Endurance implements IEndurance {
 
     @Override
     public void recoverEndurance(int value) {
-        endurance += value;
-        if(endurance > 0) {
-            if (exhausted) {
-                exhausted = false;
+        if (coolDown == 0) {
+            endurance += value;
+            if (endurance > health) {
+                endurance = health;
             }
-            if (endurance >= 5) {
-                if (tired) {
-                    setTired(false);
+            if (endurance > 0) {
+                if (exhausted) {
+                    exhausted = false;
                 }
-                if (endurance >= health) {
-                    endurance = health;
+                if (endurance >= 5) {
+                    if (tired) {
+                        setTired(false);
+                    }
                 }
             }
         }
@@ -167,7 +175,6 @@ public class Endurance implements IEndurance {
 
     @Override
     public void addCoolDown(int value) {
-        if (endurance == 0) return;
         if (value > coolDown) {
             coolDown = value;
         }

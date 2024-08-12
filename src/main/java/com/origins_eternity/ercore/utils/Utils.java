@@ -40,6 +40,9 @@ public class Utils {
     public static void tickUpdate(EntityPlayer player) {
         IEndurance endurance = player.getCapability(ENDURANCE, null);
         endurance.setHealth(player.getHealth());
+        if (endurance.getEndurance() > player.getHealth()) {
+            endurance.setEndurance(player.getHealth());
+        }
         if (player.isHandActive()) {
             Item item = player.getHeldItem(player.getActiveHand()).getItem();
             if (item instanceof ItemShield) {
@@ -95,7 +98,6 @@ public class Utils {
             player.setSprinting(false);
             addTiredDebuff(player);
             if (endurance.isExhausted()) {
-                endurance.addCoolDown(312);
                 addExhaustedDebuff(player);
             }
         }

@@ -25,21 +25,31 @@ public class Overlay extends Gui {
             if (event.getType() == RenderGameOverlayEvent.ElementType.AIR) {
                 GlStateManager.enableBlend();
                 GlStateManager.pushMatrix();
-                IEndurance endurance = player.getCapability(ENDURANCE, null);
-                float value = endurance.getEndurance();
-                float percent = value / player.getMaxHealth();
-                int rest = (int) (percent * 80);
-                int consume = 80 - rest;
-                int posX = event.getResolution().getScaledWidth() / 2 + 10;
+                int posX = event.getResolution().getScaledWidth() / 2 + 82;
                 int posY = event.getResolution().getScaledHeight() - GuiIngameForge.right_height;
                 mc.getTextureManager().bindTexture(gui);
-                drawTexturedModalRect(posX, posY, 0, 0, 80, 9);
-                drawTexturedModalRect(posX + consume, posY, consume, 9, rest, 9);
+                drawTexture(player, posX, posY);
                 GuiIngameForge.right_height += 10;
                 GlStateManager.popMatrix();
                 mc.getTextureManager().bindTexture(Gui.ICONS);
                 GlStateManager.disableBlend();
             }
+        }
+    }
+
+    private void drawTexture(EntityPlayerSP player, int posX, int posY) {
+        IEndurance endurance = player.getCapability(ENDURANCE, null);
+        float health = endurance.getHealth();
+        int value = (int) endurance.getEndurance();
+        for (int i = 0; (i * 2 < health && i < 10); i++) {
+            drawTexturedModalRect(posX - i * 8, posY, 0, 0, 8, 9);
+        }
+        if (value > 20) {
+            int extra = value - 20;
+            drawTexturedModalRect(posX - 72, posY, 0, 9, 80, 9);
+            drawTexturedModalRect(posX + 8 - extra * 4, posY, 80 - extra * 4, 18, extra * 4, 9);
+        } else {
+            drawTexturedModalRect(posX + 8 - value * 4, posY, 80 - value * 4, 9, value * 4, 9);
         }
     }
 }
