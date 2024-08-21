@@ -1,6 +1,6 @@
 {
   "type": "minecraft:crafting_shaped",
-  "group": "tungsten_ingot",
+  "group": "tungsten_carbide_ingot",
   "pattern": [
     "###",
     "###",
@@ -13,6 +13,6 @@
     }
   },
   "result": {
-    "item": "ercore:tungsten_ingot"
+    "item": "ercore:tungsten_carbide_ingot"
   }
 }

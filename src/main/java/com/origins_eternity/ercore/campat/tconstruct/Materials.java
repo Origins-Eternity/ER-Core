@@ -12,7 +12,9 @@ import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.relauncher.Side;
 import slimeknights.tconstruct.library.MaterialIntegration;
 import slimeknights.tconstruct.library.TinkerRegistry;
+import slimeknights.tconstruct.library.fluid.FluidMolten;
 import slimeknights.tconstruct.library.materials.*;
+import slimeknights.tconstruct.shared.TinkerFluids;
 
 import static com.origins_eternity.ercore.utils.proxy.ClientProxy.setRenderInfo;
 import static slimeknights.tconstruct.library.TinkerRegistry.*;
@@ -49,11 +51,11 @@ public class Materials {
     }
 
     public static void addTinkerAlloying() {
-        registerAlloy(new FluidStack(Fluids.Tungsten_Steel, 1), new FluidStack(Fluids.Tungsten, 1), new FluidStack(Fluids.Tungsten_Carbide, 3));
+        registerAlloy(new FluidStack(Fluids.Tungsten_Steel, 4), new FluidStack(TinkerFluids.cobalt, 1), new FluidStack(Fluids.Tungsten_Carbide, 3));
     }
 
     public static void addTinkerCasting() {
-        registerBasinCasting(new ItemStack(Items.Tungsten_Ingot), ItemStack.EMPTY, Fluids.Tungsten, 144);
-        registerBasinCasting(new ItemStack(Items.Tungsten_Carbide_Ingot), ItemStack.EMPTY, Fluids.Tungsten_Carbide, 144);
+        registerTableCasting(new ItemStack(Items.Tungsten_Ingot), ItemStack.EMPTY, Fluids.Tungsten, 144);
+        registerTableCasting(new ItemStack(Items.Tungsten_Carbide_Ingot), ItemStack.EMPTY, Fluids.Tungsten_Carbide, 144);
     }
 }

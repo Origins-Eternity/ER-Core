@@ -6,11 +6,11 @@
   "key": {
     "#": {
       "type": "forge:ore_dict",
-      "ore": "nuggetTungstencarbide"
+      "ore": "ingotTungstencarbide"
     }
   },
   "result": {
-    "item": "ercore:tungsten_nugget",
+    "item": "ercore:tungsten_carbide_nugget",
     "count": 9
   }
 }

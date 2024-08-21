@@ -22,16 +22,16 @@ public class GenOres implements IWorldGenerator
 	
 	private final int copperVeinSize = 6;
 	private final int copperChance = 35;
-	private final int copperMinHeight = 0;
-	private final int copperMaxHeight = 125;
+	private final int copperMinHeight = 16;
+	private final int copperMaxHeight = 112;
 	private final int tinVeinSize = 4;
 	private final int tinChance = 30;
-	private final int tinMinHeight = 0;
-	private final int tinMaxHeight = 125;
+	private final int tinMinHeight = 16;
+	private final int tinMaxHeight = 112;
 	private final int tungstenVeinSize  = 5;
 	private final int tungstenChance = 40;
-	private final int tungstenMinHeight = 40;
-	private final int tungstenMaxHeight = 5;
+	private final int tungstenMinHeight = 0;
+	private final int tungstenMaxHeight = 16;
 	public GenOres() {
 		copper_ore = new WorldGenMinable(Copper_Ore.getDefaultState(), copperVeinSize, BlockMatcher.forBlock(Blocks.STONE));
 		tin_ore = new WorldGenMinable(Tin_Ore.getDefaultState(), tinVeinSize, BlockMatcher.forBlock(Blocks.STONE));
