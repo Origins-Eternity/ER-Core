@@ -53,10 +53,14 @@ public class Configuration {
         public static boolean enableHerbs = false;
 
         @Config.Name("Enable Regeneration Buff")
-        @Config.RequiresMcRestart()
         @Config.LangKey("config.ercore.regeneration")
         @Config.Comment("Whether to add the regeneration buff when player's maxhealth increased.")
         public static boolean enableRegeneration = false;
+
+        @Config.Name("Enable Hardcore")
+        @Config.LangKey("config.ercore.hardcore")
+        @Config.Comment("Whether damage from drown, lava or lightning should kill player immediately.")
+        public static boolean enableHardcore = false;
 
         @Config.Name("Show Overlay Bar")
         @Config.LangKey("config.ercore.overlay")
@@ -66,8 +70,14 @@ public class Configuration {
         @Config.Name("Languages")
         @Config.RequiresMcRestart()
         @Config.LangKey("config.ercore.languages")
-        @Config.Comment("A list of languages which can be detected to switch automatically.")
+        @Config.Comment("A list of languages which will be automatically changed.")
         public static String[] languages = new String[]{"zh_cn"};
+
+        @Config.Name("Resourcepacks")
+        @Config.RequiresMcRestart()
+        @Config.LangKey("config.ercore.resourcepacks")
+        @Config.Comment("A list of resourcepacks which will be automatically installed.")
+        public static String[] resourcepacks = new String[]{"Evolution-Reset-Resource-Pack-1.2.0.zip", "ModernityAdjunct-f3-1.2.zip", "Modernity-f3-3.10.1.zip"};
 
         @Config.Name("Tools")
         @Config.LangKey("config.ercore.tools")

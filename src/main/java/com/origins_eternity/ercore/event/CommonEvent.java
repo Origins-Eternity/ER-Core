@@ -231,7 +231,7 @@ public class CommonEvent {
     public static void onLivingDamage(LivingDamageEvent event) {
         if (event.getEntity() instanceof EntityPlayer) {
             EntityPlayer player = (EntityPlayer) event.getEntity();
-            if (!player.world.isRemote) {
+            if ((!player.world.isRemote) && (Configuration.enableHardcore)) {
                 if (event.getSource() == DamageSource.DROWN) {
                     event.setAmount(player.getHealth());
                 } else if (event.getSource() == DamageSource.LAVA) {

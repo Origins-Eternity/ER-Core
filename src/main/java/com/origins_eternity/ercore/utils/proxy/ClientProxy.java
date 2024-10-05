@@ -20,12 +20,14 @@ import slimeknights.tconstruct.library.client.texture.MetalTextureTexture;
 import slimeknights.tconstruct.library.materials.Material;
 
 import static com.origins_eternity.ercore.ERCore.MOD_ID;
+import static com.origins_eternity.ercore.utils.Utils.installResourcepacks;
 
 public class ClientProxy extends CommonProxy {
     @Override
     public void construction(FMLConstructionEvent event) {
         super.construction(event);
         setLang();
+        installResourcepacks();
     }
 
     @Override

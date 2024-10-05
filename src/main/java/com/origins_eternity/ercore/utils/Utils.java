@@ -7,6 +7,8 @@ import ichttt.mods.firstaid.api.CapabilityExtendedHealthSystem;
 import ichttt.mods.firstaid.api.damagesystem.AbstractDamageablePart;
 import ichttt.mods.firstaid.common.damagesystem.PlayerDamageModel;
 import net.minecraft.block.Block;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.resources.ResourcePackRepository;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
@@ -23,6 +25,7 @@ import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.Optional;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -30,6 +33,22 @@ import static com.origins_eternity.ercore.ERCore.packetHandler;
 import static com.origins_eternity.ercore.content.capability.Capabilities.ENDURANCE;
 
 public class Utils {
+    public static void installResourcepacks() {
+        Minecraft mc = Minecraft.getMinecraft();
+        ResourcePackRepository Repository = mc.getResourcePackRepository();
+        Repository.updateRepositoryEntriesAll();
+        List<ResourcePackRepository.Entry> Packs = Repository.getRepositoryEntriesAll();
+        List<ResourcePackRepository.Entry> Resourcepacks = new ArrayList<>();
+        for (ResourcePackRepository.Entry pack : Packs) {
+            for (String name : Configuration.resourcepacks) {
+                if (pack.getResourcePackName().equals(name)) {
+                    Resourcepacks.add(pack);
+                }
+            }
+            Repository.setRepositories(Resourcepacks);
+        }
+    }
+
     public static void syncEndurance(EntityPlayer player) {
         IEndurance endurance = player.getCapability(ENDURANCE, null);
         Capability<IEndurance> capability = ENDURANCE;

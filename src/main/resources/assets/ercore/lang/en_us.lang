@@ -69,6 +69,8 @@ config.ercore.overlay=Show Overlay Bar
 config.ercore.overlay.tooltip=Whether to show endurance bar or not.
 config.ercore.languages=Languages
 config.ercore.languages.tooltip=A list of languages which will be automatically changed.
+config.ercore.resourcepacks=Resourcepacks
+config.ercore.resourcepacks.tooltip=A list of resourcepacks which will be automatically installed.
 config.ercore.tools=Tools
 config.ercore.tools.tooltip=Use these types of tools will consume endurance.
 
@@ -88,3 +90,5 @@ config.ercore.herbs=Enable Herbs
 config.ercore.herbs.tooltip=Whether to add herbs or not.(Only work for the Fisrt Aid mod!)
 config.ercore.regeneration=Enable Regeneration Buff
 config.ercore.regeneration.tooltip=Whether to add the regeneration buff when player's maxhealth increased.
+config.ercore.hardcore=Enable Hardcore
+config.ercore.hardcore.tooltip=Whether damage from drown, lava or lightning should kill player immediately.
