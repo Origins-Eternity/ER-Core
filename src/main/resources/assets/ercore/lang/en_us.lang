@@ -21,6 +21,7 @@ item.ercore.tungsten_steel_ingot.name=Tungsten Steel Ingot
 item.ercore.tungsten_steel_nugget.name=Tungsten Steel Nugget
 item.ercore.tungsten_carbide_ingot.name=Tungsten Carbide Ingot
 item.ercore.tungsten_carbide_nugget.name=Tungsten Carbide Nugget
+item.ercore.ingot_clay_cast.name=Ingot Clay Cast
 
 item.ercore.blacksmith_workstation_blueprint.name=Blacksmith Workstation Design Blueprint
 item.ercore.basic_workshop_blueprint.name=Basic Workshop Design Blueprint

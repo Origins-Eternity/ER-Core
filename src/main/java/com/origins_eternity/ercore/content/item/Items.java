@@ -18,4 +18,5 @@ public class Items {
     public static final Item Tungsten_Steel_Nugget = new ItemCreator("Tungsten_Steel_Nugget", 0);
     public static final Item Tungsten_Carbide_Ingot = new ItemCreator("Tungsten_Carbide_Ingot", 0);
     public static final Item Tungsten_Carbide_Nugget = new ItemCreator("Tungsten_Carbide_Nugget", 0);
+    public static final Item Ingot_Clay_Cast = new ItemCreator("Ingot_Clay_Cast", 0);
 }

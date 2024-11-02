@@ -21,7 +21,6 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.WorldType;
 import net.minecraftforge.common.capabilities.Capability;
-import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.Optional;
 
 import java.util.ArrayList;
@@ -80,15 +79,6 @@ public class Utils {
         } else {
             endurance.removeCoolDown(10);
             endurance.addSaturation(0.1f);
-        }
-        if (Loader.isModLoaded("firstaid")) {
-            double maxHealth = player.getAttributeMap().getAttributeInstanceByName("generic.maxHealth").getAttributeValue();
-            if (maxHealth > endurance.getMaxHealth()) {
-                if (Configuration.enableRegeneration) {
-                    player.addPotionEffect(new PotionEffect(MobEffects.REGENERATION, 200, 2));
-                }
-                endurance.setMaxHealth(maxHealth);
-            }
         }
     }
 

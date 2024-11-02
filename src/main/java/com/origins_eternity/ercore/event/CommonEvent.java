@@ -8,12 +8,16 @@ import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
+import net.minecraft.init.MobEffects;
+import net.minecraft.item.ItemFood;
+import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.entity.living.LivingDamageEvent;
+import net.minecraftforge.event.entity.living.LivingEntityUseItemEvent;
 import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.event.entity.player.AttackEntityEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
@@ -131,6 +135,27 @@ public class CommonEvent {
                 if (Loader.isModLoaded("firstaid")) {
                     double maxHealth = player.getAttributeMap().getAttributeInstanceByName("generic.maxHealth").getAttributeValue();
                     endurance.setMaxHealth(maxHealth);
+                }
+            }
+        }
+    }
+
+    @SubscribeEvent
+    public static void onLivingEntityUseItem(LivingEntityUseItemEvent.Finish event) {
+        if (event.getEntity() instanceof EntityPlayer) {
+            EntityPlayer player = (EntityPlayer) event.getEntity();
+            if (!player.isCreative()) {
+                if (Loader.isModLoaded("firstaid")) {
+                    if (event.getItem().getItem() instanceof ItemFood) {
+                        IEndurance endurance = player.getCapability(Capabilities.ENDURANCE, null);
+                        double maxHealth = player.getAttributeMap().getAttributeInstanceByName("generic.maxHealth").getAttributeValue();
+                        if (maxHealth > endurance.getMaxHealth()) {
+                            if (Configuration.enableRegeneration) {
+                                player.addPotionEffect(new PotionEffect(MobEffects.REGENERATION, 200, 2));
+                            }
+                            endurance.setMaxHealth(maxHealth);
+                        }
+                    }
                 }
             }
         }

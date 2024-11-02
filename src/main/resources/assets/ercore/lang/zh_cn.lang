@@ -21,6 +21,7 @@ item.ercore.tungsten_steel_ingot.name=钨钢锭
 item.ercore.tungsten_steel_nugget.name=钨钢粒
 item.ercore.tungsten_carbide_ingot.name=碳化钨锭
 item.ercore.tungsten_carbide_nugget.name=碳化钨粒
+item.ercore.ingot_clay_cast.name=锭粘土铸模
 
 item.ercore.blacksmith_workstation_blueprint.name=铁匠工作站设计蓝图
 item.ercore.basic_workshop_blueprint.name=基础工作坊设计蓝图

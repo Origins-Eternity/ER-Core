@@ -40,12 +40,12 @@ public class Materials {
     }
 
     public static void addTinkerMelting() {
-        registerMelting(Items.Tungsten_Nugget, Fluids.Tungsten, 72);
+        registerMelting(Items.Tungsten_Nugget, Fluids.Tungsten, 16);
         registerMelting(Items.Tungsten_Ingot, Fluids.Tungsten, 144);
         registerMelting(Ores.Tungsten_ore, Fluids.Tungsten, 144);
-        registerMelting(Items.Tungsten_Carbide_Nugget, Fluids.Tungsten_Carbide, 72);
+        registerMelting(Items.Tungsten_Carbide_Nugget, Fluids.Tungsten_Carbide, 16);
         registerMelting(Items.Tungsten_Carbide_Ingot, Fluids.Tungsten_Carbide, 144);
-        registerMelting(Items.Tungsten_Steel_Nugget, Fluids.Tungsten_Steel, 72);
+        registerMelting(Items.Tungsten_Steel_Nugget, Fluids.Tungsten_Steel, 16);
         registerMelting(Items.Tungsten_Steel_Ingot, Fluids.Tungsten_Steel, 144);
     }
 
