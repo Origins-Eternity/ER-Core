@@ -1,4 +1,6 @@
-﻿itemGroup.ercore=ER 核心
+﻿# ER 核心 简体中文
+
+itemGroup.ercore=ER 核心
 
 tile.ercore.slakedlime_block.name=熟石灰块
 tile.ercore.copper_ore.name=孔雀石
