@@ -37,7 +37,7 @@ public class Utils {
         ResourcePackRepository Repository = mc.getResourcePackRepository();
         Repository.updateRepositoryEntriesAll();
         List<ResourcePackRepository.Entry> Packs = Repository.getRepositoryEntriesAll();
-        List<ResourcePackRepository.Entry> Resourcepacks = new ArrayList<>();
+        List<ResourcePackRepository.Entry> Resourcepacks = Repository.getRepositoryEntries();
         for (ResourcePackRepository.Entry pack : Packs) {
             for (String name : Configuration.resourcepacks) {
                 if (pack.getResourcePackName().equals(name)) {
