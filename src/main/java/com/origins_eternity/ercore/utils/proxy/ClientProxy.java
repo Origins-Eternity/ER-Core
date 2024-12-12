@@ -1,11 +1,9 @@
 package com.origins_eternity.ercore.utils.proxy;
 
-import com.origins_eternity.ercore.config.Configuration;
 import com.origins_eternity.ercore.content.gui.Overlay;
 import com.origins_eternity.ercore.utils.Utils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
-import net.minecraft.client.resources.Language;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fluids.Fluid;
@@ -26,7 +24,6 @@ public class ClientProxy extends CommonProxy {
     @Override
     public void construction(FMLConstructionEvent event) {
         super.construction(event);
-        setLang();
         installResourcepacks();
     }
 
@@ -52,16 +49,6 @@ public class ClientProxy extends CommonProxy {
         return Minecraft.getMinecraft();
     }
 
-    private static void setLang() {
-        String language = System.getProperty("user.language");
-        String[] lang = Configuration.languages;
-        for (String code : lang) {
-            if (code.contains(language)) {
-                mc().getLanguageManager().setCurrentLanguage(new Language(code, "", "", false));
-            }
-        }
-    }
-
     @Optional.Method(modid = "tconstruct")
     public static void setRenderInfo(Material material, Fluid fluid) {
         material.setRenderInfo(new MaterialRenderInfo.AbstractMaterialRenderInfo() {
@@ -71,5 +58,4 @@ public class ClientProxy extends CommonProxy {
             }
         });
     }
-
 }

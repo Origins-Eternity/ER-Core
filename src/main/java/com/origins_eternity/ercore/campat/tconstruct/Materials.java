@@ -13,6 +13,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import slimeknights.tconstruct.library.MaterialIntegration;
 import slimeknights.tconstruct.library.TinkerRegistry;
 import slimeknights.tconstruct.library.materials.*;
+import slimeknights.tconstruct.shared.TinkerCommons;
 import slimeknights.tconstruct.shared.TinkerFluids;
 
 import static com.origins_eternity.ercore.utils.proxy.ClientProxy.setRenderInfo;
@@ -57,5 +58,7 @@ public class Materials {
         registerTableCasting(new ItemStack(Items.Tungsten_Ingot), ItemStack.EMPTY, Fluids.Tungsten, 144);
         registerTableCasting(new ItemStack(Items.Tungsten_Carbide_Ingot), ItemStack.EMPTY, Fluids.Tungsten_Carbide, 144);
         registerTableCasting(new ItemStack(Items.Tungsten_Steel_Ingot), ItemStack.EMPTY, Fluids.Tungsten_Steel, 144);
+        registerTableCasting(new ItemStack(Items.Bronze_Ingot), new ItemStack(Items.Ingot_Clay_Cast), TinkerFluids.bronze, 144);
+        registerTableCasting(new ItemStack(Items.Ingot_Clay_Cast), TinkerCommons.searedBrick, TinkerFluids.clay, 244);
     }
 }

@@ -7,6 +7,7 @@ import ichttt.mods.firstaid.api.CapabilityExtendedHealthSystem;
 import ichttt.mods.firstaid.api.damagesystem.AbstractDamageablePart;
 import ichttt.mods.firstaid.common.damagesystem.PlayerDamageModel;
 import net.minecraft.block.Block;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.ResourcePackRepository;
 import net.minecraft.entity.player.EntityPlayer;
@@ -113,13 +114,24 @@ public class Utils {
         }
     }
 
-    public static Block getBlock(String id, Block origin) {
-        ResourceLocation location = new ResourceLocation(id);
-        Block block = Block.REGISTRY.getObject(location);
-        if (block.equals(Blocks.AIR)) {
-            block = origin;
+    public static IBlockState getBlock(String id) {
+        IBlockState block = Blocks.AIR.getDefaultState();
+        String[] name = id.split(":");
+        if (name.length == 2) {
+            for (IBlockState state : Block.REGISTRY.getObject(new ResourceLocation(id)).getBlockState().getValidStates()) {
+                if (state.getBlock().getMetaFromState(state) == 0) {
+                    block = state;
+                    break;
+                }
+            }
+        } else if (name.length == 3) {
+            for (IBlockState state : Block.REGISTRY.getObject(new ResourceLocation(name[0], name[1])).getBlockState().getValidStates()) {
+                if (state.getBlock().getMetaFromState(state) == Integer.parseInt(name[2])) {
+                    block = state;
+                    break;
+                }
+            }
         }
-
         return block;
     }
 

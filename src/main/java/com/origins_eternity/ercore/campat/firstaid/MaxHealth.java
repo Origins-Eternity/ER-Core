@@ -11,7 +11,7 @@ import java.util.ArrayList;
 
 import static com.origins_eternity.ercore.utils.Utils.syncHealth;
 
-public class Events {
+public class MaxHealth {
     @SubscribeEvent(priority = EventPriority.HIGHEST)
     public static void onPlayerLoggedIn(PlayerEvent.PlayerLoggedInEvent event) {
         if (!event.player.world.isRemote) {

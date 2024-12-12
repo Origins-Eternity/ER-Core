@@ -31,7 +31,7 @@ import javax.annotation.Nonnull;
 import java.util.Objects;
 
 import static com.origins_eternity.ercore.ERCore.MOD_ID;
-import static com.origins_eternity.ercore.campat.firstaid.Items.Herbs;
+import static com.origins_eternity.ercore.campat.firstaid.Herbs.Herbs;
 import static com.origins_eternity.ercore.content.block.Blocks.BLOCKITEMS;
 import static com.origins_eternity.ercore.content.block.FluidBlocks.FLUIDBLOCKS;
 import static com.origins_eternity.ercore.content.block.Ores.OREITEMS;

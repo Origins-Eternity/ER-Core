@@ -67,11 +67,11 @@ public class Configuration {
         @Config.Comment("Whether to show endurance bar or not.")
         public static boolean showOverlay = true;
 
-        @Config.Name("Languages")
+        @Config.Name("Product")
         @Config.RequiresMcRestart()
-        @Config.LangKey("config.ercore.languages")
-        @Config.Comment("A list of languages which will be automatically changed.")
-        public static String[] languages = new String[]{"zh_cn"};
+        @Config.LangKey("config.ercore.product")
+        @Config.Comment("A product of a mixture of water and lava.")
+        public static String product = "chisel:basalt";
 
         @Config.Name("Resourcepacks")
         @Config.RequiresMcRestart()

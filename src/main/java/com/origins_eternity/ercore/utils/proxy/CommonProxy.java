@@ -1,6 +1,6 @@
 package com.origins_eternity.ercore.utils.proxy;
 
-import com.origins_eternity.ercore.campat.firstaid.Events;
+import com.origins_eternity.ercore.campat.firstaid.MaxHealth;
 import com.origins_eternity.ercore.config.Configuration;
 import com.origins_eternity.ercore.content.capability.Capabilities;
 import com.origins_eternity.ercore.gen.GenOres;
@@ -29,11 +29,8 @@ public class CommonProxy {
         if (Configuration.enableFluids) {
             registerFluids();
             if (Loader.isModLoaded("tconstruct")) {
-                if ((Configuration.enableOres) && (Configuration.enableItems) && (Configuration.enableMaterial) && (Configuration.enableFluids)) {
+                if ((Configuration.enableOres) && (Configuration.enableItems) && (Configuration.enableMaterial)) {
                     preTinker();
-                    addTinkerMelting();
-                    addTinkerAlloying();
-                    addTinkerCasting();
                 }
             }
         }
@@ -47,8 +44,15 @@ public class CommonProxy {
         if (Configuration.enableOres) {
             RecipeRegister.registerRecipes();
         }
+        if (Loader.isModLoaded("tconstruct")) {
+            if ((Configuration.enableOres) && (Configuration.enableItems) && (Configuration.enableMaterial) && (Configuration.enableFluids)) {
+                addTinkerMelting();
+                addTinkerAlloying();
+                addTinkerCasting();
+            }
+        }
         if (Loader.isModLoaded("firstaid")) {
-            MinecraftForge.EVENT_BUS.register(Events.class);
+            MinecraftForge.EVENT_BUS.register(MaxHealth.class);
         }
         Capabilities.registerCapability(CapabilityManager.INSTANCE);
     }

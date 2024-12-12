@@ -19,6 +19,7 @@ import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.entity.living.LivingDamageEvent;
 import net.minecraftforge.event.entity.living.LivingEntityUseItemEvent;
 import net.minecraftforge.event.entity.living.LivingEvent;
+import net.minecraftforge.event.entity.living.PotionEvent;
 import net.minecraftforge.event.entity.player.AttackEntityEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
@@ -48,8 +49,8 @@ public class CommonEvent {
     @SubscribeEvent
     public static void onFluidPlaceBlock(BlockEvent.FluidPlaceBlockEvent event) {
         Block block = event.getState().getBlock();
-        if (block.equals(Blocks.COBBLESTONE)) {
-            event.setNewState(getBlock("chisel:basalt", Blocks.COBBLESTONE).getDefaultState());
+        if (!block.equals(Blocks.OBSIDIAN)) {
+            event.setNewState(getBlock(Configuration.product));
         }
     }
 
@@ -249,6 +250,29 @@ public class CommonEvent {
             }
             endurance.addExhaustion(0.2f);
             endurance.addCoolDown(50);
+        }
+    }
+
+    @SubscribeEvent
+    public static void onPotionApplicable(PotionEvent.PotionApplicableEvent event) {
+        if (event.getEntity() instanceof EntityPlayer) {
+            EntityPlayer player = (EntityPlayer) event.getEntity();
+            if (player.isPotionActive(event.getPotionEffect().getPotion())) {
+                event.setResult(Event.Result.DENY);
+            }
+        }
+    }
+
+    @SubscribeEvent
+    public static void onLivingUpdate(LivingEvent.LivingUpdateEvent event) {
+        if (event.getEntity() instanceof EntityPlayer) {
+            EntityPlayer player = (EntityPlayer) event.getEntity();
+            if ((!player.isCreative())) {
+                IEndurance endurance = player.getCapability(Capabilities.ENDURANCE, null);
+                if (endurance.isExhausted() && player.onGround) {
+                    event.setCanceled(true);
+                }
+            }
         }
     }
 
