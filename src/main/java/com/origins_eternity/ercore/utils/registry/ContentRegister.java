@@ -63,7 +63,13 @@ public class ContentRegister {
         if (Configuration.enableItems) {
             for (Item item : Items.ITEMS) {
                 String itemname = item.getTranslationKey();
-                event.getRegistry().register(item);
+                if (item.equals(Items.Ingot_Clay_Cast)) {
+                    if (Loader.isModLoaded("tconstruct")) {
+                        event.getRegistry().register(item);
+                    }
+                } else {
+                    event.getRegistry().register(item);
+                }
                 if (itemname.contains("ingot")) {
                     String ingotname = itemname.replaceAll("_", "").replace("ingot", "");
                     String oredictname = ingotname.substring(12, 13).toUpperCase() + ingotname.substring(13);

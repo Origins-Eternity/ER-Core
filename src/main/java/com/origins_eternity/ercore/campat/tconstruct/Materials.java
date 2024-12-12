@@ -10,9 +10,11 @@ import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.relauncher.Side;
+import slimeknights.mantle.util.RecipeMatch;
 import slimeknights.tconstruct.library.MaterialIntegration;
 import slimeknights.tconstruct.library.TinkerRegistry;
 import slimeknights.tconstruct.library.materials.*;
+import slimeknights.tconstruct.library.smeltery.CastingRecipe;
 import slimeknights.tconstruct.shared.TinkerCommons;
 import slimeknights.tconstruct.shared.TinkerFluids;
 
@@ -58,7 +60,7 @@ public class Materials {
         registerTableCasting(new ItemStack(Items.Tungsten_Ingot), ItemStack.EMPTY, Fluids.Tungsten, 144);
         registerTableCasting(new ItemStack(Items.Tungsten_Carbide_Ingot), ItemStack.EMPTY, Fluids.Tungsten_Carbide, 144);
         registerTableCasting(new ItemStack(Items.Tungsten_Steel_Ingot), ItemStack.EMPTY, Fluids.Tungsten_Steel, 144);
-        registerTableCasting(new ItemStack(Items.Bronze_Ingot), new ItemStack(Items.Ingot_Clay_Cast), TinkerFluids.bronze, 144);
-        registerTableCasting(new ItemStack(Items.Ingot_Clay_Cast), TinkerCommons.searedBrick, TinkerFluids.clay, 244);
+        registerTableCasting(new CastingRecipe(new ItemStack(Items.Bronze_Ingot), RecipeMatch.of(Items.Ingot_Clay_Cast), TinkerFluids.bronze, 144, true, false));
+        registerTableCasting(new CastingRecipe(new ItemStack(Items.Ingot_Clay_Cast), RecipeMatch.of(TinkerCommons.searedBrick), TinkerFluids.clay, 288, true, false));
     }
 }

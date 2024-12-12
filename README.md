@@ -6,8 +6,6 @@
 ### Endurance  
 **Inspired by the StaminaPlus mod, each survival/adventure player has their own endurance level, you can choose whether to display the HUD in the configuration file.**  
 ![This is an image](https://s1.ax1x.com/2023/07/22/pCbvoF0.png)
-### Language Automatically Set  
-**Mod will attempt to set the game language to the corresponding language based on the detected system language. Only Chinese are supported by default, you can add the desired language in the configuration file. Notice, the feature will not work when installed RandomPatches at the same time.**  
 ### No Infinite Fluids  
 **All fluids in the game cannot create new fluid resources, but players can still bottle water with water.**  
 ![This is an image](https://s1.ax1x.com/2022/12/28/pSSP7Sx.png)
@@ -27,6 +25,8 @@
 **With the exception of tungsten ore, the mod does not add ingots, nuggets and smelting recipes to other ores. Only some fluids have been added to the smelter recipe. However, all ores will spawn and drop in the world normally.**  
 ### Blueprints  
 **Blueprints are the tools needed to craft some items in the above modpack, and each blueprint has 10 durability. Mod doesn't add recipes to these blueprints, the textures come from the Artisan Worktables.**  
+### Ingot clay cast  
+**Ingot clay cast is the clay version of ingot cast. Only bronze material can use this to make a bronze ingot. Use clay fluid and seared brick to craft it. Like other clay cast, use and craft it will consume the cast. Only added when Tinkers' Construct 2 is installed.**  
 ### Tinker's material  
 **A new tinker's material,  Tungsten Steel, has been added, only when Tinkers' Construct 2 is installed. If you enable this, be sure to enable Items, Fluids, and Ores.**  
 ![This is an image](https://s11.ax1x.com/2024/02/13/pF8BzxP.png)
