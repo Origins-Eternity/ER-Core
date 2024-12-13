@@ -43,7 +43,9 @@ public class Utils {
         for (ResourcePackRepository.Entry pack : Packs) {
             for (String name : Configuration.resourcepacks) {
                 if (pack.getResourcePackName().equals(name)) {
-                    Resourcepacks.add(pack);
+                    if (!Resourcepacks.contains(pack)) {
+                        Resourcepacks.add(pack);
+                    }
                 }
             }
             Repository.setRepositories(Resourcepacks);
