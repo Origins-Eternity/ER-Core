@@ -62,11 +62,6 @@ public class Configuration {
         @Config.Comment("Whether damage from drown, lava or lightning should kill player immediately.")
         public static boolean enableHardcore = false;
 
-        @Config.Name("Show Overlay Bar")
-        @Config.LangKey("config.ercore.overlay")
-        @Config.Comment("Whether to show endurance bar or not.")
-        public static boolean showOverlay = true;
-
         @Config.Name("Product")
         @Config.RequiresMcRestart()
         @Config.LangKey("config.ercore.product")

@@ -68,8 +68,6 @@ fluid.ercore.tungsten_steel=熔融钨钢
 
 material.tungsten_steel.name=钨钢
 
-config.ercore.overlay=自定义状态栏显示
-config.ercore.overlay.tooltip=是否显示耐力值条
 config.ercore.product=产物
 config.ercore.product.tooltip=水和岩浆混合的产物。
 config.ercore.resourcepacks=资源包

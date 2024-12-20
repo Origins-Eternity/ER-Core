@@ -68,8 +68,6 @@ fluid.ercore.tungsten_steel=Molten Tungsten Steel
 
 material.tungsten_steel.name=Tungsten Steel
 
-config.ercore.overlay=Show Overlay Bar
-config.ercore.overlay.tooltip=Whether to show endurance bar or not.
 config.ercore.product=Product
 config.ercore.product.tooltip=A product of a mixture of water and lava.
 config.ercore.resourcepacks=Resourcepacks

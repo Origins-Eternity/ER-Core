@@ -1,6 +1,5 @@
 package com.origins_eternity.ercore.content.gui;
 
-import com.origins_eternity.ercore.config.Configuration;
 import com.origins_eternity.ercore.content.capability.endurance.IEndurance;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityPlayerSP;
@@ -9,17 +8,18 @@ import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.GuiIngameForge;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
+import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 import static com.origins_eternity.ercore.ERCore.MOD_ID;
 import static com.origins_eternity.ercore.content.capability.Capabilities.ENDURANCE;
 
 public class Overlay extends Gui {
-    private final ResourceLocation gui = new ResourceLocation(MOD_ID, "textures/gui/endurance.png");
+    public static final ResourceLocation gui = new ResourceLocation(MOD_ID, "textures/gui/endurance.png");
 
     @SubscribeEvent
     public void onRenderGameOverlay(RenderGameOverlayEvent.Pre event) {
-        if (Configuration.showOverlay) {
+        if (!Loader.isModLoaded("classicbar")) {
             Minecraft mc = Minecraft.getMinecraft();
             EntityPlayerSP player = mc.player;
             if (event.getType() == RenderGameOverlayEvent.ElementType.AIR) {
