@@ -107,8 +107,7 @@ public class Utils {
 
     public static void checkStatus(EntityPlayer player) {
         IEndurance endurance = player.getCapability(ENDURANCE, null);
-        if (endurance.isTired() && player.world.isRemote) {
-            player.setSprinting(false);
+        if (endurance.isTired()) {
             addTiredDebuff(player);
             if (endurance.isExhausted()) {
                 addExhaustedDebuff(player);
