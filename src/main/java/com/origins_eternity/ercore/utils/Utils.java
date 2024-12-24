@@ -109,6 +109,9 @@ public class Utils {
         IEndurance endurance = player.getCapability(ENDURANCE, null);
         if (endurance.isTired()) {
             addTiredDebuff(player);
+            if (player.world.isRemote) {
+                player.setSprinting(false);
+            }
             if (endurance.isExhausted()) {
                 addExhaustedDebuff(player);
             }
