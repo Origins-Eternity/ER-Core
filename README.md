@@ -1,6 +1,7 @@
 ![This is an image](https://s1.ax1x.com/2023/07/23/pCq54Ag.png)
-![This is an image](https://cf.way2muchnoise.eu/versions/702132.svg)
-![This is an image](https://cf.way2muchnoise.eu/full_702132_downloads.svg)
+[![Discord](https://img.shields.io/discord/1321045735055163402?logo=discord&color=949af1)](https://discord.gg/JdrzWQvT3v)
+[![This is an image](https://cf.way2muchnoise.eu/versions/702132.svg)](https://www.curseforge.com/minecraft/mc-mods/er-core/files)
+[![This is an image](https://cf.way2muchnoise.eu/full_702132_downloads.svg)](https://www.curseforge.com/minecraft/mc-mods/er-core)
 ## Introduction
 **Added minerals, materials, and useful features needed for technological development to the Evolution: Reset Pack. Utilities are enabled by default, but all items, blocks, fluids and other contents need to be enabled in the configuration file. Mods are already included in and mainly applies to the modpack, but you can also use it in your game if you like. But you won't have the full experience of it.**  
 ## Feature  

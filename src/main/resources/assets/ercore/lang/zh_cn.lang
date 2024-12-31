@@ -3,9 +3,10 @@
 itemGroup.ercore=ER 核心
 
 tile.ercore.slakedlime_block.name=熟石灰块
-tile.ercore.copper_ore.name=孔雀石
+tile.ercore.copper_ore.name=铜矿石
 tile.ercore.tin_ore.name=锡矿石
 tile.ercore.tungsten_ore.name=钨矿石
+tile.ercore.nickel_ore.name=镍矿石
 tile.ercore.tungsten_steel_block.name=钨钢块
 tile.ercore.molten_tungsten.name=熔融钨
 tile.ercore.molten_slaked_lime.name=熔融熟石灰
@@ -14,11 +15,11 @@ tile.ercore.molten_tungsten_carbide.name=熔融碳化钨
 tile.ercore.molten_tungsten_steel.name=熔融钨钢
 
 item.ercore.cement_powder.name=水泥粉
+item.ercore.searedbrick_unfired.name=未烧制的焦黑砖
 item.ercore.tungsten_ingot.name=钨锭
 item.ercore.bronze_ingot.name=青铜锭
 item.ercore.tungsten_nugget.name=钨粒
 item.ercore.tin_nugget.name=锡粒
-item.ercore.searedbrick_unfired.name=未烧制的焦黑砖
 item.ercore.tungsten_steel_ingot.name=钨钢锭
 item.ercore.tungsten_steel_nugget.name=钨钢粒
 item.ercore.tungsten_carbide_ingot.name=碳化钨锭
@@ -92,4 +93,4 @@ config.ercore.herbs.tooltip=是否启用草药。（仅对急救/医药护理模
 config.ercore.regeneration=启用生命恢复
 config.ercore.regeneration.tooltip=当玩家生命上限增大时，是否给予玩家生命恢复效果。
 config.ercore.hardcore=启用硬核模式
-config.ercore.hardcore.tooltip=当玩家受到来自窒息，熔岩或闪电的伤害时，是否立即死亡。
+

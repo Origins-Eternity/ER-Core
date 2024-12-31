@@ -48,9 +48,11 @@ public class CommonEvent {
 
     @SubscribeEvent
     public static void onFluidPlaceBlock(BlockEvent.FluidPlaceBlockEvent event) {
-        Block block = event.getState().getBlock();
-        if (!block.equals(Blocks.OBSIDIAN)) {
-            event.setNewState(getBlock(Configuration.product));
+        if (!event.getWorld().isRemote) {
+            Block block = event.getState().getBlock();
+            if (block.equals(Blocks.STONE) || block.equals(Blocks.COBBLESTONE)) {
+                event.setNewState(getBlock(Configuration.product));
+            }
         }
     }
 
@@ -202,21 +204,16 @@ public class CommonEvent {
         }
     }
 
-    static int counter;
-
     @SubscribeEvent
     public static void onPlayerTick(TickEvent.PlayerTickEvent event) {
         EntityPlayer player = event.player;
         if ((!player.isSpectator()) && (!player.isCreative())) {
-            counter++;
-            if (counter > 10) {
-                World world = player.world;
+            if (player.ticksExisted % 10 == 0) {
                 checkStatus(player);
-                if (!world.isRemote) {
+                if (!player.world.isRemote) {
                     tickUpdate(player);
                     syncEndurance(player);
                 }
-                counter = 0;
             }
         }
     }

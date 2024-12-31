@@ -34,15 +34,13 @@ public class CommonProxy {
                 }
             }
         }
-        if (Configuration.enableOres) {
-            GameRegistry.registerWorldGenerator(new GenOres(), 0);
-        }
         registerMessage();
     }
 
     public void init(FMLInitializationEvent event) {
         if (Configuration.enableOres) {
             RecipeRegister.registerRecipes();
+            GameRegistry.registerWorldGenerator(new GenOres(), 0);
         }
         if (Loader.isModLoaded("tconstruct")) {
             if ((Configuration.enableOres) && (Configuration.enableItems) && (Configuration.enableMaterial) && (Configuration.enableFluids)) {

@@ -63,7 +63,6 @@ public class Configuration {
         public static boolean enableHardcore = false;
 
         @Config.Name("Product")
-        @Config.RequiresMcRestart()
         @Config.LangKey("config.ercore.product")
         @Config.Comment("A product of a mixture of water and lava.")
         public static String product = "chisel:basalt";
