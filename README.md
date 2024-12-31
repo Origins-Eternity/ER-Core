@@ -24,7 +24,7 @@
 ## Content  
 **All content is also designed for the above modpack, you can customize what should be added in the configuration file, and all content will not be added by default.**  
 ### Ores  
-**A total of three ores have been added, tin, copper, and tungsten. All ores are only spawned in the Overworld. Each ore has a corresponding fluid and mineral word added.** 
+**A total of four ores have been added, tin, copper, nickel and tungsten. All ores are only spawned in the Overworld.** 
 ![This is an image](https://s11.ax1x.com/2024/02/13/pF8Bv8I.png)
 **With the exception of tungsten ore, the mod does not add ingots, nuggets and smelting recipes to other ores. Only some fluids have been added to the smelter recipe. However, all ores will spawn and drop in the world normally.**  
 ### Blueprints  
