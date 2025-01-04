@@ -24,7 +24,6 @@ public class Blueprints {
     public static final Item Tanner_Workstation = new ItemCreator("Tanner_Workstation_Blueprint", 10);
     public static final Item Mage_Workstation = new ItemCreator("Mage_Workstation_Blueprint", 10);
     public static final Item Mage_Workshop = new ItemCreator("Mage_Workshop_Blueprint", 10);
-    public static final Item Sleeping_Bag = new ItemCreator("Sleeping_Bag_Blueprint", 10);
     public static final Item Brewing_Stand = new ItemCreator("Brewing_Stand_Blueprint", 10);
     public static final Item Small_Backpack = new ItemCreator("Small_Backpack_Blueprint", 10);
     public static final Item Medium_Backpack = new ItemCreator("Medium_Backpack_Blueprint", 10);
