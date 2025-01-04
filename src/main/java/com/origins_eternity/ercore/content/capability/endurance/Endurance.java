@@ -162,7 +162,7 @@ public class Endurance implements IEndurance {
             }
             if (endurance > 0) {
                 if (exhausted) {
-                    exhausted = false;
+                    setExhausted(false);
                 }
                 if (endurance >= 5) {
                     if (tired) {
