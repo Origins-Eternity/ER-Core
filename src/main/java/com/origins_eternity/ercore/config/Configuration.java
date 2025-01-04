@@ -71,7 +71,7 @@ public class Configuration {
         @Config.RequiresMcRestart()
         @Config.LangKey("config.ercore.resourcepacks")
         @Config.Comment("A list of resourcepacks which will be automatically installed.")
-        public static String[] resourcepacks = new String[]{"Evolution-Reset-Resource-Pack-1.2.0.zip", "ModernityAdjunct-f3-1.2.zip", "Modernity-f3-3.10.1.zip"};
+        public static String[] resourcepacks = new String[]{"Evolution-Reset-Resource-Pack-1.2.0.zip", "ModernityAdjunct-f3-1.5.zip", "Modernity-f3-3.10.2.zip"};
 
         @Config.Name("Tools")
         @Config.LangKey("config.ercore.tools")

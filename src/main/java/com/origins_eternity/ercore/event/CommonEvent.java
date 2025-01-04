@@ -261,19 +261,6 @@ public class CommonEvent {
     }
 
     @SubscribeEvent
-    public static void onLivingUpdate(LivingEvent.LivingUpdateEvent event) {
-        if (event.getEntity() instanceof EntityPlayer) {
-            EntityPlayer player = (EntityPlayer) event.getEntity();
-            if ((!player.isCreative())) {
-                IEndurance endurance = player.getCapability(Capabilities.ENDURANCE, null);
-                if (endurance.isExhausted() && player.onGround) {
-                    event.setCanceled(true);
-                }
-            }
-        }
-    }
-
-    @SubscribeEvent
     public static void onLivingDamage(LivingDamageEvent event) {
         if (event.getEntity() instanceof EntityPlayer) {
             EntityPlayer player = (EntityPlayer) event.getEntity();
