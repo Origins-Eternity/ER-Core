@@ -50,8 +50,10 @@ public class CommonEvent {
     public static void onFluidPlaceBlock(BlockEvent.FluidPlaceBlockEvent event) {
         if (!event.getWorld().isRemote) {
             Block block = event.getState().getBlock();
-            if (block.equals(Blocks.STONE) || block.equals(Blocks.COBBLESTONE)) {
-                event.setNewState(getBlock(Configuration.product));
+            if (block.equals(Blocks.COBBLESTONE)) {
+                if (getBlock(Configuration.product).isFullBlock()) {
+                    event.setNewState(getBlock(Configuration.product));
+                }
             }
         }
     }

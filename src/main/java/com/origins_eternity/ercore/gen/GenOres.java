@@ -14,8 +14,7 @@ import java.util.Random;
 
 import static com.origins_eternity.ercore.content.block.Ores.*;
 
-public class GenOres implements IWorldGenerator
-{
+public class GenOres implements IWorldGenerator {
 	private final WorldGenerator copper_ore;
 	private final WorldGenerator tin_ore;
 	private final WorldGenerator tungsten_ore;
