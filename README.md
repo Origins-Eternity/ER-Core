@@ -14,7 +14,7 @@
 **All fluids in the game cannot create new fluid resources, but players can still bottle water with water.**  
 ![This is an image](https://s1.ax1x.com/2022/12/28/pSSP7Sx.png)
 ### Replace The Products of Lava and Water  
-**When lava and water meets, the original obsidian will be replaced with basalt blocks.**  
+**When lava and water meets, the original obsidian will be replaced with basalt blocks. Support custom products.**  
 ### Default World Type  
 **It's not really a change, but rather swapping the RTG world type with the default world type. Valid only when Realistic Terrain Generation and other fork version which has the same modid is installed.**  
 ### Regeneration  
