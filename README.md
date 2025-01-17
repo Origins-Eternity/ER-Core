@@ -8,7 +8,7 @@
 ## Feature  
 **The compatibility of these features is unknown, and some features are designed specifically for the modpack described above. Configurations are already available for some features, which can be highly customizable. If you encounter any problems, please feel free to give feedback.**
 ### Endurance  
-**Inspired by the StaminaPlus mod, each survival/adventure player has their own endurance level, you can choose whether to display the HUD in the configuration file.**  
+**Inspired by the StaminaPlus mod, each survival/adventure player has their own endurance level.**  
 ![This is an image](https://s1.ax1x.com/2023/07/22/pCbvoF0.png)
 ### No Infinite Fluids  
 **All fluids in the game cannot create new fluid resources, but players can still bottle water with water.**  
