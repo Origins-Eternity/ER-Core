@@ -8,8 +8,8 @@
 ## Feature  
 **The compatibility of these features is unknown, and some features are designed specifically for the modpack described above. Configurations are already available for some features, which can be highly customizable. If you encounter any problems, please feel free to give feedback.**
 ### Endurance  
-**Inspired by the StaminaPlus mod, each survival/adventure player has their own endurance level.**  
-![This is an image](https://s1.ax1x.com/2023/07/22/pCbvoF0.png)
+**Inspired by the StaminaPlus mod, each survival/adventure player has their own endurance level.**
+![This is an image](https://s21.ax1x.com/2025/01/17/pEFjDr8.png)
 ### No Infinite Fluids  
 **All fluids in the game cannot create new fluid resources, but players can still bottle water with water.**  
 ![This is an image](https://s1.ax1x.com/2022/12/28/pSSP7Sx.png)
