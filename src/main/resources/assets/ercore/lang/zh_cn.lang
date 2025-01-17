@@ -92,4 +92,7 @@ config.ercore.herbs.tooltip=是否启用草药。（仅对急救/医药护理模
 config.ercore.regeneration=启用生命恢复
 config.ercore.regeneration.tooltip=当玩家生命上限增大时，是否给予玩家生命恢复效果。
 config.ercore.hardcore=启用硬核模式
+config.ercore.hardcore.tooltip=溺水、熔岩或闪电造成的伤害是否可以立即杀死玩家。
 
+death.attack.exhausted=%1$s因过度劳累而倒下
+death.attack.exhausted.player=%1$s在逃离%2$s时因过度劳累而倒下

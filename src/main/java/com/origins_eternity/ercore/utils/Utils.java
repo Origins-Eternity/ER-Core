@@ -17,7 +17,6 @@ import net.minecraft.init.MobEffects;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBow;
 import net.minecraft.item.ItemShield;
-import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.WorldType;
@@ -31,6 +30,7 @@ import java.util.TimerTask;
 
 import static com.origins_eternity.ercore.ERCore.packetHandler;
 import static com.origins_eternity.ercore.content.capability.Capabilities.ENDURANCE;
+import static com.origins_eternity.ercore.content.damage.Damages.EXHAUSTED;
 
 public class Utils {
     public static void installResourcepacks() {
@@ -67,53 +67,39 @@ public class Utils {
         }
         if (player.isHandActive()) {
             Item item = player.getHeldItem(player.getActiveHand()).getItem();
-            if (item instanceof ItemShield) {
-                endurance.addExhaustion(0.1f);
-            } else if (item instanceof ItemBow) {
-                endurance.addExhaustion(0.2f);
+            if (item instanceof ItemShield || item instanceof ItemBow) {
+                if (endurance.getEndurance() <= 0) {
+                    player.attackEntityFrom(EXHAUSTED, 1f);
+                } else {
+                    endurance.addExhaustion(0.1f);
+                }
             }
             endurance.addCoolDown(40);
         }
         if (player.isSprinting()) {
             endurance.addCoolDown(100);
-            endurance.addExhaustion(0.3f);
+            if (endurance.getEndurance() <= 0) {
+                player.attackEntityFrom(EXHAUSTED, 1f);
+            } else {
+                endurance.addExhaustion(0.2f);
+            }
         } else if (player.isRiding()) {
             endurance.removeCoolDown(10);
             endurance.addSaturation(0.3f);
         } else {
             endurance.removeCoolDown(10);
-            endurance.addSaturation(0.1f);
-        }
-    }
-
-    private static void addPotions(EntityPlayer player, Potion potion) {
-        if (!player.isPotionActive(potion)) {
-            player.addPotionEffect(new PotionEffect(potion, 312, 2, false, false));
-        }
-    }
-
-    public static void addTiredDebuff(EntityPlayer player) {
-        if (!player.world.isRemote) {
-            addPotions(player, MobEffects.SLOWNESS);
-        }
-    }
-
-    public static void addExhaustedDebuff(EntityPlayer player) {
-        if (!player.world.isRemote) {
-            addPotions(player, MobEffects.BLINDNESS);
-            addPotions(player, MobEffects.HUNGER);
+            endurance.addSaturation(0.2f);
         }
     }
 
     public static void checkStatus(EntityPlayer player) {
         IEndurance endurance = player.getCapability(ENDURANCE, null);
-        if (endurance.isTired()) {
-            addTiredDebuff(player);
+        if (endurance.getEndurance() <= 6f) {
             if (player.world.isRemote) {
-                player.setSprinting(false);
-            }
-            if (endurance.isExhausted()) {
-                addExhaustedDebuff(player);
+                player.motionX *= 0.5;
+                player.motionZ *= 0.5;
+            } else {
+                player.addPotionEffect(new PotionEffect(MobEffects.HUNGER, 312, 1, false, false));
             }
         }
     }

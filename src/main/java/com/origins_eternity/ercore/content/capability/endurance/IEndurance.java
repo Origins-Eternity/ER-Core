@@ -33,14 +33,6 @@ public interface IEndurance {
 
     void addSaturation(float value);
 
-    boolean isExhausted();
-
-    void setExhausted(boolean exhausted);
-
-    boolean isTired();
-
-    void setTired(boolean tired);
-
     void consumeEndurance(int value);
 
     void recoverEndurance(int value);

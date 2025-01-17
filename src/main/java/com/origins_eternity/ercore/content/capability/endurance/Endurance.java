@@ -21,10 +21,6 @@ public class Endurance implements IEndurance {
 
     private float saturation = 0;
 
-    private boolean exhausted = false;
-
-    private boolean tired = false;
-
     @Override
     public void setHealth(float health) {
         if (health > 40) {
@@ -97,77 +93,46 @@ public class Endurance implements IEndurance {
 
     @Override
     public void addExhaustion(float value) {
-        exhaustion += value;
-        while (exhaustion > 1) {
-            consumeEndurance(1);
-            exhaustion -= 1;
+        if (endurance > 0) {
+            exhaustion += value;
+            while (exhaustion > 1) {
+                consumeEndurance(1);
+                exhaustion -= 1;
+            }
         }
     }
 
     @Override
     public void addSaturation(float value) {
-        if (endurance == health) return;
-        if (coolDown == 0) {
-            saturation += value;
-            while (saturation > 1) {
-                recoverEndurance(1);
-                saturation -= 1;
+        if (endurance < health) {
+            if (coolDown == 0) {
+                saturation += value;
+                while (saturation > 1) {
+                    recoverEndurance(1);
+                    saturation -= 1;
+                }
             }
         }
     }
 
     @Override
-    public boolean isExhausted() {
-        return exhausted;
-    }
-
-    @Override
-    public void setExhausted(boolean exhausted) {
-        this.exhausted = exhausted;
-    }
-
-    @Override
-    public boolean isTired() {
-        return tired;
-    }
-
-    @Override
-    public void setTired(boolean tired) {
-        this.tired = tired;
-    }
-
-    @Override
     public void consumeEndurance(int value) {
-        endurance -= value;
-        if (endurance <= 5) {
-            if (!tired) {
-                setTired(true);
-            }
+        if (endurance > 0) {
+            endurance -= value;
             if (endurance <= 0) {
                 endurance = 0;
-                if (!exhausted) {
-                    addCoolDown(312);
-                    setExhausted(true);
-                }
+                addCoolDown(312);
             }
         }
     }
 
     @Override
     public void recoverEndurance(int value) {
-        if (coolDown == 0) {
-            endurance += value;
-            if (endurance > health) {
-                endurance = health;
-            }
-            if (endurance > 0) {
-                if (exhausted) {
-                    setExhausted(false);
-                }
-                if (endurance >= 5) {
-                    if (tired) {
-                        setTired(false);
-                    }
+        if (endurance < health) {
+            if (coolDown == 0) {
+                endurance += value;
+                if (endurance > health) {
+                    endurance = health;
                 }
             }
         }
@@ -230,8 +195,6 @@ public class Endurance implements IEndurance {
             compound.setInteger("CoolDown", instance.getCoolDown());
             compound.setFloat("Exhaustion", instance.getExhaustion());
             compound.setFloat("Saturation", instance.getSaturation());
-            compound.setBoolean("Exhausted", instance.isExhausted());
-            compound.setBoolean("Tired", instance.isTired());
             if (Loader.isModLoaded("firstaid")) {
                 compound.setDouble("MaxHealth", instance.getMaxHealth());
             }
@@ -247,8 +210,6 @@ public class Endurance implements IEndurance {
                 instance.setCoolDown(compound.getInteger("CoolDown"));
                 instance.setExhaustion(compound.getFloat("Exhaustion"));
                 instance.setSaturation(compound.getFloat("Saturation"));
-                instance.setExhausted(compound.getBoolean("Exhausted"));
-                instance.setTired(compound.getBoolean("Tired"));
                 if (Loader.isModLoaded("firstaid")) {
                     instance.setMaxHealth(compound.getDouble("MaxHealth"));
                 }

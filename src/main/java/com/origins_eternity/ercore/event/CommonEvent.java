@@ -37,6 +37,7 @@ import net.minecraftforge.fml.common.gameevent.TickEvent;
 import java.util.Set;
 
 import static com.origins_eternity.ercore.ERCore.MOD_ID;
+import static com.origins_eternity.ercore.content.damage.Damages.EXHAUSTED;
 import static com.origins_eternity.ercore.utils.Utils.*;
 
 @Mod.EventBusSubscriber(modid = MOD_ID)
@@ -75,7 +76,11 @@ public class CommonEvent {
             IEndurance endurance = player.getCapability(Capabilities.ENDURANCE, null);
             if (!world.isRemote) {
                 endurance.addCoolDown(30);
-                endurance.addExhaustion(hardness / 10);
+                if (endurance.getEndurance() <= 0) {
+                    player.attackEntityFrom(EXHAUSTED, 1f);
+                } else {
+                    endurance.addExhaustion(hardness / 10);
+                }
             }
         }
     }
@@ -87,7 +92,11 @@ public class CommonEvent {
             IEndurance endurance = player.getCapability(Capabilities.ENDURANCE, null);
             if (!player.world.isRemote) {
                 endurance.addCoolDown(30);
-                endurance.addExhaustion(0.5f);
+                if (endurance.getEndurance() <= 0) {
+                    player.attackEntityFrom(EXHAUSTED, 1f);
+                } else {
+                    endurance.addExhaustion(0.5f);
+                }
             }
         }
     }
@@ -99,11 +108,13 @@ public class CommonEvent {
             EntityPlayer player = (EntityPlayer) entity;
             if (!player.isCreative()) {
                 IEndurance endurance = player.getCapability(Capabilities.ENDURANCE, null);
-                if (endurance.isExhausted()) {
-                    event.getEntityLiving().motionY -= 1F;
-                } else if (!player.world.isRemote) {
+                if (!player.world.isRemote) {
                     endurance.addCoolDown(60);
-                    endurance.addExhaustion(0.2f);
+                    if (endurance.getEndurance() <= 0) {
+                        player.attackEntityFrom(EXHAUSTED, 1f);
+                    } else {
+                        endurance.addExhaustion(0.2f);
+                    }
                 }
             }
         }
@@ -114,16 +125,11 @@ public class CommonEvent {
         EntityPlayer player = event.getEntityPlayer();
         if (!player.isCreative()) {
             IEndurance endurance = player.getCapability(Capabilities.ENDURANCE, null);
-            if (endurance.isTired()) {
+            endurance.addCoolDown(30);
+            endurance.addExhaustion(0.005f);
+            if (endurance.getEndurance() <= 6f) {
                 float origin = event.getOriginalSpeed();
-                event.setNewSpeed((float) (origin * 0.32));
-                if (endurance.isExhausted()) {
-                    event.setCanceled(true);
-                }
-            }
-            if (!player.world.isRemote) {
-                endurance.addCoolDown(20);
-                endurance.addExhaustion(0.005f);
+                event.setNewSpeed((float) (origin * 0.5));
             }
         }
     }
@@ -134,9 +140,6 @@ public class CommonEvent {
         if (!player.isCreative()) {
             if (!player.world.isRemote) {
                 IEndurance endurance = player.getCapability(Capabilities.ENDURANCE, null);
-                if (endurance.isExhausted()) {
-                    player.dropItem(true);
-                }
                 if (Loader.isModLoaded("firstaid")) {
                     double maxHealth = player.getAttributeMap().getAttributeInstanceByName("generic.maxHealth").getAttributeValue();
                     endurance.setMaxHealth(maxHealth);
@@ -171,12 +174,13 @@ public class CommonEvent {
         EntityPlayer player = event.getEntityPlayer();
         if (!player.isCreative()) {
             IEndurance endurance = player.getCapability(Capabilities.ENDURANCE, null);
-            if (endurance.isExhausted()) {
-                event.setCanceled(true);
-            }
             if (!player.world.isRemote) {
-                endurance.addCoolDown(40);
-                endurance.addExhaustion(0.2f);
+                endurance.addCoolDown(50);
+                if (endurance.getEndurance() <= 0) {
+                    player.attackEntityFrom(EXHAUSTED, 1f);
+                } else {
+                    endurance.addExhaustion(0.2f);
+                }
             }
         }
     }
@@ -210,8 +214,8 @@ public class CommonEvent {
     public static void onPlayerTick(TickEvent.PlayerTickEvent event) {
         EntityPlayer player = event.player;
         if ((!player.isSpectator()) && (!player.isCreative())) {
+            checkStatus(player);
             if (player.ticksExisted % 10 == 0) {
-                checkStatus(player);
                 if (!player.world.isRemote) {
                     tickUpdate(player);
                     syncEndurance(player);
@@ -225,14 +229,15 @@ public class CommonEvent {
         EntityPlayer player = event.getEntityPlayer();
         if ((!player.isCreative()) && (!player.world.isRemote)) {
             IEndurance endurance = player.getCapability(Capabilities.ENDURANCE, null);
-            if (endurance.isExhausted()) {
-                event.setCanceled(true);
-            }
             Set<String> tools = event.getItemStack().getItem().getToolClasses(event.getItemStack());
             for (String tool : Configuration.tools) {
                 if (tools.contains(tool)) {
-                    endurance.addExhaustion(0.2f);
                     endurance.addCoolDown(60);
+                    if (endurance.getEndurance() <= 0) {
+                        player.attackEntityFrom(EXHAUSTED, 1f);
+                    } else {
+                        endurance.addExhaustion(0.2f);
+                    }
                     break;
                 }
             }
@@ -244,11 +249,12 @@ public class CommonEvent {
         EntityPlayer player = event.getEntityPlayer();
         if ((!player.isCreative()) && (!player.world.isRemote)) {
             IEndurance endurance = player.getCapability(Capabilities.ENDURANCE, null);
-            if (endurance.isExhausted()) {
-                event.setCanceled(true);
-            }
-            endurance.addExhaustion(0.2f);
             endurance.addCoolDown(50);
+            if (endurance.getEndurance() <= 0) {
+                player.attackEntityFrom(EXHAUSTED, 1f);
+            } else {
+                endurance.addExhaustion(0.2f);
+            }
         }
     }
 
@@ -279,8 +285,8 @@ public class CommonEvent {
             EntityPlayer player = (EntityPlayer) event.getSource().getTrueSource();
             if (!player.isCreative()) {
                 IEndurance endurance = player.getCapability(Capabilities.ENDURANCE, null);
-                if (endurance.isTired()) {
-                    event.setAmount((float) (event.getAmount() * 0.32));
+                if (endurance.getEndurance() <= 6) {
+                    event.setAmount((float) (event.getAmount() * 0.5));
                 }
             }
         }

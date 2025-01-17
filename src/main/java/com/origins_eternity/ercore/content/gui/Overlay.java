@@ -41,7 +41,7 @@ public class Overlay extends Gui {
         IEndurance endurance = player.getCapability(ENDURANCE, null);
         float health = endurance.getHealth();
         int value = (int) endurance.getEndurance();
-        for (int i = 0; (i * 2 < health && i < 10); i++) {
+        for (int i = 0; (i * 2 < health - 1 && i < 10); i++) {
             drawTexturedModalRect(posX - i * 8, posY, 0, 0, 8, 9);
         }
         if (value > 20) {

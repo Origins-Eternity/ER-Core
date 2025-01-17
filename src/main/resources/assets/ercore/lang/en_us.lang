@@ -93,3 +93,6 @@ config.ercore.regeneration=Enable Regeneration Buff
 config.ercore.regeneration.tooltip=Whether to add the regeneration buff when player's maxhealth increased.
 config.ercore.hardcore=Enable Hardcore
 config.ercore.hardcore.tooltip=Whether damage from drown, lava or lightning should kill player immediately.
+
+death.attack.exhausted=%1$s collapsed from exhaustion
+death.attack.exhausted.player=%1$s collapsed from exhaustion whilst trying to escape %2$s
