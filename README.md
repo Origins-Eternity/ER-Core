@@ -10,6 +10,8 @@
 ### Endurance  
 **Inspired by the StaminaPlus mod, each survival/adventure player has their own endurance level.**
 ![This is an image](https://s21.ax1x.com/2025/01/17/pEFjDr8.png)
+**Players will get hurt while doing strenuous exercise after exhaustion, like sprint, jump, etc. This can cause to death!**
+![This is an image](https://s21.ax1x.com/2025/01/17/pEFjTZF.png)
 ### No Infinite Fluids  
 **All fluids in the game cannot create new fluid resources, but players can still bottle water with water.**  
 ![This is an image](https://s1.ax1x.com/2022/12/28/pSSP7Sx.png)
