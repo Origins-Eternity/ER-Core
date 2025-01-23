@@ -1,4 +1,4 @@
-package com.origins_eternity.ercore.campat.firstaid;
+package com.origins_eternity.ercore.compat.firstaid;
 
 import ichttt.mods.firstaid.api.CapabilityExtendedHealthSystem;
 import ichttt.mods.firstaid.common.damagesystem.PlayerDamageModel;

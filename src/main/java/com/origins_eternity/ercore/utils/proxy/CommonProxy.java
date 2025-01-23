@@ -1,6 +1,6 @@
 package com.origins_eternity.ercore.utils.proxy;
 
-import com.origins_eternity.ercore.campat.firstaid.MaxHealth;
+import com.origins_eternity.ercore.compat.firstaid.MaxHealth;
 import com.origins_eternity.ercore.config.Configuration;
 import com.origins_eternity.ercore.content.capability.Capabilities;
 import com.origins_eternity.ercore.gen.GenOres;
@@ -17,7 +17,7 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 
 import static com.origins_eternity.ercore.ERCore.packetHandler;
-import static com.origins_eternity.ercore.campat.tconstruct.Materials.*;
+import static com.origins_eternity.ercore.compat.tconstruct.Materials.*;
 import static com.origins_eternity.ercore.utils.registry.ContentRegister.registerFluids;
 
 public class CommonProxy {

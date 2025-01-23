@@ -1,4 +1,4 @@
-package com.origins_eternity.ercore.campat.tconstruct;
+package com.origins_eternity.ercore.compat.tconstruct;
 
 import com.origins_eternity.ercore.content.block.Ores;
 import com.origins_eternity.ercore.content.fluid.Fluids;

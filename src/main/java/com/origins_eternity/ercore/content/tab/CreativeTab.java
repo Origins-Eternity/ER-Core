@@ -11,7 +11,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.Loader;
 
 import static com.origins_eternity.ercore.ERCore.MOD_ID;
-import static com.origins_eternity.ercore.campat.firstaid.Herbs.Herbs;
+import static com.origins_eternity.ercore.compat.firstaid.Herbs.Herbs;
 
 public class CreativeTab {
     public static final CreativeTabs ERCORE = new CreativeTabs(MOD_ID) {

@@ -1,4 +1,4 @@
-package com.origins_eternity.ercore.campat.firstaid;
+package com.origins_eternity.ercore.compat.firstaid;
 
 import com.origins_eternity.ercore.ERCore;
 import ichttt.mods.firstaid.api.damagesystem.AbstractPartHealer;
