@@ -15,7 +15,7 @@ import static com.origins_eternity.ercore.ERCore.MOD_ID;
 import static com.origins_eternity.ercore.content.capability.Capabilities.ENDURANCE;
 
 public class Overlay extends Gui {
-    public static final ResourceLocation gui = new ResourceLocation(MOD_ID, "textures/gui/endurance.png");
+    public static final ResourceLocation GUI = new ResourceLocation(MOD_ID, "textures/gui/icons.png");
 
     @SubscribeEvent
     public void onRenderGameOverlay(RenderGameOverlayEvent.Pre event) {
@@ -27,7 +27,7 @@ public class Overlay extends Gui {
                 GlStateManager.pushMatrix();
                 int posX = event.getResolution().getScaledWidth() / 2 + 82;
                 int posY = event.getResolution().getScaledHeight() - GuiIngameForge.right_height;
-                mc.getTextureManager().bindTexture(gui);
+                mc.getTextureManager().bindTexture(GUI);
                 drawTexture(player, posX, posY);
                 GuiIngameForge.right_height += 10;
                 GlStateManager.popMatrix();
