@@ -11,7 +11,6 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 
 import java.text.NumberFormat;
-import java.util.Iterator;
 
 import static com.origins_eternity.ercore.ERCore.MOD_ID;
 import static com.origins_eternity.ercore.content.gui.Overlay.GUI;
@@ -36,10 +35,12 @@ public class ClientEvent {
             String hunger = String.format("%d", food.getHealAmount(event.getStack()));
             String saturation = NumberFormat.getPercentInstance().format(food.getSaturationModifier(event.getStack()));
             int posX = event.getX();
-            int posY = event.getY() + 11;
+            int posY = event.getY() + 1;
             for (String tip : event.getLines()) {
-                if (!tip.contains("§f   " + hunger + "    " + saturation)) {
-                    posY += 4;
+                if (tip.contains("§f   " + hunger + "    " + saturation)) {
+                    break;
+                } else {
+                    posY += event.getHeight() / event.getLines().size();
                 }
             }
             GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
