@@ -6,7 +6,6 @@
   "variants": {
     "molten_sugarcane": [{"custom": {"fluid": "sugarcane"}}],
     "molten_tungsten": [{"custom": {"fluid": "tungsten"}}],
-    "molten_slaked_lime": [{"custom": {"fluid": "slaked_lime"}}],
     "molten_tungsten_carbide": [{"custom": {"fluid": "tungsten_carbide"}}],
     "molten_tungsten_steel": [{"custom": {"fluid": "tungsten_steel"}}]
   }

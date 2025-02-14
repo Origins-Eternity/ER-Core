@@ -2,18 +2,17 @@
 
 itemGroup.ercore=ER 核心
 
-tile.ercore.slakedlime_block.name=熟石灰块
 tile.ercore.copper_ore.name=铜矿石
 tile.ercore.tin_ore.name=锡矿石
 tile.ercore.tungsten_ore.name=钨矿石
 tile.ercore.nickel_ore.name=镍矿石
 tile.ercore.tungsten_steel_block.name=钨钢块
 tile.ercore.molten_tungsten.name=熔融钨
-tile.ercore.molten_slaked_lime.name=熔融熟石灰
 tile.ercore.molten_sugarcane.name=熔融甘蔗
 tile.ercore.molten_tungsten_carbide.name=熔融碳化钨
 tile.ercore.molten_tungsten_steel.name=熔融钨钢
 
+item.ercore.clinker.name=熟料
 item.ercore.cement_powder.name=水泥粉
 item.ercore.searedbrick_unfired.name=未烧制的焦黑砖
 item.ercore.tungsten_ingot.name=钨锭
@@ -60,7 +59,6 @@ item.ercore.filter_blueprint.name=过滤器设计蓝图
 item.ercore.herbs.name=草药
 
 fluid.ercore.tungsten=熔融钨
-fluid.ercore.slaked_lime=熔融熟石灰
 fluid.ercore.sugarcane=熔融甘蔗
 fluid.ercore.tungsten_carbide=熔融碳化钨
 fluid.ercore.tungsten_steel=熔融钨钢

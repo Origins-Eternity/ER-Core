@@ -1,6 +1,7 @@
 package com.origins_eternity.ercore.utils.proxy;
 
 import com.origins_eternity.ercore.compat.firstaid.MaxHealth;
+import com.origins_eternity.ercore.compat.lootr.ReplaceChest;
 import com.origins_eternity.ercore.config.Configuration;
 import com.origins_eternity.ercore.content.capability.Capabilities;
 import com.origins_eternity.ercore.gen.GenOres;
@@ -51,6 +52,9 @@ public class CommonProxy {
         }
         if (Loader.isModLoaded("firstaid")) {
             MinecraftForge.EVENT_BUS.register(MaxHealth.class);
+        }
+        if (Loader.isModLoaded("lootr")) {
+            MinecraftForge.EVENT_BUS.register(ReplaceChest.class);
         }
         Capabilities.registerCapability(CapabilityManager.INSTANCE);
     }

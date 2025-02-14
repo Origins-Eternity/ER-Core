@@ -91,7 +91,7 @@ public class CommonEvent {
         if (!player.isCreative()) {
             IEndurance endurance = player.getCapability(Capabilities.ENDURANCE, null);
             if (!player.world.isRemote) {
-                endurance.addCoolDown(30);
+                endurance.addCoolDown(50);
                 if (endurance.getEndurance() <= 0) {
                     player.attackEntityFrom(EXHAUSTED, 1f);
                 } else {
@@ -249,7 +249,7 @@ public class CommonEvent {
         EntityPlayer player = event.getEntityPlayer();
         if ((!player.isCreative()) && (!player.world.isRemote)) {
             IEndurance endurance = player.getCapability(Capabilities.ENDURANCE, null);
-            endurance.addCoolDown(50);
+            endurance.addCoolDown(60);
             if (endurance.getEndurance() <= 0) {
                 player.attackEntityFrom(EXHAUSTED, 1f);
             } else {

@@ -8,6 +8,7 @@ import java.util.List;
 
 public class Items {
     public static final List<Item> ITEMS = new ArrayList<>();
+    public static final Item Clinker = new ItemCreator("Clinker", 0);
     public static final Item Cement_Powder = new ItemCreator("Cement_Powder", 0);
     public static final Item Tungsten_Ingot = new ItemCreator("Tungsten_Ingot", 0);
     public static final Item Tungsten_Nugget = new ItemCreator("Tungsten_Nugget", 0);
