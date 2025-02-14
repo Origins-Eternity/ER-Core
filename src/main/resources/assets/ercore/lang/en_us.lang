@@ -93,3 +93,16 @@ config.ercore.hardcore.tooltip=Whether damage from drown, lava or lightning shou
 
 death.attack.exhausted=%1$s collapsed from exhaustion
 death.attack.exhausted.player=%1$s collapsed from exhaustion whilst trying to escape %2$s
+
+commands.tpa.usage=/tpa <player>
+commands.tpaccept.usage=/tpaccept [player]
+commands.tpadeny.usage=/tpadeny [player]
+commands.tpa.accept=[Accept]
+commands.tpa.accepted=%s has accepted to your request, teleporting...
+commands.tpa.deny=[Deny]
+commands.tpa.denied=%s has denied your request.
+commands.tpa.timeout=Your teleportation request to %s timeout...
+commands.tpa.no_requests=You do not receive any teleportation requests.
+commands.tpa.no_player=You are not receiving a teleportation request from %s.
+commands.tpa.request=%s wanted to teleport to you.
+commands.tpa.self=You can't teleport to yourself!

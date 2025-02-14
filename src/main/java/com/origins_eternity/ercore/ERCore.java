@@ -5,18 +5,15 @@ import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.SidedProxy;
-import net.minecraftforge.fml.common.event.FMLConstructionEvent;
-import net.minecraftforge.fml.common.event.FMLInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.common.event.*;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 
-@Mod(modid = ERCore.MOD_ID, name = ERCore.MOD_NAME, version = ERCore.VERSION, dependencies = "after:tconstruct@[1.12-2.7.2.15,);after:pyrotech@[1.12.2-1.6.0,);after:firstaid@[1.6.13,);")
+@Mod(modid = ERCore.MOD_ID, name = ERCore.MOD_NAME, version = ERCore.VERSION, dependencies = "after:tconstruct@[1.12-2.7.2.15,);after:firstaid@[1.6.13,);")
 public class ERCore {
 	public static final String MOD_ID = "ercore";
 	public static final String MOD_NAME = "ER Core";
-	public static final String VERSION = "1.2.1";
+	public static final String VERSION = "1.2.2";
 	
 	@SidedProxy(clientSide = "com.origins_eternity.ercore.utils.proxy.ClientProxy", serverSide = "com.origins_eternity.ercore.utils.proxy.CommonProxy")
 	public static CommonProxy proxy;
@@ -36,4 +33,7 @@ public class ERCore {
 
 	@EventHandler
 	public void postInit(FMLPostInitializationEvent event) { proxy.postInit(event); }
+
+	@EventHandler
+	public void serverStart(FMLServerStartingEvent event) { proxy.serverStart(event); }
 }

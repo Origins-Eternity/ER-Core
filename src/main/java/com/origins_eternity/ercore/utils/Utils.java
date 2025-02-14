@@ -17,8 +17,11 @@ import net.minecraft.init.MobEffects;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBow;
 import net.minecraft.item.ItemShield;
+import net.minecraft.network.play.server.SPacketSoundEffect;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.SoundCategory;
+import net.minecraft.util.SoundEvent;
 import net.minecraft.world.WorldType;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.fml.common.Optional;
@@ -123,6 +126,13 @@ public class Utils {
             }
         }
         return block;
+    }
+
+    public static void playSound(EntityPlayerMP player, SoundEvent sound) {
+        if (player != null && !player.hasDisconnected()) {
+            SPacketSoundEffect packet = new SPacketSoundEffect(sound, SoundCategory.PLAYERS, player.posX, player.posY, player.posZ, 1.0F, 1.0F);
+            player.connection.sendPacket(packet);
+        }
     }
 
     @Optional.Method(modid = "rtg")

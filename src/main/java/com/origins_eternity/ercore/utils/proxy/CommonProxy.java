@@ -4,16 +4,16 @@ import com.origins_eternity.ercore.compat.firstaid.MaxHealth;
 import com.origins_eternity.ercore.compat.lootr.ReplaceChest;
 import com.origins_eternity.ercore.config.Configuration;
 import com.origins_eternity.ercore.content.capability.Capabilities;
+import com.origins_eternity.ercore.content.command.TPACommand;
+import com.origins_eternity.ercore.content.command.TPADenyCommand;
+import com.origins_eternity.ercore.content.command.TPAcceptCommand;
 import com.origins_eternity.ercore.gen.GenOres;
 import com.origins_eternity.ercore.message.SyncEndurance;
 import com.origins_eternity.ercore.utils.registry.RecipeRegister;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.capabilities.CapabilityManager;
 import net.minecraftforge.fml.common.Loader;
-import net.minecraftforge.fml.common.event.FMLConstructionEvent;
-import net.minecraftforge.fml.common.event.FMLInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.common.event.*;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 
@@ -61,6 +61,12 @@ public class CommonProxy {
 
     public void postInit(FMLPostInitializationEvent event) {
 
+    }
+
+    public void serverStart(FMLServerStartingEvent event) {
+        event.registerServerCommand(new TPACommand());
+        event.registerServerCommand(new TPAcceptCommand());
+        event.registerServerCommand(new TPADenyCommand());
     }
 
     private static void registerMessage() {

@@ -93,3 +93,16 @@ config.ercore.hardcore.tooltip=溺水、熔岩或闪电造成的伤害是否可�
 
 death.attack.exhausted=%1$s因过度劳累而倒下
 death.attack.exhausted.player=%1$s在逃离%2$s时因过度劳累而倒下
+
+commands.tpa.usage=/tpa <玩家>
+commands.tpaccept.usage=/tpaccept [玩家]
+commands.tpadeny.usage=/tpadeny [玩家]
+commands.tpa.accept=[同意]
+commands.tpa.accepted=%s同意了你的传送请求，正在传送中……
+commands.tpa.deny=[拒绝]
+commands.tpa.denied=%s拒绝了你的传送请求。
+commands.tpa.timeout=你向%s发送的传送请求已超时……
+commands.tpa.no_requests=你没有收到任何传送请求。
+commands.tpa.no_player=你没有收到来自%s的传送请求。
+commands.tpa.request=%s想要传送到你的位置。
+commands.tpa.self=传送目标不能是你自己！
