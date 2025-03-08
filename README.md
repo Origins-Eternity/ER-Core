@@ -4,7 +4,15 @@
 [![This is an image](https://cf.way2muchnoise.eu/versions/702132.svg)](https://www.curseforge.com/minecraft/mc-mods/er-core/files)
 [![This is an image](https://cf.way2muchnoise.eu/full_702132_downloads.svg)](https://www.curseforge.com/minecraft/mc-mods/er-core)
 ## Introduction
-**Added minerals, materials, and useful features needed for technological development to the Evolution: Reset Pack. Utilities are enabled by default, but all items, blocks, fluids and other contents need to be enabled in the configuration file. Mods are already included in and mainly applies to the modpack, but you can also use it in your game if you like. But you won't have the full experience of it.**  
+**Add minerals, materials, and useful features needed for technological development to the Evolution: Reset Pack. Utilities are enabled by default, but all items, blocks, fluids and other contents need to be enabled in the configuration file. Mods are already included in and mainly applies to the modpack, but you can also use it in your game if you like. But you won't have the full experience of it.**  
+## Commands
+**Add commands for teleportation request and no permissions are required to use these commands. (support tab completion and notification sound)**
+![This is an image](https://s21.ax1x.com/2025/03/08/pEtatfA.png)
+### Usage
+- **/tpa \<player>**
+- **/tpahere \<player>**
+- **/tpaccept [player]**
+- **/tpadeny [player]**
 ## Feature  
 **The compatibility of these features is unknown, and some features are designed specifically for the modpack described above. Configurations are already available for some features, which can be highly customizable. If you encounter any problems, please feel free to give feedback.**
 ### Endurance  
@@ -13,21 +21,21 @@
 **Players will get hurt while doing strenuous exercise after exhaustion, like sprint, jump, etc. This can cause to death!**
 ![This is an image](https://s21.ax1x.com/2025/01/17/pEFjTZF.png)
 ### Replace The Products of Lava and Water  
-**When lava and water meets, the original obsidian will be replaced with basalt blocks. Support custom products.**  
+**When lava and water meets, the original obsidian will be replaced with basalt blocks. Support custom products.**
 ### Default World Type  
 **It's not really a change, but rather swapping the RTG world type with the default world type. Valid only when Realistic Terrain Generation and other fork version which has the same modid is installed.**  
 ### No Infinite Fluids
 **All fluids in the game cannot create new fluid resources, but players can still bottle water with water.**  
 ![This is an image](https://s1.ax1x.com/2022/12/28/pSSP7Sx.png)
 ### Regeneration  
-**When the player uses an item, if the mod detects an increase in the player's maxhealth, it will give the Regeneration II buff for 10 seconds. Valid only when First Aid is installed at the same time, and can be turned off in the configuration file.**  
+**When the player uses an item, if the mod detects an increase in the player's maxhealth, it will give the Regeneration II buff for 10 seconds. Valid only when First Aid is installed at the same time, and can be turned off in the configuration file.**
 ### Resourcepack Auto Installation
 **Try installing resoucepacks and turn on automatically. Support custom configuration and options.txt!**
 ### Food Tooltip
 **Add a tooltip for foods, which can display food points as integers and saturation as percentages.**
 ![This is an image](https://s21.ax1x.com/2025/02/06/pEe42rD.png)
 ### Maxhealth Fix  
-**This is a fix for First Aid. These issues arise when installing First Aid and other mods that have the ability to increase the player's maxhealth at the same time. This mod currently fixes an issue where players have less health when re-entering a world or returning to the Overworld from the End, and can not gain maxhealth when respawning.**  
+**This is a fix for First Aid. These issues arise when installing First Aid and other mods that have the ability to increase the player's maxhealth at the same time. This mod currently fixes an issue where players have less health when re-entering a world or returning to the Overworld from the End, and can not gain maxhealth when respawning.**
 ## Content  
 **All content is also designed for the above modpack, you can customize what should be added in the configuration file, and all content will not be added by default.**  
 ### Ores  
