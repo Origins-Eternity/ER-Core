@@ -6,7 +6,7 @@
 ## Introduction
 **Add minerals, materials, and useful features needed for technological development to the Evolution: Reset Pack. Utilities are enabled by default, but all items, blocks, fluids and other contents need to be enabled in the configuration file. Mods are already included in and mainly applies to the modpack, but you can also use it in your game if you like. But you won't have the full experience of it.**  
 ## Commands
-**Add commands for teleportation request and no permissions are required to use these commands. (support tab completion and notification sound)**
+**Add commands for teleportation request and no permissions are required to use these commands. (support tab completion, cross dimension teleportation, notification sound and timeout)**
 ![This is an image](https://s21.ax1x.com/2025/03/08/pEtatfA.png)
 ### Usage
 - **/tpa \<player>**
