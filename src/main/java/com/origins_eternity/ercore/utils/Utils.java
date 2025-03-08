@@ -14,14 +14,19 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.MobEffects;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBow;
 import net.minecraft.item.ItemShield;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.play.server.SPacketSoundEffect;
 import net.minecraft.potion.PotionEffect;
+import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvent;
+import net.minecraft.util.text.TextComponentTranslation;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.WorldType;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.fml.common.Optional;
@@ -132,6 +137,17 @@ public class Utils {
         if (player != null && !player.hasDisconnected()) {
             SPacketSoundEffect packet = new SPacketSoundEffect(sound, SoundCategory.PLAYERS, player.posX, player.posY, player.posZ, 1.0F, 1.0F);
             player.connection.sendPacket(packet);
+        }
+    }
+
+    public static void checkTimeout(NBTTagCompound nbtTagCompound, EntityPlayerMP player) {
+        for (String name : nbtTagCompound.getKeySet()) {
+            if (MinecraftServer.getCurrentTimeMillis() - nbtTagCompound.getLong(name) > 30000) {
+                nbtTagCompound.removeTag(name);
+                TextComponentTranslation denied = new TextComponentTranslation("commands.tpa.timeout", name);
+                player.sendMessage(denied.setStyle(denied.getStyle().setColor(TextFormatting.RED)));
+                playSound(player, SoundEvents.ENTITY_ITEM_BREAK);
+            }
         }
     }
 

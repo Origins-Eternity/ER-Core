@@ -95,6 +95,7 @@ death.attack.exhausted=%1$s collapsed from exhaustion
 death.attack.exhausted.player=%1$s collapsed from exhaustion whilst trying to escape %2$s
 
 commands.tpa.usage=/tpa <player>
+commands.tpahere.usage=/tpahere <player>
 commands.tpaccept.usage=/tpaccept [player]
 commands.tpadeny.usage=/tpadeny [player]
 commands.tpa.accept=[Accept]
@@ -105,4 +106,5 @@ commands.tpa.timeout=Your teleportation request to %s timeout...
 commands.tpa.no_requests=You do not receive any teleportation requests.
 commands.tpa.no_player=You are not receiving a teleportation request from %s.
 commands.tpa.request=%s wanted to teleport to you.
+commands.tpa.request_here=%s wanted you to teleport to them.
 commands.tpa.self=You can't teleport to yourself!

@@ -10,15 +10,11 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.MobEffects;
-import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemFood;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.PotionEffect;
-import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.text.TextComponentTranslation;
-import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
@@ -43,7 +39,8 @@ import net.minecraftforge.fml.common.gameevent.TickEvent;
 import java.util.Set;
 
 import static com.origins_eternity.ercore.ERCore.MOD_ID;
-import static com.origins_eternity.ercore.content.command.TPACommand.send;
+import static com.origins_eternity.ercore.content.command.TPA.sendTo;
+import static com.origins_eternity.ercore.content.command.TPAHere.sendHere;
 import static com.origins_eternity.ercore.content.damage.Damages.EXHAUSTED;
 import static com.origins_eternity.ercore.utils.Utils.*;
 
@@ -231,16 +228,13 @@ public class CommonEvent {
         }
         if (event.side.isServer() && event.phase == TickEvent.Phase.END) {
             EntityPlayerMP player = (EntityPlayerMP) event.player;
-            NBTTagCompound nbtTagCompound = send.get(player.getUniqueID());
-            if (nbtTagCompound != null && !nbtTagCompound.isEmpty()) {
-                for (String name : nbtTagCompound.getKeySet()) {
-                    if (MinecraftServer.getCurrentTimeMillis() - nbtTagCompound.getLong(name) > 30000) {
-                        nbtTagCompound.removeTag(name);
-                        TextComponentTranslation denied = new TextComponentTranslation("commands.tpa.timeout", name);
-                        player.sendMessage(denied.setStyle(denied.getStyle().setColor(TextFormatting.RED)));
-                        playSound(player, SoundEvents.ENTITY_ITEM_BREAK);
-                    }
-                }
+            NBTTagCompound to = sendTo.get(player.getUniqueID());
+            NBTTagCompound here = sendHere.get(player.getUniqueID());
+            if (to != null && !to.isEmpty()) {
+                checkTimeout(to, player);
+            }
+            if (here != null && !here.isEmpty()) {
+                checkTimeout(here, player);
             }
         }
     }

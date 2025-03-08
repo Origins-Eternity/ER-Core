@@ -21,7 +21,7 @@ import noobanidus.mods.lootr.init.ModBlocks;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ReplaceChest {
+public class Events {
     private static boolean preventDrops = false;
 
     private static List<ResourceLocation> tables = new ArrayList<>();

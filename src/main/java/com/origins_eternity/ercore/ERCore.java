@@ -13,7 +13,7 @@ import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 public class ERCore {
 	public static final String MOD_ID = "ercore";
 	public static final String MOD_NAME = "ER Core";
-	public static final String VERSION = "1.2.2";
+	public static final String VERSION = "1.2.3";
 	
 	@SidedProxy(clientSide = "com.origins_eternity.ercore.utils.proxy.ClientProxy", serverSide = "com.origins_eternity.ercore.utils.proxy.CommonProxy")
 	public static CommonProxy proxy;
