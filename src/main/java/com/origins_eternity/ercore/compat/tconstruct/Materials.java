@@ -61,6 +61,6 @@ public class Materials {
         registerTableCasting(new ItemStack(Items.Tungsten_Carbide_Ingot), ItemStack.EMPTY, Fluids.Tungsten_Carbide, 144);
         registerTableCasting(new ItemStack(Items.Tungsten_Steel_Ingot), ItemStack.EMPTY, Fluids.Tungsten_Steel, 144);
         registerTableCasting(new CastingRecipe(new ItemStack(Items.Bronze_Ingot), RecipeMatch.of(Items.Ingot_Clay_Cast), TinkerFluids.bronze, 144, true, false));
-        registerTableCasting(new CastingRecipe(new ItemStack(Items.Ingot_Clay_Cast), RecipeMatch.of(TinkerCommons.searedBrick), TinkerFluids.clay, 288, true, false));
+        registerTableCasting(new CastingRecipe(new ItemStack(Items.Ingot_Clay_Cast), RecipeMatch.of(TinkerCommons.searedBrick), TinkerFluids.clay, 288, false, false));
     }
 }
