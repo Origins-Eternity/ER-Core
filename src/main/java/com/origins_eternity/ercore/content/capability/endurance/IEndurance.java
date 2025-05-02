@@ -13,9 +13,9 @@ public interface IEndurance {
     @Optional.Method(modid = "firstaid")
     double getMaxHealth();
 
-    void setEndurance(float endurance);
+    void setEndurance(int endurance);
 
-    float getEndurance();
+    int getEndurance();
 
     void setCoolDown(int coolDown);
 

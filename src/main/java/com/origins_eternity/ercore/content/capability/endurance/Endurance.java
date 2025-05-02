@@ -13,7 +13,7 @@ public class Endurance implements IEndurance {
 
     private float health = 20;
 
-    private float endurance = 20;
+    private int endurance = 40;
 
     private int coolDown = 0;
 
@@ -23,8 +23,8 @@ public class Endurance implements IEndurance {
 
     @Override
     public void setHealth(float health) {
-        if (health > 40) {
-            this.health = 40;
+        if (health > 20) {
+            this.health = 20;
         } else {
             this.health = health;
         }
@@ -32,8 +32,8 @@ public class Endurance implements IEndurance {
 
     @Override
     public float getHealth() {
-        if (health > 40) {
-            return 40;
+        if (health > 20) {
+            return 20;
         } else {
             return health;
         }
@@ -52,12 +52,12 @@ public class Endurance implements IEndurance {
     }
 
     @Override
-    public void setEndurance(float endurance) {
+    public void setEndurance(int endurance) {
         this.endurance = endurance;
     }
 
     @Override
-    public float getEndurance() {
+    public int getEndurance() {
         return endurance;
     }
 
@@ -118,22 +118,16 @@ public class Endurance implements IEndurance {
     @Override
     public void consumeEndurance(int value) {
         if (endurance > 0) {
-            endurance -= value;
-            if (endurance <= 0) {
-                endurance = 0;
-                addCoolDown(312);
-            }
+            endurance = Math.max(0, endurance - value);
+            addCoolDown(312);
         }
     }
 
     @Override
     public void recoverEndurance(int value) {
-        if (endurance < health) {
+        if (endurance < 2 * health) {
             if (coolDown == 0) {
-                endurance += value;
-                if (endurance > health) {
-                    endurance = health;
-                }
+                endurance = Math.min(2 * (int) health, endurance + value);
             }
         }
     }
@@ -191,7 +185,7 @@ public class Endurance implements IEndurance {
         public NBTBase writeNBT(Capability<IEndurance> capability, IEndurance instance, EnumFacing side) {
             NBTTagCompound compound = new NBTTagCompound();
             compound.setFloat("Health", instance.getHealth());
-            compound.setFloat("Endurance", instance.getEndurance());
+            compound.setInteger("Endurance", instance.getEndurance());
             compound.setInteger("CoolDown", instance.getCoolDown());
             compound.setFloat("Exhaustion", instance.getExhaustion());
             compound.setFloat("Saturation", instance.getSaturation());
@@ -206,7 +200,7 @@ public class Endurance implements IEndurance {
             if (nbt instanceof NBTTagCompound) {
                 NBTTagCompound compound = (NBTTagCompound) nbt;
                 instance.setHealth(compound.getFloat("Health"));
-                instance.setEndurance(compound.getFloat("Endurance"));
+                instance.setEndurance(compound.getInteger("Endurance"));
                 instance.setCoolDown(compound.getInteger("CoolDown"));
                 instance.setExhaustion(compound.getFloat("Exhaustion"));
                 instance.setSaturation(compound.getFloat("Saturation"));

@@ -22,10 +22,7 @@ import net.minecraftforge.event.entity.living.LivingDamageEvent;
 import net.minecraftforge.event.entity.living.LivingEntityUseItemEvent;
 import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.event.entity.living.PotionEvent;
-import net.minecraftforge.event.entity.player.AttackEntityEvent;
-import net.minecraftforge.event.entity.player.PlayerEvent;
-import net.minecraftforge.event.entity.player.PlayerInteractEvent;
-import net.minecraftforge.event.entity.player.UseHoeEvent;
+import net.minecraftforge.event.entity.player.*;
 import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.Mod;
@@ -210,7 +207,7 @@ public class CommonEvent {
         EntityPlayer player = event.player;
         if (!event.player.world.isRemote) {
             IEndurance endurance = player.getCapability(Capabilities.ENDURANCE, null);
-            endurance.setEndurance(player.getMaxHealth());
+            endurance.setEndurance((int) player.getMaxHealth());
         }
     }
 
@@ -304,6 +301,16 @@ public class CommonEvent {
                     event.setAmount((float) (event.getAmount() * 0.5));
                 }
             }
+        }
+    }
+
+    @SubscribeEvent
+    public static void onPlayerWakeUp(PlayerWakeUpEvent event) {
+        EntityPlayer player = (EntityPlayer) event.getEntity();
+        if ((!player.isCreative()) && (!player.world.isRemote)) {
+            IEndurance endurance = player.getCapability(Capabilities.ENDURANCE, null);
+            endurance.setCoolDown(0);
+            endurance.setEndurance((int) endurance.getHealth());
         }
     }
 }

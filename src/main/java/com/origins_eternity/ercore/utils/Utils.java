@@ -69,9 +69,8 @@ public class Utils {
 
     public static void tickUpdate(EntityPlayer player) {
         IEndurance endurance = player.getCapability(ENDURANCE, null);
-        endurance.setHealth(player.getHealth());
-        if (endurance.getEndurance() > player.getHealth()) {
-            endurance.setEndurance(player.getHealth());
+        if (endurance.getEndurance() > 2 * player.getHealth()) {
+            endurance.setEndurance((int) (2 * player.getHealth()));
         }
         if (player.isHandActive()) {
             Item item = player.getHeldItem(player.getActiveHand()).getItem();
