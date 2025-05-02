@@ -207,7 +207,7 @@ public class CommonEvent {
         EntityPlayer player = event.player;
         if (!event.player.world.isRemote) {
             IEndurance endurance = player.getCapability(Capabilities.ENDURANCE, null);
-            endurance.setEndurance((int) player.getMaxHealth());
+            endurance.setEndurance((int) (2 * player.getHealth()));
         }
     }
 
@@ -310,7 +310,7 @@ public class CommonEvent {
         if ((!player.isCreative()) && (!player.world.isRemote)) {
             IEndurance endurance = player.getCapability(Capabilities.ENDURANCE, null);
             endurance.setCoolDown(0);
-            endurance.setEndurance((int) endurance.getHealth());
+            endurance.setEndurance((int) (2 * player.getHealth()));
         }
     }
 }

@@ -3,9 +3,9 @@ package com.origins_eternity.ercore.content.capability.endurance;
 import net.minecraftforge.fml.common.Optional;
 
 public interface IEndurance {
-    void setHealth(float health);
+    void setMaxEndurance(int maxEndurance);
 
-    float getHealth();
+    int getMaxEndurance();
 
     @Optional.Method(modid = "firstaid")
     void setMaxHealth(double maxhealth);

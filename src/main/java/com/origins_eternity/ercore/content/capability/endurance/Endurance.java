@@ -11,7 +11,7 @@ import net.minecraftforge.fml.common.Optional;
 public class Endurance implements IEndurance {
     private double maxhealth = 20;
 
-    private float health = 20;
+    private int maxEndurance = 40;
 
     private int endurance = 40;
 
@@ -22,21 +22,13 @@ public class Endurance implements IEndurance {
     private float saturation = 0;
 
     @Override
-    public void setHealth(float health) {
-        if (health > 20) {
-            this.health = 20;
-        } else {
-            this.health = health;
-        }
+    public void setMaxEndurance(int maxEndurance) {
+        this.maxEndurance = Math.min(40, maxEndurance);
     }
 
     @Override
-    public float getHealth() {
-        if (health > 20) {
-            return 20;
-        } else {
-            return health;
-        }
+    public int getMaxEndurance() {
+        return maxEndurance;
     }
 
     @Override
@@ -104,7 +96,7 @@ public class Endurance implements IEndurance {
 
     @Override
     public void addSaturation(float value) {
-        if (endurance < health) {
+        if (endurance < maxEndurance) {
             if (coolDown == 0) {
                 saturation += value;
                 while (saturation > 1) {
@@ -125,9 +117,9 @@ public class Endurance implements IEndurance {
 
     @Override
     public void recoverEndurance(int value) {
-        if (endurance < 2 * health) {
+        if (endurance < maxEndurance) {
             if (coolDown == 0) {
-                endurance = Math.min(2 * (int) health, endurance + value);
+                endurance = Math.min(maxEndurance, endurance + value);
             }
         }
     }
@@ -184,7 +176,7 @@ public class Endurance implements IEndurance {
         @Override
         public NBTBase writeNBT(Capability<IEndurance> capability, IEndurance instance, EnumFacing side) {
             NBTTagCompound compound = new NBTTagCompound();
-            compound.setFloat("Health", instance.getHealth());
+            compound.setInteger("MaxEndurance", instance.getMaxEndurance());
             compound.setInteger("Endurance", instance.getEndurance());
             compound.setInteger("CoolDown", instance.getCoolDown());
             compound.setFloat("Exhaustion", instance.getExhaustion());
@@ -199,7 +191,7 @@ public class Endurance implements IEndurance {
         public void readNBT(Capability<IEndurance> capability, IEndurance instance, EnumFacing side, NBTBase nbt) {
             if (nbt instanceof NBTTagCompound) {
                 NBTTagCompound compound = (NBTTagCompound) nbt;
-                instance.setHealth(compound.getFloat("Health"));
+                instance.setMaxEndurance(compound.getInteger("MaxEndurance"));
                 instance.setEndurance(compound.getInteger("Endurance"));
                 instance.setCoolDown(compound.getInteger("CoolDown"));
                 instance.setExhaustion(compound.getFloat("Exhaustion"));

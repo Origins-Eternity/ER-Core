@@ -86,6 +86,7 @@ public class ClientEvent {
                     if (effect.getEffectName().equals("pyrotech.effect.comfort")) {
                         hunger += (int) (food.getHealAmount(stack) * ModuleTechBasicConfig.CAMPFIRE_EFFECTS.COMFORT_HUNGER_MODIFIER);
                         saturation += (float) (food.getSaturationModifier(stack) * ModuleTechBasicConfig.CAMPFIRE_EFFECTS.COMFORT_SATURATION_MODIFIER);
+                        break;
                     }
                 }
             }
