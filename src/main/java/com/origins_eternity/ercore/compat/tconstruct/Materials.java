@@ -39,7 +39,7 @@ public class Materials {
     }
 
     public static void preTinker() {
-        preInitMaterials(false, true, 144, Items.Tungsten_Steel_Ingot, Tungsten_Steel, Fluids.Tungsten_Steel, 2000, 8f, 10f, 3f, 100, 100, 5, 3f, 4f, 7f);
+        preInitMaterials(false, true, 144, Items.Tungsten_Steel_Ingot, Tungsten_Steel, Fluids.Tungsten_Steel, 2000, 8f, 10f, 3f, 100, 100, 6, 3f, 4f, 7f);
     }
 
     public static void addTinkerMelting() {
