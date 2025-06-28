@@ -13,13 +13,27 @@
 - **/tpahere \<player>**
 - **/tpaccept [player]**
 - **/tpadeny [player]**
-## Feature  
-**The compatibility of these features is unknown, and some features are designed specifically for the modpack described above. Configurations are already available for some features, which can be highly customizable. If you encounter any problems, please feel free to give feedback.**
-### Endurance  
+## Endurance
 **Inspired by the StaminaPlus mod, each survival/adventure player has their own endurance level.**
 ![This is an image](https://s21.ax1x.com/2025/01/17/pEFjDr8.png)
 **Players will get hurt while doing strenuous exercise after exhaustion, like sprint, jump, etc. This can cause to death!**
 ![This is an image](https://s21.ax1x.com/2025/01/17/pEFjTZF.png)
+### CraftTweaker
+**Add ZenExpansions for [IPlayer](https://docs.blamejared.com/1.12/en/Vanilla/Players/IPlayer). Developers can call this method on any [IPlayer](https://docs.blamejared.com/1.12/en/Vanilla/Players/IPlayer) object, including its subtypes.**
+- **`getEndurance()`: returns player's endurance value as int.**
+- **`addEndurance(int value)`: add or remove player's endurance value.**
+```zenscript
+import crafttweaker.event.PlayerRightClickItemEvent;
+
+events.onPlayerRightClickItem(function(event as PlayerRightClickItemEvent) {
+    if(!event.world.isRemote() && event.item.definition.id == "minecraft:fishing_rod") {
+        event.player.addEndurance(-1);
+    }
+});
+```
+**This *example* script causes player to lose 1 endurance when using a fishing rod.**
+## Feature  
+**The compatibility of these features is unknown, and some features are designed specifically for the modpack described above. Configurations are already available for some features, which can be highly customizable. If you encounter any problems, please feel free to give feedback.**
 ### Replace The Products of Lava and Water  
 **When lava and water meets, the original obsidian will be replaced with basalt blocks. Support custom products.**
 ### Default World Type  
