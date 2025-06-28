@@ -5,7 +5,7 @@
 [![This is an image](https://cf.way2muchnoise.eu/full_702132_downloads.svg)](https://www.curseforge.com/minecraft/mc-mods/er-core)
 ## Introduction
 **Add minerals, materials, and useful features needed for technological development to the Evolution: Reset Pack. Utilities are enabled by default, but all items, blocks, fluids and other contents need to be enabled in the configuration file. Mods are already included in and mainly applies to the modpack, but you can also use it in your game if you like. But you won't have the full experience of it.**  
-## Commands
+## TPA Commands
 **Add commands for teleportation request and no permissions are required to use these commands. (support tab completion, cross dimension teleportation, notification sound and timeout)**
 ![This is an image](https://s21.ax1x.com/2025/03/08/pEtatfA.png)
 ### Usage
@@ -48,6 +48,8 @@ events.onPlayerRightClickItem(function(event as PlayerRightClickItemEvent) {
 ### Food Tooltip
 **Add a tooltip for foods, which can display food points as integers and saturation as percentages.**
 ![This is an image](https://s21.ax1x.com/2025/02/06/pEe42rD.png)
+### Replace Chest
+**Replace all naturally generated (not placed by player) chests in the world with loot chests in Lootr and regenerate loot.**
 ### Maxhealth Fix  
 **This is a fix for First Aid. These issues arise when installing First Aid and other mods that have the ability to increase the player's maxhealth at the same time. This mod currently fixes an issue where players have less health when re-entering a world or returning to the Overworld from the End, and can not gain maxhealth when respawning.**
 ## Content  
