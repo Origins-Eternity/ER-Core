@@ -4,7 +4,7 @@ plugins {
 
 
 group = 'com.origins_eternity'
-version = '1.2.6'
+version = '1.2.7'
 
 java {
     archivesBaseName = 'ercore'
@@ -104,6 +104,7 @@ dependencies {
     compileOnly "curse.maven:pyrotech-306676:5822040"
     compileOnly "curse.maven:athenaeum-284350:4633750"
     compileOnly "curse.maven:lootr-361276:4756301"
+    compileOnly "curse.maven:crafttweaker-239197:6061762"
 
     // For more info...
     // http://www.gradle.org/docs/current/userguide/artifact_dependencies_tutorial.html
