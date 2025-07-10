@@ -99,6 +99,8 @@ public class TPAccept extends CommandBase {
             horse.setPositionAndUpdate(target.posX, target.posY, target.posZ);
             player.connection.setPlayerLocation(target.posX, target.posY, target.posZ, target.rotationYaw, target.rotationPitch);
             player.startRiding(horse);
+        } else {
+            player.connection.setPlayerLocation(target.posX, target.posY, target.posZ, target.rotationYaw, target.rotationPitch);
         }
         playSound(target, SoundEvents.ITEM_CHORUS_FRUIT_TELEPORT);
     }
