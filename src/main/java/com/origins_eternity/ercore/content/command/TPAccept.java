@@ -1,6 +1,7 @@
 package com.origins_eternity.ercore.content.command;
 
 import net.minecraft.command.*;
+import net.minecraft.entity.passive.EntityHorse;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.SoundEvents;
@@ -85,10 +86,20 @@ public class TPAccept extends CommandBase {
     }
     
     private static void doTeleport(EntityPlayerMP player, EntityPlayerMP target, MinecraftServer server) {
+        EntityHorse horse = null;
+        if (player.isRiding() && player.getRidingEntity() instanceof EntityHorse) {
+            EntityHorse entity = (EntityHorse) player.getRidingEntity();
+            horse = entity.getOwnerUniqueId().equals(player.getUniqueID()) && entity.isHorseSaddled() ? entity : null;
+        }
+        player.dismountRidingEntity();
         if (player.dimension != target.dimension) {
             server.getPlayerList().transferPlayerToDimension(player, target.dimension, new PlayerTeleporter(server.getWorld(target.dimension)));
+            player.connection.setPlayerLocation(target.posX, target.posY, target.posZ, target.rotationYaw, target.rotationPitch);
+        } else if (horse != null) {
+            horse.setPositionAndUpdate(target.posX, target.posY, target.posZ);
+            player.connection.setPlayerLocation(target.posX, target.posY, target.posZ, target.rotationYaw, target.rotationPitch);
+            player.startRiding(horse);
         }
-        player.connection.setPlayerLocation(target.posX, target.posY, target.posZ, target.rotationYaw, target.rotationPitch);
         playSound(target, SoundEvents.ITEM_CHORUS_FRUIT_TELEPORT);
     }
 }

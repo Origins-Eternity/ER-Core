@@ -11,7 +11,6 @@ public class Blueprints {
 
     public static final Item Blacksmith_Workstation = new ItemCreator("Blacksmith_Workstation_Blueprint", 10);
     public static final Item Basic_Workshop = new ItemCreator("Basic_Workshop_Blueprint", 10);
-    public static final Item Bucket = new ItemCreator("Bucket_Blueprint", 10);
     public static final Item Blacksmith_Workshop = new ItemCreator("Blacksmith_Workshop_Blueprint", 10);
     public static final Item Crafting_Table = new ItemCreator("Crafting_Table_Blueprint", 10);
     public static final Item Engineer_Workstation = new ItemCreator("Engineer_Workstation_Blueprint", 10);
