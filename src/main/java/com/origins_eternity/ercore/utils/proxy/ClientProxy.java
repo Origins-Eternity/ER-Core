@@ -1,6 +1,8 @@
 package com.origins_eternity.ercore.utils.proxy;
 
+import com.origins_eternity.ercore.config.Configuration;
 import com.origins_eternity.ercore.content.gui.Overlay;
+import com.origins_eternity.ercore.event.ClientEvents;
 import com.origins_eternity.ercore.utils.Utils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
@@ -21,25 +23,32 @@ public class ClientProxy extends CommonProxy {
     @Override
     public void construction(FMLConstructionEvent event) {
         super.construction(event);
-        installResourcepacks();
+        if (Configuration.enableInstallation) {
+            installResourcepacks();
+        }
     }
 
     @Override
     public void preInit(FMLPreInitializationEvent event) {
         super.preInit(event);
+        if (Configuration.enableTooltip) {
+            MinecraftForge.EVENT_BUS.register(ClientEvents.class);
+        }
     }
 
     @Override
     public void init(FMLInitializationEvent event) {
         super.init(event);
-        if (Loader.isModLoaded("rtg")) {
+        if (Loader.isModLoaded("rtg") && Configuration.enableWorldType) {
             Utils.defaultWorldtype();
         }
     }
 
     @Override
     public void postInit(FMLPostInitializationEvent event) {
-        MinecraftForge.EVENT_BUS.register(new Overlay());
+        if (Configuration.enableEndurance) {
+            MinecraftForge.EVENT_BUS.register(new Overlay());
+        }
     }
 
     @Override

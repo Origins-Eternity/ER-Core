@@ -1,12 +1,14 @@
 package com.origins_eternity.ercore.utils.proxy;
 
-import com.origins_eternity.ercore.compat.firstaid.Events;
+import com.origins_eternity.ercore.compat.firstaid.FirstAidEvents;
+import com.origins_eternity.ercore.compat.lootr.LootrEvents;
 import com.origins_eternity.ercore.config.Configuration;
 import com.origins_eternity.ercore.content.capability.Capabilities;
 import com.origins_eternity.ercore.content.command.TPA;
 import com.origins_eternity.ercore.content.command.TPADeny;
 import com.origins_eternity.ercore.content.command.TPAHere;
 import com.origins_eternity.ercore.content.command.TPAccept;
+import com.origins_eternity.ercore.event.CommonEvents;
 import com.origins_eternity.ercore.gen.GenOres;
 import com.origins_eternity.ercore.message.SyncEndurance;
 import com.origins_eternity.ercore.utils.registry.RecipeRegister;
@@ -35,6 +37,9 @@ public class CommonProxy {
                 }
             }
         }
+        if (Configuration.enableEndurance) {
+            MinecraftForge.EVENT_BUS.register(new CommonEvents());
+        }
         registerMessage();
     }
 
@@ -50,11 +55,11 @@ public class CommonProxy {
                 addTinkerCasting();
             }
         }
-        if (Loader.isModLoaded("firstaid")) {
-            MinecraftForge.EVENT_BUS.register(Events.class);
+        if (Loader.isModLoaded("firstaid") && Configuration.enableMaxHealth) {
+            MinecraftForge.EVENT_BUS.register(FirstAidEvents.class);
         }
         if (Loader.isModLoaded("lootr")) {
-            MinecraftForge.EVENT_BUS.register(com.origins_eternity.ercore.compat.lootr.Events.class);
+            MinecraftForge.EVENT_BUS.register(LootrEvents.class);
         }
         Capabilities.registerCapability(CapabilityManager.INSTANCE);
     }
@@ -64,10 +69,12 @@ public class CommonProxy {
     }
 
     public void serverStart(FMLServerStartingEvent event) {
-        event.registerServerCommand(new TPA());
-        event.registerServerCommand(new TPAHere());
-        event.registerServerCommand(new TPAccept());
-        event.registerServerCommand(new TPADeny());
+        if (Configuration.enableCommands) {
+            event.registerServerCommand(new TPA());
+            event.registerServerCommand(new TPAHere());
+            event.registerServerCommand(new TPAccept());
+            event.registerServerCommand(new TPADeny());
+        }
     }
 
     private static void registerMessage() {

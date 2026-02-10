@@ -9,22 +9,17 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
-import net.minecraft.init.MobEffects;
-import net.minecraft.item.ItemFood;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.entity.living.LivingDamageEvent;
-import net.minecraftforge.event.entity.living.LivingEntityUseItemEvent;
 import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.event.entity.living.PotionEvent;
 import net.minecraftforge.event.entity.player.*;
 import net.minecraftforge.event.world.BlockEvent;
-import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.Event;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
@@ -42,10 +37,12 @@ import static com.origins_eternity.ercore.content.damage.Damages.EXHAUSTED;
 import static com.origins_eternity.ercore.utils.Utils.*;
 
 @Mod.EventBusSubscriber(modid = MOD_ID)
-public class CommonEvent {
+public class CommonEvents {
     @SubscribeEvent
     public static void onCreateFluidSource(BlockEvent.CreateFluidSourceEvent event) {
-        event.setResult(Event.Result.DENY);
+        if (Configuration.enableNoInfinite) {
+            event.setResult(Event.Result.DENY);
+        }
     }
 
     @SubscribeEvent
@@ -69,7 +66,7 @@ public class CommonEvent {
     }
 
     @SubscribeEvent
-    public static void onBreak(BlockEvent.BreakEvent event) {
+    public void onBreak(BlockEvent.BreakEvent event) {
         EntityPlayer player = event.getPlayer();
         if (!player.isCreative()) {
             World world = event.getWorld();
@@ -87,7 +84,7 @@ public class CommonEvent {
     }
 
     @SubscribeEvent
-    public static void onItemCraftedEvent(ItemCraftedEvent event) {
+    public void onItemCraftedEvent(ItemCraftedEvent event) {
         EntityPlayer player = event.player;
         if (!player.isCreative()) {
             IEndurance endurance = player.getCapability(Capabilities.ENDURANCE, null);
@@ -103,7 +100,7 @@ public class CommonEvent {
     }
 
     @SubscribeEvent
-    public static void onLivingJump(LivingEvent.LivingJumpEvent event) {
+    public void onLivingJump(LivingEvent.LivingJumpEvent event) {
         Entity entity = event.getEntity();
         if (entity instanceof EntityPlayer) {
             EntityPlayer player = (EntityPlayer) entity;
@@ -122,7 +119,7 @@ public class CommonEvent {
     }
 
     @SubscribeEvent
-    public static void onBreakSpeed(PlayerEvent.BreakSpeed event) {
+    public void onBreakSpeed(PlayerEvent.BreakSpeed event) {
         EntityPlayer player = event.getEntityPlayer();
         if (!player.isCreative()) {
             IEndurance endurance = player.getCapability(Capabilities.ENDURANCE, null);
@@ -136,42 +133,7 @@ public class CommonEvent {
     }
 
     @SubscribeEvent
-    public static void onRightClickItem(PlayerInteractEvent.RightClickItem event) {
-        EntityPlayer player = event.getEntityPlayer();
-        if (!player.isCreative()) {
-            if (!player.world.isRemote) {
-                IEndurance endurance = player.getCapability(Capabilities.ENDURANCE, null);
-                if (Loader.isModLoaded("firstaid")) {
-                    double maxHealth = player.getAttributeMap().getAttributeInstanceByName("generic.maxHealth").getAttributeValue();
-                    endurance.setMaxHealth(maxHealth);
-                }
-            }
-        }
-    }
-
-    @SubscribeEvent
-    public static void onLivingEntityUseItem(LivingEntityUseItemEvent.Finish event) {
-        if (event.getEntity() instanceof EntityPlayer) {
-            EntityPlayer player = (EntityPlayer) event.getEntity();
-            if (!player.isCreative()) {
-                if (Loader.isModLoaded("firstaid")) {
-                    if (event.getItem().getItem() instanceof ItemFood) {
-                        IEndurance endurance = player.getCapability(Capabilities.ENDURANCE, null);
-                        double maxHealth = player.getAttributeMap().getAttributeInstanceByName("generic.maxHealth").getAttributeValue();
-                        if (maxHealth > endurance.getMaxHealth()) {
-                            if (Configuration.enableRegeneration) {
-                                player.addPotionEffect(new PotionEffect(MobEffects.REGENERATION, 200, 2));
-                            }
-                            endurance.setMaxHealth(maxHealth);
-                        }
-                    }
-                }
-            }
-        }
-    }
-
-    @SubscribeEvent
-    public static void onAttackEntity(AttackEntityEvent event) {
+    public void onAttackEntity(AttackEntityEvent event) {
         EntityPlayer player = event.getEntityPlayer();
         if (!player.isCreative()) {
             IEndurance endurance = player.getCapability(Capabilities.ENDURANCE, null);
@@ -187,7 +149,7 @@ public class CommonEvent {
     }
 
     @SubscribeEvent(priority = EventPriority.HIGHEST)
-    public static void onClone(PlayerEvent.Clone event) {
+    public void onClone(PlayerEvent.Clone event) {
         EntityPlayer old = event.getOriginal();
         EntityPlayer clone = event.getEntityPlayer();
         if (!clone.world.isRemote) {
@@ -196,14 +158,12 @@ public class CommonEvent {
             IEndurance present = clone.getCapability(capability, null);
             if (!event.isWasDeath()) {
                 capability.getStorage().readNBT(capability, present, null, capability.getStorage().writeNBT(capability, origin, null));
-            } else if (Loader.isModLoaded("firstaid")) {
-                present.setMaxHealth(origin.getMaxHealth());
             }
         }
     }
 
     @SubscribeEvent(priority = EventPriority.LOWEST)
-    public static void onPlayerRespawn(PlayerRespawnEvent event) {
+    public void onPlayerRespawn(PlayerRespawnEvent event) {
         EntityPlayer player = event.player;
         if (!event.player.world.isRemote) {
             IEndurance endurance = player.getCapability(Capabilities.ENDURANCE, null);
@@ -215,7 +175,9 @@ public class CommonEvent {
     public static void onPlayerTick(TickEvent.PlayerTickEvent event) {
         if ((!event.player.isSpectator()) && (!event.player.isCreative())) {
             EntityPlayer player = event.player;
-            checkStatus(player);
+            if (Configuration.enableEndurance) {
+                checkStatus(player);
+            }
             if (player.ticksExisted % 10 == 0) {
                 if (!player.world.isRemote) {
                     tickUpdate(player);
@@ -223,21 +185,23 @@ public class CommonEvent {
                 }
             }
         }
-        if (event.side.isServer() && event.phase == TickEvent.Phase.END) {
-            EntityPlayerMP player = (EntityPlayerMP) event.player;
-            NBTTagCompound to = sendTo.get(player.getUniqueID());
-            NBTTagCompound here = sendHere.get(player.getUniqueID());
-            if (to != null && !to.isEmpty()) {
-                checkTimeout(to, player);
-            }
-            if (here != null && !here.isEmpty()) {
-                checkTimeout(here, player);
+        if (Configuration.enableCommands) {
+            if (event.side.isServer() && event.phase == TickEvent.Phase.END) {
+                EntityPlayerMP player = (EntityPlayerMP) event.player;
+                NBTTagCompound to = sendTo.get(player.getUniqueID());
+                NBTTagCompound here = sendHere.get(player.getUniqueID());
+                if (to != null && !to.isEmpty()) {
+                    checkTimeout(to, player);
+                }
+                if (here != null && !here.isEmpty()) {
+                    checkTimeout(here, player);
+                }
             }
         }
     }
 
     @SubscribeEvent
-    public static void onRightClickBlock(PlayerInteractEvent.RightClickBlock event) {
+    public void onRightClickBlock(PlayerInteractEvent.RightClickBlock event) {
         EntityPlayer player = event.getEntityPlayer();
         if ((!player.isCreative()) && (!player.world.isRemote)) {
             IEndurance endurance = player.getCapability(Capabilities.ENDURANCE, null);
@@ -257,9 +221,9 @@ public class CommonEvent {
     }
 
     @SubscribeEvent
-    public static void onUseHoe(UseHoeEvent event) {
+    public void onUseHoe(UseHoeEvent event) {
         EntityPlayer player = event.getEntityPlayer();
-        if ((!player.isCreative()) && (!player.world.isRemote)) {
+        if (!player.isCreative() && !player.world.isRemote) {
             IEndurance endurance = player.getCapability(Capabilities.ENDURANCE, null);
             endurance.addCoolDown(60);
             if (endurance.getEndurance() <= 0) {
@@ -295,7 +259,7 @@ public class CommonEvent {
             }
         } else if (event.getSource().getTrueSource() instanceof EntityPlayer) {
             EntityPlayer player = (EntityPlayer) event.getSource().getTrueSource();
-            if (!player.isCreative()) {
+            if (!player.isCreative() && Configuration.enableEndurance) {
                 IEndurance endurance = player.getCapability(Capabilities.ENDURANCE, null);
                 if (endurance.getEndurance() <= 6) {
                     event.setAmount((float) (event.getAmount() * 0.5));
@@ -305,9 +269,9 @@ public class CommonEvent {
     }
 
     @SubscribeEvent
-    public static void onPlayerWakeUp(PlayerWakeUpEvent event) {
+    public void onPlayerWakeUp(PlayerWakeUpEvent event) {
         EntityPlayer player = (EntityPlayer) event.getEntity();
-        if ((!player.isCreative()) && (!player.world.isRemote)) {
+        if (!player.isCreative() && !player.world.isRemote) {
             IEndurance endurance = player.getCapability(Capabilities.ENDURANCE, null);
             endurance.setCoolDown(0);
             endurance.setEndurance((int) (2 * player.getHealth()));

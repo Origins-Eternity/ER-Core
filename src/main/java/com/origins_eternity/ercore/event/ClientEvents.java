@@ -1,6 +1,7 @@
 package com.origins_eternity.ercore.event;
 
 import com.codetaylor.mc.pyrotech.modules.tech.basic.ModuleTechBasicConfig;
+import com.origins_eternity.ercore.config.Configuration;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.renderer.GlStateManager;
@@ -11,7 +12,6 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraftforge.client.event.RenderTooltipEvent;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.fml.common.Loader;
-import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -20,26 +20,25 @@ import squeek.applecore.api.food.FoodValues;
 
 import java.text.NumberFormat;
 
-import static com.origins_eternity.ercore.ERCore.MOD_ID;
 import static com.origins_eternity.ercore.content.gui.Overlay.GUI;
 import static com.origins_eternity.ercore.utils.proxy.ClientProxy.mc;
 
-@Mod.EventBusSubscriber(modid = MOD_ID)
-public class ClientEvent {
-
+public class ClientEvents {
     @SideOnly(Side.CLIENT)
     @SubscribeEvent
     public static void onItemTooltip(ItemTooltipEvent event) {
-        if (event.getItemStack().getItem() instanceof ItemFood && event.getEntityPlayer() == mc().player) {
-            String[] values = foodValues(event.getItemStack(), event.getEntityPlayer());
-            event.getToolTip().add("§f   " + values[0] + "    " + values[1]);
+        if (Configuration.enableTooltip) {
+            if (event.getItemStack().getItem() instanceof ItemFood && event.getEntityPlayer() == mc().player) {
+                String[] values = foodValues(event.getItemStack(), event.getEntityPlayer());
+                event.getToolTip().add("§f   " + values[0] + "    " + values[1]);
+            }
         }
     }
 
     @SideOnly(Side.CLIENT)
     @SubscribeEvent
     public static void onRenderTooltipPostText(RenderTooltipEvent.PostText event) {
-        if (event.getStack().getItem() instanceof ItemFood) {
+        if (event.getStack().getItem() instanceof ItemFood && Configuration.enableTooltip) {
             int posX = event.getX();
             int posY = event.getY() + 1;
             String[] values = foodValues(event.getStack(), mc().player);

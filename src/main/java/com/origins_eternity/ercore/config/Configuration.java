@@ -52,26 +52,71 @@ public class Configuration {
         @Config.Comment("Whether to add herbs or not. Only work for Fisrt Aid!")
         public static boolean enableHerbs = false;
 
-        @Config.Name("Enable Regeneration Buff")
-        @Config.LangKey("config.ercore.regeneration")
-        @Config.Comment("Whether to add the regeneration buff when player's maxhealth increased.")
-        public static boolean enableRegeneration = false;
-
         @Config.Name("Enable Hardcore")
         @Config.LangKey("config.ercore.hardcore")
         @Config.Comment("Whether damage from drown, lava or lightning should kill player immediately.")
         public static boolean enableHardcore = false;
 
+        @Config.Name("Enable Commands")
+        @Config.RequiresMcRestart()
+        @Config.LangKey("config.ercore.commands")
+        @Config.Comment("Whether to add tpa commands or not.")
+        public static boolean enableCommands = true;
+
+        @Config.Name("Enable Endurance")
+        @Config.RequiresMcRestart()
+        @Config.LangKey("config.ercore.endurance")
+        @Config.Comment("Whether to add endurance system or not.")
+        public static boolean enableEndurance = true;
+
+        @Config.Name("Enable Default World Type")
+        @Config.RequiresMcRestart()
+        @Config.LangKey("config.ercore.worldtype")
+        @Config.Comment("Whether to change default world type to RTG or not.")
+        public static boolean enableWorldType = true;
+
+        @Config.Name("Enable No Infinite Fluids")
+        @Config.RequiresMcRestart()
+        @Config.LangKey("config.ercore.infinite")
+        @Config.Comment("Whether to ban infinite fluids or not.")
+        public static boolean enableNoInfinite = true;
+
+        @Config.Name("Enable Regeneration Buff")
+        @Config.LangKey("config.ercore.regeneration")
+        @Config.Comment("Whether to add the regeneration buff when player's maxhealth increased or not.")
+        public static boolean enableRegeneration = true;
+
+        @Config.Name("Enable Resourcepack Auto Installation")
+        @Config.RequiresMcRestart()
+        @Config.LangKey("config.ercore.installation")
+        @Config.Comment("Whether to install the resourspacks in list automatically or not.")
+        public static boolean enableInstallation = true;
+
+        @Config.Name("Enable Food Tooltip")
+        @Config.LangKey("config.ercore.food")
+        @Config.Comment("Whether to add a tooltip for foods or not.")
+        public static boolean enableTooltip = true;
+
+        @Config.Name("Enable Replace Chest")
+        @Config.LangKey("config.ercore.replace")
+        @Config.Comment("Whether to replace naturally generated chests in world chests with loot chests or not.")
+        public static boolean enableReplace = true;
+
+        @Config.Name("Enable Maxhealth Fix")
+        @Config.LangKey("config.ercore.maxhealth")
+        @Config.Comment("Whether to fix the maxheath issues for Fisrt Aid or not.")
+        public static boolean enableMaxHealth = true;
+
         @Config.Name("Product")
         @Config.LangKey("config.ercore.product")
         @Config.Comment("A product of a mixture of water and lava.")
-        public static String product = "chisel:basalt";
+        public static String product = "minecraft:cobblestone";
 
         @Config.Name("Resourcepacks")
         @Config.RequiresMcRestart()
         @Config.LangKey("config.ercore.resourcepacks")
         @Config.Comment("A list of resourcepacks which will be automatically installed.")
-        public static String[] resourcepacks = new String[]{"Evolution-Reset-Resource-Pack-1.2.0.zip", "ModernityAdjunct-f3-1.5.zip", "Modernity-f3-3.10.2.zip"};
+        public static String[] resourcepacks = new String[]{};
 
         @Config.Name("Tools")
         @Config.LangKey("config.ercore.tools")
