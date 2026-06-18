@@ -52,6 +52,8 @@ events.onPlayerRightClickItem(function(event as PlayerRightClickItemEvent) {
 **Replace all naturally generated (not placed by player) chests in the world with loot chests in Lootr and regenerate loot.**
 ### Maxhealth Fix  
 **This is a fix for First Aid. These issues arise when installing First Aid and other mods that have the ability to increase the player's maxhealth at the same time. This mod currently fixes an issue where players have less health when re-entering a world or returning to the Overworld from the End, and can not gain maxhealth when respawning.**
+### Thirst Quencher Fix
+**A fix for Tough Expansion. When the thirst quencher transfers fluid to other storage tanks, it does not consume the fluid stored within itself, thereby producing infinite fluid. This fix prevents thirst quencher from transferring fluids to other storage tanks.**
 ## Content  
 **All content is also designed for the above modpack, you can customize what should be added in the configuration file, and all content will not be added by default.**  
 ### Ores  
