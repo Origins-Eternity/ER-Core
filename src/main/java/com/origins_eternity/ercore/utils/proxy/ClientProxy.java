@@ -1,6 +1,5 @@
 package com.origins_eternity.ercore.utils.proxy;
 
-import com.origins_eternity.ercore.config.Configuration;
 import com.origins_eternity.ercore.content.gui.Overlay;
 import com.origins_eternity.ercore.event.ClientEvents;
 import com.origins_eternity.ercore.utils.Utils;
@@ -17,13 +16,15 @@ import slimeknights.tconstruct.library.client.texture.MetalTextureTexture;
 import slimeknights.tconstruct.library.materials.Material;
 
 import static com.origins_eternity.ercore.ERCore.MOD_ID;
+import static com.origins_eternity.ercore.config.Configuration.Compat;
+import static com.origins_eternity.ercore.config.Configuration.Features;
 import static com.origins_eternity.ercore.utils.Utils.installResourcepacks;
 
 public class ClientProxy extends CommonProxy {
     @Override
     public void construction(FMLConstructionEvent event) {
         super.construction(event);
-        if (Configuration.enableInstallation) {
+        if (Features.enableInstallation) {
             installResourcepacks();
         }
     }
@@ -31,7 +32,7 @@ public class ClientProxy extends CommonProxy {
     @Override
     public void preInit(FMLPreInitializationEvent event) {
         super.preInit(event);
-        if (Configuration.enableTooltip) {
+        if (Features.enableTooltip) {
             MinecraftForge.EVENT_BUS.register(ClientEvents.class);
         }
     }
@@ -39,14 +40,14 @@ public class ClientProxy extends CommonProxy {
     @Override
     public void init(FMLInitializationEvent event) {
         super.init(event);
-        if (Loader.isModLoaded("rtg") && Configuration.enableWorldType) {
+        if (Loader.isModLoaded("rtg") && Compat.enableWorldType) {
             Utils.defaultWorldtype();
         }
     }
 
     @Override
     public void postInit(FMLPostInitializationEvent event) {
-        if (Configuration.enableEndurance) {
+        if (Features.enableEndurance) {
             MinecraftForge.EVENT_BUS.register(new Overlay());
         }
     }

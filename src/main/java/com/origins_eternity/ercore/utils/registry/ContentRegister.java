@@ -1,6 +1,5 @@
 package com.origins_eternity.ercore.utils.registry;
 
-import com.origins_eternity.ercore.config.Configuration;
 import com.origins_eternity.ercore.content.block.Blocks;
 import com.origins_eternity.ercore.content.block.FluidBlocks;
 import com.origins_eternity.ercore.content.block.Ores;
@@ -32,6 +31,8 @@ import java.util.Objects;
 
 import static com.origins_eternity.ercore.ERCore.MOD_ID;
 import static com.origins_eternity.ercore.compat.firstaid.Herbs.Herbs;
+import static com.origins_eternity.ercore.config.Configuration.Compat;
+import static com.origins_eternity.ercore.config.Configuration.Contents;
 import static com.origins_eternity.ercore.content.block.Blocks.BLOCKITEMS;
 import static com.origins_eternity.ercore.content.block.FluidBlocks.FLUIDBLOCKS;
 import static com.origins_eternity.ercore.content.block.Ores.OREITEMS;
@@ -41,17 +42,17 @@ import static slimeknights.tconstruct.tools.TinkerTraits.autosmelt;
 public class ContentRegister {
     @SubscribeEvent
     public static void registerBlocks(RegistryEvent.Register<Block> event) {
-        if (Configuration.enableBlocks) {
+        if (Contents.enableBlocks) {
             for (Block block : Blocks.BLOCKS) {
                 event.getRegistry().register(block);
             }
         }
-        if (Configuration.enableOres) {
+        if (Contents.enableOres) {
             for (Block ore : Ores.ORES) {
                 event.getRegistry().register(ore);
             }
         }
-        if (Configuration.enableFluids) {
+        if (Contents.enableFluids) {
             for (Block fluidblock : FluidBlocks.FLUIDBLOCKS) {
                 event.getRegistry().register(fluidblock);
             }
@@ -60,7 +61,7 @@ public class ContentRegister {
 
     @SubscribeEvent
     public static void registerItems(RegistryEvent.Register<Item> event) {
-        if (Configuration.enableItems) {
+        if (Contents.enableItems) {
             for (Item item : Items.ITEMS) {
                 String itemname = item.getTranslationKey();
                 if (item.equals(Items.Ingot_Clay_Cast)) {
@@ -83,7 +84,7 @@ public class ContentRegister {
                 }
             }
         }
-        if (Configuration.enableOres) {
+        if (Contents.enableOres) {
             for (Item oreitem : OREITEMS) {
                 event.getRegistry().register(oreitem);
                 String orename = oreitem.getTranslationKey().replace("_ore", "");
@@ -91,12 +92,12 @@ public class ContentRegister {
                 OreDictionary.registerOre("ore" + oredictname, oreitem);
             }
         }
-        if (Configuration.enableBlocks) {
+        if (Contents.enableBlocks) {
             for (Item blockitem : BLOCKITEMS) {
                 event.getRegistry().register(blockitem);
             }
         }
-        if (Configuration.enableBlueprints) {
+        if (Contents.enableBlueprints) {
             for (Item print : Blueprints.PRINTS) {
                 event.getRegistry().register(print);
                 String itemname = print.getTranslationKey();
@@ -108,12 +109,12 @@ public class ContentRegister {
                 }
             }
         }
-        if (Configuration.enableFluids) {
+        if (Contents.enableFluids) {
             for (Item fluiditem : FluidBlocks.FLUIDITEMS) {
                 event.getRegistry().register(fluiditem);
             }
         }
-        if ((Configuration.enableHerbs) && (Loader.isModLoaded("firstaid"))) {
+        if ((Compat.enableHerbs) && (Loader.isModLoaded("firstaid"))) {
             event.getRegistry().register(Herbs);
         }
         if (Loader.isModLoaded("tconstruct") && Loader.isModLoaded("pyrotech")) {
@@ -130,37 +131,37 @@ public class ContentRegister {
 
     @SideOnly(Side.CLIENT)
     public static void registerModels() {
-        if (Configuration.enableItems) {
+        if (Contents.enableItems) {
             for (Item item : Items.ITEMS) {
                 ModelLoader.setCustomModelResourceLocation(item, 0, new ModelResourceLocation(Objects.requireNonNull(item.getRegistryName()), "inventory"));
             }
         }
-        if (Configuration.enableOres) {
+        if (Contents.enableOres) {
             for (Item oreitem : OREITEMS) {
                 ModelLoader.setCustomModelResourceLocation(oreitem, 0, new ModelResourceLocation(Objects.requireNonNull(oreitem.getRegistryName()), "inventory"));
             }
         }
-        if (Configuration.enableBlocks) {
+        if (Contents.enableBlocks) {
             for (Item blockitem : BLOCKITEMS) {
                 ModelLoader.setCustomModelResourceLocation(blockitem, 0, new ModelResourceLocation(Objects.requireNonNull(blockitem.getRegistryName()), "inventory"));
             }
         }
-        if (Configuration.enableBlueprints) {
+        if (Contents.enableBlueprints) {
             for (Item print : Blueprints.PRINTS) {
                 ModelLoader.setCustomModelResourceLocation(print, 0, new ModelResourceLocation(MOD_ID + ":" + "blueprint", "inventory"));
             }
         }
-        if (Configuration.enableBlocks) {
+        if (Contents.enableBlocks) {
             for (Block block : Blocks.BLOCKS) {
                 ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(block), 0, new ModelResourceLocation(Objects.requireNonNull(block.getRegistryName()), "inventory"));
             }
         }
-        if (Configuration.enableOres) {
+        if (Contents.enableOres) {
             for (Block ore : Ores.ORES) {
                 ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ore), 0, new ModelResourceLocation(Objects.requireNonNull(ore.getRegistryName()), "inventory"));
             }
         }
-        if ((Configuration.enableHerbs) && (Loader.isModLoaded("firstaid"))) {
+        if ((Compat.enableHerbs) && (Loader.isModLoaded("firstaid"))) {
             ModelLoader.setCustomModelResourceLocation(Herbs, 0, new ModelResourceLocation(MOD_ID + ":" + "herbs", "inventory"));
         }
     }
@@ -189,7 +190,7 @@ public class ContentRegister {
     @SubscribeEvent
     public static void registerModels(ModelRegistryEvent event) {
         registerModels();
-        if (Configuration.enableFluids) {
+        if (Contents.enableFluids) {
             registerFluidModels();
         }
     }

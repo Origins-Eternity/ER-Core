@@ -1,6 +1,5 @@
 package com.origins_eternity.ercore.utils;
 
-import com.origins_eternity.ercore.config.Configuration;
 import com.origins_eternity.ercore.content.capability.endurance.IEndurance;
 import com.origins_eternity.ercore.message.SyncEndurance;
 import ichttt.mods.firstaid.api.CapabilityExtendedHealthSystem;
@@ -37,6 +36,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import static com.origins_eternity.ercore.ERCore.packetHandler;
+import static com.origins_eternity.ercore.config.Configuration.Features;
 import static com.origins_eternity.ercore.content.capability.Capabilities.ENDURANCE;
 import static com.origins_eternity.ercore.content.damage.Damages.EXHAUSTED;
 
@@ -49,7 +49,7 @@ public class Utils {
         List<ResourcePackRepository.Entry> Resourcepacks = new ArrayList<>();
         Resourcepacks.addAll(Repository.getRepositoryEntries());
         for (ResourcePackRepository.Entry pack : Packs) {
-            for (String name : Configuration.resourcepacks) {
+            for (String name : Features.resourcepacks) {
                 if (pack.getResourcePackName().equals(name)) {
                     if (!Resourcepacks.contains(pack)) {
                         Resourcepacks.add(pack);

@@ -63,7 +63,7 @@ events.onPlayerRightClickItem(function(event as PlayerRightClickItemEvent) {
 ### Ingot clay cast  
 **Ingot clay cast is the clay version of ingot cast. Only bronze material can use this to make a bronze ingot. Use clay fluid and seared brick to craft it. Like other clay cast, use and craft it will consume the cast. Only added when Tinkers' Construct 2 is installed.**  
 ### Tinker's material  
-**A new tinker's material,  Tungsten Steel, has been added, only when Tinkers' Construct 2 is installed. If you enable this, be sure to enable Items, Fluids, and Ores.**
+**A new tinker's material, Tungsten Steel, has been added, only when Tinkers' Construct 2 is installed. If you enable this, be sure to enable Items, Fluids, and Ores.**
 ![This is an image](https://s11.ax1x.com/2024/02/13/pF8BzxP.png)
 ### Herbs  
 **The herb is a healing item, which is used in the same way as bandage and plaster in First Aid. Recover half a heart every 23 seconds, recover one heart in total. Only added when First Aid is installed at the same time. Note that this mod does not add any recipes to it.**  

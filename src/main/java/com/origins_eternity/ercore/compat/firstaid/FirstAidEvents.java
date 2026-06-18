@@ -1,6 +1,5 @@
 package com.origins_eternity.ercore.compat.firstaid;
 
-import com.origins_eternity.ercore.config.Configuration;
 import com.origins_eternity.ercore.content.capability.Capabilities;
 import com.origins_eternity.ercore.content.capability.endurance.IEndurance;
 import ichttt.mods.firstaid.api.CapabilityExtendedHealthSystem;
@@ -18,6 +17,7 @@ import net.minecraftforge.fml.common.gameevent.PlayerEvent;
 
 import java.util.ArrayList;
 
+import static com.origins_eternity.ercore.config.Configuration.Compat;
 import static com.origins_eternity.ercore.utils.Utils.syncHealth;
 
 public class FirstAidEvents {
@@ -68,7 +68,7 @@ public class FirstAidEvents {
                     IEndurance endurance = player.getCapability(Capabilities.ENDURANCE, null);
                     double maxHealth = player.getAttributeMap().getAttributeInstanceByName("generic.maxHealth").getAttributeValue();
                     if (maxHealth > endurance.getMaxHealth()) {
-                        if (Configuration.enableRegeneration) {
+                        if (Compat.enableRegeneration) {
                             player.addPotionEffect(new PotionEffect(MobEffects.REGENERATION, 200, 2));
                         }
                         endurance.setMaxHealth(maxHealth);

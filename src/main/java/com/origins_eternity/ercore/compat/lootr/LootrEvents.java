@@ -1,6 +1,5 @@
 package com.origins_eternity.ercore.compat.lootr;
 
-import com.origins_eternity.ercore.config.Configuration;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockChest;
 import net.minecraft.block.state.IBlockState;
@@ -22,6 +21,8 @@ import noobanidus.mods.lootr.init.ModBlocks;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.origins_eternity.ercore.config.Configuration.Compat;
+
 public class LootrEvents {
     private static boolean preventDrops = false;
 
@@ -40,14 +41,14 @@ public class LootrEvents {
 
     @SubscribeEvent
     public static void onEntityJoin(EntityJoinWorldEvent event) {
-        if (preventDrops && event.getEntity() instanceof EntityItem && Configuration.enableReplace) {
+        if (preventDrops && event.getEntity() instanceof EntityItem && Compat.enableReplace) {
             event.setCanceled(true);
         }
     }
 
     @SubscribeEvent
     public static void onEntityPlace(BlockEvent.EntityPlaceEvent event) {
-        if (!event.getWorld().isRemote && event.getEntity() instanceof EntityPlayer && Configuration.enableReplace) {
+        if (!event.getWorld().isRemote && event.getEntity() instanceof EntityPlayer && Compat.enableReplace) {
             Block block = event.getPlacedBlock().getBlock();
             if (block instanceof BlockChest && !(block instanceof LootrChestBlock)) {
                 event.getWorld().getTileEntity(event.getPos()).getTileData().setBoolean("place", true);
@@ -58,7 +59,7 @@ public class LootrEvents {
     @SubscribeEvent
     public static void onPlayerInteract(PlayerInteractEvent event) {
         World world = event.getWorld();
-        if (!world.isRemote && Configuration.enableReplace) {
+        if (!world.isRemote && Compat.enableReplace) {
             IBlockState state = world.getBlockState(event.getPos());
             EnumFacing facing = EnumFacing.SOUTH;
             if (state.getPropertyKeys().contains(BlockChest.FACING)) {

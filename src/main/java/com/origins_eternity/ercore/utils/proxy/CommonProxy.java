@@ -2,7 +2,7 @@ package com.origins_eternity.ercore.utils.proxy;
 
 import com.origins_eternity.ercore.compat.firstaid.FirstAidEvents;
 import com.origins_eternity.ercore.compat.lootr.LootrEvents;
-import com.origins_eternity.ercore.config.Configuration;
+import com.origins_eternity.ercore.compat.tanaddons.ThirstQuencher;
 import com.origins_eternity.ercore.content.capability.Capabilities;
 import com.origins_eternity.ercore.content.command.TPA;
 import com.origins_eternity.ercore.content.command.TPADeny;
@@ -21,6 +21,7 @@ import net.minecraftforge.fml.relauncher.Side;
 
 import static com.origins_eternity.ercore.ERCore.packetHandler;
 import static com.origins_eternity.ercore.compat.tconstruct.Materials.*;
+import static com.origins_eternity.ercore.config.Configuration.*;
 import static com.origins_eternity.ercore.utils.registry.ContentRegister.registerFluids;
 
 public class CommonProxy {
@@ -29,37 +30,40 @@ public class CommonProxy {
     }
 
     public void preInit(FMLPreInitializationEvent event) {
-        if (Configuration.enableFluids) {
+        if (Contents.enableFluids) {
             registerFluids();
             if (Loader.isModLoaded("tconstruct")) {
-                if ((Configuration.enableOres) && (Configuration.enableItems) && (Configuration.enableMaterial)) {
+                if ((Contents.enableOres) && (Contents.enableItems) && (Compat.enableMaterial)) {
                     preTinker();
                 }
             }
         }
-        if (Configuration.enableEndurance) {
+        if (Features.enableEndurance) {
             MinecraftForge.EVENT_BUS.register(new CommonEvents());
         }
         registerMessage();
     }
 
     public void init(FMLInitializationEvent event) {
-        if (Configuration.enableOres) {
+        if (Contents.enableOres) {
             RecipeRegister.registerRecipes();
             GameRegistry.registerWorldGenerator(new GenOres(), 0);
         }
         if (Loader.isModLoaded("tconstruct")) {
-            if ((Configuration.enableOres) && (Configuration.enableItems) && (Configuration.enableMaterial) && (Configuration.enableFluids)) {
+            if ((Contents.enableOres) && (Contents.enableItems) && (Compat.enableMaterial) && (Contents.enableFluids)) {
                 addTinkerMelting();
                 addTinkerAlloying();
                 addTinkerCasting();
             }
         }
-        if (Loader.isModLoaded("firstaid") && Configuration.enableMaxHealth) {
+        if (Loader.isModLoaded("firstaid") && Compat.enableMaxHealth) {
             MinecraftForge.EVENT_BUS.register(FirstAidEvents.class);
         }
         if (Loader.isModLoaded("lootr")) {
             MinecraftForge.EVENT_BUS.register(LootrEvents.class);
+        }
+        if (Loader.isModLoaded("tanaddons")) {
+            MinecraftForge.EVENT_BUS.register(ThirstQuencher.class);
         }
         Capabilities.registerCapability(CapabilityManager.INSTANCE);
     }
@@ -69,7 +73,7 @@ public class CommonProxy {
     }
 
     public void serverStart(FMLServerStartingEvent event) {
-        if (Configuration.enableCommands) {
+        if (Features.enableTPA) {
             event.registerServerCommand(new TPA());
             event.registerServerCommand(new TPAHere());
             event.registerServerCommand(new TPAccept());

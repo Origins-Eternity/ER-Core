@@ -1,6 +1,5 @@
 package com.origins_eternity.ercore.event;
 
-import com.origins_eternity.ercore.config.Configuration;
 import com.origins_eternity.ercore.content.capability.Capabilities;
 import com.origins_eternity.ercore.content.capability.endurance.Endurance;
 import com.origins_eternity.ercore.content.capability.endurance.IEndurance;
@@ -31,6 +30,7 @@ import net.minecraftforge.fml.common.gameevent.TickEvent;
 import java.util.Set;
 
 import static com.origins_eternity.ercore.ERCore.MOD_ID;
+import static com.origins_eternity.ercore.config.Configuration.Features;
 import static com.origins_eternity.ercore.content.command.TPA.sendTo;
 import static com.origins_eternity.ercore.content.command.TPAHere.sendHere;
 import static com.origins_eternity.ercore.content.damage.Damages.EXHAUSTED;
@@ -40,7 +40,7 @@ import static com.origins_eternity.ercore.utils.Utils.*;
 public class CommonEvents {
     @SubscribeEvent
     public static void onCreateFluidSource(BlockEvent.CreateFluidSourceEvent event) {
-        if (Configuration.enableNoInfinite) {
+        if (Features.enableNoInfinite) {
             event.setResult(Event.Result.DENY);
         }
     }
@@ -50,8 +50,8 @@ public class CommonEvents {
         if (!event.getWorld().isRemote) {
             Block block = event.getState().getBlock();
             if (block.equals(Blocks.COBBLESTONE)) {
-                if (getBlock(Configuration.product).isFullBlock()) {
-                    event.setNewState(getBlock(Configuration.product));
+                if (getBlock(Features.product).isFullBlock()) {
+                    event.setNewState(getBlock(Features.product));
                 }
             }
         }
@@ -66,7 +66,7 @@ public class CommonEvents {
     }
 
     @SubscribeEvent
-    public void onBreak(BlockEvent.BreakEvent event) {
+    public static void onBreak(BlockEvent.BreakEvent event) {
         EntityPlayer player = event.getPlayer();
         if (!player.isCreative()) {
             World world = event.getWorld();
@@ -84,7 +84,7 @@ public class CommonEvents {
     }
 
     @SubscribeEvent
-    public void onItemCraftedEvent(ItemCraftedEvent event) {
+    public static void onItemCraftedEvent(ItemCraftedEvent event) {
         EntityPlayer player = event.player;
         if (!player.isCreative()) {
             IEndurance endurance = player.getCapability(Capabilities.ENDURANCE, null);
@@ -100,7 +100,7 @@ public class CommonEvents {
     }
 
     @SubscribeEvent
-    public void onLivingJump(LivingEvent.LivingJumpEvent event) {
+    public static void onLivingJump(LivingEvent.LivingJumpEvent event) {
         Entity entity = event.getEntity();
         if (entity instanceof EntityPlayer) {
             EntityPlayer player = (EntityPlayer) entity;
@@ -119,7 +119,7 @@ public class CommonEvents {
     }
 
     @SubscribeEvent
-    public void onBreakSpeed(PlayerEvent.BreakSpeed event) {
+    public static void onBreakSpeed(PlayerEvent.BreakSpeed event) {
         EntityPlayer player = event.getEntityPlayer();
         if (!player.isCreative()) {
             IEndurance endurance = player.getCapability(Capabilities.ENDURANCE, null);
@@ -133,7 +133,7 @@ public class CommonEvents {
     }
 
     @SubscribeEvent
-    public void onAttackEntity(AttackEntityEvent event) {
+    public static void onAttackEntity(AttackEntityEvent event) {
         EntityPlayer player = event.getEntityPlayer();
         if (!player.isCreative()) {
             IEndurance endurance = player.getCapability(Capabilities.ENDURANCE, null);
@@ -149,7 +149,7 @@ public class CommonEvents {
     }
 
     @SubscribeEvent(priority = EventPriority.HIGHEST)
-    public void onClone(PlayerEvent.Clone event) {
+    public static void onClone(PlayerEvent.Clone event) {
         EntityPlayer old = event.getOriginal();
         EntityPlayer clone = event.getEntityPlayer();
         if (!clone.world.isRemote) {
@@ -163,7 +163,7 @@ public class CommonEvents {
     }
 
     @SubscribeEvent(priority = EventPriority.LOWEST)
-    public void onPlayerRespawn(PlayerRespawnEvent event) {
+    public static void onPlayerRespawn(PlayerRespawnEvent event) {
         EntityPlayer player = event.player;
         if (!event.player.world.isRemote) {
             IEndurance endurance = player.getCapability(Capabilities.ENDURANCE, null);
@@ -175,7 +175,7 @@ public class CommonEvents {
     public static void onPlayerTick(TickEvent.PlayerTickEvent event) {
         if ((!event.player.isSpectator()) && (!event.player.isCreative())) {
             EntityPlayer player = event.player;
-            if (Configuration.enableEndurance) {
+            if (Features.enableEndurance) {
                 checkStatus(player);
             }
             if (player.ticksExisted % 10 == 0) {
@@ -185,7 +185,7 @@ public class CommonEvents {
                 }
             }
         }
-        if (Configuration.enableCommands) {
+        if (Features.enableTPA) {
             if (event.side.isServer() && event.phase == TickEvent.Phase.END) {
                 EntityPlayerMP player = (EntityPlayerMP) event.player;
                 NBTTagCompound to = sendTo.get(player.getUniqueID());
@@ -201,12 +201,12 @@ public class CommonEvents {
     }
 
     @SubscribeEvent
-    public void onRightClickBlock(PlayerInteractEvent.RightClickBlock event) {
+    public static void onRightClickBlock(PlayerInteractEvent.RightClickBlock event) {
         EntityPlayer player = event.getEntityPlayer();
         if ((!player.isCreative()) && (!player.world.isRemote)) {
             IEndurance endurance = player.getCapability(Capabilities.ENDURANCE, null);
             Set<String> tools = event.getItemStack().getItem().getToolClasses(event.getItemStack());
-            for (String tool : Configuration.tools) {
+            for (String tool : Features.tools) {
                 if (tools.contains(tool)) {
                     endurance.addCoolDown(60);
                     if (endurance.getEndurance() <= 0) {
@@ -221,7 +221,7 @@ public class CommonEvents {
     }
 
     @SubscribeEvent
-    public void onUseHoe(UseHoeEvent event) {
+    public static void onUseHoe(UseHoeEvent event) {
         EntityPlayer player = event.getEntityPlayer();
         if (!player.isCreative() && !player.world.isRemote) {
             IEndurance endurance = player.getCapability(Capabilities.ENDURANCE, null);
@@ -248,7 +248,7 @@ public class CommonEvents {
     public static void onLivingDamage(LivingDamageEvent event) {
         if (event.getEntity() instanceof EntityPlayer) {
             EntityPlayer player = (EntityPlayer) event.getEntity();
-            if ((!player.world.isRemote) && (Configuration.enableHardcore)) {
+            if ((!player.world.isRemote) && (Features.enableHardcore)) {
                 if (event.getSource() == DamageSource.DROWN) {
                     event.setAmount(player.getHealth());
                 } else if (event.getSource() == DamageSource.LAVA) {
@@ -259,7 +259,7 @@ public class CommonEvents {
             }
         } else if (event.getSource().getTrueSource() instanceof EntityPlayer) {
             EntityPlayer player = (EntityPlayer) event.getSource().getTrueSource();
-            if (!player.isCreative() && Configuration.enableEndurance) {
+            if (!player.isCreative() && Features.enableEndurance) {
                 IEndurance endurance = player.getCapability(Capabilities.ENDURANCE, null);
                 if (endurance.getEndurance() <= 6) {
                     event.setAmount((float) (event.getAmount() * 0.5));
@@ -269,12 +269,12 @@ public class CommonEvents {
     }
 
     @SubscribeEvent
-    public void onPlayerWakeUp(PlayerWakeUpEvent event) {
+    public static void onPlayerWakeUp(PlayerWakeUpEvent event) {
         EntityPlayer player = (EntityPlayer) event.getEntity();
         if (!player.isCreative() && !player.world.isRemote) {
             IEndurance endurance = player.getCapability(Capabilities.ENDURANCE, null);
             endurance.setCoolDown(0);
-            endurance.setEndurance((int) (2 * player.getHealth()));
+            endurance.setEndurance(endurance.getMaxEndurance());
         }
     }
 }
