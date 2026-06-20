@@ -14,6 +14,7 @@ import net.minecraft.util.text.TextFormatting;
 import javax.annotation.Nullable;
 import java.util.*;
 
+import static com.origins_eternity.ercore.config.Configuration.Features;
 import static com.origins_eternity.ercore.content.command.TPA.sendTo;
 import static com.origins_eternity.ercore.content.command.TPAHere.sendHere;
 import static com.origins_eternity.ercore.utils.Utils.playSound;
@@ -86,18 +87,24 @@ public class TPAccept extends CommandBase {
         return index == 0;
     }
     
-    private static void doTeleport(EntityPlayerMP player, EntityPlayerMP target, MinecraftServer server) {
-        if (player.dimension != target.dimension) {
-            player.dismountRidingEntity();
-            server.getPlayerList().transferPlayerToDimension(player, target.dimension, new PlayerTeleporter(server.getWorld(target.dimension)));
-            player.connection.setPlayerLocation(target.posX, target.posY, target.posZ, target.rotationYaw, target.rotationPitch);
-        } else if (player.isRiding() && tpHorse(player.getRidingEntity())) {
-            player.getRidingEntity().setPositionAndUpdate(target.posX, target.posY, target.posZ);
+    private static void doTeleport(EntityPlayerMP player, EntityPlayerMP target, MinecraftServer server) throws CommandException {
+        boolean here = Features.blacklist ? Arrays.stream(Features.dimensions).noneMatch(num -> num == player.dimension) : Arrays.stream(Features.dimensions).anyMatch(num -> num == player.dimension);
+        boolean there = Features.blacklist ? Arrays.stream(Features.dimensions).noneMatch(num -> num == target.dimension) : Arrays.stream(Features.dimensions).anyMatch(num -> num == target.dimension);
+        if (here && there) {
+            if (player.dimension != target.dimension) {
+                player.dismountRidingEntity();
+                server.getPlayerList().transferPlayerToDimension(player, target.dimension, new PlayerTeleporter(server.getWorld(target.dimension)));
+                player.connection.setPlayerLocation(target.posX, target.posY, target.posZ, target.rotationYaw, target.rotationPitch);
+            } else if (player.isRiding() && tpHorse(player.getRidingEntity())) {
+                player.getRidingEntity().setPositionAndUpdate(target.posX, target.posY, target.posZ);
+            } else {
+                player.dismountRidingEntity();
+                player.connection.setPlayerLocation(target.posX, target.posY, target.posZ, target.rotationYaw, target.rotationPitch);
+            }
+            playSound(target, SoundEvents.ITEM_CHORUS_FRUIT_TELEPORT);
         } else {
-            player.dismountRidingEntity();
-            player.connection.setPlayerLocation(target.posX, target.posY, target.posZ, target.rotationYaw, target.rotationPitch);
+            throw new CommandException("commands.tpa.banned_dimension");
         }
-        playSound(target, SoundEvents.ITEM_CHORUS_FRUIT_TELEPORT);
     }
 
     private static boolean tpHorse(Entity entity) {

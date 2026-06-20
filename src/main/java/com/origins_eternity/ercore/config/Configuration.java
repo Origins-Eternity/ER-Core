@@ -101,7 +101,7 @@ public class Configuration {
                 @Config.Name("Enable TPA")
                 @Config.RequiresMcRestart()
                 @Config.LangKey("config.ercore.tpa")
-                @Config.Comment("Whether to add tpa commands or not.")
+                @Config.Comment("Whether to add TPA commands or not.")
                 public boolean enableTPA = true;
 
                 @Config.Name("Enable Endurance")
@@ -126,6 +126,16 @@ public class Configuration {
                 @Config.LangKey("config.ercore.food")
                 @Config.Comment("Whether to add a tooltip for foods or not.")
                 public boolean enableTooltip = true;
+
+                @Config.Name("Blacklist")
+                @Config.LangKey("config.ercore.blacklist")
+                @Config.Comment("Whether to make the list of dimensions blacklist or not.")
+                public boolean blacklist = false;
+
+                @Config.Name("Dimensions")
+                @Config.LangKey("config.ercore.dimensions")
+                @Config.Comment("The list of dimensions which can use TPA commands.")
+                public int[] dimensions = new int[]{1, 0, -1};
 
                 @Config.Name("Product")
                 @Config.LangKey("config.ercore.product")
