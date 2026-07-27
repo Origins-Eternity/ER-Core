@@ -37,7 +37,7 @@ events.onPlayerRightClickItem(function(event as PlayerRightClickItemEvent) {
 ### Default World Type  
 **It's not really a change, but rather swapping the RTG world type with the default world type. Valid only when Realistic Terrain Generation and other fork version which has the same modid is installed.**  
 ### No Infinite Fluids
-**All fluids in the game cannot create new fluid resources, but players can still bottle water with water.**  
+**All fluids in the game cannot create new fluid resources, but players can still bottle water with water.**
 ![This is an image](https://s1.ax1x.com/2022/12/28/pSSP7Sx.png)
 ### Regeneration  
 **When the player uses an item, if the mod detects an increase in the player's maxhealth, it will give the Regeneration II buff for 10 seconds. Valid only when First Aid is installed at the same time, and can be turned off in the configuration file.**
@@ -64,7 +64,7 @@ events.onPlayerRightClickItem(function(event as PlayerRightClickItemEvent) {
 **Ingot clay cast is the clay version of ingot cast. Only bronze material can use this to make a bronze ingot. Use clay fluid and seared brick to craft it. Like other clay cast, use and craft it will consume the cast. Only added when Tinkers' Construct 2 is installed.**  
 ### Tinker's material  
 **A new tinker's material, Tungsten Steel, has been added, only when Tinkers' Construct 2 is installed. If you enable this, be sure to enable Items, Fluids, and Ores.**
-![This is an image](https://s11.ax1x.com/2024/02/13/pF8BzxP.png)
+![This is an image](https://s41.ax1x.com/2026/07/27/pmWpLF0.png)
 ### Herbs  
 **The herb is a healing item, which is used in the same way as bandage and plaster in First Aid. Recover half a heart every 23 seconds, recover one heart in total. Only added when First Aid is installed at the same time. Note that this mod does not add any recipes to it.**  
 ## About  
