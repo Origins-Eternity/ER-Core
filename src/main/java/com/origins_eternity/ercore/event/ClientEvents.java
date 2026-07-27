@@ -1,48 +1,50 @@
 package com.origins_eternity.ercore.event;
 
-import com.codetaylor.mc.pyrotech.modules.tech.basic.ModuleTechBasicConfig;
+import com.origins_eternity.ercore.content.capability.endurance.IEndurance;
+import com.origins_eternity.ercore.content.render.RollRender;
+import com.origins_eternity.ercore.message.DoubleJump;
+import com.origins_eternity.ercore.message.Roll;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
-import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemFood;
-import net.minecraft.item.ItemStack;
-import net.minecraft.potion.Potion;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.math.MathHelper;
+import net.minecraftforge.client.event.RenderPlayerEvent;
 import net.minecraftforge.client.event.RenderTooltipEvent;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
-import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.gameevent.InputEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import squeek.applecore.api.AppleCoreAPI;
-import squeek.applecore.api.food.FoodValues;
 
-import java.text.NumberFormat;
-
+import static com.origins_eternity.ercore.ERCore.packetHandler;
 import static com.origins_eternity.ercore.config.Configuration.Features;
-import static com.origins_eternity.ercore.content.gui.Overlay.GUI;
+import static com.origins_eternity.ercore.content.capability.Capabilities.ENDURANCE;
+import static com.origins_eternity.ercore.content.render.Overlay.GUI;
+import static com.origins_eternity.ercore.utils.Utils.getFoodValues;
 import static com.origins_eternity.ercore.utils.proxy.ClientProxy.mc;
+import static com.origins_eternity.ercore.utils.proxy.ClientProxy.rollKey;
 
+@SideOnly(Side.CLIENT)
 public class ClientEvents {
-    @SideOnly(Side.CLIENT)
     @SubscribeEvent
     public static void onItemTooltip(ItemTooltipEvent event) {
         if (Features.enableTooltip) {
             if (event.getItemStack().getItem() instanceof ItemFood && event.getEntityPlayer() == mc().player) {
-                String[] values = foodValues(event.getItemStack(), event.getEntityPlayer());
+                String[] values = getFoodValues(event.getItemStack(), event.getEntityPlayer());
                 event.getToolTip().add("§f   " + values[0] + "    " + values[1]);
             }
         }
     }
 
-    @SideOnly(Side.CLIENT)
     @SubscribeEvent
     public static void onRenderTooltipPostText(RenderTooltipEvent.PostText event) {
         if (event.getStack().getItem() instanceof ItemFood && Features.enableTooltip) {
             int posX = event.getX();
             int posY = event.getY() + 1;
-            String[] values = foodValues(event.getStack(), mc().player);
+            String[] values = getFoodValues(event.getStack(), mc().player);
             for (String tip : event.getLines()) {
                 if (tip.contains("§f   " + values[0] + "    " + values[1])) {
                     break;
@@ -52,43 +54,71 @@ public class ClientEvents {
             }
             GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
             GlStateManager.enableBlend();
-            drawFoodTooltip(posX, posY, values[0]);
+            Gui gui = mc().currentScreen;
+            mc().getTextureManager().bindTexture(Gui.ICONS);
+            if (gui != null) {
+                gui.drawTexturedModalRect(posX, posY, 16, 27, 9, 9);
+                gui.drawTexturedModalRect(posX, posY, 61, 27, 9, 9);
+                posX += mc().fontRenderer.getStringWidth(values[0]) + 16;
+                mc().getTextureManager().bindTexture(GUI);
+                gui.drawTexturedModalRect(posX, posY, 9, 0, 9, 9);
+                mc().getTextureManager().bindTexture(Gui.ICONS);
+                gui.drawTexturedModalRect(posX, posY, 61, 27, 9, 9);
+            }
             GlStateManager.disableBlend();
         }
     }
 
-    private static void drawFoodTooltip(int posX, int posY, String hunger) {
-        GuiScreen gui = mc().currentScreen;
-        if (gui != null) {
-            mc().getTextureManager().bindTexture(Gui.ICONS);
-            gui.drawTexturedModalRect(posX, posY, 16, 27, 9, 9);
-            gui.drawTexturedModalRect(posX, posY, 61, 27, 9, 9);
-            posX += mc().fontRenderer.getStringWidth(hunger) + 16;
-            mc().getTextureManager().bindTexture(GUI);
-            gui.drawTexturedModalRect(posX, posY, 9, 0, 9, 9);
-            mc().getTextureManager().bindTexture(Gui.ICONS);
-            gui.drawTexturedModalRect(posX, posY, 61, 27, 9, 9);
-        }
-    }
+    private static long jumpTick;
 
-    private static String[] foodValues(ItemStack stack, EntityPlayer player) {
-        ItemFood food = (ItemFood) stack.getItem();
-        int hunger = food.getHealAmount(stack);
-        float saturation = food.getSaturationModifier(stack);
-        if (player != null) {
-            if (Loader.isModLoaded("applecore")) {
-                FoodValues foodValues = AppleCoreAPI.accessor.getFoodValuesForPlayer(stack, player);
-                hunger = foodValues.hunger;
-                saturation = foodValues.saturationModifier;
+    @SubscribeEvent
+    public static void onKeyInput(InputEvent.KeyInputEvent event) {
+        EntityPlayer player = mc().player;
+        if (player != null && mc().world != null) {
+            if (player.isInWater() || !Features.enableEndurance) return;
+            IEndurance endurance = player.getCapability(ENDURANCE, null);
+            if (rollKey.isPressed()) {
+                if (RollRender.getAnimationProgress(player.getEntityId()) >= 0.0f) return;
+                if (player.onGround && endurance.getEndurance() >= 5) {
+                    packetHandler.sendToServer(new Roll());
+                    player.playSound(SoundEvents.ENTITY_BAT_TAKEOFF, 0.3F, 0.6F);
+                }
             }
-            if (Loader.isModLoaded("pyrotech")) {
-                Potion comfort = Potion.REGISTRY.getObject(new ResourceLocation("pyrotech", "comfort"));
-                if (player.isPotionActive(comfort)) {
-                    hunger += (int) (food.getHealAmount(stack) * ModuleTechBasicConfig.CAMPFIRE_EFFECTS.COMFORT_HUNGER_MODIFIER);
-                    saturation += (float) (food.getSaturationModifier(stack) * ModuleTechBasicConfig.CAMPFIRE_EFFECTS.COMFORT_SATURATION_MODIFIER);
+            if (mc().gameSettings.keyBindJump.isPressed()) {
+                if (player.isCreative() || player.isSpectator()) return;
+                long current = Minecraft.getSystemTime();
+                if (current - jumpTick < 500 || endurance.getDoubleJumped()) return;
+                if (!player.onGround && !player.isRiding() && endurance.getEndurance() >= 1) {
+                    packetHandler.sendToServer(new DoubleJump());
+                    player.playSound(SoundEvents.ENTITY_PLAYER_ATTACK_SWEEP, 0.3F, 0.6F);
+                    jumpTick = current;
                 }
             }
         }
-        return new String[]{String.format("%d", hunger), NumberFormat.getPercentInstance().format(saturation)};
+    }
+
+    @SubscribeEvent
+    public static void onRenderPlayerPre(RenderPlayerEvent.Pre event) {
+        EntityPlayer player = event.getEntityPlayer();
+        float progress = RollRender.getAnimationProgress(player.getEntityId());
+        if (progress >= 0.0f) {
+            float yaw = (float) Math.toRadians(player.rotationYaw);
+            float axisX = MathHelper.cos(yaw);
+            float axisZ = MathHelper.sin(yaw);
+            GlStateManager.pushMatrix();
+            GlStateManager.translate(0.0, 0.5, 0.0);
+            GlStateManager.rotate(progress * 360.0f, axisX, 0.0f, axisZ);
+            GlStateManager.translate(0.0, -0.5, 0.0);
+        }
+    }
+
+
+    @SubscribeEvent
+    public static void onRenderPlayerPost(RenderPlayerEvent.Post event) {
+        int entityId = event.getEntityPlayer().getEntityId();
+        float progress = RollRender.getAnimationProgress(entityId);
+        if (progress >= 0.0f) {
+            GlStateManager.popMatrix();
+        }
     }
 }

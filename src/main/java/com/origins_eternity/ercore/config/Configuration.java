@@ -67,12 +67,6 @@ public class Configuration {
                 @Config.Comment("Whether to add ores or not.")
                 public boolean enableOres = false;
 
-                @Config.Name("Enable Blocks")
-                @Config.RequiresMcRestart()
-                @Config.LangKey("config.ercore.blocks")
-                @Config.Comment("Whether to add blocks or not.")
-                public boolean enableBlocks = false;
-
                 @Config.Name("Enable Items")
                 @Config.RequiresMcRestart()
                 @Config.LangKey("config.ercore.items")

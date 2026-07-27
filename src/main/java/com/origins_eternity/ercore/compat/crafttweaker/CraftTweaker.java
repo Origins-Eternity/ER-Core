@@ -21,13 +21,13 @@ public class CraftTweaker {
     }
 
     @ZenMethod
-    public static void addEndurance(IPlayer iplayer, int value) {
+    public static void addEndurance(IPlayer iplayer, float value) {
         EntityPlayer player = CraftTweakerMC.getPlayer(iplayer);
         IEndurance endurance = player.getCapability(Capabilities.ENDURANCE, null);
         if (value > 0) {
-            endurance.recoverEndurance(value);
+            endurance.addSaturation(value);
         } else if (value < 0) {
-            endurance.consumeEndurance(-value);
+            endurance.addExhaustion(-value);
             if (endurance.getEndurance() <= 0) {
                 player.attackEntityFrom(EXHAUSTED, 1f);
             }

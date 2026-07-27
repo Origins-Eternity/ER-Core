@@ -1,26 +1,23 @@
 package com.origins_eternity.ercore.utils.proxy;
 
-import com.origins_eternity.ercore.content.gui.Overlay;
+import com.origins_eternity.ercore.content.render.Overlay;
 import com.origins_eternity.ercore.event.ClientEvents;
 import com.origins_eternity.ercore.utils.Utils;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.texture.TextureAtlasSprite;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.client.settings.KeyBinding;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.fluids.Fluid;
+import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.common.Loader;
-import net.minecraftforge.fml.common.Optional;
 import net.minecraftforge.fml.common.event.*;
-import slimeknights.tconstruct.library.client.MaterialRenderInfo;
-import slimeknights.tconstruct.library.client.texture.MetalTextureTexture;
-import slimeknights.tconstruct.library.materials.Material;
+import org.lwjgl.input.Keyboard;
 
-import static com.origins_eternity.ercore.ERCore.MOD_ID;
 import static com.origins_eternity.ercore.config.Configuration.Compat;
 import static com.origins_eternity.ercore.config.Configuration.Features;
 import static com.origins_eternity.ercore.utils.Utils.installResourcepacks;
 
 public class ClientProxy extends CommonProxy {
+    public static KeyBinding rollKey;
+
     @Override
     public void construction(FMLConstructionEvent event) {
         super.construction(event);
@@ -32,8 +29,10 @@ public class ClientProxy extends CommonProxy {
     @Override
     public void preInit(FMLPreInitializationEvent event) {
         super.preInit(event);
-        if (Features.enableTooltip) {
-            MinecraftForge.EVENT_BUS.register(ClientEvents.class);
+        MinecraftForge.EVENT_BUS.register(ClientEvents.class);
+        if (Features.enableEndurance) {
+            rollKey = new KeyBinding("key.ercore.roll", Keyboard.KEY_R, "key.categories.ercore");
+            ClientRegistry.registerKeyBinding(rollKey);
         }
     }
 
@@ -59,15 +58,5 @@ public class ClientProxy extends CommonProxy {
 
     public static Minecraft mc() {
         return Minecraft.getMinecraft();
-    }
-
-    @Optional.Method(modid = "tconstruct")
-    public static void setRenderInfo(Material material, Fluid fluid) {
-        material.setRenderInfo(new MaterialRenderInfo.AbstractMaterialRenderInfo() {
-            @Override
-            public TextureAtlasSprite getTexture(ResourceLocation resourceLocation, String location) {
-                return new MetalTextureTexture(new ResourceLocation(MOD_ID + ":materials/" + material.getIdentifier()), resourceLocation, location, fluid.getColor(), 2f, 3f, 0f);
-            }
-        });
     }
 }

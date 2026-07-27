@@ -2,7 +2,6 @@ package com.origins_eternity.ercore.content;
 
 import com.origins_eternity.ercore.ERCore;
 import com.origins_eternity.ercore.content.block.Blocks;
-import com.origins_eternity.ercore.content.block.Ores;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -24,13 +23,8 @@ public class BlockCreator extends Block {
         setSoundType(SoundType.STONE);
         setCreativeTab(ERCORE);
 
-        if (name.contains("Ore")) {
-            Ores.ORES.add(this);
-            Ores.OREITEMS.add(new ItemBlock(this).setRegistryName(name.toLowerCase()));
-        } else {
-            Blocks.BLOCKS.add(this);
-            Blocks.BLOCKITEMS.add(new ItemBlock(this).setRegistryName(name.toLowerCase()));
-        }
+        Blocks.BLOCKS.add(this);
+        Blocks.BLOCKITEMS.add(new ItemBlock(this).setRegistryName(name.toLowerCase()));
     }
 
     @Override

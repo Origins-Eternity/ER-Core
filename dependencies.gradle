@@ -1,0 +1,13 @@
+dependencies {
+    minecraft "net.minecraftforge:forge:${minecraftVersion}-${forgeVersion}"
+
+    compileOnly "curse.maven:firstaid-276837:2871156"
+    compileOnly "curse.maven:mantle-74924:2713386"
+    compileOnly "curse.maven:tconstruct-74072:2902483"
+    compileOnly "curse.maven:applecore-224472:2481612"
+    compileOnly "curse.maven:pyrotech-306676:5822040"
+    compileOnly "curse.maven:athenaeum-284350:4633750"
+    compileOnly "curse.maven:lootr-361276:4756301"
+    compileOnly "curse.maven:crafttweaker-239197:6061762"
+    compileOnly "curse.maven:tanaddons-257225:2556034"
+}

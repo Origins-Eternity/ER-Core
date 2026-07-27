@@ -1,7 +1,6 @@
 package com.origins_eternity.ercore.content.tab;
 
 import com.origins_eternity.ercore.content.block.Blocks;
-import com.origins_eternity.ercore.content.block.Ores;
 import com.origins_eternity.ercore.content.fluid.Fluids;
 import com.origins_eternity.ercore.content.item.Blueprints;
 import com.origins_eternity.ercore.content.item.Items;
@@ -22,9 +21,7 @@ public class CreativeTab {
             if (Contents.enableItems) {
                 icon = new ItemStack(Items.Tungsten_Ingot, 1);
             } else if (Contents.enableOres) {
-                icon = new ItemStack(Ores.Copper_Ore, 1);
-            } else if (Contents.enableBlocks) {
-                icon = new ItemStack(Blocks.Tungsten_Steel_Block, 1);
+                icon = new ItemStack(Blocks.Copper_Ore, 1);
             } else if (Contents.enableBlueprints) {
                 icon = new ItemStack(Blueprints.Basic_Workshop, 1);
             } else if (Contents.enableFluids) {

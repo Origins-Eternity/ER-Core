@@ -176,10 +176,14 @@ public class CommonEvents {
         if ((!event.player.isSpectator()) && (!event.player.isCreative())) {
             EntityPlayer player = event.player;
             if (Features.enableEndurance) {
-                checkStatus(player);
-            }
-            if (player.ticksExisted % 10 == 0) {
-                if (!player.world.isRemote) {
+                IEndurance endurance = player.getCapability(Capabilities.ENDURANCE, null);
+                if (endurance.getDoubleJumped()) {
+                    endurance.setDoubleJumped(!player.onGround);
+                }
+                if (endurance.getEndurance() < 6) {
+                    player.setSprinting(false);
+                }
+                if (player.ticksExisted % 10 == 0 && !player.world.isRemote) {
                     tickUpdate(player);
                     syncEndurance(player);
                 }

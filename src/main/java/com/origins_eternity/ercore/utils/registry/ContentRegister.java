@@ -2,7 +2,6 @@ package com.origins_eternity.ercore.utils.registry;
 
 import com.origins_eternity.ercore.content.block.Blocks;
 import com.origins_eternity.ercore.content.block.FluidBlocks;
-import com.origins_eternity.ercore.content.block.Ores;
 import com.origins_eternity.ercore.content.fluid.Fluids;
 import com.origins_eternity.ercore.content.item.Blueprints;
 import com.origins_eternity.ercore.content.item.Items;
@@ -35,21 +34,15 @@ import static com.origins_eternity.ercore.config.Configuration.Compat;
 import static com.origins_eternity.ercore.config.Configuration.Contents;
 import static com.origins_eternity.ercore.content.block.Blocks.BLOCKITEMS;
 import static com.origins_eternity.ercore.content.block.FluidBlocks.FLUIDBLOCKS;
-import static com.origins_eternity.ercore.content.block.Ores.OREITEMS;
 import static slimeknights.tconstruct.tools.TinkerTraits.autosmelt;
 
 @Mod.EventBusSubscriber(modid = MOD_ID)
 public class ContentRegister {
     @SubscribeEvent
     public static void registerBlocks(RegistryEvent.Register<Block> event) {
-        if (Contents.enableBlocks) {
+        if (Contents.enableOres) {
             for (Block block : Blocks.BLOCKS) {
                 event.getRegistry().register(block);
-            }
-        }
-        if (Contents.enableOres) {
-            for (Block ore : Ores.ORES) {
-                event.getRegistry().register(ore);
             }
         }
         if (Contents.enableFluids) {
@@ -85,16 +78,13 @@ public class ContentRegister {
             }
         }
         if (Contents.enableOres) {
-            for (Item oreitem : OREITEMS) {
-                event.getRegistry().register(oreitem);
-                String orename = oreitem.getTranslationKey().replace("_ore", "");
-                String oredictname = orename.substring(12, 13).toUpperCase() + orename.substring(13);
-                OreDictionary.registerOre("ore" + oredictname, oreitem);
-            }
-        }
-        if (Contents.enableBlocks) {
             for (Item blockitem : BLOCKITEMS) {
                 event.getRegistry().register(blockitem);
+                if (blockitem.getTranslationKey().contains("_ore")) {
+                    String orename = blockitem.getTranslationKey().replace("_ore", "");
+                    String oredictname = orename.substring(12, 13).toUpperCase() + orename.substring(13);
+                    OreDictionary.registerOre("ore" + oredictname, blockitem);
+                }
             }
         }
         if (Contents.enableBlueprints) {
@@ -137,28 +127,16 @@ public class ContentRegister {
             }
         }
         if (Contents.enableOres) {
-            for (Item oreitem : OREITEMS) {
-                ModelLoader.setCustomModelResourceLocation(oreitem, 0, new ModelResourceLocation(Objects.requireNonNull(oreitem.getRegistryName()), "inventory"));
-            }
-        }
-        if (Contents.enableBlocks) {
             for (Item blockitem : BLOCKITEMS) {
                 ModelLoader.setCustomModelResourceLocation(blockitem, 0, new ModelResourceLocation(Objects.requireNonNull(blockitem.getRegistryName()), "inventory"));
+            }
+            for (Block block : Blocks.BLOCKS) {
+                ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(block), 0, new ModelResourceLocation(Objects.requireNonNull(block.getRegistryName()), "inventory"));
             }
         }
         if (Contents.enableBlueprints) {
             for (Item print : Blueprints.PRINTS) {
                 ModelLoader.setCustomModelResourceLocation(print, 0, new ModelResourceLocation(MOD_ID + ":" + "blueprint", "inventory"));
-            }
-        }
-        if (Contents.enableBlocks) {
-            for (Block block : Blocks.BLOCKS) {
-                ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(block), 0, new ModelResourceLocation(Objects.requireNonNull(block.getRegistryName()), "inventory"));
-            }
-        }
-        if (Contents.enableOres) {
-            for (Block ore : Ores.ORES) {
-                ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ore), 0, new ModelResourceLocation(Objects.requireNonNull(ore.getRegistryName()), "inventory"));
             }
         }
         if ((Compat.enableHerbs) && (Loader.isModLoaded("firstaid"))) {

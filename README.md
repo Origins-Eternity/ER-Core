@@ -1,5 +1,3 @@
-![This is an image](https://s1.ax1x.com/2023/07/23/pCq54Ag.png)
-
 [![Discord](https://img.shields.io/discord/1321045735055163402?logo=discord&color=949af1)](https://discord.gg/JdrzWQvT3v)
 [![This is an image](https://cf.way2muchnoise.eu/versions/702132.svg)](https://www.curseforge.com/minecraft/mc-mods/er-core/files)
 [![This is an image](https://cf.way2muchnoise.eu/full_702132_downloads.svg)](https://www.curseforge.com/minecraft/mc-mods/er-core)
@@ -14,20 +12,20 @@
 - **/tpaccept [player]**
 - **/tpadeny [player]**
 ## Endurance
-**Inspired by the StaminaPlus mod, each survival/adventure player has their own endurance level.**
+**Inspired by the StaminaPlus mod, each survival/adventure player has their own endurance level. Players can use endurance to roll(press R on ground) or perform a double jump(press Space again after jump).**
 ![This is an image](https://s21.ax1x.com/2025/01/17/pEFjDr8.png)
 **Players will get hurt while doing strenuous exercise after exhaustion, like sprint, jump, etc. This can cause to death!**
 ![This is an image](https://s21.ax1x.com/2025/01/17/pEFjTZF.png)
 ### CraftTweaker
 **Add ZenExpansions for [IPlayer](https://docs.blamejared.com/1.12/en/Vanilla/Players/IPlayer). Developers can call this method on any [IPlayer](https://docs.blamejared.com/1.12/en/Vanilla/Players/IPlayer) object, including its subtypes.**
 - **`getEndurance()`: returns player's endurance value as int.**
-- **`addEndurance(int value)`: add or remove player's endurance value.**
+- **`addEndurance(float value)`: add or remove player's endurance value.**
 ```zenscript
 import crafttweaker.event.PlayerRightClickItemEvent;
 
 events.onPlayerRightClickItem(function(event as PlayerRightClickItemEvent) {
     if(!event.world.isRemote() && event.item.definition.id == "minecraft:fishing_rod") {
-        event.player.addEndurance(-1);
+        event.player.addEndurance(-1f);
     }
 });
 ```
@@ -58,7 +56,7 @@ events.onPlayerRightClickItem(function(event as PlayerRightClickItemEvent) {
 **All content is also designed for the above modpack, you can customize what should be added in the configuration file, and all content will not be added by default.**  
 ### Ores  
 **A total of four ores have been added, tin, copper, nickel and tungsten. All ores are only spawned in the Overworld.**
-![This is an image](https://s11.ax1x.com/2024/02/13/pF8Bv8I.png)
+![This is an image](https://s41.ax1x.com/2026/07/27/pmRH1Y9.png)
 **Except tungsten ore, the mod does not add ingots, nuggets and smelting recipes to other ores. Only some fluids have been added to the smelter recipe. However, all ores will spawn and drop in the world normally.**  
 ### Blueprints  
 **Blueprints are the tools needed to craft some items in the above modpack, and each blueprint has 10 durability. Mod doesn't add recipes to these blueprints, the textures come from the Artisan Worktables.**  

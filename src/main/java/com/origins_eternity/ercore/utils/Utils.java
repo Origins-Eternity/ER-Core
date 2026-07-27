@@ -1,5 +1,6 @@
 package com.origins_eternity.ercore.utils;
 
+import com.codetaylor.mc.pyrotech.modules.tech.basic.ModuleTechBasicConfig;
 import com.origins_eternity.ercore.content.capability.endurance.IEndurance;
 import com.origins_eternity.ercore.message.SyncEndurance;
 import ichttt.mods.firstaid.api.CapabilityExtendedHealthSystem;
@@ -12,14 +13,11 @@ import net.minecraft.client.resources.ResourcePackRepository;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
-import net.minecraft.init.MobEffects;
 import net.minecraft.init.SoundEvents;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemBow;
-import net.minecraft.item.ItemShield;
+import net.minecraft.item.*;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.play.server.SPacketSoundEffect;
-import net.minecraft.potion.PotionEffect;
+import net.minecraft.potion.Potion;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundCategory;
@@ -28,8 +26,12 @@ import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.WorldType;
 import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.Optional;
+import squeek.applecore.api.AppleCoreAPI;
+import squeek.applecore.api.food.FoodValues;
 
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Timer;
@@ -100,18 +102,6 @@ public class Utils {
         }
     }
 
-    public static void checkStatus(EntityPlayer player) {
-        IEndurance endurance = player.getCapability(ENDURANCE, null);
-        if (endurance.getEndurance() <= 6f) {
-            if (player.world.isRemote) {
-                player.motionX *= 0.5;
-                player.motionZ *= 0.5;
-            } else {
-                player.addPotionEffect(new PotionEffect(MobEffects.HUNGER, 312, 1, false, false));
-            }
-        }
-    }
-
     public static IBlockState getBlock(String id) {
         IBlockState block = Blocks.AIR.getDefaultState();
         String[] name = id.split(":");
@@ -149,6 +139,27 @@ public class Utils {
                 playSound(player, SoundEvents.ENTITY_ITEM_BREAK);
             }
         }
+    }
+
+    public static String[] getFoodValues(ItemStack stack, EntityPlayer player) {
+        ItemFood food = (ItemFood) stack.getItem();
+        int hunger = food.getHealAmount(stack);
+        float saturation = food.getSaturationModifier(stack);
+        if (player != null) {
+            if (Loader.isModLoaded("applecore")) {
+                FoodValues foodValues = AppleCoreAPI.accessor.getFoodValuesForPlayer(stack, player);
+                hunger = foodValues.hunger;
+                saturation = foodValues.saturationModifier;
+            }
+            if (Loader.isModLoaded("pyrotech")) {
+                Potion comfort = Potion.REGISTRY.getObject(new ResourceLocation("pyrotech", "comfort"));
+                if (player.isPotionActive(comfort)) {
+                    hunger += (int) (food.getHealAmount(stack) * ModuleTechBasicConfig.CAMPFIRE_EFFECTS.COMFORT_HUNGER_MODIFIER);
+                    saturation += (float) (food.getSaturationModifier(stack) * ModuleTechBasicConfig.CAMPFIRE_EFFECTS.COMFORT_SATURATION_MODIFIER);
+                }
+            }
+        }
+        return new String[]{String.format("%d", hunger), NumberFormat.getPercentInstance().format(saturation)};
     }
 
     @Optional.Method(modid = "rtg")

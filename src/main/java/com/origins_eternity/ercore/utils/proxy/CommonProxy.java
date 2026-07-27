@@ -10,6 +10,9 @@ import com.origins_eternity.ercore.content.command.TPAHere;
 import com.origins_eternity.ercore.content.command.TPAccept;
 import com.origins_eternity.ercore.event.CommonEvents;
 import com.origins_eternity.ercore.gen.GenOres;
+import com.origins_eternity.ercore.message.DoubleJump;
+import com.origins_eternity.ercore.message.Roll;
+import com.origins_eternity.ercore.message.RollAnimation;
 import com.origins_eternity.ercore.message.SyncEndurance;
 import com.origins_eternity.ercore.utils.registry.RecipeRegister;
 import net.minecraftforge.common.MinecraftForge;
@@ -39,7 +42,7 @@ public class CommonProxy {
             }
         }
         if (Features.enableEndurance) {
-            MinecraftForge.EVENT_BUS.register(new CommonEvents());
+            MinecraftForge.EVENT_BUS.register(CommonEvents.class);
         }
         registerMessage();
     }
@@ -83,5 +86,8 @@ public class CommonProxy {
 
     private static void registerMessage() {
         packetHandler.registerMessage(SyncEndurance.Handler.class, SyncEndurance.class, 0, Side.CLIENT);
+        packetHandler.registerMessage(Roll.Handler.class, Roll.class, 1, Side.SERVER);
+        packetHandler.registerMessage(RollAnimation.Handler.class, RollAnimation.class, 2, Side.CLIENT);
+        packetHandler.registerMessage(DoubleJump.Handler.class, DoubleJump.class, 3, Side.SERVER);
     }
 }

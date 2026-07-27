@@ -40,4 +40,8 @@ public interface IEndurance {
     void addCoolDown(int value);
 
     void removeCoolDown(int value);
+
+    boolean getDoubleJumped();
+
+    void setDoubleJumped(boolean doubleJumped);
 }

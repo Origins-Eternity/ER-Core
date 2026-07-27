@@ -11,13 +11,12 @@ public class Items {
     public static final Item Clinker = new ItemCreator("Clinker", 0);
     public static final Item Cement_Powder = new ItemCreator("Cement_Powder", 0);
     public static final Item Tungsten_Ingot = new ItemCreator("Tungsten_Ingot", 0);
-    public static final Item Tungsten_Nugget = new ItemCreator("Tungsten_Nugget", 0);
     public static final Item Bronze_Ingot = new ItemCreator("Bronze_Ingot", 0);
     public static final Item Tin_Nugget = new ItemCreator("Tin_Nugget", 0);
+    public static final Item Tungsten_Nugget = new ItemCreator("Tungsten_Nugget", 0);
     public static final Item Searedbrick_Unfired = new ItemCreator("Searedbrick_Unfired", 0);
     public static final Item Tungsten_Steel_Ingot = new ItemCreator("Tungsten_Steel_Ingot", 0);
-    public static final Item Tungsten_Steel_Nugget = new ItemCreator("Tungsten_Steel_Nugget", 0);
     public static final Item Tungsten_Carbide_Ingot = new ItemCreator("Tungsten_Carbide_Ingot", 0);
-    public static final Item Tungsten_Carbide_Nugget = new ItemCreator("Tungsten_Carbide_Nugget", 0);
     public static final Item Ingot_Clay_Cast = new ItemCreator("Ingot_Clay_Cast", 0);
+    public static final Item Compressed_Tungsten_Steel = new ItemCreator("Compressed_Tungsten_Steel", 0);
 }

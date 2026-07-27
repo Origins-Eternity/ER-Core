@@ -21,6 +21,8 @@ public class Endurance implements IEndurance {
 
     private float saturation = 0;
 
+    private boolean doubleJumped = false;
+
     @Override
     public void setMaxEndurance(int maxEndurance) {
         this.maxEndurance = Math.min(40, maxEndurance);
@@ -139,6 +141,16 @@ public class Endurance implements IEndurance {
         }
     }
 
+    @Override
+    public boolean getDoubleJumped() {
+        return doubleJumped;
+    }
+
+    @Override
+    public void setDoubleJumped(boolean doubleJumped) {
+        this.doubleJumped = doubleJumped;
+    }
+
     public static class EnduranceProvider implements ICapabilitySerializable<NBTBase> {
         final Capability<IEndurance> capability;
         final IEndurance instance;
@@ -178,9 +190,10 @@ public class Endurance implements IEndurance {
             NBTTagCompound compound = new NBTTagCompound();
             compound.setInteger("MaxEndurance", instance.getMaxEndurance());
             compound.setInteger("Endurance", instance.getEndurance());
-            compound.setInteger("CoolDown", instance.getCoolDown());
             compound.setFloat("Exhaustion", instance.getExhaustion());
             compound.setFloat("Saturation", instance.getSaturation());
+            compound.setInteger("CoolDown", instance.getCoolDown());
+            compound.setBoolean("DoubleJumped", instance.getDoubleJumped());
             if (Loader.isModLoaded("firstaid")) {
                 compound.setDouble("MaxHealth", instance.getMaxHealth());
             }
@@ -193,9 +206,10 @@ public class Endurance implements IEndurance {
                 NBTTagCompound compound = (NBTTagCompound) nbt;
                 instance.setMaxEndurance(compound.getInteger("MaxEndurance"));
                 instance.setEndurance(compound.getInteger("Endurance"));
-                instance.setCoolDown(compound.getInteger("CoolDown"));
                 instance.setExhaustion(compound.getFloat("Exhaustion"));
                 instance.setSaturation(compound.getFloat("Saturation"));
+                instance.setCoolDown(compound.getInteger("CoolDown"));
+                instance.setDoubleJumped(compound.getBoolean("DoubleJumped"));
                 if (Loader.isModLoaded("firstaid")) {
                     instance.setMaxHealth(compound.getDouble("MaxHealth"));
                 }

@@ -1,4 +1,4 @@
-package com.origins_eternity.ercore.content.gui;
+package com.origins_eternity.ercore.content.render;
 
 import com.origins_eternity.ercore.content.capability.endurance.IEndurance;
 import net.minecraft.client.Minecraft;

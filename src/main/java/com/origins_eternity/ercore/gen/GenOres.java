@@ -12,7 +12,7 @@ import net.minecraftforge.fml.common.IWorldGenerator;
 
 import java.util.Random;
 
-import static com.origins_eternity.ercore.content.block.Ores.*;
+import static com.origins_eternity.ercore.content.block.Blocks.*;
 
 public class GenOres implements IWorldGenerator {
 	private final WorldGenerator copper_ore;
@@ -20,28 +20,28 @@ public class GenOres implements IWorldGenerator {
 	private final WorldGenerator tungsten_ore;
 	private final WorldGenerator nickel_ore;
 
-	private final int copperVeinSize = 6;
-	private final int copperChance = 32;
-	private final int copperMinHeight = 16;
-	private final int copperMaxHeight = 112;
-	private final int tinVeinSize = 5;
-	private final int tinChance = 29;
+	private final int copperVeinSize = 8;
+	private final int copperChance = 22;
+	private final int copperMinHeight = 40;
+	private final int copperMaxHeight = 96;
+	private final int tinVeinSize = 6;
+	private final int tinChance = 18;
 	private final int tinMinHeight = 16;
-	private final int tinMaxHeight = 118;
-	private final int tungstenVeinSize  = 3;
-	private final int tungstenChance = 35;
-	private final int tungstenMinHeight = 0;
-	private final int tungstenMaxHeight = 16;
-	private final int nickelVeinSize  = 4;
-	private final int nickelChance = 29;
-	private final int nickelMinHeight = 8;
-	private final int nickelMaxHeight = 45;
+	private final int tinMaxHeight = 72;
+	private final int nickelVeinSize  = 5;
+	private final int nickelChance = 14;
+	private final int nickelMinHeight = 6;
+	private final int nickelMaxHeight = 48;
+	private final int tungstenVeinSize  = 4;
+	private final int tungstenChance = 6;
+	private final int tungstenMinHeight = 6;
+	private final int tungstenMaxHeight = 24;
 
 	public GenOres() {
 		copper_ore = new WorldGenMinable(Copper_Ore.getDefaultState(), copperVeinSize, BlockMatcher.forBlock(Blocks.STONE));
 		tin_ore = new WorldGenMinable(Tin_Ore.getDefaultState(), tinVeinSize, BlockMatcher.forBlock(Blocks.STONE));
-		tungsten_ore = new WorldGenMinable(Tungsten_ore.getDefaultState(), tungstenVeinSize, BlockMatcher.forBlock(Blocks.STONE));
 		nickel_ore = new WorldGenMinable(Nickel_ore.getDefaultState(), nickelVeinSize, BlockMatcher.forBlock(Blocks.STONE));
+		tungsten_ore = new WorldGenMinable(Tungsten_ore.getDefaultState(), tungstenVeinSize, BlockMatcher.forBlock(Blocks.STONE));
 	}
 
 	@Override
@@ -50,8 +50,8 @@ public class GenOres implements IWorldGenerator {
 		if (dimension == 0) {
 			runGenerator(copper_ore, world, random, chunkX, chunkZ, copperChance, copperMinHeight, copperMaxHeight);
 			runGenerator(tin_ore, world, random, chunkX, chunkZ, tinChance, tinMinHeight, tinMaxHeight);
-			runGenerator(tungsten_ore, world, random, chunkX, chunkZ, tungstenChance, tungstenMinHeight, tungstenMaxHeight);
 			runGenerator(nickel_ore, world, random, chunkX, chunkZ, nickelChance, nickelMinHeight, nickelMaxHeight);
+			runGenerator(tungsten_ore, world, random, chunkX, chunkZ, tungstenChance, tungstenMinHeight, tungstenMaxHeight);
 		}
 	}
 
