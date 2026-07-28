@@ -102,6 +102,11 @@ public class Utils {
         }
     }
 
+    public static String getOreDictName(String type, String origin) {
+        String name = origin.replaceAll("_", "").replace(type, "");
+        return type + name.substring(12, 13).toUpperCase() + name.substring(13);
+    }
+
     public static IBlockState getBlock(String id) {
         IBlockState block = Blocks.AIR.getDefaultState();
         String[] name = id.split(":");

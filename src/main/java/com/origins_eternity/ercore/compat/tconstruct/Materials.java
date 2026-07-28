@@ -37,19 +37,19 @@ public class Materials {
     }
 
     public static void addTinkerMelting() {
+        registerMelting(Items.Tin_Nugget, TinkerFluids.tin, 16);
         registerMelting(Items.Tungsten_Ingot, Fluids.Tungsten, 144);
-        registerMelting(Blocks.Tungsten_ore, Fluids.Tungsten, 144);
-        registerMelting(Items.Tungsten_Carbide_Ingot, Fluids.Tungsten_Carbide, 144);
+        registerMelting(Items.Tungsten_Nugget, Fluids.Tungsten, 16);
+        registerMelting(Blocks.Tungsten_Ore, Fluids.Tungsten, 144);
         registerMelting(Items.Tungsten_Steel_Ingot, Fluids.Tungsten_Steel, 144);
     }
 
     public static void addTinkerAlloying() {
-        registerAlloy(new FluidStack(Fluids.Tungsten_Steel, 4), new FluidStack(TinkerFluids.cobalt, 1), new FluidStack(Fluids.Tungsten_Carbide, 3));
+        registerAlloy(new FluidStack(Fluids.Tungsten_Steel, 4), new FluidStack(TinkerFluids.cobalt, 1), new FluidStack(Fluids.Tungsten, 3));
     }
 
     public static void addTinkerCasting() {
         registerTableCasting(new ItemStack(Items.Tungsten_Ingot), ItemStack.EMPTY, Fluids.Tungsten, 144);
-        registerTableCasting(new ItemStack(Items.Tungsten_Carbide_Ingot), ItemStack.EMPTY, Fluids.Tungsten_Carbide, 144);
         registerTableCasting(new ItemStack(Items.Tungsten_Steel_Ingot), ItemStack.EMPTY, Fluids.Tungsten_Steel, 144);
         registerTableCasting(new CastingRecipe(new ItemStack(Items.Bronze_Ingot), RecipeMatch.of(Items.Ingot_Clay_Cast), TinkerFluids.bronze, 144, true, false));
         registerTableCasting(new CastingRecipe(new ItemStack(Items.Ingot_Clay_Cast), RecipeMatch.of(TinkerCommons.searedBrick), TinkerFluids.clay, 288, false, false));

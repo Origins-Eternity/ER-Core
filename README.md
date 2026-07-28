@@ -59,7 +59,7 @@ events.onPlayerRightClickItem(function(event as PlayerRightClickItemEvent) {
 ![This is an image](https://s41.ax1x.com/2026/07/27/pmRH1Y9.png)
 **Except tungsten ore, the mod does not add ingots, nuggets and smelting recipes to other ores. Only some fluids have been added to the smelter recipe. However, all ores will spawn and drop in the world normally.**  
 ### Blueprints  
-**Blueprints are the tools needed to craft some items in the above modpack, and each blueprint has 10 durability. Mod doesn't add recipes to these blueprints, the textures come from the Artisan Worktables.**  
+**Blueprints are the tools needed to craft some items in the above modpack and this mod doesn't add recipes to these blueprints. The textures are come from the Artisan Worktables.**  
 ### Ingot clay cast  
 **Ingot clay cast is the clay version of ingot cast. Only bronze material can use this to make a bronze ingot. Use clay fluid and seared brick to craft it. Like other clay cast, use and craft it will consume the cast. Only added when Tinkers' Construct 2 is installed.**  
 ### Tinker's material  

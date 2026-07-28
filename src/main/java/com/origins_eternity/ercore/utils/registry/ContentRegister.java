@@ -34,6 +34,7 @@ import static com.origins_eternity.ercore.config.Configuration.Compat;
 import static com.origins_eternity.ercore.config.Configuration.Contents;
 import static com.origins_eternity.ercore.content.block.Blocks.BLOCKITEMS;
 import static com.origins_eternity.ercore.content.block.FluidBlocks.FLUIDBLOCKS;
+import static com.origins_eternity.ercore.utils.Utils.getOreDictName;
 import static slimeknights.tconstruct.tools.TinkerTraits.autosmelt;
 
 @Mod.EventBusSubscriber(modid = MOD_ID)
@@ -65,13 +66,11 @@ public class ContentRegister {
                     event.getRegistry().register(item);
                 }
                 if (itemname.contains("ingot")) {
-                    String ingotname = itemname.replaceAll("_", "").replace("ingot", "");
-                    String oredictname = ingotname.substring(12, 13).toUpperCase() + ingotname.substring(13);
-                    OreDictionary.registerOre("ingot" + oredictname, item);
+                    OreDictionary.registerOre(getOreDictName("ingot", itemname), item);
                 } else if (itemname.contains("nugget")) {
-                    String nuggetname = itemname.replaceAll("_", "").replace("nugget", "");
-                    String oredictname = nuggetname.substring(12, 13).toUpperCase() + nuggetname.substring(13);
-                    OreDictionary.registerOre("nugget" + oredictname, item);
+                    OreDictionary.registerOre(getOreDictName("nugget", itemname), item);
+                } else if (itemname.contains("dust")) {
+                    OreDictionary.registerOre(getOreDictName("dust", itemname), item);
                 } else if (!(itemname.contains("_"))) {
                     OreDictionary.registerOre(itemname, item);
                 }
@@ -90,13 +89,7 @@ public class ContentRegister {
         if (Contents.enableBlueprints) {
             for (Item print : Blueprints.PRINTS) {
                 event.getRegistry().register(print);
-                String itemname = print.getTranslationKey();
                 OreDictionary.registerOre("blueprint", print);
-                if (itemname.contains("workshop")) {
-                    OreDictionary.registerOre("blueprintWorkshop", print);
-                } else if (itemname.contains("workstation")) {
-                    OreDictionary.registerOre("blueprintWorkstation", print);
-                }
             }
         }
         if (Contents.enableFluids) {

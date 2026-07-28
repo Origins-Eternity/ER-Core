@@ -23,7 +23,7 @@ public class CreativeTab {
             } else if (Contents.enableOres) {
                 icon = new ItemStack(Blocks.Copper_Ore, 1);
             } else if (Contents.enableBlueprints) {
-                icon = new ItemStack(Blueprints.Basic_Workshop, 1);
+                icon = new ItemStack(Blueprints.Crafting_Table, 1);
             } else if (Contents.enableFluids) {
                 icon = new ItemStack(Fluids.Tungsten.getBlock());
             } else if ((Compat.enableHerbs) && (Loader.isModLoaded("firstaid"))) {

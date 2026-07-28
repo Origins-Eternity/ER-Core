@@ -40,8 +40,8 @@ public class GenOres implements IWorldGenerator {
 	public GenOres() {
 		copper_ore = new WorldGenMinable(Copper_Ore.getDefaultState(), copperVeinSize, BlockMatcher.forBlock(Blocks.STONE));
 		tin_ore = new WorldGenMinable(Tin_Ore.getDefaultState(), tinVeinSize, BlockMatcher.forBlock(Blocks.STONE));
-		nickel_ore = new WorldGenMinable(Nickel_ore.getDefaultState(), nickelVeinSize, BlockMatcher.forBlock(Blocks.STONE));
-		tungsten_ore = new WorldGenMinable(Tungsten_ore.getDefaultState(), tungstenVeinSize, BlockMatcher.forBlock(Blocks.STONE));
+		nickel_ore = new WorldGenMinable(Nickel_Ore.getDefaultState(), nickelVeinSize, BlockMatcher.forBlock(Blocks.STONE));
+		tungsten_ore = new WorldGenMinable(Tungsten_Ore.getDefaultState(), tungstenVeinSize, BlockMatcher.forBlock(Blocks.STONE));
 	}
 
 	@Override
