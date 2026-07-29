@@ -32,7 +32,7 @@ public class DoubleJump implements IMessage {
                 player.velocityChanged = true;
 
                 endurance.setDoubleJumped(true);
-                endurance.addExhaustion(1f);
+                endurance.consumeEndurance(1);
             });
             return null;
         }

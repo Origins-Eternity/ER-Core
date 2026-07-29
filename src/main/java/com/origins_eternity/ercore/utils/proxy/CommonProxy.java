@@ -25,6 +25,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import static com.origins_eternity.ercore.ERCore.packetHandler;
 import static com.origins_eternity.ercore.compat.tconstruct.Materials.*;
 import static com.origins_eternity.ercore.config.Configuration.*;
+import static com.origins_eternity.ercore.content.potion.Potions.registerPotionRecipes;
 import static com.origins_eternity.ercore.utils.registry.ContentRegister.registerFluids;
 
 public class CommonProxy {
@@ -51,6 +52,9 @@ public class CommonProxy {
         if (Contents.enableOres) {
             RecipeRegister.registerRecipes();
             GameRegistry.registerWorldGenerator(new GenOres(), 0);
+        }
+        if (Features.enableEndurance) {
+            registerPotionRecipes();
         }
         if (Loader.isModLoaded("tconstruct")) {
             if ((Contents.enableOres) && (Contents.enableItems) && (Compat.enableMaterial) && (Contents.enableFluids)) {

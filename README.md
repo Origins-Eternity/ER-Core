@@ -16,16 +16,18 @@
 ![This is an image](https://s21.ax1x.com/2025/01/17/pEFjDr8.png)
 **Players will get hurt while doing strenuous exercise after exhaustion, like sprint, jump, etc. This can cause to death!**
 ![This is an image](https://s21.ax1x.com/2025/01/17/pEFjTZF.png)
+### Potion
+**Add energy potion effect, which can recover 1 sanity every `40 >> amplifier` ticks. Brewed from sugar with potion of jump boost or rabbit foot with potion of speed. During the effect, players won't consume any endurance, except for rolling or double jumping. But once the effect goes, players will get weakness and mining fatigue as side effects.**
 ### CraftTweaker
 **Add ZenExpansions for [IPlayer](https://docs.blamejared.com/1.12/en/Vanilla/Players/IPlayer). Developers can call this method on any [IPlayer](https://docs.blamejared.com/1.12/en/Vanilla/Players/IPlayer) object, including its subtypes.**
 - **`getEndurance()`: returns player's endurance value as int.**
-- **`addEndurance(float value)`: add or remove player's endurance value.**
+- **`addEndurance(int value)`: add or remove player's endurance value.**
 ```zenscript
 import crafttweaker.event.PlayerRightClickItemEvent;
 
 events.onPlayerRightClickItem(function(event as PlayerRightClickItemEvent) {
     if(!event.world.isRemote() && event.item.definition.id == "minecraft:fishing_rod") {
-        event.player.addEndurance(-1f);
+        event.player.addEndurance(-1);
     }
 });
 ```
@@ -34,8 +36,6 @@ events.onPlayerRightClickItem(function(event as PlayerRightClickItemEvent) {
 **The compatibility of these features is unknown, and some features are designed specifically for the modpack described above. Configurations are already available for some features, which can be highly customizable. If you encounter any problems, please feel free to give feedback.**
 ### Replace The Products of Lava and Water  
 **When lava and water meets, the original obsidian will be replaced with basalt blocks. Support custom products.**
-### Default World Type  
-**It's not really a change, but rather swapping the RTG world type with the default world type. Valid only when Realistic Terrain Generation and other fork version which has the same modid is installed.**  
 ### No Infinite Fluids
 **All fluids in the game cannot create new fluid resources, but players can still bottle water with water.**
 ![This is an image](https://s1.ax1x.com/2022/12/28/pSSP7Sx.png)

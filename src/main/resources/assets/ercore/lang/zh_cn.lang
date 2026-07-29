@@ -31,7 +31,6 @@ item.ercore.compressed_tungsten_steel.name=致密钨钢
 item.ercore.bag_blueprint.name=背包设计蓝图
 item.ercore.gunpowder_blueprint.name=火药设计蓝图
 item.ercore.tool_blueprint.name=工具设计蓝图
-item.ercore.workstation_blueprint.name=工作站设计蓝图
 item.ercore.workshop_blueprint.name=工作坊设计蓝图
 item.ercore.crafting_table_blueprint.name=工作台设计蓝图
 item.ercore.furnace_core_blueprint.name=熔炉核心设计蓝图
@@ -41,6 +40,12 @@ item.ercore.altar_blueprint.name=祭坛设计蓝图
 item.ercore.filter_blueprint.name=过滤器设计蓝图
 
 item.ercore.herbs.name=草药
+
+effect.energy=能量
+tipped_arrow.effect.energy=能量之箭
+potion.effect.energy=能量药水
+splash_potion.effect.energy=喷溅型能量药水
+lingering_potion.effect.energy=滞留型能量药水
 
 fluid.ercore.tungsten=熔融钨
 fluid.ercore.sugarcane=熔融甘蔗
@@ -58,8 +63,6 @@ config.ercore.material=启用材料
 config.ercore.material.tooltip=是否添加一种新的匠魂材料。（需要启用物品，流体和矿石！）
 config.ercore.herbs=启用草药
 config.ercore.herbs.tooltip=是否启用草药。（仅对急救/医药护理模组有效！）
-config.ercore.worldtype=启用默认世界类型
-config.ercore.worldtype.tooltip=是否改变默认世界类型为RTG。
 config.ercore.regeneration=启用生命恢复
 config.ercore.regeneration.tooltip=当玩家生命上限增大时，是否给予玩家生命恢复效果。
 config.ercore.replace=启用箱子替换
@@ -80,8 +83,6 @@ config.ercore.fluids.tooltip=是否启用流体。
 
 config.sanity.features=功能
 config.sanity.features.tooltip=功能配置
-config.ercore.hardcore=启用硬核模式
-config.ercore.hardcore.tooltip=溺水、熔岩或闪电造成的伤害是否可以立即杀死玩家。
 config.ercore.tpa=启用TPA指令
 config.ercore.tpa.tooltip=是否添加TPA指令。
 config.ercore.endurance=启用耐力

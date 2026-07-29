@@ -23,6 +23,8 @@ public class Endurance implements IEndurance {
 
     private boolean doubleJumped = false;
 
+    private boolean energetic = false;
+
     @Override
     public void setMaxEndurance(int maxEndurance) {
         this.maxEndurance = Math.min(40, maxEndurance);
@@ -87,7 +89,7 @@ public class Endurance implements IEndurance {
 
     @Override
     public void addExhaustion(float value) {
-        if (endurance > 0) {
+        if (endurance > 0 && !energetic) {
             exhaustion += value;
             while (exhaustion > 1) {
                 consumeEndurance(1);
@@ -120,9 +122,7 @@ public class Endurance implements IEndurance {
     @Override
     public void recoverEndurance(int value) {
         if (endurance < maxEndurance) {
-            if (coolDown == 0) {
-                endurance = Math.min(maxEndurance, endurance + value);
-            }
+            endurance = Math.min(maxEndurance, endurance + value);
         }
     }
 
@@ -149,6 +149,16 @@ public class Endurance implements IEndurance {
     @Override
     public void setDoubleJumped(boolean doubleJumped) {
         this.doubleJumped = doubleJumped;
+    }
+
+    @Override
+    public boolean getEnergetic() {
+        return energetic;
+    }
+
+    @Override
+    public void setEnergetic(boolean energetic) {
+        this.energetic = energetic;
     }
 
     public static class EnduranceProvider implements ICapabilitySerializable<NBTBase> {
@@ -194,6 +204,7 @@ public class Endurance implements IEndurance {
             compound.setFloat("Saturation", instance.getSaturation());
             compound.setInteger("CoolDown", instance.getCoolDown());
             compound.setBoolean("DoubleJumped", instance.getDoubleJumped());
+            compound.setBoolean("Energetic", instance.getEnergetic());
             if (Loader.isModLoaded("firstaid")) {
                 compound.setDouble("MaxHealth", instance.getMaxHealth());
             }
@@ -210,6 +221,7 @@ public class Endurance implements IEndurance {
                 instance.setSaturation(compound.getFloat("Saturation"));
                 instance.setCoolDown(compound.getInteger("CoolDown"));
                 instance.setDoubleJumped(compound.getBoolean("DoubleJumped"));
+                instance.setEnergetic(compound.getBoolean("Energetic"));
                 if (Loader.isModLoaded("firstaid")) {
                     instance.setMaxHealth(compound.getDouble("MaxHealth"));
                 }

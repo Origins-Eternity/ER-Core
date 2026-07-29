@@ -37,10 +37,14 @@ public class Materials {
     }
 
     public static void addTinkerMelting() {
+        registerMelting(Blocks.Tin_Ore, TinkerFluids.tin, 144);
+        registerMelting(Items.Tin_Dust, TinkerFluids.tin, 144);
         registerMelting(Items.Tin_Nugget, TinkerFluids.tin, 16);
+        registerMelting(Blocks.Tungsten_Ore, Fluids.Tungsten, 144);
+        registerMelting(Items.Tungsten_Dust, Fluids.Tungsten, 144);
         registerMelting(Items.Tungsten_Ingot, Fluids.Tungsten, 144);
         registerMelting(Items.Tungsten_Nugget, Fluids.Tungsten, 16);
-        registerMelting(Blocks.Tungsten_Ore, Fluids.Tungsten, 144);
+        registerMelting(Items.Tungsten_Steel_Dust, Fluids.Tungsten_Steel, 144);
         registerMelting(Items.Tungsten_Steel_Ingot, Fluids.Tungsten_Steel, 144);
     }
 

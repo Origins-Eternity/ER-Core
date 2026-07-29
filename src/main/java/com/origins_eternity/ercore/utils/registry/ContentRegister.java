@@ -12,6 +12,8 @@ import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.renderer.block.statemap.StateMapperBase;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.potion.Potion;
+import net.minecraft.potion.PotionType;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.client.model.ModelLoader;
@@ -30,10 +32,10 @@ import java.util.Objects;
 
 import static com.origins_eternity.ercore.ERCore.MOD_ID;
 import static com.origins_eternity.ercore.compat.firstaid.Herbs.Herbs;
-import static com.origins_eternity.ercore.config.Configuration.Compat;
-import static com.origins_eternity.ercore.config.Configuration.Contents;
+import static com.origins_eternity.ercore.config.Configuration.*;
 import static com.origins_eternity.ercore.content.block.Blocks.BLOCKITEMS;
 import static com.origins_eternity.ercore.content.block.FluidBlocks.FLUIDBLOCKS;
+import static com.origins_eternity.ercore.content.potion.Potions.*;
 import static com.origins_eternity.ercore.utils.Utils.getOreDictName;
 import static slimeknights.tconstruct.tools.TinkerTraits.autosmelt;
 
@@ -50,6 +52,22 @@ public class ContentRegister {
             for (Block fluidblock : FluidBlocks.FLUIDBLOCKS) {
                 event.getRegistry().register(fluidblock);
             }
+        }
+    }
+
+    @SubscribeEvent
+    public static void registerPotions(RegistryEvent.Register<Potion> event) {
+        if (Features.enableEndurance) {
+            for (Potion potion : POTIONS) {
+                event.getRegistry().register(potion);
+            }
+        }
+    }
+
+    @SubscribeEvent
+    public static void registerPotionTypes(RegistryEvent.Register<PotionType> event) {
+        if (Features.enableEndurance) {
+            event.getRegistry().registerAll(Energy_Potion, Long_Energy_Potion, Strong_Energy_Potion);
         }
     }
 

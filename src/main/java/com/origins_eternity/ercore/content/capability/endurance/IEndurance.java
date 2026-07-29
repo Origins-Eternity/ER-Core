@@ -44,4 +44,8 @@ public interface IEndurance {
     boolean getDoubleJumped();
 
     void setDoubleJumped(boolean doubleJumped);
+
+    boolean getEnergetic();
+
+    void setEnergetic(boolean energetic);
 }

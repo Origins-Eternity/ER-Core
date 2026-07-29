@@ -2,16 +2,13 @@ package com.origins_eternity.ercore.utils.proxy;
 
 import com.origins_eternity.ercore.content.render.Overlay;
 import com.origins_eternity.ercore.event.ClientEvents;
-import com.origins_eternity.ercore.utils.Utils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.settings.KeyBinding;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
-import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.event.*;
 import org.lwjgl.input.Keyboard;
 
-import static com.origins_eternity.ercore.config.Configuration.Compat;
 import static com.origins_eternity.ercore.config.Configuration.Features;
 import static com.origins_eternity.ercore.utils.Utils.installResourcepacks;
 
@@ -39,9 +36,6 @@ public class ClientProxy extends CommonProxy {
     @Override
     public void init(FMLInitializationEvent event) {
         super.init(event);
-        if (Loader.isModLoaded("rtg") && Compat.enableWorldType) {
-            Utils.defaultWorldtype();
-        }
     }
 
     @Override

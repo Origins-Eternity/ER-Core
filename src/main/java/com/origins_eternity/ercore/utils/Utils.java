@@ -2,6 +2,7 @@ package com.origins_eternity.ercore.utils;
 
 import com.codetaylor.mc.pyrotech.modules.tech.basic.ModuleTechBasicConfig;
 import com.origins_eternity.ercore.content.capability.endurance.IEndurance;
+import com.origins_eternity.ercore.content.potion.Potions;
 import com.origins_eternity.ercore.message.SyncEndurance;
 import ichttt.mods.firstaid.api.CapabilityExtendedHealthSystem;
 import ichttt.mods.firstaid.api.damagesystem.AbstractDamageablePart;
@@ -13,18 +14,19 @@ import net.minecraft.client.resources.ResourcePackRepository;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
+import net.minecraft.init.MobEffects;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.*;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.play.server.SPacketSoundEffect;
 import net.minecraft.potion.Potion;
+import net.minecraft.potion.PotionEffect;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.util.text.TextFormatting;
-import net.minecraft.world.WorldType;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.Optional;
@@ -71,9 +73,15 @@ public class Utils {
 
     public static void tickUpdate(EntityPlayer player) {
         IEndurance endurance = player.getCapability(ENDURANCE, null);
-        endurance.setMaxEndurance((int) (2 * player.getHealth()));
-        if (endurance.getEndurance() > endurance.getMaxEndurance()) {
-            endurance.setEndurance(endurance.getMaxEndurance());
+        if (endurance.getEnergetic()) {
+            endurance.setMaxEndurance(40);
+            if (!player.isPotionActive(Potions.Energy)) {
+                player.addPotionEffect(new PotionEffect(MobEffects.WEAKNESS, 600, 0));
+                player.addPotionEffect(new PotionEffect(MobEffects.MINING_FATIGUE, 400, 0));
+                endurance.setEnergetic(false);
+            }
+        } else {
+            endurance.setMaxEndurance((int) (2 * player.getHealth()));
         }
         if (player.isHandActive()) {
             Item item = player.getHeldItem(player.getActiveHand()).getItem();
@@ -165,18 +173,6 @@ public class Utils {
             }
         }
         return new String[]{String.format("%d", hunger), NumberFormat.getPercentInstance().format(saturation)};
-    }
-
-    @Optional.Method(modid = "rtg")
-    public static void defaultWorldtype() {
-        for (int i = 0; i < WorldType.WORLD_TYPES.length; ++i) {
-            if (WorldType.WORLD_TYPES[i] == WorldType.byName("RTG")) {
-                WorldType defaultype = WorldType.WORLD_TYPES[0];
-                WorldType.WORLD_TYPES[0] = WorldType.WORLD_TYPES[i];
-                WorldType.WORLD_TYPES[i] = defaultype;
-                break;
-            }
-        }
     }
 
     @Optional.Method(modid = "firstaid")

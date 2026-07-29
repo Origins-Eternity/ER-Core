@@ -3,13 +3,13 @@ package com.origins_eternity.ercore.event;
 import com.origins_eternity.ercore.content.capability.Capabilities;
 import com.origins_eternity.ercore.content.capability.endurance.Endurance;
 import com.origins_eternity.ercore.content.capability.endurance.IEndurance;
+import com.origins_eternity.ercore.content.potion.Potions;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.Capability;
@@ -106,7 +106,7 @@ public class CommonEvents {
             EntityPlayer player = (EntityPlayer) entity;
             if (!player.isCreative()) {
                 IEndurance endurance = player.getCapability(Capabilities.ENDURANCE, null);
-                if (!player.world.isRemote) {
+                if (!player.world.isRemote && !player.isPotionActive(Potions.Energy)) {
                     endurance.addCoolDown(60);
                     if (endurance.getEndurance() <= 0) {
                         player.attackEntityFrom(EXHAUSTED, 1f);
@@ -250,18 +250,7 @@ public class CommonEvents {
 
     @SubscribeEvent
     public static void onLivingDamage(LivingDamageEvent event) {
-        if (event.getEntity() instanceof EntityPlayer) {
-            EntityPlayer player = (EntityPlayer) event.getEntity();
-            if ((!player.world.isRemote) && (Features.enableHardcore)) {
-                if (event.getSource() == DamageSource.DROWN) {
-                    event.setAmount(player.getHealth());
-                } else if (event.getSource() == DamageSource.LAVA) {
-                    event.setAmount(player.getHealth());
-                } else if (event.getSource() == DamageSource.LIGHTNING_BOLT) {
-                    event.setAmount(player.getHealth());
-                }
-            }
-        } else if (event.getSource().getTrueSource() instanceof EntityPlayer) {
+        if (event.getSource().getTrueSource() instanceof EntityPlayer) {
             EntityPlayer player = (EntityPlayer) event.getSource().getTrueSource();
             if (!player.isCreative() && Features.enableEndurance) {
                 IEndurance endurance = player.getCapability(Capabilities.ENDURANCE, null);

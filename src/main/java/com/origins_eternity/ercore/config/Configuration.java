@@ -38,12 +38,6 @@ public class Configuration {
                 @Config.Comment("Whether to add herbs or not. Only work for Fisrt Aid!")
                 public boolean enableHerbs = false;
 
-                @Config.Name("Enable Default World Type")
-                @Config.RequiresMcRestart()
-                @Config.LangKey("config.ercore.worldtype")
-                @Config.Comment("Whether to change default world type to RTG or not.")
-                public boolean enableWorldType = true;
-
                 @Config.Name("Enable Regeneration Buff")
                 @Config.LangKey("config.ercore.regeneration")
                 @Config.Comment("Whether to add the regeneration buff when player's maxhealth increased or not.")
@@ -87,11 +81,6 @@ public class Configuration {
         }
         
         public static class ConfigFeatures {
-                @Config.Name("Enable Hardcore")
-                @Config.LangKey("config.ercore.hardcore")
-                @Config.Comment("Whether damage from drown, lava or lightning should kill player immediately.")
-                public boolean enableHardcore = false;
-
                 @Config.Name("Enable TPA")
                 @Config.RequiresMcRestart()
                 @Config.LangKey("config.ercore.tpa")

@@ -43,7 +43,7 @@ public class Roll implements IMessage {
                 player.fallDistance = 0;
 
                 IEndurance endurance = player.getCapability(Capabilities.ENDURANCE, null);
-                endurance.addExhaustion(3f);
+                endurance.consumeEndurance(3);
 
                 RollAnimation animation = new RollAnimation(player.getEntityId());
                 packetHandler.sendToAllTracking(animation, player);

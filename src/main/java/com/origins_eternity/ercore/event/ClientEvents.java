@@ -22,7 +22,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import static com.origins_eternity.ercore.ERCore.packetHandler;
 import static com.origins_eternity.ercore.config.Configuration.Features;
 import static com.origins_eternity.ercore.content.capability.Capabilities.ENDURANCE;
-import static com.origins_eternity.ercore.content.render.Overlay.GUI;
+import static com.origins_eternity.ercore.content.render.Overlay.indicator;
 import static com.origins_eternity.ercore.utils.Utils.getFoodValues;
 import static com.origins_eternity.ercore.utils.proxy.ClientProxy.mc;
 import static com.origins_eternity.ercore.utils.proxy.ClientProxy.rollKey;
@@ -60,7 +60,7 @@ public class ClientEvents {
                 gui.drawTexturedModalRect(posX, posY, 16, 27, 9, 9);
                 gui.drawTexturedModalRect(posX, posY, 61, 27, 9, 9);
                 posX += mc().fontRenderer.getStringWidth(values[0]) + 16;
-                mc().getTextureManager().bindTexture(GUI);
+                mc().getTextureManager().bindTexture(indicator);
                 gui.drawTexturedModalRect(posX, posY, 9, 0, 9, 9);
                 mc().getTextureManager().bindTexture(Gui.ICONS);
                 gui.drawTexturedModalRect(posX, posY, 61, 27, 9, 9);
@@ -79,7 +79,7 @@ public class ClientEvents {
             IEndurance endurance = player.getCapability(ENDURANCE, null);
             if (rollKey.isPressed()) {
                 if (RollRender.getAnimationProgress(player.getEntityId()) >= 0.0f) return;
-                if (player.onGround && endurance.getEndurance() >= 5) {
+                if (player.onGround && endurance.getEndurance() >= 3) {
                     packetHandler.sendToServer(new Roll());
                     player.playSound(SoundEvents.ENTITY_BAT_TAKEOFF, 0.3F, 0.6F);
                 }
