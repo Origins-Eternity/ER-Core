@@ -31,8 +31,8 @@ import javax.annotation.Nonnull;
 import java.util.Objects;
 
 import static com.origins_eternity.ercore.ERCore.MOD_ID;
-import static com.origins_eternity.ercore.compat.firstaid.Herbs.Herbs;
-import static com.origins_eternity.ercore.config.Configuration.*;
+import static com.origins_eternity.ercore.config.Configuration.Contents;
+import static com.origins_eternity.ercore.config.Configuration.Features;
 import static com.origins_eternity.ercore.content.block.Blocks.BLOCKITEMS;
 import static com.origins_eternity.ercore.content.block.FluidBlocks.FLUIDBLOCKS;
 import static com.origins_eternity.ercore.content.potion.Potions.*;
@@ -115,9 +115,6 @@ public class ContentRegister {
                 event.getRegistry().register(fluiditem);
             }
         }
-        if ((Compat.enableHerbs) && (Loader.isModLoaded("firstaid"))) {
-            event.getRegistry().register(Herbs);
-        }
         if (Loader.isModLoaded("tconstruct") && Loader.isModLoaded("pyrotech")) {
             autosmelt.addItem(Item.REGISTRY.getObject(new ResourceLocation("pyrotech:furnace_core")));
         }
@@ -127,31 +124,6 @@ public class ContentRegister {
         for (Fluid fluid : Fluids.FLUIDS) {
             FluidRegistry.registerFluid(fluid);
             FluidRegistry.addBucketForFluid(fluid);
-        }
-    }
-
-    @SideOnly(Side.CLIENT)
-    public static void registerModels() {
-        if (Contents.enableItems) {
-            for (Item item : Items.ITEMS) {
-                ModelLoader.setCustomModelResourceLocation(item, 0, new ModelResourceLocation(Objects.requireNonNull(item.getRegistryName()), "inventory"));
-            }
-        }
-        if (Contents.enableOres) {
-            for (Item blockitem : BLOCKITEMS) {
-                ModelLoader.setCustomModelResourceLocation(blockitem, 0, new ModelResourceLocation(Objects.requireNonNull(blockitem.getRegistryName()), "inventory"));
-            }
-            for (Block block : Blocks.BLOCKS) {
-                ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(block), 0, new ModelResourceLocation(Objects.requireNonNull(block.getRegistryName()), "inventory"));
-            }
-        }
-        if (Contents.enableBlueprints) {
-            for (Item print : Blueprints.PRINTS) {
-                ModelLoader.setCustomModelResourceLocation(print, 0, new ModelResourceLocation(MOD_ID + ":" + "blueprint", "inventory"));
-            }
-        }
-        if ((Compat.enableHerbs) && (Loader.isModLoaded("firstaid"))) {
-            ModelLoader.setCustomModelResourceLocation(Herbs, 0, new ModelResourceLocation(MOD_ID + ":" + "herbs", "inventory"));
         }
     }
 
@@ -178,7 +150,24 @@ public class ContentRegister {
 
     @SubscribeEvent
     public static void registerModels(ModelRegistryEvent event) {
-        registerModels();
+        if (Contents.enableItems) {
+            for (Item item : Items.ITEMS) {
+                ModelLoader.setCustomModelResourceLocation(item, 0, new ModelResourceLocation(Objects.requireNonNull(item.getRegistryName()), "inventory"));
+            }
+        }
+        if (Contents.enableOres) {
+            for (Item blockitem : BLOCKITEMS) {
+                ModelLoader.setCustomModelResourceLocation(blockitem, 0, new ModelResourceLocation(Objects.requireNonNull(blockitem.getRegistryName()), "inventory"));
+            }
+            for (Block block : Blocks.BLOCKS) {
+                ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(block), 0, new ModelResourceLocation(Objects.requireNonNull(block.getRegistryName()), "inventory"));
+            }
+        }
+        if (Contents.enableBlueprints) {
+            for (Item print : Blueprints.PRINTS) {
+                ModelLoader.setCustomModelResourceLocation(print, 0, new ModelResourceLocation(MOD_ID + ":" + "blueprint", "inventory"));
+            }
+        }
         if (Contents.enableFluids) {
             registerFluidModels();
         }

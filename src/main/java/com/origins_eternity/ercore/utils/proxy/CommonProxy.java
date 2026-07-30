@@ -1,6 +1,7 @@
 package com.origins_eternity.ercore.utils.proxy;
 
 import com.origins_eternity.ercore.compat.firstaid.FirstAidEvents;
+import com.origins_eternity.ercore.compat.firstaid.HerbsHealer;
 import com.origins_eternity.ercore.compat.lootr.LootrEvents;
 import com.origins_eternity.ercore.compat.tanaddons.ThirstQuencher;
 import com.origins_eternity.ercore.content.capability.Capabilities;
@@ -23,6 +24,7 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 
 import static com.origins_eternity.ercore.ERCore.packetHandler;
+import static com.origins_eternity.ercore.compat.botania.EnergyBrew.addEnergyBrew;
 import static com.origins_eternity.ercore.compat.tconstruct.Materials.*;
 import static com.origins_eternity.ercore.config.Configuration.*;
 import static com.origins_eternity.ercore.content.potion.Potions.registerPotionRecipes;
@@ -45,6 +47,11 @@ public class CommonProxy {
         if (Features.enableEndurance) {
             MinecraftForge.EVENT_BUS.register(CommonEvents.class);
         }
+        if (Loader.isModLoaded("firstaid")) {
+            if (Compat.enableHerbs) {
+                MinecraftForge.EVENT_BUS.register(HerbsHealer.class);
+            }
+        }
         registerMessage();
     }
 
@@ -55,6 +62,9 @@ public class CommonProxy {
         }
         if (Features.enableEndurance) {
             registerPotionRecipes();
+            if (Loader.isModLoaded("botania")) {
+                addEnergyBrew();
+            }
         }
         if (Loader.isModLoaded("tconstruct")) {
             if ((Contents.enableOres) && (Contents.enableItems) && (Compat.enableMaterial) && (Contents.enableFluids)) {
@@ -63,8 +73,10 @@ public class CommonProxy {
                 addTinkerCasting();
             }
         }
-        if (Loader.isModLoaded("firstaid") && Compat.enableMaxHealth) {
-            MinecraftForge.EVENT_BUS.register(FirstAidEvents.class);
+        if (Loader.isModLoaded("firstaid")) {
+            if (Compat.enableMaxHealth) {
+                MinecraftForge.EVENT_BUS.register(FirstAidEvents.class);
+            }
         }
         if (Loader.isModLoaded("lootr")) {
             MinecraftForge.EVENT_BUS.register(LootrEvents.class);

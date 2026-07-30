@@ -115,7 +115,7 @@ public class Endurance implements IEndurance {
     public void consumeEndurance(int value) {
         if (endurance > 0) {
             endurance = Math.max(0, endurance - value);
-            addCoolDown(312);
+            addCoolDown(300);
         }
     }
 

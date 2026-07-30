@@ -40,7 +40,7 @@ public class Overlay extends Gui {
     private void drawTexture(EntityPlayerSP player, int posX, int posY) {
         IEndurance endurance = player.getCapability(ENDURANCE, null);
         int value = endurance.getEndurance();
-        for (int i = 0; (i * 2 <= endurance.getMaxEndurance() && i < 10); i++) {
+        for (int i = 0; i < 10; i++) {
             drawTexturedModalRect(posX - i * 8, posY, 0, 0, 8, 9);
         }
         if (value > 20) {

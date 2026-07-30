@@ -8,6 +8,7 @@ import java.util.List;
 
 public class Items {
     public static final List<Item> ITEMS = new ArrayList<>();
+    public static final Item Tungsten_Ingot = new ItemCreator("Tungsten_Ingot", 0);
     public static final Item Clinker = new ItemCreator("Clinker", 0);
     public static final Item Cement_Powder = new ItemCreator("Cement_Powder", 0);
     public static final Item Bronze_Ingot = new ItemCreator("Bronze_Ingot", 0);
@@ -16,7 +17,6 @@ public class Items {
     public static final Item Ardite_Dust = new ItemCreator("Ardite_Dust", 0);
     public static final Item Cobalt_Dust = new ItemCreator("Cobalt_Dust", 0);
     public static final Item Tungsten_Dust = new ItemCreator("Tungsten_Dust", 0);
-    public static final Item Tungsten_Ingot = new ItemCreator("Tungsten_Ingot", 0);
     public static final Item Tungsten_Nugget = new ItemCreator("Tungsten_Nugget", 0);
     public static final Item Searedbrick_Unfired = new ItemCreator("Searedbrick_Unfired", 0);
     public static final Item Tungsten_Steel_Dust = new ItemCreator("Tungsten_Steel_Dust", 0);

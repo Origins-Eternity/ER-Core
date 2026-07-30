@@ -77,11 +77,13 @@ public class Utils {
             endurance.setMaxEndurance(40);
             if (!player.isPotionActive(Potions.Energy)) {
                 player.addPotionEffect(new PotionEffect(MobEffects.WEAKNESS, 600, 0));
-                player.addPotionEffect(new PotionEffect(MobEffects.MINING_FATIGUE, 400, 0));
                 endurance.setEnergetic(false);
             }
-        } else {
-            endurance.setMaxEndurance((int) (2 * player.getHealth()));
+            return;
+        }
+        float health = player.getHealth();
+        if (endurance.getMaxEndurance() > 2 * health) {
+            endurance.setMaxEndurance((int) Math.max(20, health));
         }
         if (player.isHandActive()) {
             Item item = player.getHeldItem(player.getActiveHand()).getItem();

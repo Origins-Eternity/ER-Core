@@ -47,6 +47,8 @@ potion.effect.energy=能量药水
 splash_potion.effect.energy=喷溅型能量药水
 lingering_potion.effect.energy=滞留型能量药水
 
+ercore.brew.energy=能量药水
+
 fluid.ercore.tungsten=熔融钨
 fluid.ercore.sugarcane=熔融甘蔗
 fluid.ercore.tungsten_carbide=熔融碳化钨

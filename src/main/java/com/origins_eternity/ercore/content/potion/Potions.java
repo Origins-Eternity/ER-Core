@@ -12,9 +12,9 @@ import java.util.ArrayList;
 public class Potions {
     public static final ArrayList<Potion> POTIONS = new ArrayList<>();
     public static final Potion Energy = new Energy("energy");
-    public static final PotionType Energy_Potion = new PotionType("energy", new PotionEffect(Energy, 400)).setRegistryName("energy");
-    public static final PotionType Long_Energy_Potion = new PotionType("energy", new PotionEffect(Energy, 1200)).setRegistryName("long_energy");
-    public static final PotionType Strong_Energy_Potion = new PotionType("energy", new PotionEffect(Energy, 200, 1)).setRegistryName("strong_energy");
+    public static final PotionType Energy_Potion = new PotionType("energy", new PotionEffect(Energy, 800)).setRegistryName("energy");
+    public static final PotionType Long_Energy_Potion = new PotionType("energy", new PotionEffect(Energy, 1400)).setRegistryName("long_energy");
+    public static final PotionType Strong_Energy_Potion = new PotionType("energy", new PotionEffect(Energy, 600, 1)).setRegistryName("strong_energy");
     public static final PotionType[] types = {Energy_Potion, Long_Energy_Potion, Strong_Energy_Potion};
 
     public static void registerPotionRecipes() {

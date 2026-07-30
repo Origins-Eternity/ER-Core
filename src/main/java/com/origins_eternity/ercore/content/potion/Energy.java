@@ -15,7 +15,7 @@ import static com.origins_eternity.ercore.content.render.Overlay.indicator;
 
 public class Energy extends Potion {
     public Energy(String name) {
-        super(false, 0xFF99d437);
+        super(false, 0xFF52ef8e);
         setPotionName("effect." + name);
         setRegistryName(name);
         setBeneficial();
@@ -37,7 +37,7 @@ public class Energy extends Potion {
 
     @Override
     public boolean isReady(int duration, int amplifier) {
-        int interval = 40 >> amplifier;
+        int interval = 20 >> amplifier;
         if (interval > 0) {
             return duration % interval == 0;
         } else {

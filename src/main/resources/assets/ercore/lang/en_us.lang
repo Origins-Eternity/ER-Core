@@ -47,6 +47,8 @@ potion.effect.energy=Potion of Energy
 splash_potion.effect.energy=Energy Splash Potion
 lingering_potion.effect.energy=Energy Lingering Potion
 
+ercore.brew.energy=Energy
+
 fluid.ercore.tungsten=Molten Tungsten
 fluid.ercore.sugarcane=Molten Sugarcane
 fluid.ercore.tungsten_carbide=Molten Tungsten Carbide

@@ -17,7 +17,9 @@
 **Players will get hurt while doing strenuous exercise after exhaustion, like sprint, jump, etc. This can cause to death!**
 ![This is an image](https://s21.ax1x.com/2025/01/17/pEFjTZF.png)
 ### Potion
-**Add energy potion effect, which can recover 1 sanity every `40 >> amplifier` ticks. Brewed from sugar with potion of jump boost or rabbit foot with potion of speed. During the effect, players won't consume any endurance, except for rolling or double jumping. But once the effect goes, players will get weakness and mining fatigue as side effects.**
+**Add energy potion effect, which can recover 1 sanity every `20 >> amplifier` ticks. Brewed from sugar with potion of jump boost or rabbit foot with potion of speed. During the effect, players won't consume any endurance, except for rolling or double jumping. But once the effect goes, players will get weakness as side effects.**
+### Botania
+**A new brew type of Energy has been added, which players can brew it in the Botanical Brewery. Using it grants effects of Energy, Strength, and Resistance.**
 ### CraftTweaker
 **Add ZenExpansions for [IPlayer](https://docs.blamejared.com/1.12/en/Vanilla/Players/IPlayer). Developers can call this method on any [IPlayer](https://docs.blamejared.com/1.12/en/Vanilla/Players/IPlayer) object, including its subtypes.**
 - **`getEndurance()`: returns player's endurance value as int.**

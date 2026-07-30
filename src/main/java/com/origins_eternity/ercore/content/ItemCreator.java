@@ -4,8 +4,10 @@ import com.origins_eternity.ercore.ERCore;
 import com.origins_eternity.ercore.content.item.Blueprints;
 import com.origins_eternity.ercore.content.item.Items;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 
 import static com.origins_eternity.ercore.content.tab.CreativeTab.ERCORE;
+import static com.origins_eternity.ercore.content.tab.CreativeTab.addCreativeTab;
 
 public class ItemCreator extends Item
 {
@@ -15,12 +17,14 @@ public class ItemCreator extends Item
         setRegistryName(name.toLowerCase());
         setMaxDamage(maxdamage);
         setNoRepair();
-        setCreativeTab(ERCORE);
 
         if (name.contains("Blueprint")) {
             Blueprints.PRINTS.add(this);
         } else {
             Items.ITEMS.add(this);
         }
+
+        addCreativeTab(new ItemStack(this));
+        setCreativeTab(ERCORE);
     }
 }

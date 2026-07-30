@@ -9,7 +9,9 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
+import net.minecraft.init.MobEffects;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.potion.Potion;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.Capability;
@@ -27,6 +29,7 @@ import net.minecraftforge.fml.common.gameevent.PlayerEvent.ItemCraftedEvent;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent.PlayerRespawnEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 
+import java.util.Arrays;
 import java.util.Set;
 
 import static com.origins_eternity.ercore.ERCore.MOD_ID;
@@ -238,10 +241,22 @@ public class CommonEvents {
         }
     }
 
+    private final static Potion[] Debuffs = new Potion[]{
+            MobEffects.WEAKNESS,
+            MobEffects.SLOWNESS,
+            MobEffects.MINING_FATIGUE
+    };
+
     @SubscribeEvent
     public static void onPotionApplicable(PotionEvent.PotionApplicableEvent event) {
         if (event.getEntity() instanceof EntityPlayer) {
             EntityPlayer player = (EntityPlayer) event.getEntity();
+            IEndurance endurance = player.getCapability(Capabilities.ENDURANCE, null);
+            if (endurance.getEnergetic()) {
+                if (Arrays.stream(Debuffs).anyMatch(debuff -> debuff == event.getPotionEffect().getPotion())) {
+                    event.setResult(Event.Result.DENY);
+                }
+            }
             if (player.isPotionActive(event.getPotionEffect().getPotion())) {
                 event.setResult(Event.Result.DENY);
             }
