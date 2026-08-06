@@ -1,17 +1,9 @@
 package com.origins_eternity.ercore.content.capability.endurance;
 
-import net.minecraftforge.fml.common.Optional;
-
 public interface IEndurance {
     void setMaxEndurance(int maxEndurance);
 
     int getMaxEndurance();
-
-    @Optional.Method(modid = "firstaid")
-    void setMaxHealth(double maxhealth);
-
-    @Optional.Method(modid = "firstaid")
-    double getMaxHealth();
 
     void setEndurance(int endurance);
 

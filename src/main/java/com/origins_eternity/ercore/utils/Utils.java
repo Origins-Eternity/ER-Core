@@ -4,9 +4,6 @@ import com.codetaylor.mc.pyrotech.modules.tech.basic.ModuleTechBasicConfig;
 import com.origins_eternity.ercore.content.capability.endurance.IEndurance;
 import com.origins_eternity.ercore.content.potion.Potions;
 import com.origins_eternity.ercore.message.SyncEndurance;
-import ichttt.mods.firstaid.api.CapabilityExtendedHealthSystem;
-import ichttt.mods.firstaid.api.damagesystem.AbstractDamageablePart;
-import ichttt.mods.firstaid.common.damagesystem.PlayerDamageModel;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
@@ -29,15 +26,12 @@ import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.fml.common.Loader;
-import net.minecraftforge.fml.common.Optional;
 import squeek.applecore.api.AppleCoreAPI;
 import squeek.applecore.api.food.FoodValues;
 
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Timer;
-import java.util.TimerTask;
 
 import static com.origins_eternity.ercore.ERCore.packetHandler;
 import static com.origins_eternity.ercore.config.Configuration.Features;
@@ -81,9 +75,11 @@ public class Utils {
             }
             return;
         }
-        float health = player.getHealth();
-        if (endurance.getMaxEndurance() > 2 * health) {
-            endurance.setMaxEndurance((int) Math.max(20, health));
+        int maxEndurance = (int) (player.getHealth() * 2);
+        if (endurance.getMaxEndurance() > maxEndurance) {
+            endurance.setMaxEndurance(Math.max(20, maxEndurance));
+        } else if (endurance.getMaxEndurance() < maxEndurance) {
+            endurance.setMaxEndurance(maxEndurance);
         }
         if (player.isHandActive()) {
             Item item = player.getHeldItem(player.getActiveHand()).getItem();
@@ -98,11 +94,7 @@ public class Utils {
         }
         if (player.isSprinting()) {
             endurance.addCoolDown(100);
-            if (endurance.getEndurance() <= 0) {
-                player.attackEntityFrom(EXHAUSTED, 1f);
-            } else {
-                endurance.addExhaustion(0.2f);
-            }
+            endurance.addExhaustion(0.2f);
         } else if (player.isRiding()) {
             endurance.removeCoolDown(10);
             endurance.addSaturation(0.3f);
@@ -175,43 +167,5 @@ public class Utils {
             }
         }
         return new String[]{String.format("%d", hunger), NumberFormat.getPercentInstance().format(saturation)};
-    }
-
-    @Optional.Method(modid = "firstaid")
-    public static void syncHealth(EntityPlayer old, EntityPlayer clone) {
-        Timer timer = new Timer();
-        TimerTask task = new TimerTask() {
-            @Override
-            public void run() {
-                PlayerDamageModel past = (PlayerDamageModel) old.getCapability(CapabilityExtendedHealthSystem.INSTANCE, null);
-                PlayerDamageModel current = (PlayerDamageModel) clone.getCapability(CapabilityExtendedHealthSystem.INSTANCE, null);
-                ArrayList<AbstractDamageablePart> oldParts = new ArrayList<>();
-                ArrayList<AbstractDamageablePart> newParts = new ArrayList<>();
-                past.forEach(oldParts::add);
-                current.forEach(newParts::add);
-                for (int i = 0; i < newParts.size(); i++) {
-                    newParts.get(i).currentHealth = oldParts.get(i).currentHealth;
-                }
-                current.scheduleResync();
-            }
-        };
-        timer.schedule(task, 50);
-    }
-
-    @Optional.Method(modid = "firstaid")
-    public static void syncHealth(ArrayList<Float> health, PlayerDamageModel model) {
-        Timer timer = new Timer();
-        TimerTask task = new TimerTask() {
-            @Override
-            public void run() {
-                ArrayList<AbstractDamageablePart> parts = new ArrayList<>();
-                model.forEach(parts::add);
-                for (int i = 0; i < parts.size(); i++) {
-                    parts.get(i).currentHealth = health.get(i);
-                }
-                model.scheduleResync();
-            }
-        };
-        timer.schedule(task, 50);
     }
 }

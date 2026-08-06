@@ -36,30 +36,33 @@ events.onPlayerRightClickItem(function(event as PlayerRightClickItemEvent) {
 **This *example* script causes player to lose 1 endurance when using a fishing rod.**
 ## Feature  
 **The compatibility of these features is unknown, and some features are designed specifically for the modpack described above. Configurations are already available for some features, which can be highly customizable. If you encounter any problems, please feel free to give feedback.**
-### Replace The Products of Lava and Water  
+### Replace the Products of Lava and Water  
 **When lava and water meets, the original obsidian will be replaced with basalt blocks. Support custom products.**
 ### No Infinite Fluids
 **All fluids in the game cannot create new fluid resources, but players can still bottle water with water.**
 ![This is an image](https://s1.ax1x.com/2022/12/28/pSSP7Sx.png)
-### Regeneration  
-**When the player uses an item, if the mod detects an increase in the player's maxhealth, it will give the Regeneration II buff for 10 seconds. Valid only when First Aid is installed at the same time, and can be turned off in the configuration file.**
 ### Resourcepack Auto Installation
 **Try installing resoucepacks and turn on automatically. Support custom configuration and options.txt!**
 ### Food Tooltip
 **Add a tooltip for foods, which can display food points as integers and saturation as percentages.**
 ![This is an image](https://s21.ax1x.com/2025/02/06/pEe42rD.png)
 ### Replace Chest
-**Replace all naturally generated (not placed by player) chests in the world with loot chests in Lootr and regenerate loot.**
-### Maxhealth Fix  
-**This is a fix for First Aid. These issues arise when installing First Aid and other mods that have the ability to increase the player's maxhealth at the same time. This mod currently fixes an issue where players have less health when re-entering a world or returning to the Overworld from the End, and can not gain maxhealth when respawning.**
+**Replace all naturally generated chests in the world with Lootr chests.**
+### Grave Experience
+**Allow the grave in GraveStone mod store player's experience.**
+### MaxHealth Fix  
+**A fix for First Aid. These issues arise when installing First Aid and other mods that have the ability to increase the player's maxHealth at the same time. This mod fixes the issue that player's health changes when enter in a world.**
+### Thirst Overlay Fix
+**A fix for Tough As Nails. Enable blending before display thirst overlay, so that prevent the overlay displays strangely in some cases.**
 ### Thirst Quencher Fix
-**A fix for Tough Expansion. When the thirst quencher transfers fluid to other storage tanks, it does not consume the fluid stored within itself, thereby producing infinite fluid. This fix prevents thirst quencher from transferring fluids to other storage tanks.**
+**A fix for Tough Expansion. When the thirst quencher transfers fluid to other storage tanks, it does not consume the fluid stored within itself, thereby producing infinite fluid. This fix make the thirst quencher reduce its liquids correctly after transferring.**
+### Tank Stack Limit
+**Limit the stack size of tanks with liquids in Pyrotech mod.**
 ## Content  
 **All content is also designed for the above modpack, you can customize what should be added in the configuration file, and all content will not be added by default.**  
 ### Ores  
 **A total of four ores have been added, tin, copper, nickel and tungsten. All ores are only spawned in the Overworld.**
 ![This is an image](https://s41.ax1x.com/2026/07/27/pmRH1Y9.png)
-**Except tungsten ore, the mod does not add ingots, nuggets and smelting recipes to other ores. Only some fluids have been added to the smelter recipe. However, all ores will spawn and drop in the world normally.**  
 ### Blueprints  
 **Blueprints are the tools needed to craft some items in the above modpack and this mod doesn't add recipes to these blueprints. The textures are come from the Artisan Worktables.**  
 ### Ingot clay cast  

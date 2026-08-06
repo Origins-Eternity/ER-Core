@@ -29,29 +29,50 @@ public class Configuration {
                 @Config.Name("Enable Material")
                 @Config.RequiresMcRestart()
                 @Config.LangKey("config.ercore.material")
-                @Config.Comment("Whether to add a new tinker's material or not.(Require enable items, fluids and ores!)")
+                @Config.Comment("Whether to add a new tinker's material or not. (Require enable items, fluids and ores)")
                 public boolean enableMaterial = false;
 
                 @Config.Name("Enable Herbs")
                 @Config.RequiresMcRestart()
                 @Config.LangKey("config.ercore.herbs")
-                @Config.Comment("Whether to add herbs or not. Only work for Fisrt Aid!")
+                @Config.Comment("Whether to add herbs or not. (Require the First Aid mod)")
                 public boolean enableHerbs = false;
 
-                @Config.Name("Enable Regeneration Buff")
-                @Config.LangKey("config.ercore.regeneration")
-                @Config.Comment("Whether to add the regeneration buff when player's maxhealth increased or not.")
-                public boolean enableRegeneration = true;
-
                 @Config.Name("Enable Replace Chest")
+                @Config.RequiresMcRestart()
                 @Config.LangKey("config.ercore.replace")
-                @Config.Comment("Whether to replace naturally generated chests in world chests with loot chests or not.")
+                @Config.Comment("Whether to replace naturally generated chests in world chests with Lootr chests or not.")
                 public boolean enableReplace = true;
 
-                @Config.Name("Enable Maxhealth Fix")
-                @Config.LangKey("config.ercore.maxhealth")
-                @Config.Comment("Whether to fix the maxheath issues for Fisrt Aid or not.")
+                @Config.Name("Enable Grave Experience")
+                @Config.RequiresMcRestart()
+                @Config.LangKey("config.ercore.grave")
+                @Config.Comment("Whether to allow the gravestone store player's experience or not.")
+                public boolean enableGrave = true;
+
+                @Config.Name("Enable MaxHealth Fix")
+                @Config.RequiresMcRestart()
+                @Config.LangKey("config.ercore.maxHealth")
+                @Config.Comment("Whether to fix the issue that player's health changes when login with First Aid mod.")
                 public boolean enableMaxHealth = true;
+
+                @Config.Name("Enable Thirst Overlay Fix")
+                @Config.RequiresMcRestart()
+                @Config.LangKey("config.ercore.thirstOverlay")
+                @Config.Comment("Whether to fix the issue that thirst overlay in Tough As Nails mod sometimes displays abnormal.")
+                public boolean enableThirstOverlay = true;
+
+                @Config.Name("Enable Thirst Quencher Fix")
+                @Config.RequiresMcRestart()
+                @Config.LangKey("config.ercore.thirstQuencher")
+                @Config.Comment("Whether to fix the issue that the thirst quencher in TanExpansion mod can produce unlimited fluids.")
+                public boolean enableThirstQuencher = true;
+
+                @Config.Name("Tank Stack Limit")
+                @Config.RequiresMcRestart()
+                @Config.LangKey("config.ercore.tankStack")
+                @Config.Comment("Limit the stack size of tanks with liquids in Pyrotech mod. Set this to 0 to disable.")
+                public int tankStack = 1;
         }
 
         public static class ConfigContents {

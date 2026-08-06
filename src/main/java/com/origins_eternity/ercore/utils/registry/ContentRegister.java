@@ -75,22 +75,20 @@ public class ContentRegister {
     public static void registerItems(RegistryEvent.Register<Item> event) {
         if (Contents.enableItems) {
             for (Item item : Items.ITEMS) {
-                String itemname = item.getTranslationKey();
+                String itemName = item.getTranslationKey();
                 if (item.equals(Items.Ingot_Clay_Cast)) {
                     if (Loader.isModLoaded("tconstruct")) {
                         event.getRegistry().register(item);
                     }
                 } else {
                     event.getRegistry().register(item);
-                }
-                if (itemname.contains("ingot")) {
-                    OreDictionary.registerOre(getOreDictName("ingot", itemname), item);
-                } else if (itemname.contains("nugget")) {
-                    OreDictionary.registerOre(getOreDictName("nugget", itemname), item);
-                } else if (itemname.contains("dust")) {
-                    OreDictionary.registerOre(getOreDictName("dust", itemname), item);
-                } else if (!(itemname.contains("_"))) {
-                    OreDictionary.registerOre(itemname, item);
+                    if (itemName.contains("ingot")) {
+                        OreDictionary.registerOre(getOreDictName("ingot", itemName), item);
+                    } else if (itemName.contains("nugget")) {
+                        OreDictionary.registerOre(getOreDictName("nugget", itemName), item);
+                    } else if (itemName.contains("dust")) {
+                        OreDictionary.registerOre(getOreDictName("dust", itemName), item);
+                    }
                 }
             }
         }
@@ -98,9 +96,9 @@ public class ContentRegister {
             for (Item blockitem : BLOCKITEMS) {
                 event.getRegistry().register(blockitem);
                 if (blockitem.getTranslationKey().contains("_ore")) {
-                    String orename = blockitem.getTranslationKey().replace("_ore", "");
-                    String oredictname = orename.substring(12, 13).toUpperCase() + orename.substring(13);
-                    OreDictionary.registerOre("ore" + oredictname, blockitem);
+                    String oreName = blockitem.getTranslationKey().replace("_ore", "");
+                    String oreDictName = oreName.substring(12, 13).toUpperCase() + oreName.substring(13);
+                    OreDictionary.registerOre("ore" + oreDictName, blockitem);
                 }
             }
         }

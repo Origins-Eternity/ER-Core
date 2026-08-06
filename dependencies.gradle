@@ -11,4 +11,14 @@ dependencies {
     compileOnly "curse.maven:crafttweaker-239197:6061762"
     compileOnly "curse.maven:tanaddons-257225:2556034"
     compileOnly "curse.maven:botania-225643:3330934"
+    compileOnly "curse.maven:gravestone-238551:2744766"
+    compileOnly "curse.maven:toughasnails-246391:2710969"
+
+    embed("org.spongepowered:mixin:0.8.3-SNAPSHOT") {
+        exclude module: 'guava'
+        exclude module: 'commons-io'
+        exclude module: 'gson'
+    }
+
+    annotationProcessor "org.spongepowered:mixin:0.8.3-SNAPSHOT:processor"
 }

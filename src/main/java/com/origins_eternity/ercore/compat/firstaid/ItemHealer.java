@@ -20,10 +20,10 @@ import static com.origins_eternity.ercore.ERCore.MOD_ID;
 import static com.origins_eternity.ercore.content.tab.CreativeTab.ERCORE;
 import static com.origins_eternity.ercore.content.tab.CreativeTab.addCreativeTab;
 
-public class HerbsHealer extends ItemHealing {
-    private static HerbsHealer herbs;
+public class ItemHealer extends ItemHealing {
+    private static ItemHealer herbs;
 
-    public HerbsHealer(String name, Function<ItemStack, AbstractPartHealer> healerFunction, Function<ItemStack, Integer> time) {
+    public ItemHealer(String name, Function<ItemStack, AbstractPartHealer> healerFunction, Function<ItemStack, Integer> time) {
         super(healerFunction, time);
         setTranslationKey(ERCore.MOD_ID + "." + name.toLowerCase());
         setRegistryName(name.toLowerCase());
@@ -35,7 +35,7 @@ public class HerbsHealer extends ItemHealing {
 
     @SubscribeEvent
     public static void registerItems(RegistryEvent.Register<Item> event) {
-        herbs = new HerbsHealer("Herbs", stack -> new PartHealer(15 * 20, 2, stack), stack -> 2000);
+        herbs = new ItemHealer("Herbs", stack -> new PartHealer(15 * 20, 2, stack), stack -> 2000);
         event.getRegistry().register(herbs);
     }
 

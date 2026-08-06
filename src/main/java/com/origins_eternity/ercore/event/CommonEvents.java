@@ -26,7 +26,6 @@ import net.minecraftforge.fml.common.eventhandler.Event;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent.ItemCraftedEvent;
-import net.minecraftforge.fml.common.gameevent.PlayerEvent.PlayerRespawnEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 
 import java.util.Arrays;
@@ -162,15 +161,6 @@ public class CommonEvents {
             if (!event.isWasDeath()) {
                 capability.getStorage().readNBT(capability, present, null, capability.getStorage().writeNBT(capability, origin, null));
             }
-        }
-    }
-
-    @SubscribeEvent(priority = EventPriority.LOWEST)
-    public static void onPlayerRespawn(PlayerRespawnEvent event) {
-        EntityPlayer player = event.player;
-        if (!event.player.world.isRemote) {
-            IEndurance endurance = player.getCapability(Capabilities.ENDURANCE, null);
-            endurance.setEndurance((int) (2 * player.getHealth()));
         }
     }
 

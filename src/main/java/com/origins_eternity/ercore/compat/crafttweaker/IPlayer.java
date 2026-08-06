@@ -4,7 +4,6 @@ import com.origins_eternity.ercore.content.capability.Capabilities;
 import com.origins_eternity.ercore.content.capability.endurance.IEndurance;
 import crafttweaker.annotations.ZenRegister;
 import crafttweaker.api.minecraft.CraftTweakerMC;
-import crafttweaker.api.player.IPlayer;
 import net.minecraft.entity.player.EntityPlayer;
 import stanhebben.zenscript.annotations.ZenExpansion;
 import stanhebben.zenscript.annotations.ZenMethod;
@@ -13,15 +12,15 @@ import static com.origins_eternity.ercore.content.damage.Damages.EXHAUSTED;
 
 @ZenRegister
 @ZenExpansion("crafttweaker.player.IPlayer")
-public class CraftTweaker {
+public class IPlayer {
     @ZenMethod
-    public static int getEndurance(IPlayer iplayer) {
+    public static int getEndurance(crafttweaker.api.player.IPlayer iplayer) {
         IEndurance endurance = CraftTweakerMC.getPlayer(iplayer).getCapability(Capabilities.ENDURANCE, null);
         return endurance.getEndurance();
     }
 
     @ZenMethod
-    public static void addEndurance(IPlayer iplayer, int value) {
+    public static void addEndurance(crafttweaker.api.player.IPlayer iplayer, int value) {
         EntityPlayer player = CraftTweakerMC.getPlayer(iplayer);
         IEndurance endurance = player.getCapability(Capabilities.ENDURANCE, null);
         if (value > 0) {

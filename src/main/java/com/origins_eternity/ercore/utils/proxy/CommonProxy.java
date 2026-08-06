@@ -1,9 +1,6 @@
 package com.origins_eternity.ercore.utils.proxy;
 
-import com.origins_eternity.ercore.compat.firstaid.FirstAidEvents;
-import com.origins_eternity.ercore.compat.firstaid.HerbsHealer;
-import com.origins_eternity.ercore.compat.lootr.LootrEvents;
-import com.origins_eternity.ercore.compat.tanaddons.ThirstQuencher;
+import com.origins_eternity.ercore.compat.firstaid.ItemHealer;
 import com.origins_eternity.ercore.content.capability.Capabilities;
 import com.origins_eternity.ercore.content.command.TPA;
 import com.origins_eternity.ercore.content.command.TPADeny;
@@ -24,7 +21,7 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 
 import static com.origins_eternity.ercore.ERCore.packetHandler;
-import static com.origins_eternity.ercore.compat.botania.EnergyBrew.addEnergyBrew;
+import static com.origins_eternity.ercore.compat.botania.Brew.addEnergyBrew;
 import static com.origins_eternity.ercore.compat.tconstruct.Materials.*;
 import static com.origins_eternity.ercore.config.Configuration.*;
 import static com.origins_eternity.ercore.content.potion.Potions.registerPotionRecipes;
@@ -49,7 +46,7 @@ public class CommonProxy {
         }
         if (Loader.isModLoaded("firstaid")) {
             if (Compat.enableHerbs) {
-                MinecraftForge.EVENT_BUS.register(HerbsHealer.class);
+                MinecraftForge.EVENT_BUS.register(ItemHealer.class);
             }
         }
         registerMessage();
@@ -72,17 +69,6 @@ public class CommonProxy {
                 addTinkerAlloying();
                 addTinkerCasting();
             }
-        }
-        if (Loader.isModLoaded("firstaid")) {
-            if (Compat.enableMaxHealth) {
-                MinecraftForge.EVENT_BUS.register(FirstAidEvents.class);
-            }
-        }
-        if (Loader.isModLoaded("lootr")) {
-            MinecraftForge.EVENT_BUS.register(LootrEvents.class);
-        }
-        if (Loader.isModLoaded("tanaddons")) {
-            MinecraftForge.EVENT_BUS.register(ThirstQuencher.class);
         }
         Capabilities.registerCapability(CapabilityManager.INSTANCE);
     }

@@ -5,12 +5,8 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ICapabilitySerializable;
-import net.minecraftforge.fml.common.Loader;
-import net.minecraftforge.fml.common.Optional;
 
 public class Endurance implements IEndurance {
-    private double maxhealth = 20;
-
     private int maxEndurance = 40;
 
     private int endurance = 40;
@@ -33,18 +29,6 @@ public class Endurance implements IEndurance {
     @Override
     public int getMaxEndurance() {
         return maxEndurance;
-    }
-
-    @Override
-    @Optional.Method(modid = "firstaid")
-    public void setMaxHealth(double maxhealth) {
-        this.maxhealth = maxhealth;
-    }
-
-    @Override
-    @Optional.Method(modid = "firstaid")
-    public double getMaxHealth() {
-        return maxhealth;
     }
 
     @Override
@@ -205,9 +189,6 @@ public class Endurance implements IEndurance {
             compound.setInteger("CoolDown", instance.getCoolDown());
             compound.setBoolean("DoubleJumped", instance.getDoubleJumped());
             compound.setBoolean("Energetic", instance.getEnergetic());
-            if (Loader.isModLoaded("firstaid")) {
-                compound.setDouble("MaxHealth", instance.getMaxHealth());
-            }
             return compound;
         }
 
@@ -222,9 +203,6 @@ public class Endurance implements IEndurance {
                 instance.setCoolDown(compound.getInteger("CoolDown"));
                 instance.setDoubleJumped(compound.getBoolean("DoubleJumped"));
                 instance.setEnergetic(compound.getBoolean("Energetic"));
-                if (Loader.isModLoaded("firstaid")) {
-                    instance.setMaxHealth(compound.getDouble("MaxHealth"));
-                }
             }
         }
     }

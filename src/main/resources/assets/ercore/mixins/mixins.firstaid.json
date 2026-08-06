@@ -1,0 +1,12 @@
+{
+  "required": false,
+  "package": "com.origins_eternity.ercore.mixins.firstaid",
+  "refmap": "mixins.ercore.refmap.json",
+  "compatibilityLevel": "JAVA_8",
+  "target": "@env(DEFAULT)",
+  "minVersion": "0.8",
+  "mixins": [
+    "MixinEventHandler",
+    "MixinDamageModel"
+  ]
+}
