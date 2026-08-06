@@ -15,6 +15,7 @@ import com.origins_eternity.ercore.message.SyncEndurance;
 import com.origins_eternity.ercore.utils.registry.RecipeRegister;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.capabilities.CapabilityManager;
+import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.event.*;
 import net.minecraftforge.fml.common.registry.GameRegistry;
@@ -25,11 +26,15 @@ import static com.origins_eternity.ercore.compat.botania.Brew.addEnergyBrew;
 import static com.origins_eternity.ercore.compat.tconstruct.Materials.*;
 import static com.origins_eternity.ercore.config.Configuration.*;
 import static com.origins_eternity.ercore.content.potion.Potions.registerPotionRecipes;
+import static com.origins_eternity.ercore.content.tab.CreativeTab.addCreativeTab;
 import static com.origins_eternity.ercore.utils.registry.ContentRegister.registerFluids;
 
 public class CommonProxy {
     public void construction(FMLConstructionEvent event) {
-
+        addCreativeTab();
+        if (Contents.enableFluids) {
+            FluidRegistry.enableUniversalBucket();
+        }
     }
 
     public void preInit(FMLPreInitializationEvent event) {

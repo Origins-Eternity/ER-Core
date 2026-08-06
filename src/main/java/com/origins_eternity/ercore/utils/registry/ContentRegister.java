@@ -36,6 +36,7 @@ import static com.origins_eternity.ercore.config.Configuration.Features;
 import static com.origins_eternity.ercore.content.block.Blocks.BLOCKITEMS;
 import static com.origins_eternity.ercore.content.block.FluidBlocks.FLUIDBLOCKS;
 import static com.origins_eternity.ercore.content.potion.Potions.*;
+import static com.origins_eternity.ercore.content.tab.CreativeTab.ERCORE;
 import static com.origins_eternity.ercore.utils.Utils.getOreDictName;
 import static slimeknights.tconstruct.tools.TinkerTraits.autosmelt;
 
@@ -49,8 +50,8 @@ public class ContentRegister {
             }
         }
         if (Contents.enableFluids) {
-            for (Block fluidblock : FluidBlocks.FLUIDBLOCKS) {
-                event.getRegistry().register(fluidblock);
+            for (Block fluidBlock : FluidBlocks.FLUIDBLOCKS) {
+                event.getRegistry().register(fluidBlock);
             }
         }
     }
@@ -75,6 +76,7 @@ public class ContentRegister {
     public static void registerItems(RegistryEvent.Register<Item> event) {
         if (Contents.enableItems) {
             for (Item item : Items.ITEMS) {
+                item.setCreativeTab(ERCORE);
                 String itemName = item.getTranslationKey();
                 if (item.equals(Items.Ingot_Clay_Cast)) {
                     if (Loader.isModLoaded("tconstruct")) {
@@ -127,20 +129,25 @@ public class ContentRegister {
 
     @SideOnly(Side.CLIENT)
     public static void registerFluidModels() {
-        for (Block fluidblock : FLUIDBLOCKS) {
-            String fluidname = fluidblock.getTranslationKey().substring(12);
-            ModelLoader.setCustomMeshDefinition(Item.getItemFromBlock(fluidblock), new ItemMeshDefinition() {
+        for (Block fluidBlock : FLUIDBLOCKS) {
+            String fluidName = fluidBlock.getTranslationKey().substring(12);
+            ModelResourceLocation fluidModel = new ModelResourceLocation(MOD_ID + ":fluid", fluidName);
+
+            ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(fluidBlock), 0, fluidModel);
+
+            ModelLoader.setCustomMeshDefinition(Item.getItemFromBlock(fluidBlock), new ItemMeshDefinition() {
                 @Nonnull
                 @Override
                 public ModelResourceLocation getModelLocation(@Nonnull ItemStack stack) {
-                    return new ModelResourceLocation(MOD_ID + ":fluid", fluidname);
+                    return fluidModel;
                 }
             });
-            ModelLoader.setCustomStateMapper(fluidblock, new StateMapperBase() {
+
+            ModelLoader.setCustomStateMapper(fluidBlock, new StateMapperBase() {
                 @Nonnull
                 @Override
                 protected ModelResourceLocation getModelResourceLocation(@Nonnull IBlockState state) {
-                    return new ModelResourceLocation(MOD_ID + ":fluid", fluidname);
+                    return fluidModel;
                 }
             });
         }

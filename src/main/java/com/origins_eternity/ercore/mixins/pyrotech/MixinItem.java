@@ -9,6 +9,8 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
+import static com.origins_eternity.ercore.config.Configuration.Compat;
+
 @Mixin(value = Item.class, remap = false)
 public class MixinItem {
     @Inject(
@@ -19,10 +21,8 @@ public class MixinItem {
     public void getItemStackLimit(ItemStack stack, CallbackInfoReturnable<Integer> cir) {
         if (stack.getItem() instanceof ItemBlockTank) {
             NBTTagCompound nbt = ItemBlockTank.getTankTag(stack);
-            if (nbt != null && !nbt.hasKey("Empty")) {
-                cir.setReturnValue(1);
-            } else {
-                cir.setReturnValue(16);
+            if (nbt != null && !nbt.hasKey("Empty") && Compat.tankStack > 0) {
+                cir.setReturnValue(Compat.tankStack);
             }
         }
     }

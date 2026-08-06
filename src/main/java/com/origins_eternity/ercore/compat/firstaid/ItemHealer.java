@@ -18,7 +18,6 @@ import java.util.function.Function;
 
 import static com.origins_eternity.ercore.ERCore.MOD_ID;
 import static com.origins_eternity.ercore.content.tab.CreativeTab.ERCORE;
-import static com.origins_eternity.ercore.content.tab.CreativeTab.addCreativeTab;
 
 public class ItemHealer extends ItemHealing {
     private static ItemHealer herbs;
@@ -28,8 +27,6 @@ public class ItemHealer extends ItemHealing {
         setTranslationKey(ERCore.MOD_ID + "." + name.toLowerCase());
         setRegistryName(name.toLowerCase());
         setMaxStackSize(16);
-
-        addCreativeTab(new ItemStack(this));
         setCreativeTab(ERCORE);
     }
 

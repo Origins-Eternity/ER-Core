@@ -8,12 +8,10 @@ import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
-import net.minecraft.item.ItemStack;
 
 import java.util.Random;
 
 import static com.origins_eternity.ercore.content.tab.CreativeTab.ERCORE;
-import static com.origins_eternity.ercore.content.tab.CreativeTab.addCreativeTab;
 
 public class BlockCreator extends Block {
     public BlockCreator(String name, int hardness, int harvestlevel, String toolclass) {
@@ -27,7 +25,6 @@ public class BlockCreator extends Block {
         Blocks.BLOCKS.add(this);
         Blocks.BLOCKITEMS.add(new ItemBlock(this).setRegistryName(name.toLowerCase()));
 
-        addCreativeTab(new ItemStack(this));
         setCreativeTab(ERCORE);
     }
 
