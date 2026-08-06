@@ -11,7 +11,7 @@ import toughasnails.handler.thirst.ThirstOverlayHandler;
 @Mixin(value = ThirstOverlayHandler.class, remap = false)
 public class MixinThirstOverlay {
     @Inject(method = "onPreRenderOverlay", at = @At("HEAD"))
-    public void beforePreRenderOverlay(RenderGameOverlayEvent.Pre event, CallbackInfo ci) {
+    private void onPreRenderOverlay(RenderGameOverlayEvent.Pre event, CallbackInfo ci) {
         if (event.getType() == RenderGameOverlayEvent.ElementType.AIR) {
             GlStateManager.enableBlend();
         }

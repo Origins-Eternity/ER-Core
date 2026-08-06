@@ -18,7 +18,7 @@ public class MixinItem {
             at = @At("HEAD"),
             cancellable = true
     )
-    public void getItemStackLimit(ItemStack stack, CallbackInfoReturnable<Integer> cir) {
+    private void getItemStackLimit(ItemStack stack, CallbackInfoReturnable<Integer> cir) {
         if (stack.getItem() instanceof ItemBlockTank) {
             NBTTagCompound nbt = ItemBlockTank.getTankTag(stack);
             if (nbt != null && !nbt.hasKey("Empty") && Compat.tankStack > 0) {

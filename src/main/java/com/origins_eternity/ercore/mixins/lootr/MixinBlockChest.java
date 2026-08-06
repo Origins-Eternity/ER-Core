@@ -18,28 +18,30 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import java.util.List;
 
-import static com.origins_eternity.ercore.compat.lootr.ChestReplacer.isPlayerPlaced;
-
-
-@Mixin(BlockChest.class)
+@Mixin(value = BlockChest.class)
 public abstract class MixinBlockChest {
-    @Inject(method = "onBlockAdded", at = @At("RETURN"), remap = false)
-    public void onBlockAdded(World world, BlockPos pos, IBlockState state, CallbackInfo ci) {
-        if (!world.isRemote && !isPlayerPlaced(pos)) {
-            if (state.getBlock() instanceof LootrChestBlock) return;
+    @Inject(method = "onBlockAdded", at = @At("RETURN"))
+    private void onBlockAdded(World world, BlockPos pos, IBlockState state, CallbackInfo ci) {
+        if (!world.isRemote) {
+            if (ChestReplacer.isPlayerPlaced(pos) || state.getBlock() instanceof LootrChestBlock) {
+                ChestReplacer.untrack();
+                return;
+            }
 
             world.getMinecraftServer().addScheduledTask(() -> {
-                List<ResourceLocation> tables = ChestReplacer.getChestLootTables();
-                ResourceLocation lootTable = tables.get(world.rand.nextInt(tables.size()));
-
                 TileEntity oldTile = world.getTileEntity(pos);
+
+                ResourceLocation lootTable = null;
                 if (oldTile instanceof TileEntityLockableLoot) {
                     lootTable = ((TileEntityLockableLoot) oldTile).getLootTable();
                 }
+                if (lootTable == null) {
+                    List<ResourceLocation> tables = ChestReplacer.getChestLootTables();
+                    lootTable = tables.get(world.rand.nextInt(tables.size()));
+                }
 
                 LootrChestBlock replacement = state.getBlock().equals(Blocks.TRAPPED_CHEST) ? ModBlocks.TRAPPED_CHEST : ModBlocks.CHEST;
-                world.setBlockState(pos, replacement.getDefaultState()
-                        .withProperty(BlockChest.FACING, state.getValue(BlockChest.FACING)), 2);
+                world.setBlockState(pos, replacement.getDefaultState().withProperty(BlockChest.FACING, state.getValue(BlockChest.FACING)), 2);
 
                 TileEntity newTile = world.getTileEntity(pos);
                 if (newTile instanceof TileEntityLockableLoot) {

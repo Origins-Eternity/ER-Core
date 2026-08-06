@@ -5,6 +5,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.templates.FluidHandlerItemStack;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.gen.Accessor;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -17,15 +18,16 @@ public abstract class MixinFluidHandler {
     public abstract ItemStack getContainerStack();
 
     @Inject(method = "drain(Lnet/minecraftforge/fluids/FluidStack;Z)Lnet/minecraftforge/fluids/FluidStack;", at = @At("RETURN"))
-    public void syncOnDrainStack(FluidStack resource, boolean doDrain, CallbackInfoReturnable<FluidStack> cir) {
+    private void syncOnDrainStack(FluidStack resource, boolean doDrain, CallbackInfoReturnable<FluidStack> cir) {
         syncFluidStored(cir.getReturnValue(), getContainerStack(), doDrain);
     }
 
     @Inject(method = "drain(IZ)Lnet/minecraftforge/fluids/FluidStack;", at = @At("RETURN"))
-    public void syncOnDrainAmount(int maxDrain, boolean doDrain, CallbackInfoReturnable<FluidStack> cir) {
+    private void syncOnDrainAmount(int maxDrain, boolean doDrain, CallbackInfoReturnable<FluidStack> cir) {
         syncFluidStored(cir.getReturnValue(), getContainerStack(), doDrain);
     }
 
+    @Unique
     private static void syncFluidStored(FluidStack drained, ItemStack container, boolean doDrain) {
         if (!doDrain || drained == null || drained.amount <= 0) return;
 

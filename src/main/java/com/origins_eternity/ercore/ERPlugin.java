@@ -5,6 +5,8 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import net.minecraft.launchwrapper.Launch;
 import net.minecraftforge.fml.relauncher.IFMLLoadingPlugin;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.spongepowered.asm.mixin.Mixins;
 
 import javax.annotation.Nonnull;
@@ -15,12 +17,18 @@ import java.util.Map;
 import java.util.jar.JarFile;
 import java.util.zip.ZipEntry;
 
+import static com.origins_eternity.ercore.ERCore.MOD_ID;
 import static com.origins_eternity.ercore.config.Configuration.Compat;
 
 @IFMLLoadingPlugin.Name("ERPlugin")
 public class ERPlugin implements IFMLLoadingPlugin {
+    private Logger logger = LogManager.getLogger(MOD_ID);
+
     public ERPlugin() {
         ArrayList<String> targetModIds = getTargetModIds();
+
+        logger.info("{}ERCORE NB", targetModIds);
+
         File modsDir = new File(Launch.minecraftHome, "mods");
         File[] files = modsDir.listFiles((dir, name) -> name.endsWith(".jar"));
 
@@ -28,14 +36,14 @@ public class ERPlugin implements IFMLLoadingPlugin {
 
         for (File jar : files) {
             if (jar.isFile() && jar.getName().endsWith(".jar")) {
-                String modid = getModIdFromJar(jar);
-                if (targetModIds.contains(modid)) {
+                String modId = getModIdFromJar(jar);
+                if (targetModIds.contains(modId)) {
                     try {
                         Launch.classLoader.addURL(jar.toURI().toURL());
                     } catch (Exception e) {
                         throw new RuntimeException("Failed to prepare target classpath!", e);
                     }
-                    registerMixinConfigs(modid);
+                    registerMixinConfigs(modId);
                 }
             }
         }
@@ -79,8 +87,8 @@ public class ERPlugin implements IFMLLoadingPlugin {
         return null;
     }
 
-    private void registerMixinConfigs(String modid) {
-        Mixins.addConfiguration("assets/ercore/mixins/mixins." + modid + ".json");
+    private void registerMixinConfigs(String modId) {
+        Mixins.addConfiguration("assets/ercore/mixins/mixins." + modId + ".json");
     }
 
     @Override public String[] getASMTransformerClass() { return new String[0]; }
