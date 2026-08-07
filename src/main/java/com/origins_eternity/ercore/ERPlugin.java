@@ -19,15 +19,14 @@ import java.util.zip.ZipEntry;
 
 import static com.origins_eternity.ercore.ERCore.MOD_ID;
 import static com.origins_eternity.ercore.config.Configuration.Compat;
+import static com.origins_eternity.ercore.config.Configuration.Features;
 
 @IFMLLoadingPlugin.Name("ERPlugin")
 public class ERPlugin implements IFMLLoadingPlugin {
-    private Logger logger = LogManager.getLogger(MOD_ID);
+    public static Logger logger = LogManager.getLogger(MOD_ID);
 
     public ERPlugin() {
         ArrayList<String> targetModIds = getTargetModIds();
-
-        logger.info("{}ERCORE NB", targetModIds);
 
         File modsDir = new File(Launch.minecraftHome, "mods");
         File[] files = modsDir.listFiles((dir, name) -> name.endsWith(".jar"));
@@ -46,6 +45,9 @@ public class ERPlugin implements IFMLLoadingPlugin {
                     registerMixinConfigs(modId);
                 }
             }
+        }
+        if (Features.enableSlowness) {
+            registerMixinConfigs("minecraft");
         }
     }
 

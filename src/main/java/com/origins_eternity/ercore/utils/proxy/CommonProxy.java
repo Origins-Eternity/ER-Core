@@ -1,7 +1,6 @@
 package com.origins_eternity.ercore.utils.proxy;
 
 import com.origins_eternity.ercore.compat.firstaid.ItemHealer;
-import com.origins_eternity.ercore.compat.lootr.ChestReplacer;
 import com.origins_eternity.ercore.content.capability.Capabilities;
 import com.origins_eternity.ercore.content.command.TPA;
 import com.origins_eternity.ercore.content.command.TPADeny;
@@ -46,9 +45,6 @@ public class CommonProxy {
                     preTinker();
                 }
             }
-        }
-        if (Compat.enableReplace) {
-            MinecraftForge.EVENT_BUS.register(ChestReplacer.class);
         }
         if (Features.enableEndurance) {
             MinecraftForge.EVENT_BUS.register(CommonEvents.class);

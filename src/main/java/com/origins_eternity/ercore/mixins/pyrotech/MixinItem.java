@@ -13,12 +13,8 @@ import static com.origins_eternity.ercore.config.Configuration.Compat;
 
 @Mixin(value = Item.class, remap = false)
 public class MixinItem {
-    @Inject(
-            method = "getItemStackLimit(Lnet/minecraft/item/ItemStack;)I",
-            at = @At("HEAD"),
-            cancellable = true
-    )
-    private void getItemStackLimit(ItemStack stack, CallbackInfoReturnable<Integer> cir) {
+    @Inject(method = "getItemStackLimit(Lnet/minecraft/item/ItemStack;)I", at = @At("HEAD"), cancellable = true)
+    private void getStackLimit(ItemStack stack, CallbackInfoReturnable<Integer> cir) {
         if (stack.getItem() instanceof ItemBlockTank) {
             NBTTagCompound nbt = ItemBlockTank.getTankTag(stack);
             if (nbt != null && !nbt.hasKey("Empty") && Compat.tankStack > 0) {

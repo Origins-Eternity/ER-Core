@@ -21,10 +21,9 @@ import java.util.List;
 @Mixin(value = BlockChest.class)
 public abstract class MixinBlockChest {
     @Inject(method = "onBlockAdded", at = @At("RETURN"))
-    private void onBlockAdded(World world, BlockPos pos, IBlockState state, CallbackInfo ci) {
+    private void afterBlockAdded(World world, BlockPos pos, IBlockState state, CallbackInfo ci) {
         if (!world.isRemote) {
             if (ChestReplacer.isPlayerPlaced(pos) || state.getBlock() instanceof LootrChestBlock) {
-                ChestReplacer.untrack();
                 return;
             }
 

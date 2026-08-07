@@ -36,28 +36,30 @@ events.onPlayerRightClickItem(function(event as PlayerRightClickItemEvent) {
 **This *example* script causes player to lose 1 endurance when using a fishing rod.**
 ## Feature  
 **The compatibility of these features is unknown, and some features are designed specifically for the modpack described above. Configurations are already available for some features, which can be highly customizable. If you encounter any problems, please feel free to give feedback.**
-### Replace the Products of Lava and Water  
-**When lava and water meets, the original obsidian will be replaced with basalt blocks. Support custom products.**
+### Food Tooltip
+**Add a tooltip for foods, which can display food points as integers and saturation as percentages.**
+![This is an image](https://s21.ax1x.com/2025/02/06/pEe42rD.png)
+### Better Slowness
+**Slowness effects can not change the player's FOV now.**
 ### No Infinite Fluids
 **All fluids in the game cannot create new fluid resources, but players can still bottle water with water.**
 ![This is an image](https://s1.ax1x.com/2022/12/28/pSSP7Sx.png)
 ### Resourcepack Auto Installation
 **Try installing resoucepacks and turn on automatically. Support custom configuration and options.txt!**
-### Food Tooltip
-**Add a tooltip for foods, which can display food points as integers and saturation as percentages.**
-![This is an image](https://s21.ax1x.com/2025/02/06/pEe42rD.png)
-### Replace Chest
-**Replace all naturally generated chests in the world with Lootr chests.**
-### Grave Experience
-**Allow the grave in GraveStone mod store player's experience.**
-### MaxHealth Fix  
-**A fix for First Aid. These issues arise when installing First Aid and other mods that have the ability to increase the player's maxHealth at the same time. This mod fixes the issue that player's health changes when enter in a world.**
-### Thirst Overlay Fix
-**A fix for Tough As Nails. Enable blending before display thirst overlay, so that prevent the overlay displays strangely in some cases.**
-### Thirst Quencher Fix
-**A fix for Tough Expansion. When the thirst quencher transfers fluid to other storage tanks, it does not consume the fluid stored within itself, thereby producing infinite fluid. This fix make the thirst quencher reduce its liquids correctly after transferring.**
+### Replace the Products of Lava and Water
+**When lava and water meets, the original obsidian will be replaced with basalt blocks. Support custom products.**
 ### Tank Stack Limit
 **Limit the stack size of tanks with liquids in Pyrotech mod.**
+### Grave Experience
+**Allow the grave in GraveStone mod store player's experience.**
+### Lootr Fix
+**Fix for Lootr. Fixed the empty lootr minecart issue and replace naturally generated chests in the world with Lootr chests. Compatible with most of the structures that added by mods like Ruins.**
+### MaxHealth Fix  
+**Fix for First Aid. This mod prevents player's health from changing and the redistribution of the max health to each part when enter in a world. The issue arise when installing First Aid and other mods that have the ability to increase the player's maxHealth at the same time.**
+### Thirst Overlay Fix
+**Fix for Tough As Nails. Enable blending before display thirst overlay, so that prevent the overlay displays strangely in some cases.**
+### Thirst Quencher Fix
+**Fix for Tough Expansion. When the thirst quencher transfers fluid to other storage tanks, it does not consume the fluid stored within itself, thereby producing infinite fluid. This fix make the thirst quencher reduce its liquids correctly after transferring.**
 ## Content  
 **All content is also designed for the above modpack, you can customize what should be added in the configuration file, and all content will not be added by default.**  
 ### Ores  

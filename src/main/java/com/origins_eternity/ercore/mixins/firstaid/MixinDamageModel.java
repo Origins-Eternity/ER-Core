@@ -14,7 +14,7 @@ public abstract class MixinDamageModel {
     private float prevScaleFactor;
 
     @Inject(method = "runScaleLogic", at = @At("HEAD"), cancellable = true)
-    private void runScaleLogic(EntityPlayer player, CallbackInfo ci) {
+    private void runLoginScaleLogic(EntityPlayer player, CallbackInfo ci) {
         if (player.getTags().contains("Login")) {
             this.prevScaleFactor = player.getMaxHealth() / 20f;
             player.removeTag("Login");

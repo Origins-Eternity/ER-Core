@@ -21,43 +21,39 @@ import java.util.Map;
 @Mixin(value = EventHandler.class, remap = false)
 public abstract class MixinEventHandler {
     @Unique
-    private static final Map<Integer, List<Float>> partsHealth = new HashMap<>();
+    private static final Map<Integer, List<Float>> SAVED_HEALTH = new HashMap<>();
 
     @Inject(method = "onLogin", at = @At("HEAD"))
     private static void onLogin(PlayerEvent.PlayerLoggedInEvent event, CallbackInfo ci) {
         EntityPlayer player = event.player;
         if (!player.world.isRemote) {
             player.addTag("Login");
-            PlayerDamageModel  model = (PlayerDamageModel) player.getCapability(CapabilityExtendedHealthSystem.INSTANCE, null);
-
-            List<Float> health = new ArrayList<>();
-            model.forEach(part -> {
-                health.add(part.currentHealth);
-            });
-
-            partsHealth.put(player.getEntityId(), health);
+            PlayerDamageModel model = (PlayerDamageModel) player.getCapability(CapabilityExtendedHealthSystem.INSTANCE, null);
+            if (model != null) {
+                List<Float> health = new ArrayList<>();
+                model.forEach(part -> health.add(part.currentHealth));
+                SAVED_HEALTH.put(player.getEntityId(), health);
+            }
         }
     }
 
     @Inject(method = "tickPlayers", at = @At("HEAD"))
     private static void tickPlayers(TickEvent.PlayerTickEvent event, CallbackInfo ci) {
         EntityPlayer player = event.player;
-        if (!player.world.isRemote && player.ticksExisted == 3) {
-            int id = player.getEntityId();
-            if (partsHealth.containsKey(id)) {
+        if (player.world.isRemote) return;
+
+        if (player.ticksExisted == 3) {
+            List<Float> saved = SAVED_HEALTH.remove(player.getEntityId());
+            if (saved != null) {
                 PlayerDamageModel model = (PlayerDamageModel) player.getCapability(CapabilityExtendedHealthSystem.INSTANCE, null);
-
-                List<AbstractDamageablePart> parts = new ArrayList<>();
-                model.forEach(parts::add);
-
-                List<Float> health = partsHealth.get(id);
-
-                for (int i = 0; i < parts.size() && i < health.size(); i++) {
-                    parts.get(i).currentHealth = health.get(i);
+                if (model != null) {
+                    List<AbstractDamageablePart> parts = new ArrayList<>();
+                    model.forEach(parts::add);
+                    for (int i = 0; i < parts.size() && i < saved.size(); i++) {
+                        parts.get(i).currentHealth = saved.get(i);
+                    }
+                    model.scheduleResync();
                 }
-
-                model.scheduleResync();
-                partsHealth.remove(id);
             }
         }
     }

@@ -114,6 +114,12 @@ public class Configuration {
                 @Config.Comment("Whether to add endurance system or not.")
                 public boolean enableEndurance = true;
 
+                @Config.Name("Enable Better Slowness")
+                @Config.RequiresMcRestart()
+                @Config.LangKey("config.ercore.slowness")
+                @Config.Comment("Whether to prevent the slowness effect from changing player's FOV or not.")
+                public boolean enableSlowness = true;
+
                 @Config.Name("Enable No Infinite Fluids")
                 @Config.RequiresMcRestart()
                 @Config.LangKey("config.ercore.infinite")

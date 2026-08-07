@@ -18,12 +18,12 @@ public abstract class MixinFluidHandler {
     public abstract ItemStack getContainerStack();
 
     @Inject(method = "drain(Lnet/minecraftforge/fluids/FluidStack;Z)Lnet/minecraftforge/fluids/FluidStack;", at = @At("RETURN"))
-    private void syncOnDrainStack(FluidStack resource, boolean doDrain, CallbackInfoReturnable<FluidStack> cir) {
+    private void onDrainStack(FluidStack resource, boolean doDrain, CallbackInfoReturnable<FluidStack> cir) {
         syncFluidStored(cir.getReturnValue(), getContainerStack(), doDrain);
     }
 
     @Inject(method = "drain(IZ)Lnet/minecraftforge/fluids/FluidStack;", at = @At("RETURN"))
-    private void syncOnDrainAmount(int maxDrain, boolean doDrain, CallbackInfoReturnable<FluidStack> cir) {
+    private void onDrainAmount(int maxDrain, boolean doDrain, CallbackInfoReturnable<FluidStack> cir) {
         syncFluidStored(cir.getReturnValue(), getContainerStack(), doDrain);
     }
 
