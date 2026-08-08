@@ -46,7 +46,7 @@ public class ERPlugin implements IFMLLoadingPlugin {
                 }
             }
         }
-        if (Features.enableSlowness) {
+        if (Features.betterSlowness) {
             registerMixinConfigs("minecraft");
         }
     }
@@ -54,8 +54,8 @@ public class ERPlugin implements IFMLLoadingPlugin {
     @Nonnull
     private static ArrayList<String> getTargetModIds() {
         ArrayList<String> targetModIds = new ArrayList<>();
-        if (Compat.tank > 0) {
-            targetModIds.add("pyrotech");
+        if (Compat.betterArcFurnace) {
+            targetModIds.add("immersiveengineering");
         }
         if (Compat.enableGrave) {
             targetModIds.add("gravestone");
@@ -71,6 +71,9 @@ public class ERPlugin implements IFMLLoadingPlugin {
         }
         if (Compat.enableThirstQuencher) {
             targetModIds.add("tanaddons");
+        }
+        if (Compat.tank > 0) {
+            targetModIds.add("pyrotech");
         }
         return targetModIds;
     }

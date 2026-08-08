@@ -48,10 +48,6 @@ events.onPlayerRightClickItem(function(event as PlayerRightClickItemEvent) {
 **Try installing resoucepacks and turn on automatically. Support custom configuration and options.txt!**
 ### Replace the Products of Lava and Water
 **When lava and water meets, the original obsidian will be replaced with basalt blocks. Support custom products.**
-### Tank Stack Limit
-**Limit the stack size of tanks with liquids in Pyrotech mod.**
-### Grave Experience
-**Allow the grave in GraveStone mod store player's experience.**
 ### Lootr Fix
 **Fix for Lootr. Fixed the empty lootr minecart issue and replace naturally generated chests in the world with Lootr chests. Compatible with most of the structures that added by mods like Ruins.**
 ### MaxHealth Fix  
@@ -60,6 +56,14 @@ events.onPlayerRightClickItem(function(event as PlayerRightClickItemEvent) {
 **Fix for Tough As Nails. Enable blending before display thirst overlay, so that prevent the overlay displays strangely in some cases.**
 ### Thirst Quencher Fix
 **Fix for Tough Expansion. When the thirst quencher transfers fluid to other storage tanks, it does not consume the fluid stored within itself, thereby producing infinite fluid. This fix make the thirst quencher reduce its liquids correctly after transferring.**
+### Grave Experience
+**Allow the grave in GraveStone mod store player's experience.**
+### Better ArcFurnace Recipes
+**Make the ArcFurnace in Immersive Engineering to match the recipe with additives first when the two recipe inputs are the same, instead of only one of them being able to work properly.**
+### Tank Stack Limit
+**Limit the stack size of tanks with liquids in Pyrotech mod.**
+### Torch Lighters
+**Add a custom list for lighters that can use to relight torches in Realistic Torches mod.**
 ## Content  
 **All content is also designed for the above modpack, you can customize what should be added in the configuration file, and all content will not be added by default.**  
 ### Ores  

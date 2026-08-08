@@ -38,11 +38,29 @@ public class Configuration {
                 @Config.Comment("Whether to add herbs or not. (Require the First Aid mod)")
                 public boolean enableHerbs = false;
 
-                @Config.Name("Enable Replace Chest")
+                @Config.Name("Enable Lootr Fix")
                 @Config.RequiresMcRestart()
-                @Config.LangKey("config.ercore.replace")
-                @Config.Comment("Whether to replace naturally generated chests in world chests with Lootr chests or not.")
+                @Config.LangKey("config.ercore.lootr")
+                @Config.Comment("Whether to fix the empty lootr minecart issue and replace naturally generated chests in world chests with Lootr chests or not.")
                 public boolean enableReplace = true;
+
+                @Config.Name("Enable MaxHealth Fix")
+                @Config.RequiresMcRestart()
+                @Config.LangKey("config.ercore.maxhealth")
+                @Config.Comment("Whether to fix the issue that player's health changes when login with First Aid mod.")
+                public boolean enableMaxHealth = true;
+
+                @Config.Name("Enable Thirst Overlay Fix")
+                @Config.RequiresMcRestart()
+                @Config.LangKey("config.ercore.thirst_overlay")
+                @Config.Comment("Whether to fix the issue that thirst overlay in Tough As Nails mod sometimes displays abnormal.")
+                public boolean enableThirstOverlay = true;
+
+                @Config.Name("Enable Thirst Quencher Fix")
+                @Config.RequiresMcRestart()
+                @Config.LangKey("config.ercore.thirst_quencher")
+                @Config.Comment("Whether to fix the issue that the thirst quencher in TanExpansion mod can produce unlimited fluids.")
+                public boolean enableThirstQuencher = true;
 
                 @Config.Name("Enable Grave Experience")
                 @Config.RequiresMcRestart()
@@ -50,23 +68,11 @@ public class Configuration {
                 @Config.Comment("Whether to allow the gravestone store player's experience or not.")
                 public boolean enableGrave = true;
 
-                @Config.Name("Enable MaxHealth Fix")
+                @Config.Name("Better ArcFurnace Recipes")
                 @Config.RequiresMcRestart()
-                @Config.LangKey("config.ercore.maxHealth")
-                @Config.Comment("Whether to fix the issue that player's health changes when login with First Aid mod.")
-                public boolean enableMaxHealth = true;
-
-                @Config.Name("Enable Thirst Overlay Fix")
-                @Config.RequiresMcRestart()
-                @Config.LangKey("config.ercore.thirstOverlay")
-                @Config.Comment("Whether to fix the issue that thirst overlay in Tough As Nails mod sometimes displays abnormal.")
-                public boolean enableThirstOverlay = true;
-
-                @Config.Name("Enable Thirst Quencher Fix")
-                @Config.RequiresMcRestart()
-                @Config.LangKey("config.ercore.thirstQuencher")
-                @Config.Comment("Whether to fix the issue that the thirst quencher in TanExpansion mod can produce unlimited fluids.")
-                public boolean enableThirstQuencher = true;
+                @Config.LangKey("config.ercore.arc_furnace")
+                @Config.Comment("When the two recipe inputs are the same, arc furnace will prefer to match the one with additives.")
+                public boolean betterArcFurnace = true;
 
                 @Config.Name("Tank Stack Limit")
                 @Config.RequiresMcRestart()
@@ -120,12 +126,6 @@ public class Configuration {
                 @Config.Comment("Whether to add endurance system or not.")
                 public boolean enableEndurance = true;
 
-                @Config.Name("Enable Better Slowness")
-                @Config.RequiresMcRestart()
-                @Config.LangKey("config.ercore.slowness")
-                @Config.Comment("Whether to prevent the slowness effect from changing player's FOV or not.")
-                public boolean enableSlowness = true;
-
                 @Config.Name("Enable No Infinite Fluids")
                 @Config.RequiresMcRestart()
                 @Config.LangKey("config.ercore.infinite")
@@ -142,6 +142,12 @@ public class Configuration {
                 @Config.LangKey("config.ercore.food")
                 @Config.Comment("Whether to add a tooltip for foods or not.")
                 public boolean enableTooltip = true;
+
+                @Config.Name("Better Slowness")
+                @Config.RequiresMcRestart()
+                @Config.LangKey("config.ercore.slowness")
+                @Config.Comment("Whether to prevent the slowness effect from changing player's FOV or not.")
+                public boolean betterSlowness = true;
 
                 @Config.Name("Blacklist")
                 @Config.LangKey("config.ercore.blacklist")
