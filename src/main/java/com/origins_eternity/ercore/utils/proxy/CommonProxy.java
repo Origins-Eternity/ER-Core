@@ -1,6 +1,7 @@
 package com.origins_eternity.ercore.utils.proxy;
 
 import com.origins_eternity.ercore.compat.firstaid.ItemHealer;
+import com.origins_eternity.ercore.compat.realistictorch.TorchLighter;
 import com.origins_eternity.ercore.content.capability.Capabilities;
 import com.origins_eternity.ercore.content.command.TPA;
 import com.origins_eternity.ercore.content.command.TPADeny;
@@ -48,6 +49,9 @@ public class CommonProxy {
         }
         if (Features.enableEndurance) {
             MinecraftForge.EVENT_BUS.register(CommonEvents.class);
+        }
+        if (Loader.isModLoaded("realistictorches")) {
+            MinecraftForge.EVENT_BUS.register(TorchLighter.class);
         }
         if (Loader.isModLoaded("firstaid")) {
             if (Compat.enableHerbs) {

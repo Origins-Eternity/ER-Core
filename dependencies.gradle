@@ -13,6 +13,7 @@ dependencies {
     compileOnly "curse.maven:botania-225643:3330934"
     compileOnly "curse.maven:gravestone-238551:2744766"
     compileOnly "curse.maven:toughasnails-246391:2710969"
+    compileOnly "curse.maven:realistictorches-235729:3152820"
 
     embed("org.spongepowered:mixin:0.8.3-SNAPSHOT") {
         exclude module: 'guava'

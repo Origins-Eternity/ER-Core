@@ -109,6 +109,19 @@ public class Utils {
         return type + name.substring(12, 13).toUpperCase() + name.substring(13);
     }
 
+    public static int stackMatched(ItemStack item, String[] list) {
+        for (int i = 0; i < list.length; i++) {
+            String[] parts = list[i].split(";");
+            String[] name = parts[0].split(":");
+            if (name.length == 2) {
+                if (item.getItem().equals(Item.REGISTRY.getObject(new ResourceLocation(parts[0])))) {
+                    return i;
+                }
+            }
+        }
+        return -1;
+    }
+
     public static IBlockState getBlock(String id) {
         IBlockState block = Blocks.AIR.getDefaultState();
         String[] name = id.split(":");

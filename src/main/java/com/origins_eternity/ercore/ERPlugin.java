@@ -54,7 +54,7 @@ public class ERPlugin implements IFMLLoadingPlugin {
     @Nonnull
     private static ArrayList<String> getTargetModIds() {
         ArrayList<String> targetModIds = new ArrayList<>();
-        if (Compat.tankStack > 0) {
+        if (Compat.tank > 0) {
             targetModIds.add("pyrotech");
         }
         if (Compat.enableGrave) {

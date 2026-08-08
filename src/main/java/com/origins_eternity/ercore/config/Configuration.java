@@ -70,9 +70,15 @@ public class Configuration {
 
                 @Config.Name("Tank Stack Limit")
                 @Config.RequiresMcRestart()
-                @Config.LangKey("config.ercore.tankStack")
+                @Config.LangKey("config.ercore.tank")
                 @Config.Comment("Limit the stack size of tanks with liquids in Pyrotech mod. Set this to 0 to disable.")
-                public int tankStack = 1;
+                public int tank = 1;
+
+                @Config.Name("Torch Lighters")
+                @Config.RequiresMcRestart()
+                @Config.LangKey("config.ercore.lighters")
+                @Config.Comment("The list of lighters that can relight torches in the Realistic Torches mod. ('item;damage')")
+                public String[] lighters = new String[]{"pyrotech:flint_and_tinder;1", "pyrotech:bow_drill;1", "pyrotech:bow_drill_durable_spindle;1", "pyrotech:matchstick;1"};
         }
 
         public static class ConfigContents {

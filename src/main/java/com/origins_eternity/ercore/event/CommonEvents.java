@@ -21,7 +21,6 @@ import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.event.entity.living.PotionEvent;
 import net.minecraftforge.event.entity.player.*;
 import net.minecraftforge.event.world.BlockEvent;
-import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.Event;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -38,7 +37,6 @@ import static com.origins_eternity.ercore.content.command.TPAHere.sendHere;
 import static com.origins_eternity.ercore.content.damage.Damages.EXHAUSTED;
 import static com.origins_eternity.ercore.utils.Utils.*;
 
-@Mod.EventBusSubscriber(modid = MOD_ID)
 public class CommonEvents {
     @SubscribeEvent
     public static void onCreateFluidSource(BlockEvent.CreateFluidSourceEvent event) {

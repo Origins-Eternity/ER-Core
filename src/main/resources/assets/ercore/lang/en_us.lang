@@ -75,8 +75,10 @@ config.ercore.thirstOverlay=Enable Thirst Overlay Fix
 config.ercore.thirstOverlay.tooltip=Whether to fix the issue that thirst overlay in Tough As Nails mod sometimes displays abnormal.
 config.ercore.thirstQuencher=Enable Thirst Quencher Fix
 config.ercore.thirstQuencher.tooltip=Whether to fix the issue that the thirst quencher in TanExpansion mod can produce unlimited fluids.
-config.ercore.tankStack=Tank Stack Limit
-config.ercore.tankStack.tooltip=Limit stack size of the tanks with liquids in Pyrotech mod. Set this to 0 to disable.
+config.ercore.tank=Tank Stack Limit
+config.ercore.tank.tooltip=Limit stack size of the tanks with liquids in Pyrotech mod. Set this to 0 to disable.
+config.ercore.lighters=Torch Lighters
+config.ercore.lighters.tooltip=The list of lighters that can relight torches in the Realistic Torches mod. ('item;damage')
 
 config.sanity.contents=Contents
 config.sanity.contents.tooltip=Contents Options
