@@ -51,7 +51,7 @@ events.onPlayerRightClickItem(function(event as PlayerRightClickItemEvent) {
 ### Lootr Fix
 **Fix for Lootr. Fixed the empty lootr minecart issue and replace naturally generated chests in the world with Lootr chests. Compatible with most of the structures that added by mods like Ruins.**
 ### MaxHealth Fix  
-**Fix for First Aid. This mod prevents player's health from changing and the redistribution of the max health to each part when enter in a world. The issue arise when installing First Aid and other mods that have the ability to increase the player's maxHealth at the same time.**
+**Fix for First Aid. Prevent the maximum health of each part of the player from being reassigned when entering the world, and correctly restore the health saved when the player last logged out.**
 ### Thirst Overlay Fix
 **Fix for Tough As Nails. Enable blending before display thirst overlay, so that prevent the overlay displays strangely in some cases.**
 ### Thirst Quencher Fix
