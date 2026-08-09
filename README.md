@@ -60,6 +60,8 @@ events.onPlayerRightClickItem(function(event as PlayerRightClickItemEvent) {
 **Allow the grave in GraveStone mod store player's experience.**
 ### Better ArcFurnace Recipes
 **Make the ArcFurnace in Immersive Engineering to match the recipe with additives first when the two recipe inputs are the same, instead of only one of them being able to work properly.**
+### Better Ocean Crops Replace
+**Restore the previous fluid state after the destruction of ocean crops (kelp, coral and sea pickle) in Oceanic Expanse mod, instead of always creating a water source at the position.**
 ### Tank Stack Limit
 **Limit the stack size of tanks with liquids in Pyrotech mod.**
 ### Torch Lighters

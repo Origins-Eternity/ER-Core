@@ -1,0 +1,14 @@
+{
+  "required": false,
+  "package": "com.origins_eternity.ercore.mixins.oe",
+  "refmap": "mixins.ercore.refmap.json",
+  "compatibilityLevel": "JAVA_8",
+  "target": "@env(DEFAULT)",
+  "minVersion": "0.8",
+  "mixins": [
+    "MixinBlockCoral",
+    "MixinBlockCoralFun",
+    "MixinBlockKelp",
+    "MixinBlockSeaPickle"
+  ]
+}

@@ -42,7 +42,7 @@ public class Configuration {
                 @Config.RequiresMcRestart()
                 @Config.LangKey("config.ercore.lootr")
                 @Config.Comment("Whether to fix the empty lootr minecart issue and replace naturally generated chests in world chests with Lootr chests or not.")
-                public boolean enableReplace = true;
+                public boolean enableLootr = true;
 
                 @Config.Name("Enable MaxHealth Fix")
                 @Config.RequiresMcRestart()
@@ -71,8 +71,14 @@ public class Configuration {
                 @Config.Name("Better ArcFurnace Recipes")
                 @Config.RequiresMcRestart()
                 @Config.LangKey("config.ercore.arc_furnace")
-                @Config.Comment("When the two recipe inputs are the same, arc furnace will prefer to match the one with additives.")
+                @Config.Comment("Whether to make arc furnace prefer to match the one with additives when the two recipe inputs are the same.")
                 public boolean betterArcFurnace = true;
+
+                @Config.Name("Better Ocean Crops Replace")
+                @Config.RequiresMcRestart()
+                @Config.LangKey("config.ercore.ocean_crops")
+                @Config.Comment("Whether to restore the previous fluid state after the ocean crops(kelp, coral and sea pickle) added by Oceanic Expanse are destroyed, instead of creating a water source at the position.")
+                public boolean betterOceanCrops = true;
 
                 @Config.Name("Tank Stack Limit")
                 @Config.RequiresMcRestart()

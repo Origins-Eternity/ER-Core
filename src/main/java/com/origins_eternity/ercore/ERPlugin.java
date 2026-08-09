@@ -57,10 +57,13 @@ public class ERPlugin implements IFMLLoadingPlugin {
         if (Compat.betterArcFurnace) {
             targetModIds.add("immersiveengineering");
         }
+        if (Compat.betterOceanCrops) {
+            targetModIds.add("oe");
+        }
         if (Compat.enableGrave) {
             targetModIds.add("gravestone");
         }
-        if (Compat.enableReplace) {
+        if (Compat.enableLootr) {
             targetModIds.add("lootr");
         }
         if (Compat.enableMaxHealth) {
