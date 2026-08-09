@@ -117,8 +117,8 @@ config.ercore.product=产物
 config.ercore.product.tooltip=水和岩浆混合的产物。
 config.ercore.resourcepacks=资源包
 config.ercore.resourcepacks.tooltip=将被自动安装的资源包列表。
-config.ercore.tools=工具
-config.ercore.tools.tooltip=使用这些类型的工具将会消耗耐力值。
+config.ercore.mining=挖掘黑名单
+config.ercore.mining.tooltip=使用这些工具挖掘不会消耗耐力值。
 
 death.attack.exhausted=%1$s因过度劳累而倒下
 death.attack.exhausted.player=%1$s在逃离%2$s时因过度劳累而倒下

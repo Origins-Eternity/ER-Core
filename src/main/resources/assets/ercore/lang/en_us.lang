@@ -117,8 +117,8 @@ config.ercore.product=Product
 config.ercore.product.tooltip=A product of a mixture of water and lava.
 config.ercore.resourcepacks=Resourcepacks
 config.ercore.resourcepacks.tooltip=A list of resourcepacks which will be automatically installed.
-config.ercore.tools=Tools
-config.ercore.tools.tooltip=Use these types of tools will consume endurance.
+config.ercore.mining=Mining Blacklist
+config.ercore.mining.tooltip=Use these tools to break blocks will not consume endurance.
 
 death.attack.exhausted=%1$s collapsed from exhaustion
 death.attack.exhausted.player=%1$s collapsed from exhaustion whilst trying to escape %2$s

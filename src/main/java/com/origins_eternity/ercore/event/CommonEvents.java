@@ -19,7 +19,10 @@ import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.entity.living.LivingDamageEvent;
 import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.event.entity.living.PotionEvent;
-import net.minecraftforge.event.entity.player.*;
+import net.minecraftforge.event.entity.player.AttackEntityEvent;
+import net.minecraftforge.event.entity.player.PlayerEvent;
+import net.minecraftforge.event.entity.player.PlayerWakeUpEvent;
+import net.minecraftforge.event.entity.player.UseHoeEvent;
 import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.fml.common.eventhandler.Event;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
@@ -28,7 +31,6 @@ import net.minecraftforge.fml.common.gameevent.PlayerEvent.ItemCraftedEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 
 import java.util.Arrays;
-import java.util.Set;
 
 import static com.origins_eternity.ercore.ERCore.MOD_ID;
 import static com.origins_eternity.ercore.config.Configuration.Features;
@@ -71,6 +73,8 @@ public class CommonEvents {
         if (!player.isCreative()) {
             World world = event.getWorld();
             float hardness = event.getState().getBlockHardness(world, event.getPos());
+            if (hardness < 0.6 || stackMatched(player.inventory.getCurrentItem(), Features.mining) != -1) return;
+
             IEndurance endurance = player.getCapability(Capabilities.ENDURANCE, null);
             if (!world.isRemote) {
                 endurance.addCoolDown(30);
@@ -124,7 +128,6 @@ public class CommonEvents {
         if (!player.isCreative()) {
             IEndurance endurance = player.getCapability(Capabilities.ENDURANCE, null);
             endurance.addCoolDown(30);
-            endurance.addExhaustion(0.005f);
             if (endurance.getEndurance() <= 6f) {
                 float origin = event.getOriginalSpeed();
                 event.setNewSpeed((float) (origin * 0.5));
@@ -190,26 +193,6 @@ public class CommonEvents {
                 }
                 if (here != null && !here.isEmpty()) {
                     checkTimeout(here, player);
-                }
-            }
-        }
-    }
-
-    @SubscribeEvent
-    public static void onRightClickBlock(PlayerInteractEvent.RightClickBlock event) {
-        EntityPlayer player = event.getEntityPlayer();
-        if ((!player.isCreative()) && (!player.world.isRemote)) {
-            IEndurance endurance = player.getCapability(Capabilities.ENDURANCE, null);
-            Set<String> tools = event.getItemStack().getItem().getToolClasses(event.getItemStack());
-            for (String tool : Features.tools) {
-                if (tools.contains(tool)) {
-                    endurance.addCoolDown(60);
-                    if (endurance.getEndurance() <= 0) {
-                        player.attackEntityFrom(EXHAUSTED, 1f);
-                    } else {
-                        endurance.addExhaustion(0.2f);
-                    }
-                    break;
                 }
             }
         }

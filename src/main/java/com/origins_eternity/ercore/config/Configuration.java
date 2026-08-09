@@ -155,7 +155,7 @@ public class Configuration {
                 @Config.Comment("Whether to prevent the slowness effect from changing player's FOV or not.")
                 public boolean betterSlowness = true;
 
-                @Config.Name("Blacklist")
+                @Config.Name("Dimensions Blacklist")
                 @Config.LangKey("config.ercore.blacklist")
                 @Config.Comment("Whether to make the list of dimensions blacklist or not.")
                 public boolean blacklist = false;
@@ -176,10 +176,10 @@ public class Configuration {
                 @Config.Comment("A list of resourcepacks which will be automatically installed.")
                 public String[] resourcepacks = new String[]{};
 
-                @Config.Name("Tools")
-                @Config.LangKey("config.ercore.tools")
-                @Config.Comment("Use these types of tools will consume endurance.")
-                public String[] tools = new String[]{"pickaxe", "axe", "shovel"};
+                @Config.Name("Mining Blacklist")
+                @Config.LangKey("config.ercore.mining")
+                @Config.Comment("Use these tools to break blocks will not consume endurance.")
+                public String[] mining = new String[]{"immersiveengineering:drill"};
         }
 
     @Mod.EventBusSubscriber(modid = MOD_ID)
