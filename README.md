@@ -71,14 +71,16 @@ events.onPlayerRightClickItem(function(event as PlayerRightClickItemEvent) {
 ### Ores  
 **A total of four ores have been added, tin, copper, nickel and tungsten. All ores are only spawned in the Overworld.**
 ![This is an image](https://s41.ax1x.com/2026/07/27/pmRH1Y9.png)
+### Herbs
+**The herb is a healing item, which is used in the same way as bandage and plaster in First Aid. Recover half a heart every 23 seconds, recover one heart in total. Only added when First Aid is installed at the same time. Note that this mod does not add any recipes to it.**
 ### Blueprints  
-**Blueprints are the tools needed to craft some items in the above modpack and this mod doesn't add recipes to these blueprints. The textures are come from the Artisan Worktables.**  
+**Blueprints are the tools needed to craft some items in the above modpack and this mod doesn't add recipes to these blueprints. The textures are come from the Artisan Worktables.**
+### Rock Campfire
+**Add a rock campfire as an upgraded version of the campfire in Pyrotech mod. Compared to the original campfire, the rock campfire does not turn into ash when the fuel runs out. Its brightness, recipe speed, and effect range have all been improved, and it will not be extinguished by rain.**
 ### Ingot clay cast  
 **Ingot clay cast is the clay version of ingot cast. Only bronze material can use this to make a bronze ingot. Use clay fluid and seared brick to craft it. Like other clay cast, use and craft it will consume the cast. Only added when Tinkers' Construct 2 is installed.**  
 ### Tinker's material  
 **A new tinker's material, Tungsten Steel, has been added, only when Tinkers' Construct 2 is installed. If you enable this, be sure to enable Items, Fluids, and Ores.**
 ![This is an image](https://s41.ax1x.com/2026/07/27/pmWpLF0.png)
-### Herbs  
-**The herb is a healing item, which is used in the same way as bandage and plaster in First Aid. Recover half a heart every 23 seconds, recover one heart in total. Only added when First Aid is installed at the same time. Note that this mod does not add any recipes to it.**  
 ## About  
 **This mod has been open source under the Apache License 2.0, you can use, modify, port and distribute this mod under the license. And there are currently no plans to make a mod like this for a new Minecraft version.**
