@@ -5,11 +5,7 @@ import com.origins_eternity.ercore.content.block.Blocks;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
-
-import java.util.Random;
 
 import static com.origins_eternity.ercore.content.tab.CreativeTab.ERCORE;
 
@@ -26,10 +22,5 @@ public class BlockCreator extends Block {
         Blocks.BLOCKITEMS.add(new ItemBlock(this).setRegistryName(name.toLowerCase()));
 
         setCreativeTab(ERCORE);
-    }
-
-    @Override
-    public Item getItemDropped(IBlockState state, Random rand, int fortune) {
-        return Item.getItemFromBlock(this);
     }
 }

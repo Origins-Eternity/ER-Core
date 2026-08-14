@@ -4,36 +4,34 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.storage.loot.LootTableList;
 
-import java.util.ArrayDeque;
 import java.util.ArrayList;
-import java.util.Deque;
 import java.util.List;
 
-public class ChestReplacer {
-    private static final List<ResourceLocation> lootTables = new ArrayList<>();
+public class ChestHelper {
+    private static final List<ResourceLocation> TABLES = new ArrayList<>();
 
-    private static final Deque<BlockPos> blockPos = new ArrayDeque<>();
+    private static final List<BlockPos> PLACING = new ArrayList<>();
 
-    public static void track(BlockPos pos) {
-        blockPos.push(pos);
+    public static void startTracking(BlockPos pos) {
+        PLACING.add(pos);
     }
 
-    public static void untrack() {
-        if (!blockPos.isEmpty()) blockPos.pop();
+    public static void endTracking(BlockPos pos) {
+        PLACING.remove(pos);
     }
 
     public static boolean isPlayerPlaced(BlockPos pos) {
-        return blockPos.contains(pos);
+        return PLACING.contains(pos);
     }
 
     public static List<ResourceLocation> getChestLootTables() {
-        if (lootTables.isEmpty()) {
+        if (TABLES.isEmpty()) {
             for (ResourceLocation location : LootTableList.getAll()) {
                 if (location.toString().contains("chests")) {
-                    lootTables.add(location);
+                    TABLES.add(location);
                 }
             }
         }
-        return lootTables;
+        return TABLES;
     }
 }

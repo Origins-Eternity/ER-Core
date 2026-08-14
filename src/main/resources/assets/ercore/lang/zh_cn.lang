@@ -2,6 +2,8 @@
 
 itemGroup.ercore=ER 核心
 
+tile.ercore.rock.name=石块
+tile.ercore.campfire_rock.name=石头篝火
 tile.ercore.copper_ore.name=铜矿石
 tile.ercore.tin_ore.name=锡矿石
 tile.ercore.tungsten_ore.name=钨矿石
@@ -61,10 +63,12 @@ key.categories.ercore=ER 核心
 
 config.sanity.compat=兼容
 config.sanity.compat.tooltip=模组兼容配置
-config.ercore.material=启用材料
-config.ercore.material.tooltip=是否添加一种新的匠魂材料。（需要启用物品，流体和矿石）
 config.ercore.herbs=启用草药
 config.ercore.herbs.tooltip=是否启用草药。（需要First Aid模组）
+config.ercore.material=启用材料
+config.ercore.material.tooltip=是否添加一种新的匠魂材料。（需要启用物品，流体和矿石）
+config.ercore.rock=启用石头篝火
+config.ercore.rock.tooltip=是否添加石头篝火作为Pyrotech模组中篝火的升级版本。
 config.ercore.lootr=启用Lootr修复
 config.ercore.lootr.tooltip=是否修复Lootr空矿车问题并将世界上自然生成的箱子替换为Lootr战利品箱。
 config.ercore.maxhealth=启用最大生命值修复

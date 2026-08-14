@@ -1,6 +1,6 @@
 package com.origins_eternity.ercore.mixins.lootr;
 
-import com.origins_eternity.ercore.compat.lootr.ChestReplacer;
+import com.origins_eternity.ercore.compat.lootr.ChestHelper;
 import net.minecraft.block.BlockChest;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
@@ -23,30 +23,28 @@ public abstract class MixinBlockChest {
     @Inject(method = "onBlockAdded", at = @At("RETURN"))
     private void afterBlockAdded(World world, BlockPos pos, IBlockState state, CallbackInfo ci) {
         if (!world.isRemote) {
-            if (ChestReplacer.isPlayerPlaced(pos) || state.getBlock() instanceof LootrChestBlock) {
+            if (ChestHelper.isPlayerPlaced(pos) || state.getBlock() instanceof LootrChestBlock) {
                 return;
             }
 
-            world.getMinecraftServer().addScheduledTask(() -> {
-                TileEntity oldTile = world.getTileEntity(pos);
+            TileEntity oldTile = world.getTileEntity(pos);
 
-                ResourceLocation lootTable = null;
-                if (oldTile instanceof TileEntityLockableLoot) {
-                    lootTable = ((TileEntityLockableLoot) oldTile).getLootTable();
-                }
-                if (lootTable == null) {
-                    List<ResourceLocation> tables = ChestReplacer.getChestLootTables();
-                    lootTable = tables.get(world.rand.nextInt(tables.size()));
-                }
+            ResourceLocation lootTable = null;
+            if (oldTile instanceof TileEntityLockableLoot) {
+                lootTable = ((TileEntityLockableLoot) oldTile).getLootTable();
+            }
+            if (lootTable == null) {
+                List<ResourceLocation> tables = ChestHelper.getChestLootTables();
+                lootTable = tables.get(world.rand.nextInt(tables.size()));
+            }
 
-                LootrChestBlock replacement = state.getBlock().equals(Blocks.TRAPPED_CHEST) ? ModBlocks.TRAPPED_CHEST : ModBlocks.CHEST;
-                world.setBlockState(pos, replacement.getDefaultState().withProperty(BlockChest.FACING, state.getValue(BlockChest.FACING)), 2);
+            LootrChestBlock replacement = state.getBlock().equals(Blocks.TRAPPED_CHEST) ? ModBlocks.TRAPPED_CHEST : ModBlocks.CHEST;
+            world.setBlockState(pos, replacement.getDefaultState().withProperty(BlockChest.FACING, state.getValue(BlockChest.FACING)), 2);
 
-                TileEntity newTile = world.getTileEntity(pos);
-                if (newTile instanceof TileEntityLockableLoot) {
-                    ((TileEntityLockableLoot) newTile).setLootTable(lootTable, world.rand.nextLong());
-                }
-            });
+            TileEntity newTile = world.getTileEntity(pos);
+            if (newTile instanceof TileEntityLockableLoot) {
+                ((TileEntityLockableLoot) newTile).setLootTable(lootTable, world.rand.nextLong());
+            }
         }
     }
 }

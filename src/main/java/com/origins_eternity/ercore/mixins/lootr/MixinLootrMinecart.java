@@ -11,7 +11,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(value = LootrChestMinecartEntity.class, remap = false)
 public abstract class MixinLootrMinecart {
-    @Inject(method = "processInitialInteract", at = @At("HEAD"), cancellable = true)
+    @Inject(method = "func_184230_a", at = @At("HEAD"), cancellable = true)
     private void onInitialInteract(EntityPlayer player, EnumHand hand, CallbackInfoReturnable<Boolean> cir) {
         LootrChestMinecartEntity cart = (LootrChestMinecartEntity) (Object) this;
 

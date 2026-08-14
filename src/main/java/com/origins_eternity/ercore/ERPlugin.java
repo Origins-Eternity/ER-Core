@@ -5,8 +5,6 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import net.minecraft.launchwrapper.Launch;
 import net.minecraftforge.fml.relauncher.IFMLLoadingPlugin;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.spongepowered.asm.mixin.Mixins;
 
 import javax.annotation.Nonnull;
@@ -17,14 +15,11 @@ import java.util.Map;
 import java.util.jar.JarFile;
 import java.util.zip.ZipEntry;
 
-import static com.origins_eternity.ercore.ERCore.MOD_ID;
 import static com.origins_eternity.ercore.config.Configuration.Compat;
 import static com.origins_eternity.ercore.config.Configuration.Features;
 
 @IFMLLoadingPlugin.Name("ERPlugin")
 public class ERPlugin implements IFMLLoadingPlugin {
-    public static Logger logger = LogManager.getLogger(MOD_ID);
-
     public ERPlugin() {
         ArrayList<String> targetModIds = getTargetModIds();
 
@@ -75,7 +70,7 @@ public class ERPlugin implements IFMLLoadingPlugin {
         if (Compat.enableThirstQuencher) {
             targetModIds.add("tanaddons");
         }
-        if (Compat.tank > 0) {
+        if (Compat.enableRock) {
             targetModIds.add("pyrotech");
         }
         return targetModIds;

@@ -1,6 +1,6 @@
 package com.origins_eternity.ercore.mixins.lootr;
 
-import com.origins_eternity.ercore.compat.lootr.ChestReplacer;
+import com.origins_eternity.ercore.compat.lootr.ChestHelper;
 import net.minecraft.block.BlockChest;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemBlock;
@@ -20,7 +20,7 @@ public abstract class MixinItemBlock {
                             net.minecraft.block.state.IBlockState newState,
                             CallbackInfoReturnable<Boolean> cir) {
         if (newState.getBlock() instanceof BlockChest) {
-            ChestReplacer.track(pos);
+            ChestHelper.startTracking(pos);
         }
     }
 
@@ -31,7 +31,7 @@ public abstract class MixinItemBlock {
                            net.minecraft.block.state.IBlockState newState,
                            CallbackInfoReturnable<Boolean> cir) {
         if (newState.getBlock() instanceof BlockChest) {
-            ChestReplacer.untrack();
+            ChestHelper.endTracking(pos);
         }
     }
 }

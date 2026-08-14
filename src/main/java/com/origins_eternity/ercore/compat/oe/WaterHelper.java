@@ -8,8 +8,8 @@ import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-public class WaterReplacer {
-    public static IBlockState getCoralReplacement(World world, BlockPos pos, IBlockState state, boolean inWater) {
+public class WaterHelper {
+    public static IBlockState getCoralReplacement(World world, BlockPos pos, boolean inWater) {
         if (!inWater || world.provider.doesWaterVaporize()) {
             return Blocks.AIR.getDefaultState();
         }

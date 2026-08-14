@@ -15,6 +15,7 @@ public class ClassicCreator extends BlockFluidClassic {
         String fluidname = fluid.getUnlocalizedName().substring(13);
         setTranslationKey(ERCore.MOD_ID + ".molten_" + fluidname);
         setRegistryName("molten_" + fluidname);
+
         FluidBlocks.FLUIDBLOCKS.add(this);
         FluidBlocks.FLUIDITEMS.add(new ItemBlock(this).setRegistryName("molten_" + fluidname));
 

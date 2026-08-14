@@ -1,0 +1,23 @@
+{
+	"credit": "Modified from Pyrotech",
+	"parent": "block/block",
+	"textures": {
+		"particle": "pyrotech:blocks/campfire",
+		"campfire": "pyrotech:blocks/campfire"
+	},
+	"elements": [
+		{
+			"from": [1, 7.5, 6],
+			"to": [9, 11.5, 10],
+			"rotation": {"angle": 45, "axis": "z", "origin": [10, 3.6, 8]},
+			"faces": {
+				"north": {"uv": [4, 0, 12, 4], "texture": "#campfire"},
+				"east": {"uv": [0, 0, 4, 4], "texture": "#campfire"},
+				"south": {"uv": [8, 0, 16, 4], "texture": "#campfire"},
+				"west": {"uv": [0, 0, 4, 4], "texture": "#campfire"},
+				"up": {"uv": [4, 0, 12, 4], "texture": "#campfire"},
+				"down": {"uv": [6, 0, 14, 4], "texture": "#campfire"}
+			}
+		}
+	]
+}

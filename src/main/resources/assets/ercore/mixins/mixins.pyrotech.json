@@ -6,6 +6,10 @@
   "target": "@env(DEFAULT)",
   "minVersion": "0.8",
   "mixins": [
-    "MixinItemStack"
+    "MixinBlockCampfire",
+    "MixinItemStack",
+    "MixinItemTinder",
+    "MixinLogRenderer",
+    "MixinTileCampfire"
   ]
 }

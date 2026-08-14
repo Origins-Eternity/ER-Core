@@ -10,7 +10,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-import static com.origins_eternity.ercore.compat.oe.WaterReplacer.getReplacement;
+import static com.origins_eternity.ercore.compat.oe.WaterHelper.getReplacement;
 
 @Mixin(value = BlockSeaPickle.class, remap = false)
 public abstract class MixinBlockSeaPickle extends BlockBush {

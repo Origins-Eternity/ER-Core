@@ -14,6 +14,7 @@ import slimeknights.tconstruct.library.materials.*;
 import slimeknights.tconstruct.library.smeltery.CastingRecipe;
 import slimeknights.tconstruct.shared.TinkerCommons;
 import slimeknights.tconstruct.shared.TinkerFluids;
+import slimeknights.tconstruct.smeltery.TinkerSmeltery;
 
 import static slimeknights.tconstruct.library.TinkerRegistry.*;
 import static slimeknights.tconstruct.tools.TinkerTraits.*;
@@ -53,9 +54,9 @@ public class Materials {
     }
 
     public static void addTinkerCasting() {
-        registerTableCasting(new ItemStack(Items.Tungsten_Ingot), ItemStack.EMPTY, Fluids.Tungsten, 144);
-        registerTableCasting(new ItemStack(Items.Tungsten_Steel_Ingot), ItemStack.EMPTY, Fluids.Tungsten_Steel, 144);
+        registerTableCasting(new ItemStack(Items.Tungsten_Ingot), TinkerSmeltery.castIngot, Fluids.Tungsten, 144);
+        registerTableCasting(new ItemStack(Items.Tungsten_Steel_Ingot), TinkerSmeltery.castIngot, Fluids.Tungsten_Steel, 144);
         registerTableCasting(new CastingRecipe(new ItemStack(Items.Bronze_Ingot), RecipeMatch.of(Items.Ingot_Clay_Cast), TinkerFluids.bronze, 144, true, false));
-        registerTableCasting(new CastingRecipe(new ItemStack(Items.Ingot_Clay_Cast), RecipeMatch.of(TinkerCommons.searedBrick), TinkerFluids.clay, 288, false, false));
+        registerTableCasting(new CastingRecipe(new ItemStack(Items.Ingot_Clay_Cast), RecipeMatch.of(TinkerCommons.searedBrick), TinkerFluids.clay, 288));
     }
 }

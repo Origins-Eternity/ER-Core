@@ -1,6 +1,7 @@
 package com.origins_eternity.ercore.utils.proxy;
 
 import com.origins_eternity.ercore.compat.firstaid.ItemHealer;
+import com.origins_eternity.ercore.compat.pyrotech.RockHelper;
 import com.origins_eternity.ercore.compat.realistictorch.TorchLighter;
 import com.origins_eternity.ercore.content.capability.Capabilities;
 import com.origins_eternity.ercore.content.command.TPA;
@@ -41,11 +42,6 @@ public class CommonProxy {
     public void preInit(FMLPreInitializationEvent event) {
         if (Contents.enableFluids) {
             registerFluids();
-            if (Loader.isModLoaded("tconstruct")) {
-                if ((Contents.enableOres) && (Contents.enableItems) && (Compat.enableMaterial)) {
-                    preTinker();
-                }
-            }
         }
         if (Features.enableEndurance) {
             MinecraftForge.EVENT_BUS.register(CommonEvents.class);
@@ -56,6 +52,11 @@ public class CommonProxy {
         if (Loader.isModLoaded("firstaid")) {
             if (Compat.enableHerbs) {
                 MinecraftForge.EVENT_BUS.register(ItemHealer.class);
+            }
+        }
+        if (Loader.isModLoaded("pyrotech")) {
+            if (Compat.enableRock) {
+                MinecraftForge.EVENT_BUS.register(RockHelper.class);
             }
         }
         registerMessage();
@@ -74,6 +75,7 @@ public class CommonProxy {
         }
         if (Loader.isModLoaded("tconstruct")) {
             if ((Contents.enableOres) && (Contents.enableItems) && (Compat.enableMaterial) && (Contents.enableFluids)) {
+                preTinker();
                 addTinkerMelting();
                 addTinkerAlloying();
                 addTinkerCasting();

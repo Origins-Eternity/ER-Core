@@ -26,17 +26,23 @@ public class Configuration {
         public static ConfigFeatures Features = new ConfigFeatures();
 
         public static class ConfigCompat {
+                @Config.Name("Enable Herbs")
+                @Config.RequiresMcRestart()
+                @Config.LangKey("config.ercore.herbs")
+                @Config.Comment("Whether to add herbs or not. (Require First Aid mod)")
+                public boolean enableHerbs = false;
+
                 @Config.Name("Enable Material")
                 @Config.RequiresMcRestart()
                 @Config.LangKey("config.ercore.material")
                 @Config.Comment("Whether to add a new tinker's material or not. (Require enable items, fluids and ores)")
                 public boolean enableMaterial = false;
 
-                @Config.Name("Enable Herbs")
+                @Config.Name("Enable Rock Campfire")
                 @Config.RequiresMcRestart()
-                @Config.LangKey("config.ercore.herbs")
-                @Config.Comment("Whether to add herbs or not. (Require the First Aid mod)")
-                public boolean enableHerbs = false;
+                @Config.LangKey("config.ercore.rock")
+                @Config.Comment("Whether to add a rock campfire as an upgraded version of the campfire in Pyrotech mod.")
+                public boolean enableRock = true;
 
                 @Config.Name("Enable Lootr Fix")
                 @Config.RequiresMcRestart()
@@ -84,7 +90,7 @@ public class Configuration {
                 @Config.RequiresMcRestart()
                 @Config.LangKey("config.ercore.tank")
                 @Config.Comment("Limit the stack size of tanks with liquids in Pyrotech mod. Set this to 0 to disable.")
-                public int tank = 1;
+                public int tank = 0;
 
                 @Config.Name("Torch Lighters")
                 @Config.RequiresMcRestart()

@@ -9,7 +9,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;
 
 @Mixin(ChestUtil.class)
-public class MixinChestUtil {
+public abstract class MixinChestUtil {
     @Redirect(method = "handleLootCart", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/player/EntityPlayer;displayGui(Lnet/minecraft/world/IInteractionObject;)V"))
     private static void onHandleLootCart(EntityPlayer player, IInteractionObject guiOwner) {
         if (guiOwner instanceof IInventory) {

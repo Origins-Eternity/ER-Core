@@ -1,0 +1,27 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "ercore:rock_a",
+    "textures": {
+      "stone": "blocks/stone",
+      "particle": "blocks/stone"
+    },
+    "transform": "forge:default-block"
+  },
+  "variants": {
+    "rotation": {
+      "0": { "model": "ercore:rock_a", "transform": { "rotation": {"y": 0 } } },
+      "1": { "model": "ercore:rock_b", "transform": { "rotation": {"y": 45 } } },
+      "2": { "model": "ercore:rock_a", "transform": { "rotation": {"y": 90 } } },
+      "3": { "model": "ercore:rock_b", "transform": { "rotation": {"y": 135 } } },
+      "4": { "model": "ercore:rock_a", "transform": { "rotation": {"y": 180 } } },
+      "5": { "model": "ercore:rock_b", "transform": { "rotation": {"y": 225 } } },
+      "6": { "model": "ercore:rock_a", "transform": { "rotation": {"y": 270 } } },
+      "7": { "model": "ercore:rock_b", "transform": { "rotation": {"y": 315 } } }
+    },
+    "bound": {
+      "true": {},
+      "false": {}
+    }
+  }
+}

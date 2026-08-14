@@ -2,6 +2,8 @@
 
 itemGroup.ercore=ER Core
 
+tile.ercore.rock.name=Rock
+tile.ercore.campfire_rock.name=Rock Campfire
 tile.ercore.copper_ore.name=Copper Ore
 tile.ercore.tin_ore.name=Tin Ore
 tile.ercore.tungsten_ore.name=Tungsten Ore
@@ -61,10 +63,12 @@ key.categories.ercore=ER Core
 
 config.sanity.compat=Compat
 config.sanity.compat.tooltip=Mod Compat Options
-config.ercore.material=Enable Material
-config.ercore.material.tooltip=Whether to add a new tinker's material or not.(Require enable items, fluids and ores)
 config.ercore.herbs=Enable Herbs
 config.ercore.herbs.tooltip=Whether to add herbs or not.(Require Fisrt Aid mod)
+config.ercore.material=Enable Material
+config.ercore.material.tooltip=Whether to add a new tinker's material or not.(Require enable items, fluids and ores)
+config.ercore.rock=Enable Rock Campfire
+config.ercore.rock.tooltip=Whether to add a rock campfire as an upgraded version of the campfire in Pyrotech mod.
 config.ercore.lootr=Enable Lootr Fix
 config.ercore.lootr.tooltip=Whether to fix the empty lootr minecart issue and replace naturally generated chests in world chests with Lootr chests or not.
 config.ercore.maxhealth=Enable Maxhealth Fix

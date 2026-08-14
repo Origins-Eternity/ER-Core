@@ -11,7 +11,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-import static com.origins_eternity.ercore.compat.oe.WaterReplacer.getCoralReplacement;
+import static com.origins_eternity.ercore.compat.oe.WaterHelper.getCoralReplacement;
 
 @Mixin(value = BlockCoralFan.class, remap = false)
 public abstract class MixinBlockCoralFun {
@@ -20,17 +20,16 @@ public abstract class MixinBlockCoralFun {
 
     @Inject(method = "func_176206_d", at = @At("HEAD"), cancellable = true)
     private void onPlayerDestroy(World worldIn, BlockPos pos, IBlockState state, CallbackInfo ci) {
-        worldIn.setBlockState(pos, getCoralReplacement(worldIn, pos, state, state.getValue(BlockCoralFan.IN_WATER)));
+        worldIn.setBlockState(pos, getCoralReplacement(worldIn, pos, state.getValue(BlockCoralFan.IN_WATER)));
         ci.cancel();
     }
 
     @Inject(method = "checkForDrop", at = @At("HEAD"), cancellable = true)
     private void onCheckForDrop(World worldIn, BlockPos pos, IBlockState state, CallbackInfoReturnable<Boolean> cir) {
-        if (this.canBlockStay(worldIn, pos, state)) {
-            cir.setReturnValue(true);
-            return;
+        if (!this.canBlockStay(worldIn, pos, state)) {
+            worldIn.setBlockState(pos, getCoralReplacement(worldIn, pos, state.getValue(BlockCoralFan.IN_WATER)), 3);
+            cir.setReturnValue(false);
+            cir.cancel();
         }
-        worldIn.setBlockState(pos, getCoralReplacement(worldIn, pos, state, state.getValue(BlockCoralFan.IN_WATER)), 3);
-        cir.setReturnValue(false);
     }
 }

@@ -1,0 +1,112 @@
+{
+  "credit": "Modified from Pyrotech",
+  "forge_marker": 1,
+  "defaults": {
+    "uvlock": true,
+    "model": "pyrotech:tinder",
+    "textures": {
+      "particle": "pyrotech:blocks/campfire"
+    }
+  },
+  "variants": {
+    "ash": {
+      "0": {},
+      "1": {
+        "submodel": {
+          "ash": {"model": "pyrotech:campfire_ash_a"}
+        }
+      },
+      "2": {
+        "submodel": {
+          "ash": {"model": "pyrotech:campfire_ash_b"}
+        }
+      },
+      "3": {
+        "submodel": {
+          "ash": {"model": "pyrotech:campfire_ash_c"}
+        }
+      },
+      "4": {
+        "submodel": {
+          "ash": {"model": "pyrotech:campfire_ash_d"}
+        }
+      },
+      "5": {
+        "submodel": {
+          "ash": {"model": "pyrotech:campfire_ash_e"}
+        }
+      },
+      "6": {
+        "submodel": {
+          "ash": {"model": "pyrotech:campfire_ash_f"}
+        }
+      },
+      "7": {
+        "submodel": {
+          "ash": {"model": "pyrotech:campfire_ash_g"}
+        }
+      },
+      "8": {
+        "submodel": {
+          "ash": {"model": "pyrotech:campfire_ash_h"}
+        }
+      }
+    },
+    "variant": {
+      "normal": {
+        "textures": {
+          "tinder": "pyrotech:blocks/tinder",
+          "particle": "pyrotech:blocks/tinder"
+        }
+      },
+      "lit": {
+        "submodel": {
+          "f0": {
+            "model": "pyrotech:campfire_fire",
+            "transform": {
+              "translation": [0, 0.125, 0],
+              "scale": [1.2, 1.2, 1.2]
+            }
+          }
+        },
+        "textures": {
+          "tinder": "pyrotech:blocks/active_pile",
+          "fire": "minecraft:blocks/fire_layer_1",
+          "particle": "minecraft:blocks/fire_layer_1"
+        }
+      },
+      "ash": {
+        "model": "pyrotech:campfire_ash_a",
+        "textures": {
+          "particle": "pyrotech:blocks/ash_block"
+        }
+      },
+      "item": {
+        "textures": {
+          "tinder": "pyrotech:blocks/active_pile",
+          "fire": "minecraft:blocks/fire_layer_1",
+          "particle": "minecraft:blocks/fire_layer_1"
+        },
+        "submodel": {
+          "s0": {"model": "ercore:rock_a", "transform": {"translation": [0, 0, -0.5], "rotation": {"y": 0 } } },
+          "s1": {"model": "ercore:rock_b", "transform": {"translation": [-0.1, 0, -0.1], "rotation": {"y": 45 } } },
+          "s2": {"model": "ercore:rock_a", "transform": {"translation": [-0.5, 0, 0], "rotation": {"y": 90 } } },
+          "s3": {"model": "ercore:rock_b", "transform": {"translation": [-0.1, 0, 0.1], "rotation": {"y": 135 } } },
+          "s4": {"model": "ercore:rock_a", "transform": {"translation": [0, 0, 0.5], "rotation": {"y": 180 } } },
+          "s5": {"model": "ercore:rock_b", "transform": {"translation": [0.1, 0, 0.1], "rotation": {"y": 225 } } },
+          "s6": {"model": "ercore:rock_a", "transform": {"translation": [0.5, 0, 0], "rotation": {"y": 270 } } },
+          "s7": {"model": "ercore:rock_b", "transform": {"translation": [0.1, 0, -0.1], "rotation": {"y": 315 } } },
+          "f0": {"model": "pyrotech:campfire_fire", "transform": {"translation": [0, 0.125, 0], "scale": [1.2, 1.2, 1.2]}},
+          "a": {"model": "ercore:campfire_log_b"},
+          "b": {"model": "ercore:campfire_log_b", "y": 90},
+          "c": {"model": "ercore:campfire_log_b", "y": 180},
+          "d": {"model": "ercore:campfire_log_b", "y": 270},
+          "e": {"model": "pyrotech:campfire_log_a", "transform": { "rotation": {"y": 45 } } },
+          "f": {"model": "pyrotech:campfire_log_a", "transform": { "rotation": {"y": 135 } } },
+          "g": {"model": "pyrotech:campfire_log_a", "transform": { "rotation": {"y": 225 } } },
+          "h": {"model": "pyrotech:campfire_log_a", "transform": { "rotation": {"y": 315 } } }
+        }
+      }
+    }
+  }
+}
