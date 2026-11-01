@@ -19,12 +19,23 @@ public abstract class MixinBlockGrave {
     private void onBreakBlock(World worldIn, BlockPos pos, IBlockState state, CallbackInfo ci) {
         if (worldIn.isRemote) return;
         TileEntity te = worldIn.getTileEntity(pos);
+
         if (te instanceof TileEntityGraveStone) {
-            int exp = ((IGraveExperience) te).getGraveExperience();
-            while (exp > 0) {
-                int drop = Math.min(exp, 50);
-                exp -= drop;
-                worldIn.spawnEntity(new EntityXPOrb(worldIn, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, drop));
+            int totalExp = ((IGraveExperience) te).getGraveExperience();
+            if (totalExp <= 0) return;
+
+            int orbs = Math.min(14, totalExp);
+            int perOrb = totalExp / orbs;
+            int remainder = totalExp % orbs;
+
+            double x = pos.getX() + 0.5;
+            double y = pos.getY() + 0.5;
+            double z = pos.getZ() + 0.5;
+
+            for (int i = 0; i < orbs; i++) {
+                int value = perOrb + (i < remainder ? 1 : 0);
+                if (value <= 0) continue;
+                worldIn.spawnEntity(new EntityXPOrb(worldIn, x, y, z, value));
             }
             ((IGraveExperience) te).setGraveExperience(0);
         }

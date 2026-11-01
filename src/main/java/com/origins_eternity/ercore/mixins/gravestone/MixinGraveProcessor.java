@@ -7,13 +7,17 @@ import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.TextComponentString;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import java.util.List;
+
+import static com.origins_eternity.ercore.compat.gravestone.ExpHelper.getTotalExperience;
 
 @Mixin(value = GraveProcessor.class, remap = false)
 public abstract class MixinGraveProcessor {
@@ -29,7 +33,8 @@ public abstract class MixinGraveProcessor {
             EntityPlayer player = (EntityPlayer) this.entity;
             TileEntity te = this.entity.world.getTileEntity(this.gravePosition);
             if (te instanceof IGraveExperience) {
-                ((IGraveExperience) te).setGraveExperience(player.experienceTotal);
+                int totalXp = getTotalExperience(player);
+                ((IGraveExperience) te).setGraveExperience(totalXp);
 
                 player.experienceTotal = 0;
                 player.experienceLevel = 0;

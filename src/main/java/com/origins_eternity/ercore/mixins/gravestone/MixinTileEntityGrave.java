@@ -25,12 +25,12 @@ public abstract class MixinTileEntityGrave implements IGraveExperience {
         this.graveExperience = exp;
     }
 
-    @Inject(method = "writeToNBT", at = @At("RETURN"))
+    @Inject(method = "func_189515_b", at = @At("RETURN"))
     private void onWrite(NBTTagCompound compound, CallbackInfoReturnable<NBTTagCompound> cir) {
         compound.setInteger("GraveExperience", this.graveExperience);
     }
 
-    @Inject(method = "readFromNBT", at = @At("RETURN"))
+    @Inject(method = "func_145839_a", at = @At("RETURN"))
     private void onRead(NBTTagCompound compound, CallbackInfo ci) {
         this.graveExperience = compound.getInteger("GraveExperience");
     }

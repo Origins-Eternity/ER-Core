@@ -10,6 +10,7 @@
     "MixinItemStack",
     "MixinItemTinder",
     "MixinLogRenderer",
-    "MixinTileCampfire"
+    "MixinTileCampfire",
+    "MixinTileStoneHopper"
   ]
 }

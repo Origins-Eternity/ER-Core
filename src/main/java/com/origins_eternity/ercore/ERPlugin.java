@@ -4,13 +4,17 @@ import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import net.minecraft.launchwrapper.Launch;
+import net.minecraftforge.fml.relauncher.CoreModManager;
+import net.minecraftforge.fml.relauncher.FMLInjectionData;
 import net.minecraftforge.fml.relauncher.IFMLLoadingPlugin;
 import org.spongepowered.asm.mixin.Mixins;
 
 import javax.annotation.Nonnull;
 import java.io.File;
 import java.io.InputStreamReader;
+import java.lang.reflect.Field;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.jar.JarFile;
 import java.util.zip.ZipEntry;
@@ -32,6 +36,7 @@ public class ERPlugin implements IFMLLoadingPlugin {
             if (jar.isFile() && jar.getName().endsWith(".jar")) {
                 String modId = getModIdFromJar(jar);
                 if (targetModIds.contains(modId)) {
+                    markAsReparseable(jar.getName());
                     try {
                         Launch.classLoader.addURL(jar.toURI().toURL());
                     } catch (Exception e) {
@@ -43,6 +48,17 @@ public class ERPlugin implements IFMLLoadingPlugin {
         }
         if (Features.betterSlowness) {
             registerMixinConfigs("minecraft");
+        }
+    }
+
+    private static void markAsReparseable(String fileName) {
+        try {
+            List<String> list = CoreModManager.getReparseableCoremods();
+            if (!list.contains(fileName)) {
+                list.add(fileName);
+            }
+        } catch (Throwable t) {
+            System.out.println("[ERCore] Failed to mark reparseable: " + fileName + " - " + t);
         }
     }
 
