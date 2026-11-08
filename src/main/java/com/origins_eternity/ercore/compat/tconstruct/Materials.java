@@ -59,4 +59,8 @@ public class Materials {
         registerTableCasting(new CastingRecipe(new ItemStack(Items.Bronze_Ingot), RecipeMatch.of(Items.Ingot_Clay_Cast), TinkerFluids.bronze, 144, true, false));
         registerTableCasting(new CastingRecipe(new ItemStack(Items.Ingot_Clay_Cast), RecipeMatch.of(TinkerCommons.searedBrick), TinkerFluids.clay, 288));
     }
+
+    public static void registerFuels() {
+        TinkerRegistry.registerSmelteryFuel(new FluidStack(Fluids.Living_Tar, 50), 150);
+    }
 }

@@ -10,8 +10,9 @@ tile.ercore.tungsten_ore.name=钨矿石
 tile.ercore.nickel_ore.name=镍矿石
 tile.ercore.molten_tungsten.name=熔融钨
 tile.ercore.molten_sugarcane.name=熔融甘蔗
-tile.ercore.molten_tungsten_carbide.name=熔融碳化钨
+tile.ercore.molten_living_tar.name=熔融活焦油
 tile.ercore.molten_tungsten_steel.name=熔融钨钢
+tile.ercore.molten_tungsten_carbide.name=熔融碳化钨
 
 item.ercore.clinker.name=熟料
 item.ercore.cement_powder.name=水泥粉
@@ -53,8 +54,9 @@ ercore.brew.energy=能量药水
 
 fluid.ercore.tungsten=熔融钨
 fluid.ercore.sugarcane=熔融甘蔗
-fluid.ercore.tungsten_carbide=熔融碳化钨
+fluid.ercore.living_tar=熔融活焦油
 fluid.ercore.tungsten_steel=熔融钨钢
+fluid.ercore.tungsten_carbide=熔融碳化钨
 
 material.tungsten_steel.name=钨钢
 

@@ -10,8 +10,9 @@ tile.ercore.tungsten_ore.name=Tungsten Ore
 tile.ercore.nickel_ore.name=Nickel Ore
 tile.ercore.molten_tungsten.name=Molten Tungsten
 tile.ercore.molten_sugarcane.name=Molten Sugarcane
-tile.ercore.molten_tungsten_carbide.name=Molten Tungsten Carbide
+tile.ercore.molten_living_tar.name=Molten Living Tar
 tile.ercore.molten_tungsten_steel.name=Molten Tungsten Steel
+tile.ercore.molten_tungsten_carbide.name=Molten Tungsten Carbide
 
 item.ercore.clinker.name=Clinker
 item.ercore.cement_powder.name=Cement Powder
@@ -53,8 +54,9 @@ ercore.brew.energy=Energy
 
 fluid.ercore.tungsten=Molten Tungsten
 fluid.ercore.sugarcane=Molten Sugarcane
-fluid.ercore.tungsten_carbide=Molten Tungsten Carbide
+fluid.ercore.living_tar=Molten Living Tar
 fluid.ercore.tungsten_steel=Molten Tungsten Steel
+fluid.ercore.tungsten_carbide=Molten Tungsten Carbide
 
 material.tungsten_steel.name=Tungsten Steel
 

@@ -42,6 +42,9 @@ public class CommonProxy {
     public void preInit(FMLPreInitializationEvent event) {
         if (Contents.enableFluids) {
             registerFluids();
+            if (Loader.isModLoaded("tconstruct")) {
+                registerFuels();
+            }
         }
         if (Features.enableEndurance) {
             MinecraftForge.EVENT_BUS.register(CommonEvents.class);
@@ -73,8 +76,8 @@ public class CommonProxy {
                 addEnergyBrew();
             }
         }
-        if (Loader.isModLoaded("tconstruct")) {
-            if ((Contents.enableOres) && (Contents.enableItems) && (Compat.enableMaterial) && (Contents.enableFluids)) {
+        if ((Contents.enableOres) && (Contents.enableItems) && (Compat.enableMaterial) && (Contents.enableFluids)) {
+            if (Loader.isModLoaded("tconstruct")) {
                 preTinker();
                 addTinkerMelting();
                 addTinkerAlloying();
